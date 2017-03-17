@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<com.velli.tachograph.views.ListItemActivityChooser xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ListItemWorkLimit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    card:cardCornerRadius="2dp"
+    card:cardElevation="@dimen/card_elevation"
+    card:cardUseCompatPadding="false"
+    tools:ignore="RtlHardcoded">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/left_keyline"
+        android:layout_marginStart="@dimen/left_keyline"
+        android:layout_marginRight="@dimen/right_keyline"
+        android:layout_marginEnd="@dimen/right_keyline">
+
+
+
+        <com.velli.tachograph.views.TextViewTimeCounter
+            android:id="@+id/list_item_activity_event_chooser_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/WorkLimitTitle"
+            custom:style="regular"
+            android:layout_marginTop="16dp"/>
+
+
+        <com.velli.tachograph.views.RobotoLightTextView
+            android:id="@+id/list_item_activity_event_chooser_next_event"
+            style="@style/ListSecondaryText"
+            custom:style="regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:singleLine="false" />
+
+
+        <View
+            android:id="@+id/list_item_activity_event_chooser_divider"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="3dp"
+            android:background="@drawable/dotted_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <com.velli.tachograph.views.RobotoButton
+                android:id="@+id/list_item_activity_event_chooser_driving"
+                style="@style/ActivityChooserButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_driving_large_on"
+                android:text="@string/add_event_drive_time" />
+
+            <com.velli.tachograph.views.RobotoButton
+                android:id="@+id/list_item_activity_event_chooser_resting"
+                style="@style/ActivityChooserButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_rest_large_on"
+                android:text="@string/add_event_event_resting" />
+
+            <com.velli.tachograph.views.RobotoButton
+                android:id="@+id/list_item_activity_event_chooser_other_work"
+                style="@style/ActivityChooserButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_other_work_large_on"
+                android:text="@string/add_event_other_work" />
+
+            <com.velli.tachograph.views.RobotoButton
+                android:id="@+id/list_item_activity_event_chooser_poa"
+                style="@style/ActivityChooserButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_poa_large_on"
+                android:text="@string/add_event_poa" />
+
+        </LinearLayout>
+    </LinearLayout>
+</com.velli.tachograph.views.ListItemActivityChooser>

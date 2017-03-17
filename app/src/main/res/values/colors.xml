@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<resources>
+    <color name="color_primary_400">#00b0ff</color>
+    <color name="color_primary_dark_700">#0091ea</color>
+    
+    <color name="color_accent_orange_600">#fb8c00</color>
+
+
+    
+    <color name="text_color_primary_light">#FFFFFF</color>
+    <color name="text_color_secondary_light">#FFFFFF</color>
+    
+    <color name="gray">#8A000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#e51c23</color>
+
+    <color name="list_item_selected">#1F03a9f4</color>
+    
+    <color name="event_drving">#03a9f4</color>
+    <color name="event_daily_rest">#4caf50</color>
+    <color name="event_weekly_rest">#009688</color>
+    <color name="event_break">#607d8b</color>
+    <color name="event_other_work">#ff8a05</color>
+    <color name="event_poa">#af6ad2</color>
+    
+    <color name="time_picker_text_dark">#DD000000</color>
+    <color name="time_picker_text_secondary_dark">#8A000000</color>
+    <color name="time_picker_text_dark_disabled">#61000000</color>
+
+    <color name="time_picker_text_light">#FFFFFF</color>
+    <color name="time_picker_text_secondary_light">#B2FFFF</color>
+    <color name="time_picker_text_light_disabled">#4CFFFFFF</color>
+
+    
+    <array name="event_colors">
+        <item>@color/event_drving</item>
+        <item>@color/event_daily_rest</item>
+        <item>@color/event_weekly_rest</item>
+        <item>@color/event_break</item>
+        <item>@color/event_other_work</item>
+        <item>@color/event_poa</item>
+    </array>
+</resources>

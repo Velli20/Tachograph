@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/activity_scrollable_map_header_map"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_title_conatiner_height"
+        android:focusable="false"
+        map:liteMode="true"
+        map:mapType="normal" />
+
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/activity_scrollable_map_header_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:id="@+id/activity_scrollable_map_header_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/activity_scrollable_map_header_blank_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_title_conatiner_height"
+                android:background="@android:color/transparent" />
+
+           
+            
+        </LinearLayout>
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    <View
+        android:id="@+id/activity_scrollable_map_header_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_title_conatiner_height"
+        android:background="@color/white" />
+
+    <View
+        android:id="@+id/activity_scrollable_map_header_toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="@dimen/toolbar_title_conatiner_height"
+        android:background="@drawable/dropdown_shadow" />
+
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/activity_scrollable_map_header_title"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        custom:style="medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:minHeight="@dimen/toolbar_height"
+        android:paddingEnd="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="72dp"
+        android:paddingStart="72dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_scrollable_map_header_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@android:color/transparent"
+        app:contentInsetLeft="72dp"
+        app:contentInsetStart="72dp"
+        app:theme="@style/ToolbarStyleDark" >
+    </android.support.v7.widget.Toolbar>
+
+</FrameLayout>

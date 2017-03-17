@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<resources>
+
+    <string name="app_name">"Tachygraphe"</string>
+    <string name="menu_settings">"Règlages"</string>
+    <string name="menu_send_feedback">"Envoyez vos remarques"</string>
+    <string name="menu_discard">"Supprimer l'événement"</string>
+    <string name="menu_save_changes">"Sauvegarder les changements"</string>
+    <string name="menu_filter">"Filtre"</string>
+    <string name="menu_filter_category_drive">"Conduite"</string>
+    <string name="menu_filter_category_rest">"Repos"</string>
+    <string name="menu_filter_category_other_work">"Travail"</string>
+    <string name="menu_filter_category_poa">"Mise a disposition"</string>
+    <string name="menu_start_weekly_rest">"Commencer le repos hebdomadaire"</string>
+    <string name="menu_stop_weekly_rest">"Arrêter le repos hebdomadaire"</string>
+    <string name="menu_start_daily_rest">"Commencer repos journalier"</string>
+    <string name="menu_stop_daily_rest">"Arrêter repos journalier"</string>
+    <string name="menu_start_break">"Commencer la pause"</string>
+    <string name="menu_stop_break">"Arrêt de la pause"</string>
+    <string name="menu_map_layer">"Couche de carte"</string>
+    <string name="menu_export_events">"Exporter les événements"</string>
+    <string name="menu_sort">"Trier"</string>
+    <string name="menu_show_items">"Afficher les éléments"</string>
+    <string name="menu_restore">"Restaurer"</string>
+    <string name="menu_open_map">Open map</string> <!-- <a> Translate this</a> -->
+
+    <string name="default_filename">"tachygraphe"</string>
+
+    <string name="action_file_saved">"Fichier enregistré dans la mémoire interne"</string>
+    <string name="action_database_backup_complete">"Sauvegarde complète"</string>
+    <string name="action_database_restore_complete">"Restauration terminée"</string>
+    <string name="action_all_files_removed">"Tous les fichiers ont été supprimés"</string>
+    <string name="action_ok">"Ok"</string>
+    <string name="action_cancel">"Annuler"</string>
+    <string name="action_today">"Aujourd'hui"</string>
+    <string name="action_disble">"Désactiver"</string>
+    <string name="action_title_remove_all_logs">"Effacer toutes les données"</string>
+
+    <string name="dialog_title_map_layer">"Couche de carte"</string>
+    <string name="dialog_title_delete_route">"Supprimer l'itinéraire?"</string>
+    <string name="dialog_title_filename">"Nom de fichier"</string>
+    <string name="dialog_title_set_treshold_speed">"Réglage de vitesse"</string>
+    <string name="dialog_title_set_threshold_time">"Réglage du seuil de temps"</string>
+    <string name="dialog_title_alarm_time">"Temps"</string>
+    <string name="dialog_title_fix_following_errors">"Corriger les erreurs suivantes:"</string>
+    <string name="dialog_text_delete_route">"Le trajet et ses étapes seront effacés de l appareil"</string>
+    <string name="dialog_text_remove_all_logs">"Êtes vous sur de vouloir effacer toutes les données?"</string>
+    <string name="dialog_text_error_for_this_period_or_for_this_date_are_already_an_event">"Il y a déjà un événement pour cette période / jour, choisir une autre date / heure"</string>
+    <string name="dialog_text_error_start_end_time">"Le temps de fin est avant l'heure de départ!"</string>
+
+    <string name="title_add_new_log_event">"Ajout"</string>
+    <string name="title_edit_log_event">"Modifier"</string>
+    <string name="title_today">"Aujourd'hui"</string>
+    <string name="title_week">"Semaine"</string>
+    <string name="title_now">"Maintenant"</string>
+    <string name="title_speed">"Vitesse"</string>
+    <string name="title_average_speed">"Vitesse moyenne"</string>
+    <string name="title_duration">"Durée"</string>
+    <string name="title_started_at">"Commencé à:"</string>
+    <string name="title_ended_at">"Terminé à: "</string>
+    <string name="title_split_break">"Coupure fractionnée"</string>
+    <string name="title_no_saved_routes">"Aucun itinéraire enregistré"</string>
+    <string name="title_recording_event">"Enregistrement en cours"</string>
+    <string name="title_address_unavailable">"Indisponible"</string>
+    <string name="title_loading_address">"Chargement de l'adresse…"</string>
+    <string name="title_items_to_show_in_summary">"Gestion d'affichage"</string>
+    <string name="title_info">Info</string><!-- <a> Translate this</a> -->
+
+    <string name="exeption_title_extended_drive_time">"Jours de conduite allongés restant"</string>
+    <string name="exeption_subtitle_extended_drive_time">"La période de conduite journalière ne doit pas dépasser 9 heures, avec une exception à 10 heures deux fois par semaine."</string>
+    <string name="exeption_title_reduced_daily_rest">"Réduction de repos journaliers restants"</string>
+    <string name="exeption_subtitle_reduced_daily_rest">"La période de repos quotidien doit être d'au moins 11 heures, et peu être réduite à 9 heures au maximum trois fois par semaine."</string>
+    <string name="exeption_title_reduced_weekly_rest">"Repos hebdomadaires réduits restants"</string>
+    <string name="exeption_subtitle_reduced_weekly_rest">"Le repos hebdomadaire est de 45 heures en continu, qui peuvent être réduits chaque deuxième semaine à 24 heures."</string>
+
+    <string name="add_event_drive_time">"Temps de conduite"</string>
+    <string name="add_event_poa">"Mise à disposition"</string>
+    <string name="add_event_other_work">"Travail"</string>
+    <string name="add_event_event_resting">"Repos"</string>
+    <string name="add_event_event_mileage_at_start">"Au départ"</string>
+    <string name="add_event_event_mileage_at_end">"A l'arrivée"</string>
+    <string name="add_event_event_start_time">"Heure de début: "</string>
+    <string name="add_event_event_end_time">"Heure de Fin:"</string>
+    <string name="add_event_event_start_date">"Date de départ:"</string>
+    <string name="add_event_event_end_date">"Date de fin:"</string>
+    <string name="add_event_event_add_note">"Ajouter une note"</string>
+    <string name="add_event_title_time">"Temps"</string>
+    <string name="add_event_title_date">"Date"</string>
+    <string name="add_event_title_mileage">"Kilométrage"</string>
+    <string name="add_event_start_location">"Lieux de départ"</string>
+    <string name="add_event_end_location">"Lieux d'arrivée"</string>
+    <string name="add_event_is_split_break">"Pause Fractionnée"</string>
+
+    <string name="export_events_start_time">"Heure de début"</string>
+    <string name="export_events_start_date">"Date de départ"</string>
+    <string name="export_events_end_time">"Heure de fin"</string>
+    <string name="export_events_end_date">"Date de fin"</string>
+    <string name="export_events_event_type">"Type d'événement"</string>
+    <string name="export_events_mileage_at_start">"Kilométrage au départ"</string>
+    <string name="export_events_mileage_at_end">"Kilométrage a l'arrivée"</string>
+    <string name="export_events_note">"Note"</string>
+    <string name="export_events_duration">"Durée"</string>
+
+    <string name="notification_logging_in_progress">"Enregistrement en cours"</string>
+    <string name="notification_next_event_daily_rest">"Prochain événement : repos journalier"</string>
+    <string name="notification_next_event_break">"Prochain événement: repos"</string>
+    <string name="notification_next_event_weekly_rest">"Prochain événement: repos hebdomadaire"</string>
+    <string name="notification_next_event_driving">"Prochain événement: temps de conduite"</string>
+    <string name="notification_button_start_break">"Pause"</string>
+    <string name="notification_button_start_weekly_rest">"Repos hebdomadaire"</string>
+    <string name="notification_button_start_drive_time">"Conduite"</string>
+    <string name="notification_button_start_daily_rest">"Pause"</string>
+    <string name="notification_button_cancel_logging">"Annuler"</string>
+    <string name="notification_logging_started">"Enregistrement commencé"</string>
+    <string name="notification_logging_stopped">"Enregistrement arrêté"</string>
+    <string name="notification_break_time_ending">"Fin de pause dans"</string>
+    <string name="notification_break_time_ended">"Temps de pause terminé"</string>
+    <string name="notification_drive_time_ending">"Durée de conduite journalière terminée dans"</string>
+    <string name="notification_drive_time_ended">"Durée de conduite journalière terminé"</string>
+    <string name="notification_daily_rest_ending">"Le repos journalier se termine dans"</string>
+    <string name="notification_daily_rest_ended">"Repos journalier terminé"</string>
+    <string name="notification_weekly_rest_ending">"Le repos hebdomadaire se termine dans"</string>
+    <string name="notification_weekly_rest_ended">"Repos hebdomadaire terminé"</string>
+    <string name="notification_tap_to_show_more_info">"Appuyez pour afficher plus d'info"</string>
+    <string name="notification_in_time">""</string>
+
+    <string name="working_days_weekly_drive_time">"Temps de conduite hebdomadaire:"</string>
+    <string name="working_days_weekly_work_time">"Temps de travail hebdomadaire:"</string>
+    <string name="working_days_weekly_rest_time">"Repos hebdomadaire:"</string>
+    <string name="working_days_wtd_weekly_rest_time">"Repos hebdomadaire selon la DTT:"</string>
+    <string name="working_days_wtd_weekly_work_time">"Temps de conduite hebdomadaire selon la DTT:"</string>
+    <string name="working_days_total_driven_distance">Total driven distance:</string>
+    <!-- <a> Translate this</a> -->
+    <string name="working_days_driven_distance">Driven distance:</string>
+    <!-- <a> Translate this</a> -->
+
+    <string name="working_days_daily_rest_time">"Repos journalier:"</string>
+    <string name="working_days_daily_drive_time">"Temps de conduite journalière: "</string>
+    <string name="working_days_daily_work_time">"Temps de travail journalier:"</string>
+    <string name="working_days_daily_wtd_work_time">"Temps de travail journalier selon la DTT: "</string>
+    <string name="working_days_daily_wtd_night_shift_work_time">"Temps de travail de nuit selon la DTT"</string>
+    <string name="working_days_no_items_to_display">"Aucun événement enregistré."</string>
+
+    <string name="work_limit_next_weekly_rest">"Prochain repos hebdomadaire"</string>
+    <string name="work_limit_next_daily_rest">"Prochain repos journalier "</string>
+    <string name="work_limit_daily_rest">"Repos journalier"</string>
+    <string name="work_limit_weekly_rest">"Repos hebdomadaire"</string>
+    <string name="work_limit_weekly_driving_time">"Temps de conduite hebdomadaire"</string>
+    <string name="work_limit_fortnightly_drivetime">"Temps de conduite Bimensuel"</string>
+    <string name="work_limit_continious_driving_time">"Temps de conduite continue"</string>
+    <string name="work_limit_daily_driving_time">"Temps conduite journalière"</string>
+    <string name="work_limit_break_time">"Pause"</string>
+
+    <string name="work_limit_wtd_daily_rest">"Repos journalier selon la DTT"</string>
+    <string name="work_limit_wtd_weekly_rest">"Repos hebdomadaire selon la DTT"</string>
+    <string name="work_limit_wtd_weekly_working">"Temps de travail hebdomadaire selon la DTT"</string>
+    <string name="work_limit_wtd_weekly_working_average1">""</string>
+    <string name="work_limit_wtd_weekly_working_average2">"Moyenne Hebdomadaire: "</string>
+    <string name="work_limit_wtd_night_shift_working_time">"Temps de travail de nuit selon la DTT"</string>
+
+
+    <string name="work_limit_daily_rest_remaining">Daily rest remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_weekly_rest_remaining">Weekly rest remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_weekly_driving_time_remaining">Weekly driving time remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_fortnightly_drivetime_remaining">Fortnightly driving time remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_continious_driving_time_remaining">Continious driving time remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_daily_driving_time_remaining">Daily driving time remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_break_time_remaining">Break time remaining</string>
+    <!-- <a> Translate this</a> -->
+
+    <string name="work_limit_wtd_daily_rest_remaining">WTD daily rest remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_wtd_weekly_rest_remaining">WTD weekly rest remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_wtd_weekly_working_remaining">WTD weekly working time remaining</string>
+    <!-- <a> Translate this</a> -->
+    <string name="work_limit_wtd_night_shift_working_time_remaining">WTD night shift working time remaining</string>
+    <!-- <a> Translate this</a> -->
+
+    <string-array name="navigation_drawer_titles">
+        <item>"Résumé"</item>
+        <item>"Enregistrement"</item>
+        <item>"Relevé d'enregistrement"</item>
+        <item>"Routes"</item>
+    </string-array>
+    <string-array name="map_ground_layers">
+        <item>"Satellite"</item>
+        <item>"Satellite avec rues"</item>
+        <item>"Carte"</item>
+        <item>"Terre"</item>
+    </string-array>
+    <string-array name="event_explanations">
+        <item>"Temps de conduite"</item>
+        <item>"Repos journalier"</item>
+        <item>"Repos hebdomadaire"</item>
+        <item>"Pause"</item>
+        <item>"Travail"</item>
+        <item>"Mise a disposition"</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>"Janvier"</item>
+        <item>"Février"</item>
+        <item>"Mars"</item>
+        <item>"Avril"</item>
+        <item>"Mai"</item>
+        <item>"Juin"</item>
+        <item>"Juillet"</item>
+        <item>"Août"</item>
+        <item>"Septembre"</item>
+        <item>"Octobre"</item>
+        <item>"Novembre"</item>
+        <item>"Décembre"</item>
+    </string-array>
+
+    <string-array name="items_to_show_in_summary">
+        <item>"Temps de conduite Bimensuel"</item>
+        <item>"Repos hebdomadaire"</item>
+        <item>"Repos journalier"</item>
+        <item>"Temps de conduite journalière"</item>
+        <item>"Temps de conduite hebdomadaire"</item>
+        <item>"Temps de travail hebdomadaire selon la DTT"</item>
+        <item>"Repos journalier selon la DTT"</item>
+        <item>"Repos hebdomadaire selon la DTT"</item>
+        <item>"Temps de travail de nuit selon la DTT"</item>
+    </string-array>
+
+    <string-array name="set_file_name_dialog_storage_options">
+        <item>"Périphérique d'enregistrement"</item>
+        <item>"enregistrement des document"</item>
+        <item>"Partager…"</item>
+    </string-array>
+
+    <string name="preference_category_general">"Réglages généraux"</string>
+    <string name="preference_category_log">"Enregistrement"</string>
+    <string name="preference_category_gps_settings">"Réglages GPS"</string>
+    <string name="preference_category_notifications">"Notifications"</string>
+
+    <string name="preference_title_count_daily_and_weekly_rest_automatically">Count daily and weekly rest automatically</string>
+    <!-- <a> Translate this</a> -->
+    <string name="preference_title_switch_automatically_to_drive">Switch automatically to drive after break time </string>
+    <!-- <a> Translate this</a> -->
+    <string name="preference_title_count_activity_progress">Count activity progress</string>
+    <!-- <a> Translate this</a> -->
+    <string name="preference_title_show_notifications">"Afficher les notifications"</string>
+    <string name="preference_title_notification_vibrate">"Vibreur"</string>
+    <string name="preference_title_notification_sound">"Son"</string>
+    <string name="preference_title_alarm_drive_time_ending">"Avertissement de fin de conduite"</string>
+    <string name="preference_title_alarm_break_time_ending">"Avertissement de fin de pause"</string>
+    <string name="preference_title_alarm_daily_rest_ending">"Avertissement de fin de repos journalier"</string>
+    <string name="preference_title_alarm_weekly_rest_ending">"Avertissement de fin de repos hebdomadaire"</string>
+
+    <string name="preference_title_remove_all_logs">"Effacer les enregistrements"</string>
+    <string name="preference_title_backup_restore">"Sauvegarde ou restauration des données"</string>
+    <string name="preference_title_sort_by">"Trier par"</string>
+    <string name="preference_title_backup">"Sauvegarde des données"</string>
+    <string name="preference_title_restore">"Restauration des données"</string>
+    <string name="preference_title_export">"Exportation des données"</string>
+    <string name="preference_title_use_gps">"Activer l'enregistrement de vitesse GPS"</string>
+    <string name="preference_title_threshold_value">"Seuil  de vitesse d 'arrêt"</string>
+    <string name="preference_title_threshold_time">"Seuil de temps d’arrêt"</string>
+    <string name="preference_title_remove_less_1_min_entries">"Effacer les événement inférieur a 1 min"</string>
+    <string name="preference_title_gps_min_accuracy">"Precision minimale  du GPS"</string>
+
+    <string name="preference_summary_count_daily_and_weekly_rest_automatically">Calculate the time between activities as a daily and weekly resting</string>
+    <!-- <a> Translate this</a> -->
+    <string name="preference_summary_switch_automatically_to_drive">Switch automatically to drive time after you finish break time</string>
+    <!-- <a> Translate this</a> -->
+    <string name="preference_summary_alarm_disabled">"Desactiver"</string>
+    <string name="preference_summary_alarm_drive_time_ending">"avant la fin de conduite"</string>
+    <string name="preference_summary_alarm_break_time_ending">"avant la fin du temps de pause"</string>
+    <string name="preference_summary_alarm_daily_rest_ending">"avant la fin du temps de repos journalier"</string>
+    <string name="preference_summary_alarm_weekly_rest_ending">"avant la fin du temps de repos hebdomadaire"</string>
+
+    <string name="preference_summary_export">"Exportation d'enregistrement en fichier .xls pour la visualisation dans votre tableur préféré"</string>
+    <string name="preference_summary_use_gps">"Bascule automatiquement de conduite a travail quand le seuil de vitesse est atteint."</string>
+    <string name="preference_summary_threshold_value">"L'application considère que le véhicule est arrêté lorsque la vitesse du GPS est inférieure à cette valeur."</string>
+    <string name="preference_summary_threshold_time">" L'application basculera à travail lorsque le véhicule sera arrêté depuis la valeur de  temps indique."</string>
+    <string name="preference_summary_remove_less_1_min_entries">"Supprimer automatiquement les entrées inférieures à 1 minute"</string>
+    <string name="preference_summary_gps_min_accuracy">"Les données du GPS seront ignorées si la position n'a pas une position au moins égale a la valeur indiquée."</string>
+
+    <string-array name="prefrence_entries_sort_by_month_week_day">
+        <item>"Jour"</item>
+        <item>"Semaine"</item>
+        <item>"Mois"</item>
+    </string-array>
+
+    <string-array name="prefrence_entries_sort_by_asc_desc">
+        <item>"Descendant"</item>
+        <item>"Ascendant"</item>
+    </string-array>
+
+    <string-array name="prefrence_entries_count_activity_progress">
+        <item>Down</item> <!-- <a> Translate this</a> -->
+        <item>Up</item> <!-- <a> Translate this</a> -->
+    </string-array>
+
+
+
+</resources>

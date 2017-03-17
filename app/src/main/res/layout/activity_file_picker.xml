@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_file_picker_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/color_primary_400"
+        android:layout_alignParentTop="true"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        app:theme="@style/ToolbarStyleActivityFilePicker"
+        app:contentInsetLeft="16dp"
+        app:contentInsetStart="16dp">
+
+        <Spinner
+            android:id="@+id/activity_file_picker_navigation_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left|start"/>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/activity_file_picker_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_file_picker_toolbar"
+        android:layout_above="@+id/activity_file_picker_edittext_container"/>
+
+    <View
+        android:id="@+id/activity_file_picker_toolbar_shadow"
+        android:layout_height="3dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/dropdown_shadow"
+        android:layout_gravity="top"
+        android:layout_marginTop="@dimen/toolbar_height"/>
+
+
+    <RelativeLayout
+        android:id="@+id/activity_file_picker_edittext_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="@dimen/left_keyline"
+        android:layout_marginStart="@dimen/left_keyline"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:minHeight="48dp">
+
+        <ImageView
+            android:id="@+id/activity_file_picker_file_ext_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_filepicker_excel"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/activity_file_picker_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/activity_file_picker_file_ext_icon"
+            android:layout_toRightOf="@+id/activity_file_picker_file_ext_icon"
+            android:layout_toStartOf="@+id/activity_file_picker_save"
+            android:layout_toLeftOf="@+id/activity_file_picker_save"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawablePadding="32dp"
+            android:hint="@string/file_picker_title_filename"
+            android:textColor="@color/time_picker_text_dark"
+            android:textColorHint="@color/time_picker_text_dark_disabled"
+            android:textSize="14sp"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/activity_file_picker_save"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/file_picker_menu_save" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@+id/activity_file_picker_edittext_container"
+        android:background="@drawable/dropdown_shadow_up"/>
+</RelativeLayout>

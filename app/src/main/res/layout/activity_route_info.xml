@@ -1,0 +1,235 @@
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/list_item_map"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_header_map_height"
+        android:focusable="false"
+        map:liteMode="true"
+        map:mapType="normal" />
+
+    
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/list_header_map_height"
+                android:background="@android:color/transparent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_title_start_place"
+                    style="@style/AddEventSubHeader"
+                    custom:style="medium"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_action_start_location"
+                    android:drawableStart="@drawable/ic_action_start_location"
+                    android:text="@string/add_event_start_location" 
+                    android:layout_marginTop="16dp"/>
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_start_place"
+                    style="@style/ListPrimaryText"
+                    custom:style="regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="72dp"
+                    android:text="@string/title_loading_address"/>
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_title_end_place"
+                    style="@style/AddEventSubHeader"
+                    custom:style="medium"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_action_end_location"
+                    android:drawableStart="@drawable/ic_action_end_location"
+                    android:text="@string/add_event_end_location" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_end_place"
+                    style="@style/ListPrimaryText"
+                    custom:style="regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="72dp"
+                    android:text="@string/title_loading_address"/>
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_title_duration"
+                    style="@style/AddEventSubHeader"
+                    custom:style="medium"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_time"
+                    android:drawableStart="@drawable/ic_time"
+                    android:text="@string/title_duration" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_duration"
+                    style="@style/ListPrimaryText"
+                    custom:style="regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_title_average_speed"
+                    style="@style/AddEventSubHeader"
+                    custom:style="medium"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_mileage"
+                    android:drawableStart="@drawable/ic_mileage"
+                    android:text="@string/title_average_speed" />
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/route_info_average_speed"
+                    style="@style/ListPrimaryText"
+                    custom:style="regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="72dp" />
+
+                <com.velli.tachograph.views.RobotoLightTextView
+                    android:id="@+id/list_item_speed_chart_title"
+                    custom:style="light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:singleLine="true"
+                    android:text="@string/title_speed"
+                    android:textColor="#ff707070"
+                    android:textSize="24sp" />
+
+               <com.velli.tachograph.views.StaticSpeedChart
+                    android:id="@+id/route_info_speed_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" 
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_header_map_height"
+        android:background="@color/white"/>
+    
+    <View
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="@dimen/list_header_map_height"
+        android:background="@drawable/dropdown_shadow" />
+    
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/title"
+        custom:style="medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:minHeight="@dimen/toolbar_height"
+        android:textColor="@color/gray"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:textSize="20sp" />
+    
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:theme="@style/ToolbarStyleDark"
+        android:background="@android:color/transparent"
+        app:contentInsetLeft="72dp"
+        app:contentInsetStart="72dp">
+    </android.support.v7.widget.Toolbar>
+    
+    
+</FrameLayout>

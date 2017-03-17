@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<resources>
+    <string name="file_picker_menu_sort">Järjestä</string>
+    <string name="file_picker_menu_save">Tallenna</string>
+    <string name="file_picker_menu_sort_by_name">Nimen mukaan</string>
+    <string name="file_picker_menu_sort_by_date">Muokkauspäivämäärän mukaan</string>
+    <string name="file_picker_menu_sort_by_size">Koon mukaan</string>
+    <string name="file_picker_menu_add_folder">Luo kansio</string>
+    <string name="file_picker_title_external_storage">Sisäinen tallennustila</string>
+    <string name="file_picker_title_no_files">Ei kohteita</string>
+    <string name="file_picker_title_filename">Tiedostonnimi</string>
+    <string name="file_picker_title_create_folder">Luo kansio</string>
+</resources>

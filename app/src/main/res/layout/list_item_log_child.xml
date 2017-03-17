@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:circle="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/log_child_container"
+    android:layout_width="match_parent"
+    android:layout_height="72dp" 
+    android:background="?android:attr/activatedBackgroundIndicator">
+
+
+    <com.velli.tachograph.views.ListCircle
+        android:id="@+id/log_event_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"
+        circle:background_color_selected="@color/gray"/>
+
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/log_event_title"
+        style="@style/ListPrimaryText"
+        custom:style="regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/log_event_icon"
+        android:layout_toEndOf="@+id/log_event_icon"
+        android:layout_toLeftOf="@+id/log_event_hours"
+        android:layout_toStartOf="@+id/log_event_hours"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"/>
+
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/log_event_start_time"
+        custom:style="regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/log_event_title"
+        android:layout_toRightOf="@+id/log_event_icon"
+        android:layout_toEndOf="@+id/log_event_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        android:alpha="0.54"/>
+
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/log_event_end_time"
+        custom:style="regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/log_event_start_time"
+        android:layout_toRightOf="@+id/log_event_icon"
+        android:layout_toEndOf="@+id/log_event_icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        android:alpha="0.54"/>
+
+    
+    <com.velli.tachograph.views.RobotoLightTextView
+        android:id="@+id/log_event_hours"
+        style="@style/ListTimeText"
+        custom:style="medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" />
+    
+    <View 
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="72dp"
+        android:layout_marginStart="72dp"
+        android:background="#000000"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.12"/>
+
+ 
+</RelativeLayout>
