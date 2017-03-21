@@ -41,7 +41,7 @@
         android:layout_marginStart="10dp"
         android:alpha="0.87"
         android:drawablePadding="10dp"
-        android:textColor="@color/l_black"
+        android:textColor="@color/black"
         android:textSize="16sp"
         custom:style="regular" />
 

@@ -58,6 +58,10 @@
     <color name="time_picker_text_secondary_light">#B2FFFF</color>
     <color name="time_picker_text_light_disabled">#4CFFFFFF</color>
 
+    <color name="date_picker_date_picker_day_text_color">#FF999999</color>
+    <color name="date_picker_date_picker_today_number_color">#33b5e5</color>
+    <color name="date_picker_date_picker_month_title_color">#ffffff</color>
+    <color name="date_picker_date_picker_month_title_background_color">#f2f2f2</color>
     
     <array name="event_colors">
         <item>@color/event_drving</item>

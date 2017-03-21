@@ -52,7 +52,7 @@
             style="@style/TimePickerTimeText"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textColor="@color/l_black"/>
+            android:textColor="@color/black"/>
         
         <com.velli.tachograph.views.RobotoLightTextView
             custom:style="regular"
@@ -64,7 +64,7 @@
             style="@style/TimePickerTimeText"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textColor="@color/l_black"/>
+            android:textColor="@color/black"/>
         
         <com.velli.tachograph.views.RobotoLightTextView
             custom:style="light"
@@ -74,7 +74,7 @@
             style="@style/TimePickerTimeText"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textColor="@color/l_black" />
+            android:textColor="@color/black" />
         
         <com.velli.tachograph.views.RobotoLightTextView
             custom:style="custom"
@@ -85,7 +85,7 @@
             style="@style/TimePickerTimeText"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textColor="@color/l_black"/>
+            android:textColor="@color/black"/>
         
         <com.velli.tachograph.views.RobotoLightTextView
             custom:style="custom"
@@ -96,7 +96,7 @@
             style="@style/TimePickerTimeText"
             android:singleLine="true"
             android:ellipsize="none"
-            android:textColor="@color/l_black"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
     
@@ -120,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@+id/time_picker_number_conatainer"
-        android:background="@color/l_black" />
+        android:background="@color/black" />
 
     <LinearLayout
         android:id="@+id/time_picker_keypad"

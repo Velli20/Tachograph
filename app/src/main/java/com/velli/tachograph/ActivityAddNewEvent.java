@@ -32,6 +32,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.velli.tachograph.database.DataBaseHandler;
 
 import com.velli.tachograph.database.DataBaseHandler.OnGetEventTaskCompleted;
+import com.velli.tachograph.googledatetimepicker.DatePickerDialogView;
 import com.velli.tachograph.views.ChooseValueView;
 import com.velli.tachograph.views.ListCircle;
 import com.velli.tachograph.views.RobotoSwitchCompat;
@@ -73,7 +74,6 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import pickers.android.datetimepicker.date.DatePickerDialogView;
 
 
 public class ActivityAddNewEvent extends AppCompatActivity implements OnClickListener, OnItemSelectedListener, OnCheckedChangeListener {

@@ -47,7 +47,7 @@
         android:layout_toLeftOf="@+id/choose_value_dialog_button_erase"
         android:fontFamily="sans-serif-light"
         android:textSize="26sp"
-        android:textColor="@color/l_black"
+        android:textColor="@color/black"
         tools:ignore="UnusedAttribute" />
 
     <View
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@+id/choose_value_dialog_current_value"
-        android:background="@color/l_black" />
+        android:background="@color/black" />
     
     
         

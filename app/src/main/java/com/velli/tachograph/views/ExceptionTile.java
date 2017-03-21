@@ -34,8 +34,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.os.SystemClock;
-import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -67,7 +65,7 @@ public class ExceptionTile extends View {
 		mStrokeWidth = convertFromPxToDip(1);
 	
 		mExceptionTextPaint = new TextPaint();
-		mExceptionTextPaint.setColor(res.getColor(R.color.l_black));
+		mExceptionTextPaint.setColor(res.getColor(R.color.black));
 		mExceptionTextPaint.setTextSize(convertFromPxToDip(12));
 		mExceptionTextPaint.setAntiAlias(true);
 		mExceptionTextPaint.setTextAlign(Align.CENTER);
@@ -75,7 +73,7 @@ public class ExceptionTile extends View {
 		mTilePaint = new Paint();
 		mTilePaint.setStyle(Style.STROKE);
 		mTilePaint.setStrokeWidth(mStrokeWidth);
-		mTilePaint.setColor(res.getColor(R.color.l_black));
+		mTilePaint.setColor(res.getColor(R.color.black));
 		mTilePaint.setAntiAlias(true);
 		
 		if(!isInEditMode()){

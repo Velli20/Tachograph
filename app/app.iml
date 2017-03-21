@@ -104,7 +104,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/transition/25.2.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.Velli20/GoogleDateTimePickers/-SNAPSHOT/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ksoichiro/Android-ObservableScrollView/v1.6.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/10.0.1/jars" />
@@ -190,7 +189,6 @@
     <orderEntry type="library" exported="" name="play-services-wearable-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-25.2.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-cast-framework-10.0.1" level="project" />
-    <orderEntry type="library" exported="" name="GoogleDateTimePickers--SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.2.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-places-10.0.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-wallet-10.0.1" level="project" />
