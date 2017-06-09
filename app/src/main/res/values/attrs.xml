@@ -48,14 +48,10 @@
         <attr name="menu_button" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="OverviewCircle">
+    <declare-styleable name="StepperCircle">
         <attr name="circleColor" format="color"/>
     </declare-styleable>
-    
-    <declare-styleable name="DashpathLine">
-        <attr name="lineColor" format="color"/>
-        <attr name="dotSize" format="dimension"/>
-    </declare-styleable>
+
     
     <declare-styleable name="ListCircle">
         <attr name="background_color" format="string"/>

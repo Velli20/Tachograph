@@ -27,7 +27,7 @@
 
 <resources>
 
-    <string-array name="prefrence_entries_gps_accuracy">
+    <string-array name="preference_entries_gps_accuracy">
         <item >10 m</item>
         <item >20 m</item>
         <item >50 m</item>
@@ -37,28 +37,21 @@
         <item >1000 m</item>
     </string-array>
 
-    <string-array name="prefrence_entry_values_sort_by_month_week_day">
+    <string-array name="preference_entry_values_sort_by_month_week_day">
         <item >2</item>
         <item >1</item>
         <item >0</item>
     </string-array>
 
-    <string-array name="prefrence_entry_values_count_activity_progress">
+    <string-array name="preference_entry_values_count_activity_progress">
         <item >0</item>
         <item >1</item>
     </string-array>
 
     <string name="preference_key_count_daily_and_weekly_rest_automatically">preference_key_count_daily_and_weekly_rest_automatically</string>
-    <string name="preference_key_switch_automatically_to_drive">preference_key_switch_automatically_to_drive</string>
     <string name="preference_key_count_activity_progress">preference_key_count_activity_progress</string>
+    <string name="preference_key_show_big_activity_cards">preference_key_show_big_activity_cards</string>
     <string name="preference_key_show_notifications">preference_key_show_notifications</string>
-    <string name="preference_key_notification_vibrate">preference_key_notification_vibrate</string>
-    <string name="preference_key_notification_sound">preference_key_notification_sound</string>
-
-    <string name="preference_key_alarm_drive_time_ending">preference_key_alarm_drive_time_ending</string>
-    <string name="preference_key_alarm_break_time_ending">preference_key_alarm_break_time_ending</string>
-    <string name="preference_key_alarm_daily_rest_ending">preference_key_alarm_daily_rest_ending</string>
-    <string name="preference_key_alarm_weekly_rest_ending">preference_key_alarm_weekly_rest_ending</string>
 
     <string name="preference_key_remove_all_logs">prefence_key_remove_all_logs</string>
     <string name="preference_key_backup">preference_key_backup</string>
@@ -72,4 +65,5 @@
     <string name="preference_key_map_type">prefence_key_map_type</string>
     <string name="preference_key_remove_under_1_min_logs">preference_key_remove_under_1_min_logs</string>
     <string name="preference_key_gps_min_accuracy">preference_key_gps_min_accuracy</string>
+    <string name="preference_key_view_source_code">preference_key_view_source_code</string>
 </resources>

@@ -31,12 +31,11 @@
         android:orderInCategory="0"  
         android:title="@string/title_edit_log_event" 
         android:icon="@drawable/ic_action_edit"/>
-    
 
-    <item android:id="@+id/menu_open_full_map" 
-        appcompat:showAsAction="ifRoom" 
-        android:orderInCategory="1"  
-        android:title="@string/menu_open_map" 
-        android:icon="@drawable/ic_open_map"/>  
+    <item android:id="@+id/menu_item_discard"
+        appcompat:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        android:title="@string/menu_discard"
+        android:icon="@drawable/ic_delete_light"/>
     
 </menu>

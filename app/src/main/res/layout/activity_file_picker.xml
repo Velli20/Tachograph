@@ -34,7 +34,7 @@
         android:id="@+id/activity_file_picker_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/color_primary_400"
+        android:background="@color/color_primary"
         android:layout_alignParentTop="true"
         android:elevation="2dp"
         android:gravity="center_vertical"

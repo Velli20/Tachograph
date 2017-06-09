@@ -52,12 +52,17 @@
         app:elevation="4dp"
         tools:ignore="RtlHardcoded" />
     
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         custom:style="regular"
         android:id="@+id/working_days_fragment_no_items_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/working_days_no_items_to_display"
-        android:textColor="@color/gray" />
+        android:text="@string/title_log_no_events"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:drawableBottom="@drawable/ic_log_empty_state"
+        android:drawablePadding="16dp"
+        android:textColor="@color/gray"
+        android:textSize="24sp"/>
 </FrameLayout>

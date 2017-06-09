@@ -30,7 +30,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp">
 
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/spinner_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

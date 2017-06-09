@@ -41,7 +41,7 @@
         android:src="@drawable/ic_action_drag"
         android:contentDescription="@null"/>
 
-    <com.velli.tachograph.views.RobotoSwitchCompat 
+    <com.velli20.tachograph.views.RobotoSwitchCompat
         android:id="@+id/list_items_to_show_switch"
         custom:style="regular"
         android:layout_width="match_parent"

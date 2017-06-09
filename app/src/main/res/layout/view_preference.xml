@@ -69,7 +69,7 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp" >
 
-        <com.velli.tachograph.views.RobotoLightTextView
+        <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/title"
             robototext:style="regular"
             style="@style/ListPrimaryTextWhite"
@@ -80,7 +80,7 @@
             android:textColor="?android:attr/textColorPrimary" 
             android:singleLine="false"/>
 
-        <com.velli.tachograph.views.RobotoLightTextView
+        <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/summary"
             robototext:style="regular"
             style="@style/ListSecondaryTextWhite"

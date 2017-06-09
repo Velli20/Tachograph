@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<resources>
+
+
+    <string-array name="items_to_show_in_summary">
+        <item >@string/work_limit_daily_driving_time</item>
+        <item >@string/work_limit_daily_rest</item>
+        <item >@string/work_limit_fortnightly_driving_time</item>
+        <item >@string/work_limit_weekly_rest</item>
+        <item >@string/work_limit_weekly_driving_time</item>
+        <item >@string/work_limit_wtd_weekly_working</item>
+    </string-array>
+
+    <string-array name="event_explanations">
+        <item >@string/title_event_driving</item>
+        <item >@string/title_event_daily_rest</item>
+        <item >@string/title_event_weekly_rest</item>
+        <item >@string/title_event_break</item>
+        <item >@string/title_event_other_work</item>
+        <item >@string/title_event_poa</item>
+    </string-array>
+
+    <string-array name="navigation_drawer_titles">
+        <item >@string/title_navigation_drawer_now</item>
+        <item >@string/title_navigation_drawer_log</item>
+        <item >@string/title_navigation_drawer_log_summary</item>
+    </string-array>
+
+    <string-array name="map_ground_layers">
+        <item >@string/menu_map_layer_satellite</item>
+        <item >@string/menu_map_layer_satellite_with_streets</item>
+        <item >@string/menu_map_layer_map</item>
+        <item >@string/menu_map_layer_earth</item>
+    </string-array>
+
+    <string-array name="preference_entries_sort_by_month_week_day">
+        <item >@string/preference_entry_sort_log_by_day</item>
+        <item >@string/preference_entry_sort_log_by_week</item>
+        <item >@string/preference_entry_sort_log_by_month</item>
+    </string-array>
+
+    <string-array name="preference_entries_sort_by_asc_desc">
+        <item >@string/preference_entry_sort_log_descending</item>
+        <item >@string/preference_entry_sort_log_ascending</item>
+    </string-array>
+
+    <string-array name="preference_entries_count_activity_progress">
+        <item >@string/preference_entry_show_remaining_time</item>
+        <item >@string/preference_entry_show_elapsed_time</item>
+    </string-array>
+
+</resources>

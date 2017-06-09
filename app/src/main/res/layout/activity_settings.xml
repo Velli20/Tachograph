@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentTop="true"
-        android:background="@color/color_primary_400"
+        android:background="@color/color_primary"
         android:elevation="0dp"
         android:gravity="center_vertical"
         app:contentInsetLeft="16dp"
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="com.velli.tachograph.FragmentSettings"
+        android:name="com.velli20.tachograph.FragmentSettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/settings_toolbar" />

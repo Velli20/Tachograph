@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.velli.tachograph.googledatetimepicker.DatePickerDialogView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.velli20.tachograph.googledatetimepicker.DatePickerDialogView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -25,4 +25,4 @@
 
 
 
-</com.velli.tachograph.googledatetimepicker.DatePickerDialogView>
+</com.velli20.tachograph.googledatetimepicker.DatePickerDialogView>

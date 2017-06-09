@@ -45,13 +45,16 @@
         android:orientation="vertical"
         android:visibility="gone" >
         
-        <com.velli.tachograph.views.RobotoLightTextView
+        <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/working_days_fragment_no_items_text"
             custom:style="regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/working_days_no_items_to_display"
+            android:gravity="center_horizontal"
+            android:text="@string/log_summary_no_items_to_display"
+            android:textSize="24sp"
+            android:drawablePadding="16dp"
+            android:drawableBottom="@drawable/ic_no_log_summaries"
             android:textColor="@color/gray" />
 
     </LinearLayout>

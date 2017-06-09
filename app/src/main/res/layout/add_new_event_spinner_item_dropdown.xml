@@ -31,7 +31,7 @@
     android:layout_height="48dp"
     android:orientation="horizontal" >
     
-    <com.velli.tachograph.views.ListCircle
+    <com.velli20.tachograph.views.ListCircle
         android:id="@+id/add_new_event_spinner_item_circle"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -41,7 +41,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"/>
     
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/add_new_event_spinner_item_title"
         custom:style="regular"
         android:layout_width="match_parent"

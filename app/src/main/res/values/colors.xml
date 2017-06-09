@@ -26,12 +26,13 @@
   -->
 
 <resources>
-    <color name="color_primary_400">#00b0ff</color>
-    <color name="color_primary_dark_700">#0091ea</color>
-    
-    <color name="color_accent_orange_600">#fb8c00</color>
+    <color name="color_primary">#607d8b</color>
+    <color name="color_primary_dark">#37474f</color>
+    <color name="color_accent">#03a9f4</color>
 
-
+    <color name="color_primary_activity_settings">#90a4ae</color>
+    <color name="color_primary_dark_activity_settings">#78909c</color>
+    <color name="color_accent_activity_settings">#03a9f4</color>
     
     <color name="text_color_primary_light">#FFFFFF</color>
     <color name="text_color_secondary_light">#FFFFFF</color>
@@ -43,7 +44,7 @@
 
     <color name="list_item_selected">#1F03a9f4</color>
     
-    <color name="event_drving">#03a9f4</color>
+    <color name="event_driving">#03a9f4</color>
     <color name="event_daily_rest">#4caf50</color>
     <color name="event_weekly_rest">#009688</color>
     <color name="event_break">#607d8b</color>
@@ -64,7 +65,7 @@
     <color name="date_picker_date_picker_month_title_background_color">#f2f2f2</color>
     
     <array name="event_colors">
-        <item>@color/event_drving</item>
+        <item>@color/event_driving</item>
         <item>@color/event_daily_rest</item>
         <item>@color/event_weekly_rest</item>
         <item>@color/event_break</item>

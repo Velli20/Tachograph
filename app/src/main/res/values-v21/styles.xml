@@ -51,13 +51,9 @@
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center_vertical|right|end</item>
-        <item name="android:background">@drawable/overflow_ripple_background</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
     </style>
-    
-    <style name="EventDetailsActionButton">
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginTop">@dimen/toolbar_title_fab_margin</item>
-    </style>
+
     
     <style name="EventFab">
         <item name="android:layout_gravity">bottom|right|end</item>
@@ -65,12 +61,7 @@
         <item name="android:layout_marginBottom">16dp</item>
         <item name="android:clickable">false</item>
     </style>
-    
-    <style name="EventFabMini" parent="@style/EventFab">
-        <item name="android:layout_marginRight">24dp</item>
-        <item name="android:scaleX">0</item>
-        <item name="android:scaleY">0</item>
-    </style>
+
     
     <style name="RippleButtonBackground" >
         <item name="android:background">@drawable/overflow_ripple_background</item>

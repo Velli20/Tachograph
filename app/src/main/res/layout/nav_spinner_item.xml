@@ -32,7 +32,7 @@
 
   
 
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/spinner_item_title"
         custom:style="medium"
         android:layout_width="match_parent"

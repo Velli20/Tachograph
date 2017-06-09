@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,392 +24,64 @@
   ~  */
   -->
 
-<com.velli.tachograph.views.CustomInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.internal.ScrimInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="wrap_content">
 
-    
-    <View
-        android:id="@+id/status_revealBackground"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_gravity="top"
-        android:background="@color/color_primary_400" >
-    </View>
+        android:layout_height="wrap_content" >
 
-    <View
-        android:id="@+id/status_reveal"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_gravity="top"
-        android:background="@color/color_primary_400" >
-    </View>
+        <View
+            android:id="@+id/activity_add_new_event_status_bar_reveal_background"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_primary" />
 
-    <View
-        android:id="@+id/revealBackground"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_marginTop="24dp"
-        android:layout_gravity="top"
-        android:background="@color/color_primary_400" >
-    </View>
+        <View
+            android:id="@+id/activity_add_new_event_status_bar_reveal_view"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_primary" />
 
-    <View
-        android:id="@+id/reveal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_marginTop="24dp"
-        android:layout_gravity="top"
-        android:background="@color/color_primary_400" >
-    </View>
-    
-    
+        <View
+            android:id="@+id/activity_add_new_event_tool_bar_reveal_background"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@+id/activity_add_new_event_status_bar_reveal_background"
+            android:background="@color/color_primary" />
 
-    <ScrollView
-        android:id="@+id/activity_add_event_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="24dp"
-        android:layout_marginTop="@dimen/toolbar_height"
-        android:layout_gravity="top" >
+        <View
+            android:id="@+id/activity_add_new_event_tool_bar_reveal_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@+id/activity_add_new_event_status_bar_reveal_background"
+            android:background="@color/color_primary" />
 
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/activity_add_new_event_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_below="@+id/activity_add_new_event_status_bar_reveal_background"
+            android:background="@android:color/transparent"
+            android:elevation="3dp"
+            android:gravity="center_vertical"
+            app:contentInsetLeft="72dp"
+            app:contentInsetStart="72dp"
+            app:theme="@style/ToolbarStyle" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/activity_add_event_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_below="@+id/activity_add_new_event_tool_bar">
 
-            <Spinner
-                android:id="@+id/add_new_event_event_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp" />
-
-            <com.velli.tachograph.views.RobotoSwitchCompat
-                android:id="@+id/add_new_event_event_is_split_break"
-                custom:style="medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="72dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="72dp"
-                android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:focusable="false"
-                android:visibility="gone"
-                android:text="@string/add_event_is_split_break"
-                android:textColor="#91000000" />
-            
-            <View style="@style/Divider" />
-
-            <com.velli.tachograph.views.RobotoLightTextView
-                android:id="@+id/add_new_event_title_time"
-                style="@style/AddEventSubHeader"
-                custom:style="medium"
-                android:layout_width="wrap_content"
-                android:drawableStart="@drawable/ic_time"
-                android:text="@string/add_event_title_time" />
-
-            <View
-                style="@style/Divider"
-                android:layout_marginStart="72dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp" >
-
-                <com.velli.tachograph.views.RobotoLightTextView
-                    android:id="@+id/add_new_event_title_start_time2"
-                    style="@style/ListPrimaryText"
-                    custom:style="regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="72dp"
-                    android:layout_toStartOf="@+id/add_new_event_button_start_time"
-                    android:text="@string/add_event_event_start_time" />
-
-                <Button
-                    android:id="@+id/add_new_event_button_start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:focusable="false"
-                    android:fontFamily="sans-serif-light"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/add_new_event_end_time_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" >
-
-                <com.velli.tachograph.views.RobotoLightTextView
-                    android:id="@+id/add_new_event_title_end_time2"
-                    style="@style/ListPrimaryText"
-                    custom:style="regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="72dp"
-                    android:layout_toStartOf="@+id/add_new_event_button_end_time"
-                    android:text="@string/add_event_event_end_time" />
-
-                <Button
-                    android:id="@+id/add_new_event_button_end_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:focusable="false"
-                    android:fontFamily="sans-serif-light"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <com.velli.tachograph.views.RobotoLightTextView
-                android:id="@+id/add_new_event_title_end_time"
-                style="@style/AddEventSubHeader"
-                custom:style="medium"
-                android:layout_width="wrap_content"
-                android:drawableStart="@drawable/ic_event"
-                android:text="@string/add_event_title_date" />
-
-            <View
-                style="@style/Divider"
-                android:layout_marginStart="72dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp" >
-
-                <com.velli.tachograph.views.RobotoLightTextView
-                    android:id="@+id/add_new_event_title_start_date"
-                    style="@style/ListPrimaryText"
-                    custom:style="regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="72dp"
-                    android:layout_toStartOf="@+id/add_new_event_button_start_date"
-                    android:text="@string/add_event_event_start_date" />
-
-                <Button
-                    android:id="@+id/add_new_event_button_start_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:focusable="false"
-                    android:fontFamily="sans-serif-light"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/add_new_event_end_date_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp" >
-
-                <com.velli.tachograph.views.RobotoLightTextView
-                    android:id="@+id/add_new_event_title_end_date"
-                    style="@style/ListPrimaryText"
-                    custom:style="regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="72dp"
-                    android:layout_toStartOf="@+id/add_new_event_button_end_date"
-                    android:text="@string/add_event_event_end_date" />
-
-                <Button
-                    android:id="@+id/add_new_event_button_end_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:focusable="false"
-                    android:fontFamily="sans-serif-light"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/add_new_event_extra_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <com.velli.tachograph.views.RobotoLightTextView
-                    android:id="@+id/add_new_event_title_milage"
-                    style="@style/AddEventSubHeader"
-                    custom:style="medium"
-                    android:layout_width="wrap_content"
-                    android:drawableStart="@drawable/ic_mileage"
-                    android:text="@string/add_event_title_mileage" />
-
-                <View
-                    style="@style/Divider"
-                    android:layout_marginStart="72dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp" >
-
-                    <com.velli.tachograph.views.RobotoLightTextView
-                        android:id="@+id/add_new_event_title_mileage_start"
-                        style="@style/ListPrimaryText"
-                        custom:style="regular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="72dp"
-                        android:layout_toStartOf="@+id/add_new_event_button_mileage_start"
-                        android:text="@string/add_event_event_mileage_at_start" />
-
-                    <Button
-                        android:id="@+id/add_new_event_button_mileage_start"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:focusable="false"
-                        android:fontFamily="sans-serif-light"
-                        android:textAllCaps="false"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp" >
-
-                    <com.velli.tachograph.views.RobotoLightTextView
-                        android:id="@+id/add_new_event_title_mileage_end"
-                        style="@style/ListPrimaryText"
-                        custom:style="regular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="72dp"
-                        android:layout_toStartOf="@+id/add_new_event_button_mileage_end"
-                        android:text="@string/add_event_event_mileage_at_end" />
-
-                    <Button
-                        android:id="@+id/add_new_event_button_mileage_end"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="16dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:focusable="false"
-                        android:fontFamily="sans-serif-light"
-                        android:textAllCaps="false"
-                        android:textSize="16sp" />
-                </RelativeLayout>
+            <include layout="@layout/activity_add_new_event_form" />
+        </android.support.v4.widget.NestedScrollView>
 
 
-                <View
-                    style="@style/Divider"
-                    android:layout_marginLeft="72dp"
-                    android:layout_marginStart="72dp" />
-
-                <EditText
-                    android:id="@+id/add_new_event_start_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/add_event_start_location"
-                    android:drawableLeft="@drawable/ic_action_start_location"
-                    android:drawableStart="@drawable/ic_action_start_location"
-                    android:drawablePadding="30dp"
-                    android:inputType="text"
-                    android:textColorHint="#80000000"
-                    android:textSize="16sp" />
-
-                <View
-                    style="@style/Divider"
-                    android:layout_marginLeft="72dp"
-                    android:layout_marginStart="72dp" />
-                
-                <EditText
-                    android:id="@+id/add_new_event_end_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="15dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/add_event_end_location"
-                    android:drawableLeft="@drawable/ic_action_end_location"
-                    android:drawableStart="@drawable/ic_action_end_location"
-                    android:drawablePadding="30dp"
-                    android:inputType="text"
-                    android:textColorHint="#80000000"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                style="@style/Divider"
-                android:layout_marginStart="72dp" />
-
-            <EditText
-                android:id="@+id/add_new_event_note"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_note"
-                android:drawablePadding="30dp"
-                android:drawableStart="@drawable/ic_note"
-                android:hint="@string/add_event_event_add_note"
-                android:inputType="text"
-                android:textColorHint="#80000000"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </ScrollView>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_add_new_event"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_marginTop="24dp"
-        android:elevation="3dp"
-        android:layout_gravity="top"
-        android:background="@android:color/transparent"
-        android:gravity="center_vertical"
-        app:contentInsetLeft="72dp"
-        app:contentInsetStart="72dp"
-        app:theme="@style/ToolbarStyle" />
-
-</com.velli.tachograph.views.CustomInsetsFrameLayout>
+    </RelativeLayout>
+</android.support.design.internal.ScrimInsetsFrameLayout>

@@ -26,94 +26,29 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/event_details_container"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_event_details_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/color_primary"
+        android:elevation="3dp"
+        android:gravity="center_vertical"
+        app:contentInsetLeft="72dp"
+        app:contentInsetStart="72dp"
+        app:theme="@style/ToolbarStyle"
+        tools:ignore="UnusedAttribute" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_event_details_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_date"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:layout_marginTop="32dp"
-            android:drawableLeft="@drawable/ic_event"
-            android:drawableStart="@drawable/ic_event" />
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_duration"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_time"
-            android:drawableStart="@drawable/ic_time" />
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_milage"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_mileage"
-            android:drawableStart="@drawable/ic_mileage" />
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_start_location"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_action_start_location"
-            android:drawableStart="@drawable/ic_action_start_location" />
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_end_location"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_action_end_location"
-            android:drawableStart="@drawable/ic_action_end_location" />
-        
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_average_speed"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_average_speed"
-            android:drawableStart="@drawable/ic_average_speed" />
-
-        <com.velli.tachograph.views.RobotoLightTextView
-            android:id="@+id/event_details_note"
-            style="@style/EventDetailsText"
-            custom:style="regular"
-            android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_note"
-            android:drawableStart="@drawable/ic_note" />
-
-        <com.velli.tachograph.views.StaticSpeedChart
-            android:id="@+id/event_details_speed_graph"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"/>
-
-    </LinearLayout>
-    
-    <ProgressBar
-        android:id="@+id/event_details_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="center"
-        android:indeterminate="true"/>
+        android:layout_marginTop="@dimen/toolbar_height"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent" />
 
 </FrameLayout>

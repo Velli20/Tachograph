@@ -46,7 +46,14 @@
     <string name="menu_stop_daily_rest">Keskeytä vuorokausilepo</string>
     <string name="menu_start_break">Aloita tauko</string>
     <string name="menu_stop_break">keskeytä tauko</string>
+
     <string name="menu_map_layer">Kartan taso</string>
+    <string name="menu_map_layer_satellite">Satelliittikuva</string>
+    <string name="menu_map_layer_satellite_with_streets">Teiden satlliittikuva</string>
+    <string name="menu_map_layer_map">Kartta</string>
+    <string name="menu_map_layer_earth">Maanpinta</string>
+
+    <string name="menu_delete_route">Poista reitti</string>
     <string name="menu_export_events">Vie data</string>
     <string name="menu_sort">Järjestä</string>
     <string name="menu_show_items">Kohteiden hallinta</string>
@@ -54,60 +61,60 @@
     <string name="menu_open_map">Avaa kartta</string>
     
     <string name="default_filename">Ajopaivakirja</string>
-    
-    <string name="action_file_saved">Loki tallennettu muistikortille</string>
-    <string name="action_database_backup_complete">Tiedot varmuuskopioitu</string>
-    <string name="action_database_restore_complete">Tiedot palautettu</string>
-    <string name="action_all_files_removed">Kaikki tiedot poistettu</string>
+
     <string name="action_ok">Ok</string>
     <string name="action_cancel">Peruuta</string>
     <string name="action_today">Tänään</string>
-    <string name="action_disble">Pois päältä</string>
-    <string name="action_title_remove_all_logs">Poista kaikki lokitiedot</string>
-    
-    
+
+    <string name="dialog_title_remove_all_logs">Poista kaikki lokitiedot</string>
     <string name="dialog_title_map_layer">Kartan taso</string>
     <string name="dialog_title_delete_route">Poista reitti?</string>
     <string name="dialog_title_filename">Tiedostonnimi</string>
-    <string name="dialog_title_set_treshold_speed">Aseta nopeus</string>
+    <string name="dialog_title_set_threshold_speed">Aseta nopeus</string>
     <string name="dialog_title_set_threshold_time">Aseta kynnysaika</string>
-    <string name="dialog_title_alarm_time">Aika</string>
     <string name="dialog_title_fix_following_errors">Korjaa seuraavat virheet</string>
     <string name="dialog_text_delete_route">Reitti ja sen merkit poistetaan pysyvästi laitteesta.</string>
     <string name="dialog_text_remove_all_logs">Haluatko varmasti poistaa kaikki lokitiedot?</string>
-    <string name="dialog_text_error_for_this_period_or_for_this_date_are_already_an_event">Tälle ajalle tai päivämäärälle on jo tapahtuma, valitse toinen aika</string>
     <string name="dialog_text_error_start_end_time">lopetusaika on ennen alkamisaikaa!</string>
-    
+
+    <string name="title_navigation_drawer_now">Nyt</string>
+    <string name="title_navigation_drawer_log">Loki</string>
+    <string name="title_navigation_drawer_log_summary">Yhteenvedot</string>
+
     <string name="title_add_new_log_event">Lisää</string>
     <string name="title_edit_log_event">Muokkaa</string>
     <string name="title_today">Tänään</string>
     <string name="title_week">Viikko</string>
     <string name="title_now">Nyt</string>
     <string name="title_speed">Nopeus</string>
+    <string name="title_route">Tallennettu reitti</string>
     <string name="title_duration">Matkan kesto</string>
     <string name="title_started_at">Alkoi: </string>
     <string name="title_ended_at">Päättyi: </string>
-    <string name="title_split_break">Jaettu tauko</string>
-    <string name="title_no_saved_routes">Ei tallennettuja reittejä</string>
-    <string name="title_recording_event">Kirjaaminen käynissä</string>
-    <string name="title_address_unavailable">Ei saatavilla</string>
+
+    <string name="title_recording_event">Kirjaaminen käynnissä</string>
+    <string name="title_info">Tiedot</string>
+    <string name="title_details">Tiedot</string>
+    <string name="title_average_speed">Keskinopeus</string>
+    <string name="title_address_not_available">Ei saatavilla</string>
     <string name="title_loading_address">Haetaan osoitetta...</string>
     <string name="title_items_to_show_in_summary">Kohteiden hallinta</string>
-    <string name="title_info">Tiedot</string>
-    <string name="title_average_speed">Keskinopeus</string>
-    
-    <string name="exeption_title_extended_drive_time">Jatkettuja päiviä jäljellä</string>
-    <string name="exeption_subtitle_extended_drive_time">Vuorokautinen ajoaika saa olla enintään 9 tuntia. Sitä voidaan viikon aikana kahdesti pidentää enintään 10 tuntiin.</string>
-    <string name="exeption_title_reduced_daily_rest">Lyhennettyjä vuorokausilepoja jäljellä</string>
-    <string name="exeption_subtitle_reduced_daily_rest">Vuorokausilevon saa kahden viikottaisen lepoajan välillä lyhentää enintään kolme kertaa vähintään 9 tunnin mittaiseksi. </string>
-    <string name="exeption_title_reduced_weekly_rest">Lyhennettyjä viikkolepoja jäljellä</string>
-    <string name="exeption_subtitle_reduced_weekly_rest">Viikkolepo voidaan lyhentää vähintään 24 tuntiin kerran peräkkäisen kahden viikon aikana.</string>
-    
-    <string name="add_event_drive_time">Ajoaika</string>
-    <string name="add_event_poa">Varallaoloaika</string>
-    <string name="add_event_other_work">Muu työ</string>
-    <string name="add_event_event_resting">Lepo</string>
+    <string name="title_log_no_events">Ei lokitietoja</string>
 
+    <string name="title_event_driving">Ajoaika</string>
+    <string name="title_event_poa">Varallaoloaika</string>
+    <string name="title_event_other_work">Muu työ</string>
+    <string name="title_event_rest">Lepo</string>
+    <string name="title_event_daily_rest">Vuorokausilepo</string>
+    <string name="title_event_weekly_rest">Viikkolepo</string>
+    <string name="title_event_break">Tauko</string>
+
+    <string name="exception_title_extended_drive_time">Jatkettuja päiviä jäljellä</string>
+    <string name="exception_subtitle_extended_drive_time">Vuorokautinen ajoaika saa olla enintään 9 tuntia. Sitä voidaan viikon aikana kahdesti pidentää enintään 10 tuntiin.</string>
+    <string name="exception_title_reduced_daily_rest">Lyhennettyjä vuorokausilepoja jäljellä</string>
+    <string name="exception_subtitle_reduced_daily_rest">Vuorokausilevon saa kahden viikottaisen lepoajan välillä lyhentää enintään kolme kertaa vähintään 9 tunnin mittaiseksi. </string>
+    <string name="exception_title_reduced_weekly_rest">Lyhennettyjä viikkolepoja jäljellä</string>
+    <string name="exception_subtitle_reduced_weekly_rest">Viikkolepo voidaan lyhentää vähintään 24 tuntiin kerran peräkkäisen kahden viikon aikana.</string>
     
     <string name="add_event_event_mileage_at_start">Ajon alussa:</string>
     <string name="add_event_event_mileage_at_end">Ajon lopussa:</string>
@@ -121,8 +128,7 @@
     <string name="add_event_title_mileage">Mittarilukema</string>
     <string name="add_event_start_location">Lähtöpaikka</string>
     <string name="add_event_end_location">Saapumispaikka</string>
-    <string name="add_event_is_split_break">Jaettu tauko</string>
-    
+
     <string name="export_events_start_time">Aloitusaika</string>
     <string name="export_events_start_date">Aloituspäivä</string>
     <string name="export_events_end_time">Lopetusaika</string>
@@ -132,12 +138,9 @@
     <string name="export_events_mileage_at_end">Mittarilukema lopussa</string>
     <string name="export_events_note">Muistiinpano</string>
     <string name="export_events_duration">Kesto</string>
-    
+    <string name="export_events_driven_distance">Reitin pituus</string>
+
     <string name="notification_logging_in_progress">Kirjaaminen käynnissä</string>
-    <string name="notification_next_event_daily_rest">Seuraava toimitila: vuorokausilepo</string>
-    <string name="notification_next_event_break">Seuraava toimitila: tauko</string>
-    <string name="notification_next_event_weekly_rest">Seuraava toimitila: viikolepo</string>
-    <string name="notification_next_event_driving">Seuraava toimitila: ajoaika</string>
     <string name="notification_button_start_break">Tauko</string>
     <string name="notification_button_start_weekly_rest">Viikkolepo</string>
     <string name="notification_button_start_daily_rest">Vuorokausilepo</string>
@@ -146,89 +149,48 @@
     <string name="notification_logging_started">Kirjaaminen aloitettu</string>
     <string name="notification_logging_stopped">Kirjaaminen lopetettu</string>
 
-    <string name="notification_break_time_ending">Tauko päättyy</string>
-    <string name="notification_break_time_ended">Tauko päättynyt</string>
-    <string name="notification_drive_time_ending">Ajoaika päättyy</string>
-    <string name="notification_drive_time_ended">Ajoaika päättynyt</string>
-    <string name="notification_daily_rest_ending">Vuorokausilepo päättyy</string>
-    <string name="notification_daily_rest_ended">Vuorokausilepo päättynyt</string>
-    <string name="notification_weekly_rest_ending">Viikkolepo päättyy</string>
-    <string name="notification_weekly_rest_ended">Viikkolepo päättynyt</string>
-    <string name="notification_tap_to_show_more_info">Näytä lisää tietoja napauttamalla</string>
-    <string name="notification_in_time">kuluttua</string>
+    <string name="notification_file_saved">Loki tallennettu muistikortille</string>
+    <string name="notification_log_backup_complete">Tiedot varmuuskopioitu</string>
+    <string name="notification_log_restored">Tiedot palautettu</string>
+    <string name="notification_all_events_deleted">Kaikki tiedot poistettu</string>
 
+    <string name="log_summary_weekly_driving_time">Viikoittainen ajoaika:</string>
+    <string name="log_summary_weekly_working_time">Työskentelyaika:</string>
+    <string name="log_summary_weekly_rest_time">Viikkolepo:</string>
+    <string name="log_summary_wtd_weekly_rest_time">WTD viikolepo:</string>
+    <string name="log_summary_wtd_weekly_work_time">WTD viikoittainen työskentelyaika:</string>
+    <string name="log_summary_total_driven_distance">Ajettu matka:</string>
+    <string name="log_summary_driven_distance">Ajettu matka:</string>
     
-    
-    <string name="working_days_weekly_drive_time">Viikoittainen ajoaika:</string>
-    <string name="working_days_weekly_work_time">Työskentelyaika:</string>
-    <string name="working_days_weekly_rest_time">Viikkolepo:</string>
-    <string name="working_days_wtd_weekly_rest_time">WTD viikolepo:</string>
-    <string name="working_days_wtd_weekly_work_time">WTD viikoittainen työskentelyaika:</string>
-    <string name="working_days_total_driven_distance">Ajettu matka:</string>
-    <string name="working_days_driven_distance">Ajettu matka:</string>
-    
-    <string name="working_days_daily_rest_time">Vuorokausilepo:</string>
-    <string name="working_days_daily_drive_time">Vuorokautinen ajoaika:</string>
-    <string name="working_days_daily_work_time">Työskentelyaika:</string>
-    <string name="working_days_daily_wtd_work_time">WTD työskentelyaika:</string>
-    <string name="working_days_daily_wtd_night_shift_work_time">WTD yötyöskentelyaika:</string>
-    <string name="working_days_no_items_to_display">Ei näytettäviä lokitietoja</string>
-    
-    <string name="work_limit_next_weekly_rest">Viikkolepo aloitettava viimeistään </string>
-    <string name="work_limit_next_daily_rest">Vuorokausilepo aloitettava viimeistään </string>
+    <string name="log_summary_daily_rest_time">Vuorokausilepo:</string>
+    <string name="log_summary_daily_driving_time">Vuorokautinen ajoaika:</string>
+    <string name="log_summary_daily_working_time">Työskentelyaika:</string>
+    <string name="log_summary_daily_wtd_working_time">WTD työskentelyaika:</string>
+    <string name="log_summary_no_items_to_display">Ei näytettäviä yhteenvetoja</string>
+
    
     <string name="work_limit_daily_rest">Vuorokausilepo</string>
     <string name="work_limit_weekly_rest">Viikkolepo</string>
     <string name="work_limit_weekly_driving_time">Viikottainen ajoaika</string>
-    <string name="work_limit_fortnightly_drivetime">Kahden peräkkäisen viikon yhteenlaskettu ajoaika</string>
-    <string name="work_limit_continious_driving_time">Yhtämittainen ajoaika</string>
+    <string name="work_limit_fortnightly_driving_time">Kahden peräkkäisen viikon yhteenlaskettu ajoaika</string>
+    <string name="work_limit_continuous_driving_time">Yhtämittainen ajoaika</string>
     <string name="work_limit_daily_driving_time">Vuorokautinen ajoaika</string>
     <string name="work_limit_break_time">Tauko</string>
-    
-    <string name="work_limit_wtd_daily_rest">WTD vuorokausilepo</string>
-    <string name="work_limit_wtd_weekly_rest">WTD viikkolepo</string>
     <string name="work_limit_wtd_weekly_working">WTD viikoittainen työskentelyaika</string>
-    <string name="work_limit_wtd_weekly_working_average1"></string>
-    <string name="work_limit_wtd_weekly_working_average2">viikon keskiarvo:</string>
-    <string name="work_limit_wtd_night_shift_working_time">WTD yötyöskenetely aika</string>
-    
+
     
     <string name="work_limit_daily_rest_remaining">Vuorokausilepoa jäljellä</string>
     <string name="work_limit_weekly_rest_remaining">Viikkolepoa jäljellä</string>
     <string name="work_limit_weekly_driving_time_remaining">Viikottaista ajoaikaa jäljellä</string>
-    <string name="work_limit_fortnightly_drivetime_remaining">Kahden peräkkäisen viikon yhteenlaskettua ajoaikaa jäljellä</string>
-    <string name="work_limit_continious_driving_time_remaining">Yhtämittaista ajoaikaa jäljellä</string>
+    <string name="work_limit_fortnightly_driving_time_remaining">Kahden peräkkäisen viikon yhteenlaskettua ajoaikaa jäljellä</string>
+    <string name="work_limit_continuous_driving_time_remaining">Yhtämittaista ajoaikaa jäljellä</string>
     <string name="work_limit_daily_driving_time_remaining">Vuorokautista ajoaikaa jäljellä</string>
     <string name="work_limit_break_time_remaining">Taukoa jäljellä</string>
     
     <string name="work_limit_wtd_daily_rest_remaining">WTD vuorokausilepoa jäljellä</string>
     <string name="work_limit_wtd_weekly_rest_remaining">WTD viikkolepoa jäljellä</string>
     <string name="work_limit_wtd_weekly_working_remaining">WTD viikoittaista työskentelyaikaa jäljellä</string>
-    <string name="work_limit_wtd_night_shift_working_time_remaining">WTD yötyöskenetely aikaa jäljellä</string>
 
-    
-    <string-array name="navigation_drawer_titles">
-        <item >Yhteenveto</item>
-        <item >Loki</item>
-        <item >Työajat</item>
-        <item >Reitit</item>
-    </string-array>
-    <string-array name="map_ground_layers">
-        <item >Satelliittikuva</item>
-        <item >Teiden satlliittikuva</item>
-        <item >Kartta</item>
-        <item >Maanpinta</item>
-        
-    </string-array>
-    <string-array name="event_explanations">
-        <item >Ajoaika</item>
-        <item >Vuorokausilepo</item>
-        <item >Viikkolepo</item>
-        <item >Tauko</item>
-        <item >Muu työ</item>
-        <item >Varallaoloaika</item>
-    </string-array>
-    
     <string-array name="months">
         <item >Tammikuu</item>
         <item >Helmikuu</item>
@@ -243,34 +205,14 @@
         <item >Marraskuu</item>
         <item >Joulukuu</item>
     </string-array>
-    
-    <string-array name="items_to_show_in_summary">
-        <item >Kahden peräkkäisen viikon yhteenlaskettu ajoaika</item>
-        <item >Viikkolepo</item>
-        <item >Vuorokausilepo</item>
-        <item >Vuorokautinen ajoaika</item>
-        <item >Viikoittainen ajoaika</item>
-        <item >WTD viikoittainen työskentelyaika</item>
-        <item >WTD vuorokausilepo</item>
-        <item >WTD viikkolepo</item>
-        <item >WTD yötyöskenetely aika</item>
-    </string-array>
+
     
     <string name="preference_category_general">Yleiset asetukset</string>
     <string name="preference_category_log">Loki</string>
     <string name="preference_category_gps_settings">GPS-asetukset</string>
-    <string name="preference_category_notifications">Ilmoitukset</string>
+    <string name="preference_category_about">Tietoja</string>
     
-    <string name="preference_title_count_daily_and_weekly_rest_automatically">Laske lepoajat automaattisesti</string>
     <string name="preference_title_show_notifications">Näytä ilmoitukset</string>
-    <string name="preference_title_notification_vibrate">Värinä</string>
-    <string name="preference_title_notification_sound">Ääni</string>
-    <string name="preference_title_alarm_drive_time_ending">Ajoaika päättyy ilmoitus</string>
-    <string name="preference_title_alarm_break_time_ending">Tauko päättyy ilmoitus</string>
-    <string name="preference_title_alarm_daily_rest_ending">Vuorokausilepo päättyy ilmoitus</string>
-    <string name="preference_title_alarm_weekly_rest_ending">Viikkolepo päättyy ilmoitus</string>
-    
-    <string name="preference_title_switch_automatically_to_drive">Vaihda automaattisesti tauosta ajoaikaan</string>
     <string name="preference_title_count_activity_progress">Aktiviteetin eteneminen</string>
     <string name="preference_title_remove_all_logs">Poista kaikki lokitiedot</string>
     <string name="preference_title_backup_restore">Varmuuskopioi tai palauta data</string>
@@ -283,38 +225,23 @@
     <string name="preference_title_threshold_time">Kynnysaika</string>
     <string name="preference_title_remove_less_1_min_entries">Poista alle 1 min kirjaukset</string>
     <string name="preference_title_gps_min_accuracy">Vähimmäistarkkuus</string>
-    
-    
-    <string name="preference_summary_switch_automatically_to_drive">Vaihda automaattisesti ajoaikaan kun tauko on suoritettu</string>
-    <string name="preference_summary_count_daily_and_weekly_rest_automatically">Laske aktiviteettien väliset ajat vuorokausi- ja viikkolevoiksi</string>
-    
-    <string name="preference_summary_alarm_disabled">Pois päältä</string>
-    <string name="preference_summary_alarm_drive_time_ending">ennen ajoajan päättymistä</string>
-    <string name="preference_summary_alarm_break_time_ending">ennen tauon päättymistä</string>
-    <string name="preference_summary_alarm_daily_rest_ending">ennen vorokausilevon päättymistä</string>
-    <string name="preference_summary_alarm_weekly_rest_ending">ennen viikolevon päättymistä</string>
-    
+    <string name="preference_title_view_source_code">Tarkastele sovelluksen lähdekoodia</string>
+
     <string name="preference_summary_export">Tallenna loki ulkoiseen muistiin ja avaa haluamassasi taulukko-ohjelmassa</string>
     <string name="preference_summary_use_gps">Vaihda automaattisesti ajoajasta muuhun työhön kun ajoneuvon nopeus laskee alle kynnysnopeuden</string>
     <string name="preference_summary_threshold_value">Sovellus olettaa ajoneuvon pysähtyneen GPS-nopeuden pudotessa alle tämän nopeuden</string>
     <string name="preference_summary_threshold_time">Aseta aika, jonka kuluttua ajoaika vaihdetaan muuhun työhön kun ajoneuvon GPS-nopeus putoaa alle kynnysnopeuden</string>
     <string name="preference_summary_remove_less_1_min_entries">Poista automaattisesti kirjaukset, joiden kesto on alle 1 minuuttia</string>
     <string name="preference_summary_gps_min_accuracy">GPS-vastaanottimesta tulevaa dataa ei oteta huomioon, jos sijaintisi tarkkuus on pienempi kuin valittu sijaintitarkkuus </string>
-    
-    <string-array name="prefrence_entries_sort_by_month_week_day">
-        <item >Päivän mukaan</item>
-        <item >Viikon mukaan</item>
-        <item >Kuukauden prerusteella</item>
-    </string-array>
 
-    <string-array name="prefrence_entries_sort_by_asc_desc">
-        <item >Laskevasti</item>
-        <item >Nousevasti</item>
-    </string-array>
-    
-    <string-array name="prefrence_entries_count_activity_progress">
-        <item >Näytä jäljellä oleva aika</item>
-        <item >Näytä kulunut aika</item>
-    </string-array>
+    <string name="preference_entry_sort_log_by_day">Päivän mukaan</string>
+    <string name="preference_entry_sort_log_by_week">Viikon mukaan</string>
+    <string name="preference_entry_sort_log_by_month">Kuukauden prerusteella</string>
+
+    <string name="preference_entry_sort_log_descending">Laskevasti</string>
+    <string name="preference_entry_sort_log_ascending">Nousevasti</string>
+
+    <string name="preference_entry_show_remaining_time">Näytä jäljellä oleva aika</string>
+    <string name="preference_entry_show_elapsed_time">Näytä kulunut aika</string>
 
 </resources>

@@ -24,12 +24,12 @@
   ~  */
   -->
 
-<com.velli.tachograph.views.SetSpeedView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.velli20.tachograph.views.SetSpeedView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:robototext="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/dialog_seekbar_label"
         robototext:style="regular"
         android:layout_width="wrap_content"
@@ -53,4 +53,4 @@
         android:max="20"/>
     
 
-</com.velli.tachograph.views.SetSpeedView>
+</com.velli20.tachograph.views.SetSpeedView>

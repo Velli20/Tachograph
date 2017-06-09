@@ -32,7 +32,6 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_send_feedback">Send feedback</string>
     <string name="menu_discard">Delete event</string>
-    <string name="menu_show_route">Show logged route</string>
     <string name="menu_save_changes">Save changes</string>
     
     <string name="menu_filter">Filter</string>
@@ -43,76 +42,79 @@
 
     <string name="menu_start_weekly_rest">Start weekly rest</string>
     <string name="menu_stop_weekly_rest">Stop weekly rest</string>
-    <string name="menu_start_daily_rest">Start dailyrest</string>
-    <string name="menu_stop_daily_rest">Stop dailyrest</string>
+    <string name="menu_start_daily_rest">Start daily rest</string>
+    <string name="menu_stop_daily_rest">Stop daily rest</string>
     <string name="menu_start_break">Start break</string>
     <string name="menu_stop_break">Stop break</string>
+
     <string name="menu_map_layer">Map layer</string>
+    <string name="menu_map_layer_satellite">Satellite</string>
+    <string name="menu_map_layer_satellite_with_streets">Satellite with streetsa</string>
+    <string name="menu_map_layer_map">Map</string>
+    <string name="menu_map_layer_earth">Earth</string>
+
     <string name="menu_delete_route">Delete logged route</string>
-    <string name="menu_replay_route">Play</string>
     <string name="menu_export_events">Export events</string>
     <string name="menu_sort">Sort</string>
     <string name="menu_show_items">Show items</string>
     <string name="menu_restore">Restore</string>
     <string name="menu_open_map">Open map</string>
-    
-    <string name="default_filename">tachograph</string>
-    
-    <string name="action_file_saved">File saved to internal memory</string>
-    <string name="action_database_backup_complete">Backup complete</string>
-    <string name="action_database_restore_complete">Restore complete</string>
-    <string name="action_all_files_removed">All files have been removed</string>
-    <string name="action_ok">Ok</string>
-    <string name="action_cancel">Cancel</string>
 
+    <string name="default_filename">tachograph</string>
+
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
     <string name="action_today">Today</string>
-    <string name="action_disble">Disable</string>
-    <string name="action_title_remove_all_logs">Remove all data</string>
-    
-    
+
+    <string name="dialog_title_remove_all_logs">Delete all data</string>
     <string name="dialog_title_map_layer">Map layer</string>
     <string name="dialog_title_delete_route">Delete route?</string>
     <string name="dialog_title_filename">Filename</string>
-    <string name="dialog_title_set_treshold_speed">Set speed</string>
-    <string name="dialog_title_set_threshold_time">Set treshold time</string>
-    <string name="dialog_title_alarm_time">Time</string>
+    <string name="dialog_title_set_threshold_speed">Set speed</string>
+    <string name="dialog_title_set_threshold_time">Set threshold time</string>
     <string name="dialog_title_fix_following_errors">Correct the following errors:</string>
     <string name="dialog_text_delete_route">The track and its markers will be deleted from the device</string>
     <string name="dialog_text_remove_all_logs">Are you sure you want to delete all data?</string>
-    <string name="dialog_text_error_for_this_period_or_for_this_date_are_already_an_event">There is already an event for this period/date, choose another time/date</string>
     <string name="dialog_text_error_start_end_time">end time is before start time!</string>
-    
+
+    <string name="title_navigation_drawer_now">Now</string>
+    <string name="title_navigation_drawer_log">Log</string>
+    <string name="title_navigation_drawer_log_summary">Log summary</string>
+
     <string name="title_add_new_log_event">Add</string>
     <string name="title_edit_log_event">Edit</string>
     <string name="title_today">Today</string>
     <string name="title_week">Week</string>
     <string name="title_now">Now</string>
     <string name="title_speed">Speed</string>
+    <string name="title_route">Logged route</string>
     <string name="title_duration">Duration</string>
     <string name="title_started_at">Started at: </string>
     <string name="title_ended_at">Ended at: </string>
-    <string name="title_split_break">Split break</string>    
-    <string name="title_info">Info</string>
-    <string name="title_average_speed">Average speed</string>
-   
-    <string name="title_no_saved_routes">No saved routes</string>
+
     <string name="title_recording_event">Logging in progress</string>
-    <string name="title_address_unavailable">Unavailable</string>
+    <string name="title_info">Info</string>
+    <string name="title_details">Details</string>
+    <string name="title_average_speed">Average speed</string>
+    <string name="title_address_not_available">Unavailable</string>
     <string name="title_loading_address">Loading address…</string>
     <string name="title_items_to_show_in_summary">Manage items</string>
-    
-    
-    <string name="exeption_title_extended_drive_time">Extented days left</string>
-    <string name="exeption_subtitle_extended_drive_time">Daily driving period shall not exceed 9 hours, with an exemption of twice a week when it can be extended to 10 hours.</string>
-    <string name="exeption_title_reduced_daily_rest">Reduced daily rests left</string>
-    <string name="exeption_subtitle_reduced_daily_rest">Daily rest period shall be at least 11 hours, with an exception of going down to 9 hours maximum three times a week.</string>
-    <string name="exeption_title_reduced_weekly_rest">Reduced weekly rests left</string>
-    <string name="exeption_subtitle_reduced_weekly_rest">Weekly rest is 45 continuous hours, which can be reduced every second week to 24 hours.</string>
-    
-    <string name="add_event_drive_time">Driving time</string>
-    <string name="add_event_poa">POA</string>
-    <string name="add_event_other_work">Other work</string>
-    <string name="add_event_event_resting">Rest</string>
+    <string name="title_log_no_events">No events. Tap + to add new event</string>
+
+    <string name="title_event_driving">Driving</string>
+    <string name="title_event_poa">POA</string>
+    <string name="title_event_other_work">Other work</string>
+    <string name="title_event_rest">Rest</string>
+    <string name="title_event_daily_rest">Daily rest</string>
+    <string name="title_event_weekly_rest">Weekly rest</string>
+    <string name="title_event_break">Break</string>
+
+    <string name="exception_title_extended_drive_time">Extended days left</string>
+    <string name="exception_subtitle_extended_drive_time">Daily driving period shall not exceed 9 hours, with an exemption of twice a week when it can be extended to 10 hours.</string>
+    <string name="exception_title_reduced_daily_rest">Reduced daily rests left</string>
+    <string name="exception_subtitle_reduced_daily_rest">Daily rest period shall be at least 11 hours, with an exception of going down to 9 hours maximum three times a week.</string>
+    <string name="exception_title_reduced_weekly_rest">Reduced weekly rests left</string>
+    <string name="exception_subtitle_reduced_weekly_rest">Weekly rest is 45 continuous hours, which can be reduced every second week to 24 hours.</string>
 
     <string name="add_event_event_mileage_at_start">At start:</string>
     <string name="add_event_event_mileage_at_end">At end:</string>
@@ -123,11 +125,10 @@
     <string name="add_event_event_add_note">Add note</string>
     <string name="add_event_title_time">Time</string>
     <string name="add_event_title_date">Date</string>
-    <string name="add_event_title_mileage">Milage</string>
+    <string name="add_event_title_mileage">Mileage</string>
     <string name="add_event_start_location">Start location</string>
     <string name="add_event_end_location">End location</string>
-    <string name="add_event_is_split_break">Split break</string>
-    
+
     <string name="export_events_start_time">Start time</string>
     <string name="export_events_start_date">Start date</string>
     <string name="export_events_end_time">End time</string>
@@ -137,102 +138,56 @@
     <string name="export_events_mileage_at_end">Mileage at end</string>
     <string name="export_events_note">Note</string>
     <string name="export_events_duration">Duration</string>
-    
+    <string name="export_events_driven_distance">Driven distance</string>
+
     <string name="notification_logging_in_progress">Logging in progress</string>
-    <string name="notification_next_event_daily_rest">Next event: daily rest</string>
-    <string name="notification_next_event_break">Next event: break</string>
-    <string name="notification_next_event_weekly_rest">Next event: weekly rest</string>
-    <string name="notification_next_event_driving">Next event: driving time</string>
     <string name="notification_button_start_break">Break</string>
     <string name="notification_button_start_weekly_rest">Weekly rest</string>
     <string name="notification_button_start_drive_time">Driving</string>
     <string name="notification_button_start_daily_rest">Break</string>
-    <string name="notification_button_cancel_logging">Cancel</string>
+    <string name="notification_button_cancel_logging">Stop</string>
     <string name="notification_logging_started">Logging started</string>
     <string name="notification_logging_stopped">Logging stopped</string>
-    
-    <string name="notification_break_time_ending">Break time ends in</string>
-    <string name="notification_break_time_ended">Break time completed</string>
-    <string name="notification_drive_time_ending">Daily driving time ends in</string>
-    <string name="notification_drive_time_ended">Daily driving time ended</string>
-    <string name="notification_daily_rest_ending">Daily rest ends in</string>
-    <string name="notification_daily_rest_ended">Daily rest completed</string>
-    <string name="notification_weekly_rest_ending">Weekly rest ends in</string>
-    <string name="notification_weekly_rest_ended">Weekly rest completed</string>
-    <string name="notification_tap_to_show_more_info">Tap to show more info</string>
-    <string name="notification_in_time"></string> 
 
+    <string name="notification_file_saved">File saved to internal memory</string>
+    <string name="notification_log_backup_complete">Backup complete</string>
+    <string name="notification_log_restored">Restore complete</string>
+    <string name="notification_all_events_deleted">All files have been removed</string>
+
+    <string name="log_summary_weekly_driving_time">Weekly driving time:</string>
+    <string name="log_summary_weekly_working_time">Weekly working time:</string>
+    <string name="log_summary_weekly_rest_time">Weekly rest:</string>
+    <string name="log_summary_wtd_weekly_rest_time">WTD weekly rest:</string>
+    <string name="log_summary_wtd_weekly_work_time">WTD weekly work time:</string>
+    <string name="log_summary_total_driven_distance">Total driven distance:</string>
+    <string name="log_summary_driven_distance">Driven distance:</string>
     
-    <string name="working_days_weekly_drive_time">Weekly drive time:</string>
-    <string name="working_days_weekly_work_time">Weekly working time:</string>
-    <string name="working_days_weekly_rest_time">Weekly rest:</string>
-    <string name="working_days_wtd_weekly_rest_time">WTD weekly rest:</string>
-    <string name="working_days_wtd_weekly_work_time">WTD weekly work time:</string>
-    <string name="working_days_total_driven_distance">Total driven distance:</string>
-    <string name="working_days_driven_distance">Driven distance:</string>
-    
-    <string name="working_days_daily_rest_time">Daily rest:</string>
-    <string name="working_days_daily_drive_time">Daily drive time:</string>
-    <string name="working_days_daily_work_time">Daily working time:</string>
-    <string name="working_days_daily_wtd_work_time">WTD daily working time:</string>
-    <string name="working_days_daily_wtd_night_shift_work_time">WTD night shift working time:</string>
-    <string name="working_days_no_items_to_display">No log events.</string>
-    
-    <string name="work_limit_next_weekly_rest">Next weekly rest</string>
-    <string name="work_limit_next_daily_rest">Next daily rest</string>
+    <string name="log_summary_daily_rest_time">Daily rest:</string>
+    <string name="log_summary_daily_driving_time">Daily driving time:</string>
+    <string name="log_summary_daily_working_time">Daily working time:</string>
+    <string name="log_summary_daily_wtd_working_time">WTD daily working time:</string>
+    <string name="log_summary_no_items_to_display">No log summaries available.</string>
     
     <string name="work_limit_daily_rest">Daily rest</string>
     <string name="work_limit_weekly_rest">Weekly rest</string>
     <string name="work_limit_weekly_driving_time">Weekly driving time</string>
-    <string name="work_limit_fortnightly_drivetime">Fortnightly driving time</string>
-    <string name="work_limit_continious_driving_time">Continuous driving time</string>
+    <string name="work_limit_fortnightly_driving_time">Fortnightly driving time</string>
+    <string name="work_limit_continuous_driving_time">Continuous driving time</string>
     <string name="work_limit_daily_driving_time">Daily driving time</string>
     <string name="work_limit_break_time">Break</string>
-    
-    <string name="work_limit_wtd_daily_rest">WTD daily rest</string>
-    <string name="work_limit_wtd_weekly_rest">WTD weekly rest</string>
     <string name="work_limit_wtd_weekly_working">WTD weekly working time</string>
-    <string name="work_limit_wtd_weekly_working_average1"></string>
-    <string name="work_limit_wtd_weekly_working_average2">weeks average: </string>
-    <string name="work_limit_wtd_night_shift_working_time">WTD night shift working time</string>
-    
-    
+
     <string name="work_limit_daily_rest_remaining">Daily rest remaining</string>
     <string name="work_limit_weekly_rest_remaining">Weekly rest remaining</string>
     <string name="work_limit_weekly_driving_time_remaining">Weekly driving time remaining</string>
-    <string name="work_limit_fortnightly_drivetime_remaining">Fortnightly driving time remaining</string>
-    <string name="work_limit_continious_driving_time_remaining">Continious driving time remaining</string>
+    <string name="work_limit_fortnightly_driving_time_remaining">Fortnightly driving time remaining</string>
+    <string name="work_limit_continuous_driving_time_remaining">Continuous driving time remaining</string>
     <string name="work_limit_daily_driving_time_remaining">Daily driving time remaining</string>
     <string name="work_limit_break_time_remaining">Break time remaining</string>
     
     <string name="work_limit_wtd_daily_rest_remaining">WTD daily rest remaining</string>
     <string name="work_limit_wtd_weekly_rest_remaining">WTD weekly rest remaining</string>
     <string name="work_limit_wtd_weekly_working_remaining">WTD weekly working time remaining</string>
-    <string name="work_limit_wtd_night_shift_working_time_remaining">WTD night shift working time remaining</string>
-    
-    
-    <string-array name="navigation_drawer_titles">
-        <item >Summary</item>
-        <item >Log</item>
-        <item >Log summary</item>
-        <item >Routes</item>
-    </string-array>
-
-    <string-array name="map_ground_layers">
-        <item >Satellite</item>
-        <item >Satellite with streets</item>
-        <item >Map</item>
-        <item >Earth</item>
-    </string-array>
-
-    <string-array name="event_explanations">
-        <item >Driving</item>
-        <item >Daily rest</item>
-        <item >Weekly rest</item>
-        <item >Break time</item>
-        <item >Other work</item>
-        <item >POA</item>
-    </string-array>
     
     <string-array name="months">
         <item >January</item>
@@ -248,34 +203,14 @@
         <item >November</item>
         <item >December</item>
     </string-array>
-    
-    <string-array name="items_to_show_in_summary">
-        <item >Fortnightly driving time</item>
-        <item >Weekly rest</item>
-        <item >Daily rest</item>
-        <item >Daily driving time</item>
-        <item >Weekly driving time</item>
-        <item >WTD weekly working time</item>
-        <item >WTD daily rest</item>
-        <item >WTD weeklyrest</item>
-        <item >WTD night shift working time</item>
-    </string-array>
+
 
     <string name="preference_category_general">General settings</string>
     <string name="preference_category_log">Log</string>
     <string name="preference_category_gps_settings">GPS settings</string>
-    <string name="preference_category_notifications">Notifications</string>
+    <string name="preference_category_about">About</string>
     
     <string name="preference_title_show_notifications">Show notifications</string>
-    <string name="preference_title_notification_vibrate">Vibrate</string>
-    <string name="preference_title_notification_sound">Sound</string>
-    <string name="preference_title_alarm_drive_time_ending">Drive time ending notification</string>
-    <string name="preference_title_alarm_break_time_ending">Break time ending notification</string>
-    <string name="preference_title_alarm_daily_rest_ending">Daily rest ending notification</string>
-    <string name="preference_title_alarm_weekly_rest_ending">Weekly rest ending notification</string>
-    
-    <string name="preference_title_count_daily_and_weekly_rest_automatically">Count daily and weekly rest automatically</string>
-    <string name="preference_title_switch_automatically_to_drive">Switch automatically to drive after break time</string>
     <string name="preference_title_count_activity_progress">Count activity progress</string>
     <string name="preference_title_remove_all_logs">Clear log</string>
     <string name="preference_title_backup_restore">Backup or restore data</string>
@@ -288,38 +223,24 @@
     <string name="preference_title_threshold_time">Stopped time threshold</string>
     <string name="preference_title_remove_less_1_min_entries">Delete &#60;1 min events</string>
     <string name="preference_title_gps_min_accuracy">GPS min accuracy</string>
+    <string name="preference_title_view_source_code">View source code for this app</string>
     
-    
-    <string name="preference_summary_count_daily_and_weekly_rest_automatically">Calculate the time between activities as a daily and weekly resting</string>
-    <string name="preference_summary_switch_automatically_to_drive">Switch automatically to drive time after you finish break time</string>
-    <string name="preference_summary_alarm_disabled">Disabled</string>
-    
-    <string name="preference_summary_alarm_drive_time_ending">before end of drive time</string>
-    <string name="preference_summary_alarm_break_time_ending">before end of break time</string>
-    <string name="preference_summary_alarm_daily_rest_ending">before end of daily rest time</string>
-    <string name="preference_summary_alarm_weekly_rest_ending">before end of weekly rest time</string>
-    
-    <string name="preference_summary_export">Export log as .xls file to preview in your preferred spredsheet application</string>
+    <string name="preference_summary_export">Export log as .xls file to preview in your preferred spread sheet application</string>
     <string name="preference_summary_use_gps">Switch automatically driving time to other work when speed drops below threshold speed</string>
     <string name="preference_summary_threshold_value">App will assume the vehicle has stopped when the GPS speed is below this value</string>
     <string name="preference_summary_threshold_time">App will assume that other work has been started when vehicle has been stopped at least this long</string>
     <string name="preference_summary_remove_less_1_min_entries">Remove automatically entries with duration less than 1 min</string>
     <string name="preference_summary_gps_min_accuracy">Data coming from the GPS receiver will be ignored if your position is not at least this accurate</string>
-    
-    <string-array name="prefrence_entries_sort_by_month_week_day">
-        <item >day</item>
-        <item >week</item>
-        <item >month</item>
-    </string-array>
 
-    <string-array name="prefrence_entries_sort_by_asc_desc">
-        <item >Descending</item>
-        <item >Ascending</item>
-    </string-array>
-    
-    <string-array name="prefrence_entries_count_activity_progress">
-        <item >Down</item>
-        <item >Up</item>
-    </string-array>
+    <string name="preference_entry_sort_log_by_day">Day</string>
+    <string name="preference_entry_sort_log_by_week">Week</string>
+    <string name="preference_entry_sort_log_by_month">Month</string>
+
+    <string name="preference_entry_sort_log_descending">Descending</string>
+    <string name="preference_entry_sort_log_ascending">Ascending</string>
+
+    <string name="preference_entry_show_remaining_time">Show remaining time</string>
+    <string name="preference_entry_show_elapsed_time">Show elapsed time</string>
+
 
 </resources>

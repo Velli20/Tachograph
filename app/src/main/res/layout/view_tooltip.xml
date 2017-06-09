@@ -25,7 +25,7 @@
   ~  */
   -->
 
-<com.velli.tachograph.views.TooltipView
+<com.velli20.tachograph.views.TooltipView
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_gravity="bottom" 
     android:layout_width="match_parent" 
@@ -81,4 +81,4 @@
 	    android:layout_height="wrap_content" 
 	    android:src="@drawable/tooltip_view_arrow_down" 
 	    android:contentDescription="@null" />
-</com.velli.tachograph.views.TooltipView>
+</com.velli20.tachograph.views.TooltipView>

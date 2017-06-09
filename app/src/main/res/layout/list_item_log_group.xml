@@ -30,7 +30,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp" >
 
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/log_event_group_title"
         custom:style="medium"
         style="@style/Subtitle"
@@ -41,7 +41,7 @@
         android:layout_marginStart="16dp"
         android:gravity="left|center_vertical"/>
 
-    <com.velli.tachograph.views.RobotoLightTextView
+    <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/log_event_group_hour_summary"
         custom:style="medium"
         style="@style/Subtitle"

@@ -28,8 +28,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appcompat="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/menu_send_feedback"
+        android:orderInCategory="0"
+        appcompat:showAsAction="never"
+        android:title="@string/menu_send_feedback" >
+    </item>
+
     <item android:id="@+id/menu_settings"
-        android:orderInCategory="3"
+        android:orderInCategory="1"
         appcompat:showAsAction="never"
         android:title="@string/menu_settings" >
     </item>

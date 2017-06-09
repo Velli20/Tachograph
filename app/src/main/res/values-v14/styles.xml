@@ -28,28 +28,20 @@
 
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark_700</item> 
-        <item name="colorAccent">@color/color_primary_400</item> 
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_primary</item>
                
         <item name="windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
     </style>
-    
-    <style name="AppBaseThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@android:color/darker_gray</item>
-        <item name="colorPrimaryDark">@color/black</item> 
-         <item name="windowActionBar">false</item>
-        <item name="windowActionModeOverlay">true</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+
     
     <style name="ActivitySettings" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark_700</item> 
-        <item name="colorAccent">@color/color_primary_400</item> 
+        <item name="colorPrimary">@color/color_primary_activity_settings</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark_activity_settings</item>
+        <item name="colorAccent">@color/color_accent_activity_settings</item>
                
         <item name="windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
@@ -63,18 +55,11 @@
     <style name="AppBaseThemeWhiteBackground" parent="@style/AppBaseTheme">
         <item name="android:windowBackground">@color/white</item>
     </style>
-    
-    <style name="ActivityEventDetails" parent="@style/AppBaseTheme">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="android:textColorPrimary">@color/text_color_primary_light</item> 
-        <item name="android:textColorSecondary">@color/text_color_secondary_light</item> 
-    </style>
-    
+
     <style name="ActivityRestTypeChooser" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimary">@color/color_primary_400</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark_700</item> 
-        <item name="colorAccent">@color/color_primary_400</item> 
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_primary</item>
         
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -86,17 +71,15 @@
      </style>
     
     <style name="ToolbarStyle" parent="Theme.AppCompat.Light">
-        
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item> 
         
         <item name="popupTheme">@style/Theme.AppCompat.Light</item>
         <item name="colorControlNormal">@color/white</item>
-         <item name="actionModeStyle">@style/ContextualStyle</item>
+        <item name="actionModeStyle">@style/ContextualStyle</item>
     </style>
 
     <style name="ToolbarStyleActivityFilePicker" parent="Theme.AppCompat.Light">
-
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
 
@@ -106,8 +89,6 @@
     </style>
     
     <style name="ToolbarStyleDark" parent="Theme.AppCompat.Light">
-        
-        
         <item name="colorAccent">@color/gray</item>
         <item name="colorControlNormal">@color/gray</item>
         <item name="colorPrimary">@color/gray</item>
@@ -116,11 +97,7 @@
     </style>
     
     <style name="ContextualStyle" parent="@style/Widget.AppCompat.ActionMode">
-        <item name="background">@color/color_primary_400</item>
-    </style>
-    
-    <style name="ValuePickerButtonStyle" parent="android:Widget.Holo.Light.Button">
-        <item name="android:background">@null</item>        
+        <item name="background">@color/color_primary</item>
     </style>
 
 
@@ -129,77 +106,99 @@
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
     </style>
-    
-    <style name="EditEventCustomActionButton" parent="android:style/Widget.Holo.Light.ActionButton">
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:focusable">true</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-         
-    <style name="EditEventCustomActionButtonImage">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:padding">4dp</item>
-    </style>
-    
-    <style name="EditEventCustomActionButtonText">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/actionMenuTextAppearance</item>
-        <item name="android:textColor">?android:attr/actionMenuTextColor</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">none</item>
-        <item name="android:padding">4dp</item>
-    </style>
 
     <style name="TimePickerTimeText">
         <item name="android:textSize">@dimen/medium_font_size</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
-    <style name="AddEventSubHeader">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">#90000000</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_centerVertical">true</item>
+
+    <style name="Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:alpha">0.54</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:singleLine">true</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="Subtitle.ActivityAddNewEvent" parent="@style/Subtitle">
+        <item name="android:textColor">#90000000</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:alpha">1</item>
+        <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:drawablePadding">32dp</item>
     </style>
-    
-    <style name="AddEventButton">
+
+
+    <style name="Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Title.ActivityAddNewEvent" parent="@style/Title">
+        <item name="android:layout_marginLeft">72dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+
+    <style name="Title.ListItemLogSummary" parent="@style/Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="Title.ListItemDaySummary" >
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="Title.ListItemDayStepper" parent="@style/Title">
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="Title.ListItemLogChild">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerVertical">false</item>
+    </style>
+
+    <style name="Title.Time" parent="@style/Title">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ActivityAddNewEventButton">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:focusable">false</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_alignParentRight">true</item>
     </style>
     
     <style name="ActivityChooserButton" parent="@style/RippleButtonBackground">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/color_primary_400</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:drawablePadding">0dp</item>
         <item name="android:textAllCaps">false</item>
     </style>
-    
-    <style name="EventDetailsText" parent="@style/AddEventSubHeader">
-        <item name="android:textColor">#DE000000</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">48dp</item>
-        <item name="android:singleLine">false</item>
-    </style>
-    
-    <style name="EventDetailsActionButton">
-        <item name="android:layout_marginLeft">0dp</item>
-        <item name="android:layout_marginTop">@dimen/toolbar_title_fab_margin</item>
-    </style>
-    
-    
+
     <style name="ListPrimaryText">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#000000</item>
@@ -208,45 +207,46 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:singleLine">true</item>
     </style>
-    
-    <style name="ListWorkLimitText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:alpha">0.87</item>
-        <item name="android:layout_centerVertical">true</item>
-    </style>
-    
-    <style name="DayOverviewText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#DE000000</item>
-        <item name="android:drawablePadding">32dp</item>
-        <item name="android:gravity">center_vertical|left|start</item>
-        <item name="android:singleLine">true</item>
-    </style>
-    
+
     <style name="ListSecondaryText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:alpha">0.54</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
     </style>
-    
-    <style name="ListTimeText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:alpha">0.87</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
+
+    <style name="ListSecondaryText.ListItemDaySummary" parent="@style/ListSecondaryText">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
     </style>
-    
-    <style name="TextError">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/red</item>
-        <item name="android:alpha">1</item>
+
+    <style name="ListSecondaryText.ListItemWeekSummary" parent="@style/ListSecondaryText">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
+    <style name="ListSecondaryText.ListItemLogChild" parent="@style/ListSecondaryText" >
+        <item name="android:layout_centerVertical">false</item>
+    </style>
+
+    <style name="ActivityEventDetailsText" >
+        <item name="android:textColor">#DE000000</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:drawablePadding">32dp</item>
+    </style>
+
+    <style name="ListItemRegulationTitle" parent="@style/ListPrimaryText">
+        <item name="android:textSize">22sp</item>
+        <item name="android:singleLine">false</item>
     </style>
     
     <style name="ListPrimaryTextWhite" parent="@style/ListPrimaryText">
@@ -265,27 +265,11 @@
         <item name="android:background">#000000</item>
         <item name="android:alpha">0.12</item>
     </style>
-    
-    <style name="Subtitle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:alpha">0.54</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
-    
-    <style name="SubtitleWhite" parent="@style/Subtitle">
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:alpha">0.70</item>
-    </style>
-    
-    <style name="WorkLimitTitle" parent="@style/ListPrimaryText">
-        <item name="android:textSize">22sp</item>
-        <item name="android:singleLine">false</item>
+
+    <style name="Divider.ActivityAddNewEvent" parent="@style/Divider">
+        <item name="android:layout_marginLeft">72dp</item>
     </style>
 
-    
     <style name="EventFab">
         <item name="android:layout_gravity">bottom|right|end</item>
         <item name="android:layout_marginRight">0dp</item>
@@ -293,17 +277,16 @@
         <item name="android:clickable">false</item>
     </style>
 
-    
     <style name="ExceptionCounter">
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center_vertical|right|end</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
     
     <style name="RippleButtonBackground">
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
-    
 
     <style name="TooltipTitle" >
         <item name="android:textSize">@dimen/title_text_size</item>
@@ -319,13 +302,5 @@
         <item name="android:shadowDy">2.0</item>
         <item name="android:shadowRadius">1.0</item>
     </style>
-    
 
-    <style name="EditTextHint">
-        <item name="android:layout_marginLeft">4dp</item>
-        <item name="android:layout_marginRight">4dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:alpha">0.38</item>
-        <item name="android:textColor">#000000</item>
-    </style>
 </resources>
