@@ -63,6 +63,7 @@
     <string name="action_ok">Ok</string>
     <string name="action_cancel">Annuler</string>
     <string name="action_today">Aujourd\'hui</string>
+    <string name="action_enable_gps">Enable GPS</string>
 
     <string name="dialog_title_remove_all_logs">Effacer toutes les données</string>
     <string name="dialog_title_map_layer">Couche de carte</string>
@@ -79,6 +80,7 @@
     <string name="title_navigation_drawer_log">Enregistrement</string>
     <string name="title_navigation_drawer_log_summary">Relevé d\'enregistrement</string>
 
+    <string name="title_gps_logger_status">GPS logger status</string>
     <string name="title_add_new_log_event">Ajout</string>
     <string name="title_edit_log_event">Modifier</string>
     <string name="title_today">Aujourd\'hui</string>
@@ -90,6 +92,19 @@
     <string name="title_duration">Durée</string>
     <string name="title_started_at">Commencé à:</string>
     <string name="title_ended_at">Terminé à:</string>
+
+    <string name="title_gps_logger_logging_in_progress" formatted="false">Logging in progress. GPS speed: %d km/h</string>
+    <string name="title_gps_logger_vehicle_stopped" formatted="false">Vehicle is stopped. GPS speed: %d km/h</string>
+    <string name="title_gps_logger_gps_provider_turned_disabled">GPS provider disabled. Turn GPS on in device settings</string>
+    <string name="title_gps_logger_acquiring_gps_fix">Waiting for GPS signal</string>
+    <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">GPS signal not accurate enough. Accuracy: ± %d m</string>
+    <string name="title_detected_activity_driving">Detected activity: Driving</string>
+    <string name="title_detected_activity_walking">Detected activity: Walking</string>
+    <string name="title_detected_activity_still">Detected activity: Still</string>
+    <string name="title_detected_activity_unknown">Detected activity: Unknown</string>
+    <string name="title_detected_activity_not_enabled">Detected activity: Unavailable</string>
+    <string name="title_switching_to_other_work_in" formatted="false">Switching to Other Work in %s</string>
+
     <string name="title_recording_event">Enregistrement en cours</string>
     <string name="title_loading_address">Chargement de l\'adresse…</string>
     <string name="title_items_to_show_in_summary">Gestion d\'affichage</string>
@@ -105,6 +120,15 @@
     <string name="title_event_daily_rest">Repos journalier</string>
     <string name="title_event_weekly_rest">Repos hebdomadaire</string>
     <string name="title_event_break">Pause</string>
+
+    <!-- These strings are used in Now screen above Event chooser buttons to describe
+         current event and duration of the current event. %s is where the time string will be appended i.g Driving 1 hour 20 min -->
+    <string name="title_event_driving_format" formatted="false">Temps de conduite %s</string>
+    <string name="title_event_poa_format" formatted="false">Mise à disposition %s</string>
+    <string name="title_event_other_work_format" formatted="false">Travail %s</string>
+    <string name="title_event_daily_rest_format" formatted="false">Repos journalier %s</string>
+    <string name="title_event_weekly_rest_format" formatted="false">Repos hebdomadaire %s</string>
+    <string name="title_event_break_format" formatted="false">Pause %s</string>
 
     <string name="exception_title_extended_drive_time">Jours de conduite allongés restant"</string>
     <string name="exception_subtitle_extended_drive_time">La période de conduite journalière ne doit pas dépasser 9 heures, avec une exception à 10 heures deux fois par semaine.</string>
@@ -237,6 +261,7 @@
     <string name="preference_title_remove_less_1_min_entries">Effacer les événement inférieur a 1 min</string>
     <string name="preference_title_gps_min_accuracy">Precision minimale  du GPS</string>
     <string name="preference_title_view_source_code">View source code</string>
+    <string name="preference_title_use_detected_activity">Use Detected Activity</string>
 
     <string name="preference_summary_export">Exportation d\'enregistrement en fichier .xls pour la visualisation dans votre tableur préféré</string>
     <string name="preference_summary_use_gps">Bascule automatiquement de conduite a travail quand le seuil de vitesse est atteint.</string>
@@ -244,6 +269,9 @@
     <string name="preference_summary_threshold_time">L\'application basculera à travail lorsque le véhicule sera arrêté depuis la valeur de  temps indique.</string>
     <string name="preference_summary_remove_less_1_min_entries">Supprimer automatiquement les entrées inférieures à 1 minute</string>
     <string name="preference_summary_gps_min_accuracy">Les données du GPS seront ignorées si la position n\'a pas une position au moins égale a la valeur indiquée.</string>
+    <string name="preference_summary_use_detected_activity">Improve GPS monitor reliability by reading data coming from accelerometer sensors to determine that device is in moving vehicle or user is walking around with this device in the pocket.
+        \n\nWith this setting on App may assume that vehicle is stopped even though GPS speed is above threshold limit</string>
+
 
     <string name="preference_entry_sort_log_by_day">Jour</string>
     <string name="preference_entry_sort_log_by_week">Semaine</string>

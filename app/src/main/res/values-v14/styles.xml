@@ -35,6 +35,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:colorBackground">@color/window_background</item>
     </style>
 
     
@@ -47,12 +49,12 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
     </style>
-    
-    <style name="ActivityAddNewEventTheme" parent="@style/AppBaseTheme">
+
+    <style name="AppBaseThemeWhiteBackground" parent="@style/AppBaseTheme">
         <item name="android:windowBackground">@color/white</item>
     </style>
-    
-    <style name="AppBaseThemeWhiteBackground" parent="@style/AppBaseTheme">
+
+    <style name="ActivityAddNewEventTheme" parent="@style/AppBaseTheme">
         <item name="android:windowBackground">@color/white</item>
     </style>
 
@@ -194,7 +196,8 @@
     
     <style name="ActivityChooserButton" parent="@style/RippleButtonBackground">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:alpha">0.87</item>
         <item name="android:drawablePadding">0dp</item>
         <item name="android:textAllCaps">false</item>
     </style>
@@ -245,7 +248,7 @@
     </style>
 
     <style name="ListItemRegulationTitle" parent="@style/ListPrimaryText">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:singleLine">false</item>
     </style>
     

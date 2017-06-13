@@ -123,7 +123,7 @@ public class ExportEvents implements OnTaskCompleted {
         if(DEBUG) {
             Log.d(TAG, TAG + "writeEvents()");
         }
-	    final String[] events = mContext.getResources().getStringArray(R.array.event_explanations);
+	    final String[] events = mContext.getResources().getStringArray(R.array.events);
 		WorkbookSettings wbSettings = new WorkbookSettings();
 
 		wbSettings.setLocale(new Locale("en", "EN"));

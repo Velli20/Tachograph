@@ -42,10 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/left_keyline"
-        android:layout_marginStart="@dimen/left_keyline"
-        android:layout_marginRight="@dimen/right_keyline"
-        android:layout_marginEnd="@dimen/right_keyline">
+        android:layout_marginLeft="@dimen/left_key_line"
+        android:layout_marginStart="@dimen/left_key_line"
+        android:layout_marginRight="@dimen/right_key_line"
+        android:layout_marginEnd="@dimen/right_key_line">
 
 
 
@@ -57,18 +57,26 @@
             custom:style="regular"
             android:layout_marginTop="16dp"/>
 
+        <com.velli20.tachograph.views.TextViewTimeCounter
+            android:id="@+id/list_item_activity_event_chooser_next_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ListSecondaryText"
+            custom:style="regular"
+            android:layout_marginTop="8dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             android:weightSum="4">
 
             <com.velli20.tachograph.views.RobotoButton
                 android:id="@+id/list_item_activity_event_chooser_driving"
-                style="@style/ActivityChooserButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -77,7 +85,7 @@
 
             <com.velli20.tachograph.views.RobotoButton
                 android:id="@+id/list_item_activity_event_chooser_resting"
-                style="@style/ActivityChooserButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -86,7 +94,7 @@
 
             <com.velli20.tachograph.views.RobotoButton
                 android:id="@+id/list_item_activity_event_chooser_other_work"
-                style="@style/ActivityChooserButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -95,7 +103,7 @@
 
             <com.velli20.tachograph.views.RobotoButton
                 android:id="@+id/list_item_activity_event_chooser_poa"
-                style="@style/ActivityChooserButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

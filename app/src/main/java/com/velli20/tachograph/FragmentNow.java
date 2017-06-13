@@ -31,13 +31,15 @@ import java.util.ArrayList;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.velli20.tachograph.collections.ListAdapterFragmentNow;
 import com.velli20.tachograph.collections.ListItemRegulationToShow;
-import com.velli20.tachograph.collections.SpacesItemDecorationWorkingLimit;
+import com.velli20.tachograph.collections.SpacesItemDecorationFragmentNow;
 import com.velli20.tachograph.database.DataBaseHandler;
 import com.velli20.tachograph.database.DataBaseHandler.OnDatabaseEditedListener;
 import com.velli20.tachograph.database.DataBaseHandler.OnGetEventTaskCompleted;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -73,7 +75,7 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		mShowTimesCountDown = Integer.parseInt(prefs.getString(getString(R.string.preference_key_count_activity_progress), "0")) == 0;
-		mShowBigActivityCards = prefs.getBoolean(getString(R.string.preference_key_show_big_activity_cards), true);
+		mShowBigActivityCards = prefs.getBoolean(getString(R.string.preference_key_show_big_activity_cards), false);
 
 		DataBaseHandler.getInstance().registerOnDatabaseEditedListener(this);
 	
@@ -81,7 +83,7 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState){
-	    final View mView = inflater.inflate(R.layout.fragment_home, root, false);
+	    final View mView = inflater.inflate(R.layout.fragment_now, root, false);
 	    
 		mListWorkLimits = (RecyclerView) mView.findViewById(R.id.summary_work_limit_list);
 
@@ -98,10 +100,21 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 	    
 	    if(savedInstanceState != null){
 	    	layoutManagerState = savedInstanceState.getParcelable(BUNDLE_KEY_LAYOUT_MANAGER_STATE);
-	    } 
+	    }
+        Resources res = getResources();
+
+	    int appCompatElevation = 0;
+        int divider = res.getDimensionPixelSize(R.dimen.card_padding);
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            /* On pre Lollipop devices CardView treats elevation as Drawable that
+             * adds extra padding on layout in y-axis direction
+             */
+            appCompatElevation = res.getDimensionPixelSize(R.dimen.card_elevation);
+        }
 
 		mListWorkLimits.setLayoutManager(new LinearLayoutManager(getActivity()));
-		mListWorkLimits.addItemDecoration(new SpacesItemDecorationWorkingLimit(getResources().getDimensionPixelSize(R.dimen.card_padding)));
+		mListWorkLimits.addItemDecoration(new SpacesItemDecorationFragmentNow(divider, appCompatElevation));
 
 		mWorkAdapter = new ListAdapterFragmentNow(getActivity(),  mItemsToShow, mShowBigActivityCards);
 		mWorkAdapter.setListeners(this);
@@ -123,7 +136,7 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 	@Override
 	public void onResume(){
 		super.onResume();
-		mItemsToShow = SettingsRegulationsToShow.getCompleteList(getActivity(), mRecordingEvent);
+		mItemsToShow = CardsToShowInFragmentNow.getCompleteList(getActivity(), mRecordingEvent);
 		
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		
@@ -182,7 +195,7 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 
 		switch (item.getItemId()) {
 			case R.id.action_show_items:
-				Intent i = new Intent(getActivity(), ActivityItemsToShowInSummary.class);
+				Intent i = new Intent(getActivity(), ActivityItemsToShowInFragmentNow.class);
 				getActivity().startActivity(i);
 				return true;
 			case R.id.action_show_activity_card_size:
@@ -207,7 +220,7 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 			public void onGetEvent(final Event ev) {
 				mRecordingEvent = ev;
 
-				mItemsToShow = SettingsRegulationsToShow.getCompleteList(getActivity(), mRecordingEvent);
+				mItemsToShow = CardsToShowInFragmentNow.getCompleteList(getActivity(), mRecordingEvent);
 				if(mWorkAdapter != null){
 					mWorkAdapter.setShowTimesCountDown(mShowTimesCountDown);
 					mWorkAdapter.setItemsToShow(mItemsToShow);
@@ -244,17 +257,17 @@ public class FragmentNow extends Fragment implements OnClickListener, OnDatabase
 				@Override
 				public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
 					if(which == 0){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
+						EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
 	                } else if(which == 1){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
 	                } else if(which == 2){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
 	                }
 				}
 			});
 			
 		} else {
-			new EventRecorder().startRecordingEvent(eventToRecord, System.currentTimeMillis());
+            EventRecorder.INSTANCE.startRecordingEvent(eventToRecord, System.currentTimeMillis());
 		}
 	}
 	

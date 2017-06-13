@@ -28,12 +28,16 @@ package com.velli20.tachograph.database;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 
 
 public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
+    private static final String TAG = "DeleteEventTask ";
+    private static final boolean DEBUG = false;
+
     private ArrayList<Integer> mRowIds;
     private int mRowId;
 
@@ -46,7 +50,7 @@ public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
         mRowIds = ids;
     }
 
-    /* Delete one event on database with given row id */
+    /* Delete one event on database with given row mId */
     public DeleteEventTask(SQLiteDatabase db, int rowId){
         mDb = db;
         mRowId = rowId;
@@ -62,27 +66,34 @@ public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
         if (mDb == null || !mDb.isOpen() || mDb.isReadOnly()) {
             return -1;
         }
-
+        mDb.beginTransaction();
 
         int rowsDeleted = 0;
-        if(mRowIds != null){
-            for(Integer rowId : mRowIds){
-                if(rowId != null){
-                    deleteEvent(mDb, rowId);
-                    rowsDeleted++;
+        try {
+            if (mRowIds != null) {
+                for (Integer rowId : mRowIds) {
+                    if (rowId != null) {
+                        deleteEvent(mDb, rowId);
+                        rowsDeleted++;
+                    }
                 }
+            } else {
+                rowsDeleted = 1;
+                deleteEvent(mDb, mRowId);
             }
-        } else {
-            rowsDeleted = 1;
-            deleteEvent(mDb, mRowId);
+        } catch (Exception e) {
+            if(DEBUG) {
+                Log.e(TAG, TAG + e.getMessage());
+            }
+        } finally {
+            mDb.setTransactionSuccessful();
         }
 
-
-
+        mDb.endTransaction();
         return rowsDeleted;
     }
 
-    private static void deleteEvent(SQLiteDatabase db, int rowId) {
+    private static void deleteEvent(SQLiteDatabase db, int rowId) throws Exception {
         String queryEvent = "DELETE FROM "
                 + DataBaseHandlerConstants.TABLE_EVENTS + " WHERE("
                 + DataBaseHandlerConstants.KEY_ID + " = "

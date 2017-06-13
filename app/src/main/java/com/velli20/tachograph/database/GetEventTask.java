@@ -74,8 +74,6 @@ public class GetEventTask extends AsyncTask<String, String, ArrayList<Event>>{
 			return null;
 		}
 
-		mDb.beginTransaction();
-
         final ArrayList<Event> list = new ArrayList<>();
         final Cursor cursor = mDb.rawQuery(mQuery, null);
 
@@ -106,8 +104,6 @@ public class GetEventTask extends AsyncTask<String, String, ArrayList<Event>>{
             cursor.close();
         }
 
-        mDb.setTransactionSuccessful();
-        mDb.endTransaction();
 			
 		return list;
 	}

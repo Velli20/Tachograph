@@ -53,10 +53,10 @@ public class StartEventService extends IntentService  {
 			int currentEvent = i.getIntExtra(INTENT_EXTRA_CURRENT_EVENT, -1);
 			
 			if(eventToStart != -1){
-				new EventRecorder().startRecordingEvent(eventToStart, System.currentTimeMillis());
+				EventRecorder.INSTANCE.startRecordingEvent(eventToStart, System.currentTimeMillis());
 			} else {
 				if(event == 0){
-					new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
+					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
 				} else if(event == 1){
 					final Intent choose = new Intent(this, ActivityRestTypeChooser.class);
 					choose.putExtra(ActivityRestTypeChooser.INTENT_EXTRA_CURRENT_EVENT_TYPE, currentEvent);
@@ -65,9 +65,9 @@ public class StartEventService extends IntentService  {
 					startActivity(choose);
 					stopSelf();
 				} if(event == 2){
-					new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_OTHER_WORK, System.currentTimeMillis());
+					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_OTHER_WORK, System.currentTimeMillis());
 				} if(event == 3){
-					new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_POA, System.currentTimeMillis());
+					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_POA, System.currentTimeMillis());
 
 				}
 			}

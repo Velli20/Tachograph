@@ -66,8 +66,6 @@ public class ListItemRegulation extends CardView implements OnClickListener, OnR
 	private TextView mTextWorkLimitTitle;
 	private ActivityProgress mProgress;
 
-    private ActivityProgress mProgressBig;
-    private ActivityProgress mProgressSmall;
 
 	private ExceptionTile mExceptionTile;
 
@@ -118,10 +116,7 @@ public class ListItemRegulation extends CardView implements OnClickListener, OnR
 
 	public void showProgressInPieChart(boolean show) {
         mShowPieChart = show;
-
-        mProgressBig.setVisibility(mShowPieChart ? View.VISIBLE : View.GONE);
-        mProgressSmall.setVisibility(mShowPieChart ? View.GONE : View.VISIBLE);
-        mProgress = mShowPieChart ? mProgressBig : mProgressSmall;
+		mProgress.displayBigProgress(show);
         update();
     }
 
@@ -129,13 +124,8 @@ public class ListItemRegulation extends CardView implements OnClickListener, OnR
 	public void onFinishInflate(){
 		super.onFinishInflate();
 		mTextWorkLimitTitle = (TextView)findViewById(R.id.text_work_limit_title);
-		mProgressBig = (ActivityProgress) findViewById(R.id.work_limit_chartView_big);
-        mProgressSmall = (ActivityProgress) findViewById(R.id.work_limit_chartView_small);
+		mProgress = (ActivityProgress) findViewById(R.id.work_limit_progress);
 
-        mProgressBig.setVisibility(mShowPieChart ? View.VISIBLE : View.GONE);
-        mProgressSmall.setVisibility(mShowPieChart ? View.GONE : View.VISIBLE);
-
-        mProgress = mShowPieChart ? mProgressBig : mProgressSmall;
 		mExceptionTile = (ExceptionTile)findViewById(R.id.work_limit_exception_tile);
 
 		if(mExceptionTile != null){

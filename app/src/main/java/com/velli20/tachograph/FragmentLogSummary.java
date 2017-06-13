@@ -38,6 +38,8 @@ import com.velli20.tachograph.restingtimes.WeekHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,8 +76,8 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View v = inflater.inflate(R.layout.fragment_log_summary_layout, container, false);
 
-		mList = (RecyclerView) v.findViewById(R.id.working_days_fragment_expandableListView);
-		mList.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.card_padding)));
+        mList = (RecyclerView) v.findViewById(R.id.working_days_fragment_expandableListView);
+		mList.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.list_item_log_summary_week_divider_height)));
 
         mNoItemsView = (LinearLayout)v.findViewById(R.id.working_days_fragment_no_items);
 
@@ -133,11 +135,13 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 		private ArrayList<WeekHolder> mItems;
 		private int mItemCount = 0;
 		private WeakReference<OnGroupClickListener> mGroupClickListener;
+        private Drawable mElevationTop;
 
         private WeekOverviewAdapter(Context c, ArrayList<WeekHolder> list){
 			mInflater = LayoutInflater.from(c);
 			mItems = list;
 			mItemCount = mItems.size();
+            mElevationTop = c.getResources().getDrawable(R.drawable.dropdown_shadow_up);
 		}
 
         private void setOnGroupClickListener(OnGroupClickListener l) {
@@ -152,6 +156,7 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 		@Override
 		public void onBindViewHolder(ViewHolder holder, int position) {
 			holder.itemView.setOnClickListener(new ClickListener(position));
+
 			setWeekData(((ViewHolderWeek)holder), position);
 		}
 		
@@ -167,7 +172,11 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 			groupHolder.mWeeklyRestTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyRest()));
 			groupHolder.mWtdWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWtdWeeklyWorkingTime()));
             groupHolder.mDrivenDistance.setText(String.format(Locale.getDefault(), "%.2f", weekHolder.getWeeklyDrivenDistance()) + " km");
-            groupHolder.mShadowTop.setVisibility(position == 0? View.GONE : View.VISIBLE);
+            if(position == 0) {
+                groupHolder.mShadowTop.setBackgroundColor(Color.WHITE);
+            } else {
+                groupHolder.mShadowTop.setBackgroundDrawable(mElevationTop);
+            }
 		}
 		
 	
@@ -187,6 +196,7 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 			private TextView mWtdWeeklyWorkTime;
 			private TextView mDrivenDistance;
 			private View mShadowTop;
+            private View mBackground;
 
 			private ViewHolderWeek(View itemView) {
 				super(itemView);
@@ -198,6 +208,8 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 				mWtdWeeklyWorkTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_wtd_weekly_working_time);
                 mDrivenDistance = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_driven_distance);
                 mShadowTop = itemView.findViewById(R.id.list_item_log_summary_week_shadow_top);
+                mBackground = itemView.findViewById(R.id.list_item_log_summary_week_background);
+
 			}
 		}
 

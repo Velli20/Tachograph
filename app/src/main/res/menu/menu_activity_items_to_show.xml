@@ -30,6 +30,6 @@
         appcompat:showAsAction="ifRoom"
         android:orderInCategory="0"
         android:title="@string/menu_restore"
-        android:icon="@drawable/ic_action_restore"/>
+        android:icon="@drawable/ic_action_restore_light"/>
 
 </menu>

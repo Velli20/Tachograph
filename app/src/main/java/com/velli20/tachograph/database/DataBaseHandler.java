@@ -43,151 +43,150 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActionCompletedListener {
-	public static final String TAG = "DataBaseHandler ";
+    public static final String TAG = "DataBaseHandler ";
     public static final boolean DEBUG = false;
 
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "driving_events.db";
 
-  
+
     private static DataBaseHandler sInstance;
-	public SQLiteDatabase mDb;
-	private ArrayList<OnDatabaseEditedListener> mEditCallbacks = new ArrayList<>();
+    public SQLiteDatabase mDb;
+    private ArrayList<OnDatabaseEditedListener> mEditCallbacks = new ArrayList<>();
 
 
     public interface OnTaskCompleted {
         void onTaskCompleted(ArrayList<Event> list);
     }
-    
+
     public interface OnGetEventTaskCompleted {
         void onGetEvent(Event ev);
     }
-    
+
     public interface OnGetLocationsListener {
         void onGetLocations(ArrayList<CustomLocation> locations);
     }
-    
+
     public interface OnGetLatestLocationListener {
         void onGetLatestLocation(CustomLocation location);
     }
-    
+
     public interface OnGetSortedLogListener {
         void onTaskCompleted(ArrayList<ListItemLogGroup> list);
     }
-    
+
     public interface OnDatabaseEditedListener {
-    	void onDatabaseEdited(int action, int rowId);
+        void onDatabaseEdited(int action, int rowId);
     }
 
-    public static DataBaseHandler getInstance(){
-		if(sInstance == null) sInstance = getSync();
-    	return sInstance;
+    public static DataBaseHandler getInstance() {
+        if (sInstance == null) sInstance = getSync();
+        return sInstance;
     }
 
-	private static synchronized DataBaseHandler getSync() {
-		if(sInstance == null) sInstance = new DataBaseHandler(App.get());
-		return sInstance;
-	}
+    private static synchronized DataBaseHandler getSync() {
+        if (sInstance == null) sInstance = new DataBaseHandler(App.get());
+        return sInstance;
+    }
 
     private DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public String getDatabaseName(){
-    	return DATABASE_NAME;
+    public String getDatabaseName() {
+        return DATABASE_NAME;
     }
-    
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_EVENTS_TABLE);
-		db.execSQL(CREATE_LOCATION_TABLE);
-	}
 
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		int upgradeTo = oldVersion + 1;
-		
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_EVENTS_TABLE);
+        db.execSQL(CREATE_LOCATION_TABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        int upgradeTo = oldVersion + 1;
+
         while (upgradeTo <= newVersion) {
             switch (upgradeTo) {
                 case 3:
                     db.execSQL(CREATE_LOCATION_TABLE);
                     break;
             }
-            
+
             upgradeTo++;
         }
-	}
-	
-	public boolean isDatabaseOpen(){
-        return mDb != null && mDb.isOpen();
-	}
-	
-	public void openDatabase(){
-		mDb = getWritableDatabase();
+    }
 
-		if(mDb.getVersion() < DATABASE_VERSION){
-			onUpgrade(mDb, mDb.getVersion(), DATABASE_VERSION);
-		}
-	}
-	
-	public void closeDatabase(){
-		if(isDatabaseOpen()){
+    public boolean isDatabaseOpen() {
+        return mDb != null && mDb.isOpen();
+    }
+
+    public void openDatabase() {
+        mDb = getWritableDatabase();
+
+        if (mDb.getVersion() < DATABASE_VERSION) {
+            onUpgrade(mDb, mDb.getVersion(), DATABASE_VERSION);
+        }
+    }
+
+    public void closeDatabase() {
+        if (isDatabaseOpen()) {
             mDb.close();
             mDb = null;
-		}
-	}
+        }
+    }
 
-	
-	public void registerOnDatabaseEditedListener(OnDatabaseEditedListener l){
-		if(!mEditCallbacks.contains(l)){
-			mEditCallbacks.add(l);
-		}
-	}
-	
-	public void unregisterOnDatabaseEditedListener(OnDatabaseEditedListener l){
-		if(mEditCallbacks.remove(l) && DEBUG){
-			Log.i(TAG, TAG + "unregisterOnDatabaseEditedListener() removed callback " + l.toString());
-		}
-	}
-	
-	public void notifyCallbacks(int action, int rowId){
-		for(OnDatabaseEditedListener c : mEditCallbacks){
-			c.onDatabaseEdited(action, rowId);
-		}
-	}
+
+    public void registerOnDatabaseEditedListener(OnDatabaseEditedListener l) {
+        if (!mEditCallbacks.contains(l)) {
+            mEditCallbacks.add(l);
+        }
+    }
+
+    public void unregisterOnDatabaseEditedListener(OnDatabaseEditedListener l) {
+        if (mEditCallbacks.remove(l) && DEBUG) {
+            Log.i(TAG, TAG + "unregisterOnDatabaseEditedListener() removed callback " + l.toString());
+        }
+    }
+
+    public void notifyCallbacks(int action, int rowId) {
+        for (OnDatabaseEditedListener c : mEditCallbacks) {
+            c.onDatabaseEdited(action, rowId);
+        }
+    }
 
     @Override
     public void onDatabaseActionCompleted(int action, int rowId) {
         notifyCallbacks(action, rowId);
     }
 
-	public void addNewEvent(Event event){
-        if(!isDatabaseOpen()) {
+    public void addNewEvent(Event event) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
-		new AddEventTask(mDb, event, false).setOnDatabaseActionCompletedListener(this).execute();
-	}
+        new AddEventTask(mDb, event, false).setOnDatabaseActionCompletedListener(this).execute();
+    }
 
-    public void updateEvent(Event event){
-        if(!isDatabaseOpen()) {
+    public void updateEvent(Event event) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         new AddEventTask(mDb, event, true).setOnDatabaseActionCompletedListener(this).execute();
     }
-	
-	public void addLocation(CustomLocation location){
-        if(!isDatabaseOpen()) {
+
+    public void addLocation(CustomLocation location) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
-		new AddLocationTask(mDb, location).execute();
-	}
-	
+        new AddLocationTask(mDb, location).execute();
+    }
 
-    
-    public void getEvent(int rowId, OnGetEventTaskCompleted l, boolean includeLocationInfo){
-    	if(!isDatabaseOpen()) {
-    		openDatabase();
-    	}
+
+    public void getEvent(int rowId, OnGetEventTaskCompleted l, boolean includeLocationInfo) {
+        if (!isDatabaseOpen()) {
+            openDatabase();
+        }
         String query = new DatabaseEventQueryBuilder()
                 .fromTable(DataBaseHandlerConstants.TABLE_EVENTS)
                 .selectAllColumns()
@@ -199,15 +198,15 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setIncludeLoggedRouteDistance(includeLocationInfo)
                 .execute();
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, "getEvent() SQL query: " + query);
         }
     }
-	
-	public void getRecordingEvent(OnGetEventTaskCompleted l){
-		if(!isDatabaseOpen()) {
-    		openDatabase();
-    	}
+
+    public void getRecordingEvent(OnGetEventTaskCompleted l) {
+        if (!isDatabaseOpen()) {
+            openDatabase();
+        }
         String query = new DatabaseEventQueryBuilder()
                 .fromTable(DataBaseHandlerConstants.TABLE_EVENTS)
                 .selectAllColumns()
@@ -218,13 +217,13 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setOnGetEventTaskCompleted(l)
                 .execute();
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, "getRecordingEvent() SQL query: " + query);
         }
     }
 
-    public void getAllEvents(OnTaskCompleted listener, boolean ascending, boolean withLocationInfo){
-        if(!isDatabaseOpen()) {
+    public void getAllEvents(OnTaskCompleted listener, boolean ascending, boolean withLocationInfo) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         String query = new DatabaseEventQueryBuilder()
@@ -238,14 +237,14 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setOnTaskCompleted(listener)
                 .execute();
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, "getAllEvents() SQL query: " + query);
         }
     }
 
 
     public void getEventsByRowIds(OnTaskCompleted listener, int rowIds[], boolean withDrivenDistance) {
-        if(!isDatabaseOpen()) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
 
@@ -262,7 +261,7 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
     }
 
     public void getEventsByRowIds(OnTaskCompleted listener, ArrayList<Integer> rowIds) {
-        if(!isDatabaseOpen()) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
 
@@ -279,7 +278,7 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
 
     public void getWorkingTimes(GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener l, boolean getFullLog,
                                 boolean withDrivenDistance, boolean includeRecordingEvents, boolean includeEventIds) {
-        if(!isDatabaseOpen()) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         new GetLogSummaryTask(mDb)
@@ -293,7 +292,7 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
 
     public void getWorkingTimesWithinEventIds(GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener l, ArrayList<Integer> rowIds,
                                               boolean withDrivenDistance, boolean includeRecordingEvents, boolean includeEventIds) {
-        if(!isDatabaseOpen()) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         new GetLogSummaryTask(mDb)
@@ -305,35 +304,34 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setOnWorkingTimeCalculationsReadyListener(l)
                 .execute();
     }
-	
-	public void deleteEvent(int rowId){
-        if(!isDatabaseOpen()) {
-            openDatabase();
-        }
-		new DeleteEventTask(mDb, rowId).setOnDatabaseActionCompletedListener(this).execute();
-	}
-	
-	public void deleteEvents(ArrayList<Integer> list){
-        if(!isDatabaseOpen()) {
-            openDatabase();
-        }
-		new DeleteEventTask(mDb, list).setOnDatabaseActionCompletedListener(this).execute();
-	}
 
-	public void deleteLocations(int eventId){
-        if(!isDatabaseOpen()) {
+    public void deleteEvent(int rowId) {
+        if (!isDatabaseOpen()) {
+            openDatabase();
+        }
+        new DeleteEventTask(mDb, rowId).setOnDatabaseActionCompletedListener(this).execute();
+    }
+
+    public void deleteEvents(ArrayList<Integer> list) {
+        if (!isDatabaseOpen()) {
+            openDatabase();
+        }
+        new DeleteEventTask(mDb, list).setOnDatabaseActionCompletedListener(this).execute();
+    }
+
+    public void deleteLocations(int eventId) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         new DeleteLocationTask(mDb, eventId).setOnDatabaseActionCompletedListener(this).execute();
-	}
+    }
 
 
-	
-	public void getSortedLog(String query, String months[], String titleWeek, int sortBy,
-                             boolean includeDrivenDistance, OnGetSortedLogListener l){
-		if(!isDatabaseOpen()) {
-    		openDatabase();
-    	}
+    public void getSortedLog(String query, String months[], String titleWeek, int sortBy,
+                             boolean includeDrivenDistance, OnGetSortedLogListener l) {
+        if (!isDatabaseOpen()) {
+            openDatabase();
+        }
 
         new GetSortedLogListTask(mDb, query, months, titleWeek)
                 .setOnGetSortedLogListener(l)
@@ -341,7 +339,7 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setIncludeLoggedRouteDistance(includeDrivenDistance)
                 .execute();
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, "getSortedLog() SQL query: " + query);
         }
     }
@@ -364,7 +362,7 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
                 .setOnTaskCompleted(listener)
                 .execute(query);
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, "getEventsByTime() SQL query: " + query);
         }
 
@@ -401,8 +399,8 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
 
     }
 
-    public void getLatestLocation(OnGetLatestLocationListener l, int eventId){
-        if(!isDatabaseOpen()) {
+    public void getLatestLocation(OnGetLatestLocationListener l, int eventId) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         String query = new DatabaseLocationQueryBuilder()
@@ -416,21 +414,14 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         new GetLocationsTask(mDb, l, query).execute();
     }
 
-    public void getLoggedRoute(int eventId, int strokeWidth, int lineColor, OnGetLoggedRouteListener l) {
-        if(!isDatabaseOpen()) {
+    public void getLoggedRoute(int eventId, OnGetLoggedRouteListener l) {
+        if (!isDatabaseOpen()) {
             openDatabase();
         }
         GetLoggedRouteTask task = new GetLoggedRouteTask(mDb, eventId);
-        task.setMapParams(strokeWidth, lineColor);
         task.setOnGetLocationInfoListener(l);
         task.execute();
     }
 
-	
-
-	
-	
-	
-	
 
 }

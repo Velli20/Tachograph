@@ -32,16 +32,17 @@
     <View
         android:id="@+id/list_item_log_summary_week_shadow_top"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/list_item_log_summary_week_elevation_top"
         android:layout_alignParentTop="true"
         android:background="@drawable/dropdown_shadow_up" />
 
     <View
+        android:id="@+id/list_item_log_summary_week_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/list_item_log_summary_week_shadow_top"
         android:layout_above="@+id/list_item_log_summary_week_shadow_bottom"
-        android:background="@color/white" />
+        android:background="#FFFFFF"/>
 
 
     <LinearLayout
@@ -187,7 +188,7 @@
     <View
         android:id="@+id/list_item_log_summary_week_shadow_bottom"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="@dimen/list_item_log_summary_week_elevation_bottom"
         android:layout_below="@id/list_item_log_summary_week_driven_distance_title"
         android:background="@drawable/dropdown_shadow" />
 

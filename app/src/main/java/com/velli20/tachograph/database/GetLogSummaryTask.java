@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolder>> {
     private static final String TAG = "GetLogSummaryTask";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private SQLiteDatabase mDb;
     private boolean mCalculateDrivenDistance= false;

@@ -36,7 +36,6 @@ import com.velli20.tachograph.location.ActivityLoggedRouteMap;
 import com.velli20.tachograph.location.LoggedRoute;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,16 +52,14 @@ import android.view.View;
 import java.util.Locale;
 
 public class ActivityEventDetails extends AppCompatActivity implements OnGetLoggedRouteListener, View.OnClickListener, DataBaseHandler.OnDatabaseEditedListener {
-    public static final String INTENT_EXTRA_EVENT_ID = "intent extra event id";
+    public static final String INTENT_EXTRA_EVENT_ID = "intent extra event mId";
     private ListAdapterEventDetails mAdapter;
 
     private Event mEvent;
     private LoggedRoute mLoggedRoute;
 
     private int mEventId = -1;
-    private int mColorBlue;
 
-    private float mDensity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,11 +74,6 @@ public class ActivityEventDetails extends AppCompatActivity implements OnGetLogg
         recyclerView.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.card_padding)));
         recyclerView.setAdapter(mAdapter);
 
-
-        final Resources res = getResources();
-
-        mDensity = res.getDisplayMetrics().density;
-        mColorBlue = res.getColor(R.color.color_primary);
 
         final Intent intent = getIntent();
 
@@ -143,7 +135,7 @@ public class ActivityEventDetails extends AppCompatActivity implements OnGetLogg
             return;
         }
 
-        String[] events = getResources().getStringArray(R.array.event_explanations);
+        String[] events = getResources().getStringArray(R.array.events);
         int[] colors = getResources().getIntArray(R.array.event_colors);
 
         (findViewById(R.id.activity_event_details_toolbar)).setBackgroundColor(colors[ev.getEventType()]);
@@ -160,7 +152,7 @@ public class ActivityEventDetails extends AppCompatActivity implements OnGetLogg
         }
 
         if (ev.hasLoggedRoute()) {
-            DataBaseHandler.getInstance().getLoggedRoute(ev.getRowId(), (int) mDensity * 2, mColorBlue, this);
+            DataBaseHandler.getInstance().getLoggedRoute(ev.getRowId(), this);
         } else if(mAdapter != null) {
             mLoggedRoute = null;
             mAdapter.setLoggedRoute(null);

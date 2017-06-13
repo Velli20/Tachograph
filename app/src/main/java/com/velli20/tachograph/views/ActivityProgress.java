@@ -31,20 +31,28 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public abstract class ActivityProgress extends View {
+public class ActivityProgress extends View {
     private static final int STROKE_WIDTH = 14;
-    private static final int TITLE_SIZE = 16;
+    private static final int TITLE_SIZE = 14;
     private static final int SUB_TITLE_SIZE = 12;
     private static final int TEXT_PADDING = 2;
+    private static final int PROGRESS_BAR_PADDING = 16;
+    private static final int SUB_TITLE_PADDING = 16;
+    private static final int PROGRESS_PIE_MAX_DIAMETER = 140;
 
     private float mScale;
+    private float mHeight;
+    private float mWidth;
+
     private int mProgress;
     private int mProgressMax;
+    private boolean mDisplayBigProgress = false;
 
     private String mTitle;
     private String mSubTitle;
@@ -54,6 +62,8 @@ public abstract class ActivityProgress extends View {
 
     private final TextPaint mTitlePaint = new TextPaint();
     private final TextPaint mSubTitlePaint = new TextPaint();
+    private RectF mArcRect;
+
 
 
     public ActivityProgress(Context context) {
@@ -145,6 +155,14 @@ public abstract class ActivityProgress extends View {
         invalidate();
     }
 
+    public void displayBigProgress(boolean big) {
+        if(big != mDisplayBigProgress) {
+            mDisplayBigProgress = big;
+
+            requestLayout();
+        }
+    }
+
     Paint getChartPaint() { return mChartPaint; }
 
     Paint getChartBackgroundPaint() { return mBackGroundPaint; }
@@ -162,8 +180,164 @@ public abstract class ActivityProgress extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        drawProgress(canvas, mProgress, mProgressMax);
+        getTitlePaint().setTextAlign(mDisplayBigProgress ? Paint.Align.CENTER : Paint.Align.LEFT);
+        getSubTitlePaint().setTextAlign(mDisplayBigProgress ? Paint.Align.CENTER : Paint.Align.LEFT);
+
+        if(mDisplayBigProgress) {
+            drawProgressChart(canvas, mProgress, mProgressMax);
+        } else {
+            drawProgressBar(canvas, mProgress, mProgressMax);
+        }
+
     }
 
-    public abstract void drawProgress(Canvas canvas, float progress, float max);
+
+    private void drawProgressBar(Canvas canvas, float progress, float max) {
+        Paint progressPaint = getChartPaint();
+        Paint backgroundPaint = getChartBackgroundPaint();
+
+        TextPaint titlePaint = getTitlePaint();
+        TextPaint subTitlePaint = getSubTitlePaint();
+
+        String title = getTitle();
+        String subTitle = getSubTitle();
+
+        float progressStrokeWidth = progressPaint.getStrokeWidth();
+        float capWidth = progressStrokeWidth / 2;
+        float left = getPaddingLeft() + capWidth;
+        float right = (getWidth() - getPaddingRight())- capWidth;
+
+
+        float cy = (getHeight() / 2);
+
+        float titleHeight = 0;
+        float titleWidth = 0;
+        float titleMaxWidth = titlePaint.measureText("24 h 60 min");
+        float subTitleHeight = 0;
+        float subTitleWidth = 0;
+        float textPadding = getTextPadding();
+        float barPadding = getDpValue(PROGRESS_BAR_PADDING);
+
+        if(title != null) {
+            titleHeight = titlePaint.getTextSize();
+            titleWidth = titlePaint.measureText(title);
+        }
+        if(subTitle != null) {
+            subTitleHeight = subTitlePaint.getTextSize();
+            subTitleWidth = subTitlePaint.measureText(subTitle);
+        }
+
+        left += (Math.max(titleMaxWidth, subTitleWidth) + (textPadding)) + barPadding;
+
+        float titleCy = (subTitleHeight == 0 ? (cy - (titleHeight / 2)) : (cy - textPadding));
+        float subTitleCy = (titleHeight == 0 ? cy : (cy + subTitleHeight + textPadding));
+
+        float progressBarWidth = Math.min(progress * (right - left) / max + left, right);
+
+        canvas.drawLine(left, cy, right, cy, backgroundPaint);
+        canvas.drawLine(left, cy, progressBarWidth, cy, progressPaint);
+
+
+        if(title != null) {
+            float titleCx = getPaddingLeft() + ((titleMaxWidth - titleWidth) / 2);
+            canvas.drawText(title, titleCx, titleCy, titlePaint);
+        }
+        if(subTitle != null) {
+            float subTitleCx = getPaddingLeft() + ((titleMaxWidth - subTitleWidth) / 2);
+            canvas.drawText(subTitle, subTitleCx, subTitleCy, subTitlePaint);
+        }
+    }
+
+    private void drawProgressChart(Canvas canvas, float progress, float max) {
+
+        float width = mWidth;
+        float height = mHeight;
+
+        Paint progressPaint = getChartPaint();
+        Paint backgroundPaint = getChartBackgroundPaint();
+
+        TextPaint titlePaint = getTitlePaint();
+        TextPaint subTitlePaint = getSubTitlePaint();
+
+        String title = getTitle();
+        String subTitle = getSubTitle();
+
+        if(width > height){
+            height = width;
+        } else if(height > width){
+            width = height;
+        }
+
+        float cx = width / 2;
+        float cy = height / 2;
+
+        float percentage = Math.max(0, progress) / max;
+        float arc = percentage * 360f;
+        float stroke = getDpValue(STROKE_WIDTH) / 2;
+
+        if (arc < 360) {
+            // Draw background circle
+            canvas.drawCircle(cx, cy, (cx) - stroke, backgroundPaint);
+        }
+
+        // Draw progress
+        if(arc != 0) {
+            canvas.drawArc(mArcRect, 270, arc, false, progressPaint);
+        }
+
+        // Draw title
+        float subTitlePos = cy + getDpValue(SUB_TITLE_SIZE) + (getDpValue(SUB_TITLE_PADDING) / 2);
+
+        canvas.drawText(title, cx, cy, titlePaint);
+        canvas.drawText(subTitle, cx, subTitlePos, subTitlePaint);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int finalWidth;
+        int finalHeight;
+
+        if(mDisplayBigProgress) {
+            int maxDiameter = (int)getDpValue(PROGRESS_PIE_MAX_DIAMETER);
+
+            if (widthSize > heightSize && widthSize < maxDiameter) {
+                finalWidth = widthSize;
+                finalHeight = widthSize;
+            } else if (heightSize > widthSize && heightSize < maxDiameter) {
+                finalWidth = heightSize;
+                finalHeight = heightSize;
+            } else {
+                finalWidth = maxDiameter;
+                finalHeight = maxDiameter;
+            }
+        } else {
+            int minHeight = (int)(mTitlePaint.getTextSize() + mSubTitlePaint.getTextSize() + (getTextPadding() * 2));
+            finalWidth = widthSize;
+            finalHeight = Math.max(minHeight, heightSize);
+        }
+
+        setMeasuredDimension(finalWidth, finalHeight);
+    }
+
+    private RectF getArcRect(){
+
+        final RectF rect = new RectF();
+        final float stroke = getDpValue(STROKE_WIDTH) / 2;
+
+        rect.set(stroke, stroke, mWidth - stroke, mHeight - stroke);
+        return rect;
+    }
+
+    @Override
+    protected void onSizeChanged (int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = getWidth();
+        mHeight = getHeight();
+
+        mArcRect = getArcRect();
+
+    }
 }

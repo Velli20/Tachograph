@@ -62,19 +62,14 @@ card:cardElevation="@dimen/card_elevation" >
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp" />
 
-    <com.velli20.tachograph.views.ActivityProgressPieChart
-        android:id="@+id/work_limit_chartView_big"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
+    <com.velli20.tachograph.views.ActivityProgress
+        android:id="@+id/work_limit_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_gravity="center" />
 
-    <com.velli20.tachograph.views.ActivityProgressBar
-        android:id="@+id/work_limit_chartView_small"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:visibility="gone"
-        android:layout_gravity="center" />
 
 </LinearLayout>
 

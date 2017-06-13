@@ -27,8 +27,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.velli20.tachograph"
-    android:versionCode="11"
-    android:versionName="2.0" >
+    android:versionCode="12"
+    android:versionName="2.0.1" >
 
 
     <permission
@@ -80,7 +80,7 @@
         </activity>
 
         <activity
-            android:name="com.velli20.tachograph.ActivityItemsToShowInSummary"
+            android:name="com.velli20.tachograph.ActivityItemsToShowInFragmentNow"
             android:theme="@style/AppBaseThemeWhiteBackground"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -132,7 +132,7 @@
 
         <activity
             android:name="com.velli20.tachograph.ActivityEventDetails"
-            android:theme="@style/AppBaseTheme"
+            android:theme="@style/AppBaseThemeWhiteBackground"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <service
@@ -151,7 +151,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDvG4vOYJPsGrKAKmTnoIBzeGrlgNG5XkM" />
+            android:value="AIzaSyBCzpyNo-yLBPxbxzQvOdCqEp5jfaPGd6U" />
     </application>
 
 </manifest>

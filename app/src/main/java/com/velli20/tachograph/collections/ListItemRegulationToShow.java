@@ -27,13 +27,25 @@
 package com.velli20.tachograph.collections;
 
 public class ListItemRegulationToShow {
-	public int position;
-	public int listItem;
-	public boolean show;
+	public int mPosition;
+	public int mViewType;
+	public int mRegulationType;
+    public int mId;
+	public boolean mShow;
 
-	public ListItemRegulationToShow(int position, int listItem, boolean show){
-		this.position = position;
-		this.listItem = listItem;
-		this.show = show;
+    public ListItemRegulationToShow(int position, int viewType, int regulationType, boolean show, int id){
+        this.mPosition = position;
+        this.mViewType = viewType;
+        this.mShow = show;
+        this.mId = id;
+        this.mRegulationType = regulationType;
+
+    }
+
+	public ListItemRegulationToShow(int position, int viewType, boolean show, int id){
+		this.mPosition = position;
+		this.mViewType = viewType;
+		this.mShow = show;
+        this.mId = id;
 	}
 }

@@ -37,66 +37,66 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class ActivityRestTypeChooser extends Activity {
-	public static final String INTENT_EXTRA_CURRENT_EVENT_TYPE = "current event type";
-	public static final String TAG = "ActivityRestTypeChooser ";
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		if(getIntent() != null){
-			int type = getIntent().getIntExtra(INTENT_EXTRA_CURRENT_EVENT_TYPE, -1);
-			
-			showChooseRestTypeDialog(this, type, new MaterialDialog.ListCallback() {
-				
-				@Override
-				public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-					if(which == 0){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
-					} else if(which == 1){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
-					} else if(which == 2){
-						new EventRecorder().startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
-					}
-					finish();
-					}
-				});
-			
-		}
-	}
-	
-	public static void showChooseRestTypeDialog(final Context c, int currentEventType, final MaterialDialog.ListCallback callback){
-		new MaterialDialog.Builder(c)
-        .items(getRestTimeTypeArray(c.getResources(), currentEventType))
-        .itemsCallbackSingleChoice(currentEventType == -1? 0 : getRestingSelectedOption(currentEventType), new MaterialDialog.ListCallbackSingleChoice() {
-			
-			@Override
-			public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-				callback.onSelection(dialog, itemView, which, text);
-				if(c instanceof Activity && !(c instanceof AppCompatActivity)){
-					((Activity)c).finish();
-				}
-				return true;
-			}
-		})
-        .negativeText(R.string.action_cancel)
-        .positiveText(R.string.action_ok)
-        .show();
-	}
+    public static final String INTENT_EXTRA_CURRENT_EVENT_TYPE = "current event type";
+    public static final String TAG = "ActivityRestTypeChooser ";
 
-	public static String[] getRestTimeTypeArray(Resources res, int currentAction){
-		return new String[]{
-				currentAction == Event.EVENT_TYPE_WEEKLY_REST ? res.getString(R.string.menu_stop_weekly_rest)
-						: res.getString(R.string.menu_start_weekly_rest),
-				currentAction == Event.EVENT_TYPE_DAILY_REST ? res.getString(R.string.menu_stop_daily_rest)
-						: res.getString(R.string.menu_start_daily_rest),
-				(currentAction == Event.EVENT_TYPE_NORMAL_BREAK) ? res.getString(R.string.menu_stop_break)
-						: res.getString(R.string.menu_start_break)};
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getIntent() != null) {
+            int type = getIntent().getIntExtra(INTENT_EXTRA_CURRENT_EVENT_TYPE, -1);
 
-    public static int getRestingSelectedOption(int currentAction){
-        if(currentAction == Event.EVENT_TYPE_WEEKLY_REST){
+            showChooseRestTypeDialog(this, type, new MaterialDialog.ListCallback() {
+
+                @Override
+                public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                    if (which == 0) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
+                    } else if (which == 1) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
+                    } else if (which == 2) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
+                    }
+                    finish();
+                }
+            });
+
+        }
+    }
+
+    public static void showChooseRestTypeDialog(final Context c, int currentEventType, final MaterialDialog.ListCallback callback) {
+        new MaterialDialog.Builder(c)
+                .items(getRestTimeTypeArray(c.getResources(), currentEventType))
+                .itemsCallbackSingleChoice(currentEventType == -1 ? 0 : getRestingSelectedOption(currentEventType), new MaterialDialog.ListCallbackSingleChoice() {
+
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        callback.onSelection(dialog, itemView, which, text);
+                        if (c instanceof Activity && !(c instanceof AppCompatActivity)) {
+                            ((Activity) c).finish();
+                        }
+                        return true;
+                    }
+                })
+                .negativeText(R.string.action_cancel)
+                .positiveText(R.string.action_ok)
+                .show();
+    }
+
+    public static String[] getRestTimeTypeArray(Resources res, int currentAction) {
+        return new String[]{
+                currentAction == Event.EVENT_TYPE_WEEKLY_REST ? res.getString(R.string.menu_stop_weekly_rest)
+                        : res.getString(R.string.menu_start_weekly_rest),
+                currentAction == Event.EVENT_TYPE_DAILY_REST ? res.getString(R.string.menu_stop_daily_rest)
+                        : res.getString(R.string.menu_start_daily_rest),
+                (currentAction == Event.EVENT_TYPE_NORMAL_BREAK) ? res.getString(R.string.menu_stop_break)
+                        : res.getString(R.string.menu_start_break)};
+    }
+
+    public static int getRestingSelectedOption(int currentAction) {
+        if (currentAction == Event.EVENT_TYPE_WEEKLY_REST) {
             return 0;
-        } else if(currentAction == Event.EVENT_TYPE_DAILY_REST){
+        } else if (currentAction == Event.EVENT_TYPE_DAILY_REST) {
             return 1;
         } else {
             return 2;

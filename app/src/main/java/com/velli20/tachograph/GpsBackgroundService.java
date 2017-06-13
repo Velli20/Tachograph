@@ -26,34 +26,26 @@
 
 package com.velli20.tachograph;
 
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 import com.velli20.tachograph.database.DataBaseHandler;
 
 
 public class GpsBackgroundService extends Service implements DataBaseHandler.OnDatabaseEditedListener, DataBaseHandler.OnGetEventTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final float[] ACCURACY_VALUES;
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final String TAG = "GpsBackgroundService ";
 
-    private GoogleApiDetectedActivityListener mGoogleApiDetectedActivityListener;
+    private GoogleDetectedActivityListener mGoogleApiDetectedActivityListener;
     private GpsRouteLogger mGpsRouteLogger = new GpsRouteLogger();
 
     private int mThresholdTime;
@@ -66,6 +58,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
     private boolean mNotificationShowing = false;
     private boolean mShuttingDownService = false;
     private boolean mStoppingRouteLogging = false;
+    private boolean mUseDetectedActivity = true;
 
     private final Handler mServiceShutdownHandler = new Handler();
     private final Handler mStoppingRouteLoggingHandler = new Handler();
@@ -106,7 +99,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         super.onStartCommand(intent, flags, startId);
 
         /* Check if intent contains ActivityRecognitionResult */
-        if (intent != null && ActivityRecognitionResult.hasResult(intent) && mGoogleApiDetectedActivityListener != null) {
+        if (intent != null && ActivityRecognitionResult.hasResult(intent) && mGoogleApiDetectedActivityListener != null && mUseDetectedActivity) {
             /* Handle this intent */
             mGoogleApiDetectedActivityListener.handleActivityRecognitionResult(intent);
         }
@@ -165,13 +158,6 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
             mGpsRouteLogger.setStoppedSpeedThreshold(mThresholdSpeed);
             mGpsRouteLogger.setStoppedTimeThreshold(mThresholdTime);
             mGpsRouteLogger.setCurrentEvent(currentEvent);
-
-            /* Initialize DetectedActivity listener. This class is used to determinate whether
-             * user is walking or driving based on various sensor data
-             */
-            if (mGoogleApiDetectedActivityListener == null) {
-                mGoogleApiDetectedActivityListener = new GoogleApiDetectedActivityListener(GpsBackgroundService.this);
-            }
 
             return true;
 
@@ -235,6 +221,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         mUseGps = prefs.getBoolean(res.getString(R.string.preference_key_use_gps), false);
         mShowNotifications = prefs.getBoolean(res.getString(R.string.preference_key_show_notifications), true);
         mGpsMinAccuracy = ACCURACY_VALUES[prefs.getInt(res.getString(R.string.preference_key_gps_min_accuracy), 4)];
+        mUseDetectedActivity =  prefs.getBoolean(res.getString(R.string.preference_key_use_detected_activity), true) && DEBUG;
 
         /* Edit GPS route logger settings */
         if(mGpsRouteLogger != null) {
@@ -242,7 +229,8 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
             mGpsRouteLogger.setStoppedSpeedThreshold(mThresholdSpeed);
             mGpsRouteLogger.setStoppedTimeThreshold(mThresholdTime);
         }
-        checkIfRequiredToRunBackgroundService();
+
+        initializeBackgroundService();
     }
 
 
@@ -261,7 +249,10 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
             Log.i(TAG, TAG + " onGetEvent()");
         }
         mRecordingEvent = ev;
-        checkIfRequiredToRunBackgroundService();
+        if(mGpsRouteLogger != null) {
+            mGpsRouteLogger.setCurrentEvent(ev);
+        }
+        initializeBackgroundService();
     }
 
 
@@ -277,25 +268,28 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
     /* Check if it is required to continue running this service. If not then
      * stop this service with a 5 second delay.
      */
-    private void checkIfRequiredToRunBackgroundService() {
+    private void initializeBackgroundService() {
         if(DEBUG) {
-            Log.i(TAG, TAG + " checkIfRequiredToRunBackgroundService()");
+            Log.i(TAG, TAG + " initializeBackgroundService()");
         }
         /* Check if it is required to run this service */
         boolean showNotifications = showNotificationIfRequired(mRecordingEvent);
         boolean logRoute = logRouteIfRequired(mRecordingEvent);
 
+        if(mUseDetectedActivity && mGoogleApiDetectedActivityListener == null && logRoute)  {
+            mGoogleApiDetectedActivityListener = new GoogleDetectedActivityListener(GpsBackgroundService.this);
+        }
         if(mStoppingRouteLogging && logRoute) {
             mStoppingRouteLogging = false;
             mStoppingRouteLoggingHandler.removeCallbacks(mRouteLoggingShutdownRunnable);
             if(DEBUG) {
-                Log.d(TAG, "checkIfRequiredToRunBackgroundService() continue route logging");
+                Log.d(TAG, "initializeBackgroundService() continue route logging");
             }
         } else if(!mStoppingRouteLogging && !logRoute) {
             mStoppingRouteLogging = true;
             mStoppingRouteLoggingHandler.postDelayed(mRouteLoggingShutdownRunnable, 5000);
             if(DEBUG) {
-                Log.d(TAG, "checkIfRequiredToRunBackgroundService() stopping route logging in 5 seconds");
+                Log.d(TAG, "initializeBackgroundService() stopping route logging in 5 seconds");
             }
         }
 
@@ -307,14 +301,14 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
             mServiceShutdownHandler.postDelayed(mServiceShutdownRunnable, 5000);
 
             if(DEBUG) {
-                Log.d(TAG, "checkIfRequiredToRunBackgroundService() shutting down service in 5 seconds");
+                Log.d(TAG, "initializeBackgroundService() shutting down service in 5 seconds");
             }
         } else {
             mShuttingDownService = false;
             mServiceShutdownHandler.removeCallbacksAndMessages(mServiceShutdownRunnable);
 
             if(DEBUG) {
-                Log.d(TAG, "checkIfRequiredToRunBackgroundService() continue running service");
+                Log.d(TAG, "initializeBackgroundService() continue running service");
             }
         }
     }
@@ -352,125 +346,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
 
 
 
-    /* This class is responsible for initializing GoogleApiClient and ActivityRecognitionApi.
-     * ActivityRecognitionApi can detect if the user is currently on foot, in a car, on a bicycle or still
-     * by periodically waking up the device and reading short bursts of sensor data
-     */
-    private class GoogleApiDetectedActivityListener implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-        private PendingIntent mActivityRecognizedPendIntent;
-        private GoogleApiClient mGoogleApiClient;
-        private boolean mDetectedActivityIsDriving = true;
 
-        public GoogleApiDetectedActivityListener(Context c) {
-            mGoogleApiClient = new GoogleApiClient.Builder(c)
-                    .addApi(ActivityRecognition.API)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
-            mGoogleApiClient.connect();
 
-            if(DEBUG) {
-                Log.i(TAG, "GoogleApiDetectedActivityListener()");
-            }
 
-        }
-
-        @Override
-        public void onConnected(@Nullable Bundle connectionHint) {
-            /* After calling connect(), this method will be invoked asynchronously
-             * when the connect request has successfully completed.
-             */
-            Intent intent = new Intent(getApplicationContext(), GpsBackgroundService.class);
-            mActivityRecognizedPendIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 5000, mActivityRecognizedPendIntent);
-
-            if(DEBUG) {
-                Log.i(TAG, TAG + " GoogleApiDetectedActivityListener onConnected()");
-            }
-        }
-
-        @Override
-        public void onConnectionSuspended(int cause) {
-            /* Called when the client is temporarily in a disconnected state. */
-
-            if(cause == GoogleApiDetectedActivityListener.CAUSE_NETWORK_LOST) {
-                /* A suspension cause informing you that a peer device connection was lost. */
-            } else if(cause == GoogleApiDetectedActivityListener.CAUSE_SERVICE_DISCONNECTED) {
-                /* A suspension cause informing that the service has been killed. */
-            }
-            if(mGpsRouteLogger != null) {
-                mGpsRouteLogger.setDetectedActivityState(GpsRouteLogger.DETECTED_ACTIVITY_NOT_ENABLED);
-            }
-
-            if(DEBUG) {
-                Log.i(TAG, TAG + " GoogleApiDetectedActivityListener onConnectionSuspended() cause: " + cause);
-            }
-        }
-
-        @Override
-        public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-            /* Called when there was an error connecting the client to the service. */
-
-            if(mGpsRouteLogger != null) {
-                mGpsRouteLogger.setDetectedActivityState(GpsRouteLogger.DETECTED_ACTIVITY_NOT_ENABLED);
-            }
-            int result = connectionResult.getErrorCode();
-
-            switch (result) {
-                case ConnectionResult.API_UNAVAILABLE:
-                    break;
-            }
-
-            if(DEBUG) {
-                Log.i(TAG, TAG + " GoogleApiDetectedActivityListener onConnectionFailed()");
-            }
-        }
-
-        /* @ActivityRecognitionApi: The activities are detected by periodically waking up the device and reading short bursts of sensor data.
-         * It only makes use of low power sensors in order to keep the power usage to a minimum. For example,
-         * it can detect if the user is currently on foot, in a car, on a bicycle or still
-         */
-        public void handleActivityRecognitionResult(Intent intent) {
-            // Get the update
-            ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-            // Get the most probable activity from the list of activities in the update
-            DetectedActivity mostProbableActivity = result.getMostProbableActivity();
-
-            // Get the confidence percentage for the most probable activity
-            int confidence = mostProbableActivity.getConfidence();
-
-            // Get the type of activity
-            int activityType = mostProbableActivity.getType();
-
-            if (confidence >= 50) {
-                mDetectedActivityIsDriving = (activityType == DetectedActivity.IN_VEHICLE);
-            } else {
-                mDetectedActivityIsDriving = false;
-            }
-            if(mGpsRouteLogger != null) {
-                /* Pass result to GPS logger */
-                mGpsRouteLogger.setDetectedActivityState(mDetectedActivityIsDriving ?
-                        GpsRouteLogger.DETECTED_ACTIVITY_DRIVING : GpsRouteLogger.DETECTED_ACTIVITY_WALKING);
-            }
-            if(DEBUG) {
-                Log.i(TAG, TAG + " GoogleApiDetectedActivityListener handleActivityRecognitionResult()");
-            }
-        }
-
-        public void stop() {
-            if(mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-                ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(mGoogleApiClient, mActivityRecognizedPendIntent);
-                if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-                    mGoogleApiClient.disconnect();
-                }
-                if (mGpsRouteLogger != null) {
-                    mGpsRouteLogger.setDetectedActivityState(GpsRouteLogger.DETECTED_ACTIVITY_NOT_ENABLED);
-                }
-            }
-            if(DEBUG) {
-                Log.i(TAG, TAG + " GoogleApiDetectedActivityListener stop()");
-            }
-        }
-    }
 }

@@ -68,9 +68,16 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     private RobotoLightTextView mStartLocation;
     private RobotoLightTextView mEndLocation;
 
+    private int mColorBlue;
+    private float mDensity;
+
     public ListAdapterEventDetails(Context context) {
         mInflater = LayoutInflater.from(context);
         mRes = context.getResources();
+
+        mDensity = mRes.getDisplayMetrics().density;
+        mColorBlue = mRes.getColor(R.color.color_primary);
+
     }
 
     public void setEvent(Event event) {
@@ -229,6 +236,9 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
                     googleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
                     if(mRoute != null && mRoute.getMapPolyline() != null) {
+                        PolylineOptions line = mRoute.getMapPolyline();
+                        line.color(mColorBlue);
+                        line.width((int) mDensity * 2);
                         setMapPolyLine(googleMap, mRoute.getMapPolyline());
                     }
                 }

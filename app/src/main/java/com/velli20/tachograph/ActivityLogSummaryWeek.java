@@ -57,73 +57,73 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 public class ActivityLogSummaryWeek extends AppCompatActivity implements AdapterView.OnItemClickListener {
-	public static final boolean DEBUG = true;
-	public static final String TAG = "ActivityLogSummaryWeek ";
+    public static final boolean DEBUG = false;
+    public static final String TAG = "ActivityLogSummaryWeek ";
 
     public static final String INTENT_EVENT_IDS = "eventIds";
     public static final String INTENT_START_DATE = "startDate";
 
-	private RecyclerView mList;
-	private WeekAdapter mAdapter;
-	
-	private ArrayList<Integer> mRowIds;
-	private long mStartDate;
+    private RecyclerView mList;
+    private WeekAdapter mAdapter;
 
-	private WeekHolder mWeek;
+    private ArrayList<Integer> mRowIds;
+    private long mStartDate;
 
-	@Override
-    public void onCreate(Bundle savedInstanceState){
-    	super.onCreate(savedInstanceState);
-    	setContentView(R.layout.activity_log_summary_week);
+    private WeekHolder mWeek;
 
-		mList = (RecyclerView) findViewById(R.id.activity_week_overview_list);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_log_summary_week);
 
-		setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
+        mList = (RecyclerView) findViewById(R.id.activity_week_overview_list);
 
-		if(getIntent() != null) {
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        if (getIntent() != null) {
             mRowIds = getIntent().getIntegerArrayListExtra(INTENT_EVENT_IDS);
             mStartDate = getIntent().getLongExtra(INTENT_START_DATE, -1);
-		}
-		
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-			findViewById(R.id.toolbar_shadow).setVisibility(View.GONE);
-	    }
-		
-		final ActionBar ab = getSupportActionBar();
-		if(ab != null) {
-            if(mStartDate != -1) {
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            findViewById(R.id.toolbar_shadow).setVisibility(View.GONE);
+        }
+
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            if (mStartDate != -1) {
                 ab.setTitle(getString(R.string.title_week) + " " + DateUtils.getWeekOfYear(mStartDate));
             }
-			ab.setDisplayHomeAsUpEnabled(true);
-			ab.setDisplayShowHomeEnabled(true);
-		}
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setDisplayShowHomeEnabled(true);
+        }
 
 
         loadLogSummary(mRowIds);
-	}
+    }
 
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		switch(item.getItemId()){
-		case android.R.id.home:
-			finish();
-			return true;
-		}
-		
-		return super.onOptionsItemSelected(item);
-	}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void loadLogSummary(ArrayList<Integer> rowIds) {
-        if(rowIds == null) {
+        if (rowIds == null) {
             return;
         }
         DataBaseHandler.getInstance().getWorkingTimesWithinEventIds(new GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener() {
             @Override
             public void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks) {
-                if(workingWeeks != null && !workingWeeks.isEmpty()) {
-                    mWeek = workingWeeks.get(workingWeeks.size()-1);
+                if (workingWeeks != null && !workingWeeks.isEmpty()) {
+                    mWeek = workingWeeks.get(workingWeeks.size() - 1);
                     initializeList();
                 }
             }
@@ -131,7 +131,7 @@ public class ActivityLogSummaryWeek extends AppCompatActivity implements Adapter
     }
 
     private void initializeList() {
-        if(mAdapter == null && mWeek != null) {
+        if (mAdapter == null && mWeek != null) {
             mAdapter = new WeekAdapter(this, mWeek);
             mAdapter.setOnClickListener(this);
 
@@ -139,74 +139,74 @@ public class ActivityLogSummaryWeek extends AppCompatActivity implements Adapter
             mList.setAdapter(mAdapter);
         }
     }
-	
-	private class WeekAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-		private static final int VIEW_TYPE_CHART = 0;
-		private static final int VIEW_TYPE_NORMAL = 1;
-		
-		private final LayoutInflater mInflater;
-		private AdapterView.OnItemClickListener mListener;
-		private WeekHolder mItems;
-		
-		private final String mDailyRest;
-		private final String[] SHORT_WEEK_DAYS = new DateFormatSymbols().getShortWeekdays();
-		
-		public WeekAdapter(Context context, WeekHolder week) {
-			mInflater = LayoutInflater.from(context);
-			mItems = week;
-			
-			final Resources res = context.getResources();
-			
-			mDailyRest = res.getString(R.string.log_summary_daily_rest_time);
-		}
-		
-		public void setItems(WeekHolder week){
-			mItems = week;
-			notifyDataSetChanged();
-		}
-		
-		public void setOnClickListener(AdapterView.OnItemClickListener l) {
-			mListener = l;
-		}
-		
-		@Override
-		public int getItemCount() {
-			return mItems.getWorkDays().size() +1;
-		}
-		
-		@Override
-	    public int getItemViewType(int position) {
-			if(position == 0){
-				return VIEW_TYPE_CHART;
-			} else {
-				return VIEW_TYPE_NORMAL;
-			}
-		}
-		
-		private String getShortWeekday(long startDay){
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(startDay);
-			return SHORT_WEEK_DAYS[c.get(Calendar.DAY_OF_WEEK)];
-		}
 
-		@Override
-		public void onBindViewHolder(ViewHolder holder, int position) {
-			int viewType = getItemViewType(position);
-			
-			if(viewType == VIEW_TYPE_CHART){
-				setHeaderData(((ViewHolderHeader)holder), mItems);
-			} else {
-				holder.itemView.setOnClickListener(new ClickListener(position));
-				setDayData(((ViewHolderStepper)holder), position);
-			}
-		}
-		
-		public void setDayData(ViewHolderStepper holder, int position){
-			WorkDayHolder day = mItems.getWorkDays().get(position -1);
+    private class WeekAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private static final int VIEW_TYPE_CHART = 0;
+        private static final int VIEW_TYPE_NORMAL = 1;
 
-			holder.mWeekDay.setText(getShortWeekday(day.getStartDate()));
-			holder.mTitle.setText(DateUtils.dateSummary(day.getStartDate(), day.getEndDate()));
-			holder.mDailyRestTime.setText(DateUtils.convertMinutesToTimeString(day.getDailyRest()));
+        private final LayoutInflater mInflater;
+        private AdapterView.OnItemClickListener mListener;
+        private WeekHolder mItems;
+
+        private final String mDailyRest;
+        private final String[] SHORT_WEEK_DAYS = new DateFormatSymbols().getShortWeekdays();
+
+        private WeekAdapter(Context context, WeekHolder week) {
+            mInflater = LayoutInflater.from(context);
+            mItems = week;
+
+            final Resources res = context.getResources();
+
+            mDailyRest = res.getString(R.string.log_summary_daily_rest_time);
+        }
+
+        public void setItems(WeekHolder week) {
+            mItems = week;
+            notifyDataSetChanged();
+        }
+
+        public void setOnClickListener(AdapterView.OnItemClickListener l) {
+            mListener = l;
+        }
+
+        @Override
+        public int getItemCount() {
+            return mItems.getWorkDays().size() + 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (position == 0) {
+                return VIEW_TYPE_CHART;
+            } else {
+                return VIEW_TYPE_NORMAL;
+            }
+        }
+
+        private String getShortWeekday(long startDay) {
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(startDay);
+            return SHORT_WEEK_DAYS[c.get(Calendar.DAY_OF_WEEK)];
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            int viewType = getItemViewType(position);
+
+            if (viewType == VIEW_TYPE_CHART) {
+                setHeaderData(((ViewHolderHeader) holder), mItems);
+            } else {
+                holder.itemView.setOnClickListener(new ClickListener(position));
+                setDayData(((ViewHolderStepper) holder), position);
+            }
+        }
+
+        private void setDayData(ViewHolderStepper holder, int position) {
+            WorkDayHolder day = mItems.getWorkDays().get(position - 1);
+
+            holder.mWeekDay.setText(getShortWeekday(day.getStartDate()));
+            holder.mTitle.setText(DateUtils.dateSummary(day.getStartDate(), day.getEndDate()));
+            holder.mDailyRestTime.setText(DateUtils.convertMinutesToTimeString(day.getDailyRest()));
 
             holder.mDailyRestTitle.setText(mDailyRest);
 
@@ -214,111 +214,110 @@ public class ActivityLogSummaryWeek extends AppCompatActivity implements Adapter
             holder.mDailyWorkTime.setText(DateUtils.convertMinutesToTimeString(day.getDailyWorkingTime()));
             holder.mDailyDrivenDistance.setText(String.format("%.2f", day.getDailyDrivenDistance()) + " km");
 
-			if(position == 1 && position == getItemCount() -1){
-				holder.mIcon.setType(StepperCircle.TYPE_NO_BARS);
-			} else if(position == 1){
-				holder.mIcon.setType(StepperCircle.TYPE_START);
-			} else if(position + 1 == getItemCount()){
-				holder.mIcon.setType(StepperCircle.TYPE_END);
-			} else {
-				holder.mIcon.setType(StepperCircle.TYPE_NORMAL);
-			}
-		}
+            if (position == 1 && position == getItemCount() - 1) {
+                holder.mIcon.setType(StepperCircle.TYPE_NO_BARS);
+            } else if (position == 1) {
+                holder.mIcon.setType(StepperCircle.TYPE_START);
+            } else if (position + 1 == getItemCount()) {
+                holder.mIcon.setType(StepperCircle.TYPE_END);
+            } else {
+                holder.mIcon.setType(StepperCircle.TYPE_NORMAL);
+            }
+        }
 
-		private void setHeaderData(ViewHolderHeader holder, WeekHolder week){
-			holder.mWeeklyDriveTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyDrivingTime()));
-			holder.mWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyWorkingTime()));
-			holder.mWtdWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(week.getWtdWeeklyWorkingTime()));
-			holder.mWeeklyRestTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyRest()));
-			holder.mWeeklyDrivenDistance.setText(String.format(Locale.getDefault(), "%.2f", week.getWeeklyDrivenDistance()) + " km");
-		}
-		
-		
-
-		@Override
-		public ViewHolder onCreateViewHolder(ViewGroup root, int viewType) {
-			if(viewType == VIEW_TYPE_CHART){
-				return new ViewHolderHeader(mInflater.inflate(R.layout.list_item_log_summary_week_header, root, false));
-			} else {
-				return new ViewHolderStepper(mInflater.inflate(R.layout.list_item_log_summary_week_stepper, root, false));
-			}
-		}
-
-		private class ViewHolderHeader extends RecyclerView.ViewHolder {
-			private RobotoLightTextView mWeeklyDriveTime;
-			private RobotoLightTextView mWeeklyWorkTime;
-			private RobotoLightTextView mWtdWeeklyWorkTime;
-			private RobotoLightTextView mWeeklyRestTime;
-			private RobotoLightTextView mWeeklyDrivenDistance;
-
-			private ViewHolderHeader(View itemView) {
-				super(itemView);
-				
-				mWeeklyDriveTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_driving_time);
-				mWeeklyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_working_time);
-				mWtdWeeklyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_wtd_weekly_working_time);
-				mWeeklyRestTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_rest_time);
-				mWeeklyDrivenDistance = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_driven_distance);
-			}
-			
-		}
-		
-		private class ViewHolderStepper extends RecyclerView.ViewHolder {
-			private RobotoLightTextView mTitle;
-			private RobotoLightTextView mWeekDay;
-			private StepperCircle mIcon;
-
-			private RobotoLightTextView mDailyDriveTime;
-			private RobotoLightTextView mDailyWorkTime;
-			private RobotoLightTextView mDailyRestTime;
-			private RobotoLightTextView mDailyRestTitle;
-			private RobotoLightTextView mDailyDrivenDistance;
+        private void setHeaderData(ViewHolderHeader holder, WeekHolder week) {
+            holder.mWeeklyDriveTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyDrivingTime()));
+            holder.mWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyWorkingTime()));
+            holder.mWtdWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(week.getWtdWeeklyWorkingTime()));
+            holder.mWeeklyRestTime.setText(DateUtils.convertMinutesToTimeString(week.getWeeklyRest()));
+            holder.mWeeklyDrivenDistance.setText(String.format(Locale.getDefault(), "%.2f", week.getWeeklyDrivenDistance()) + " km");
+        }
 
 
-			private ViewHolderStepper(View itemView) {
-				super(itemView);
-				
-				mTitle = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_title);
-				mWeekDay = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_weekday);
-				mIcon = (StepperCircle) itemView.findViewById(R.id.list_item_log_summary_week_stepper_icon);
-				
-				mDailyDriveTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_driving_time);
-				mDailyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_working_time);
-				mDailyRestTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_rest_time);
-				mDailyRestTitle = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_rest_time_title);
-				mDailyDrivenDistance  = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_driven_distance);
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup root, int viewType) {
+            if (viewType == VIEW_TYPE_CHART) {
+                return new ViewHolderHeader(mInflater.inflate(R.layout.list_item_log_summary_week_header, root, false));
+            } else {
+                return new ViewHolderStepper(mInflater.inflate(R.layout.list_item_log_summary_week_stepper, root, false));
+            }
+        }
 
-			}
-			
-		}
-		
-		private class ClickListener implements OnClickListener {
-			private final int mPosition;
+        private class ViewHolderHeader extends RecyclerView.ViewHolder {
+            private RobotoLightTextView mWeeklyDriveTime;
+            private RobotoLightTextView mWeeklyWorkTime;
+            private RobotoLightTextView mWtdWeeklyWorkTime;
+            private RobotoLightTextView mWeeklyRestTime;
+            private RobotoLightTextView mWeeklyDrivenDistance;
 
-			private ClickListener(int position) {
-				mPosition = position;
-			}
+            private ViewHolderHeader(View itemView) {
+                super(itemView);
 
-			@Override
-			public void onClick(View v) {
-				if(mListener != null) {
-					mListener.onItemClick(null, v, mPosition, -1);
-				}
-				
-			}
-		}
-		
-	}
+                mWeeklyDriveTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_driving_time);
+                mWeeklyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_working_time);
+                mWtdWeeklyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_wtd_weekly_working_time);
+                mWeeklyRestTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_rest_time);
+                mWeeklyDrivenDistance = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_driven_distance);
+            }
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-        WorkDayHolder workday =  mWeek.getWorkDays().get(position-1);
-        if(workday != null) {
+        }
+
+        private class ViewHolderStepper extends RecyclerView.ViewHolder {
+            private RobotoLightTextView mTitle;
+            private RobotoLightTextView mWeekDay;
+            private StepperCircle mIcon;
+
+            private RobotoLightTextView mDailyDriveTime;
+            private RobotoLightTextView mDailyWorkTime;
+            private RobotoLightTextView mDailyRestTime;
+            private RobotoLightTextView mDailyRestTitle;
+            private RobotoLightTextView mDailyDrivenDistance;
+
+
+            private ViewHolderStepper(View itemView) {
+                super(itemView);
+
+                mTitle = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_title);
+                mWeekDay = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_weekday);
+                mIcon = (StepperCircle) itemView.findViewById(R.id.list_item_log_summary_week_stepper_icon);
+
+                mDailyDriveTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_driving_time);
+                mDailyWorkTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_working_time);
+                mDailyRestTime = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_rest_time);
+                mDailyRestTitle = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_rest_time_title);
+                mDailyDrivenDistance = (RobotoLightTextView) itemView.findViewById(R.id.list_item_log_summary_week_stepper_daily_driven_distance);
+
+            }
+
+        }
+
+        private class ClickListener implements OnClickListener {
+            private final int mPosition;
+
+            private ClickListener(int position) {
+                mPosition = position;
+            }
+
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick(null, v, mPosition, -1);
+                }
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        WorkDayHolder workday = mWeek.getWorkDays().get(position - 1);
+        if (workday != null) {
             Intent i = new Intent(this, ActivityLogSummaryDay.class);
             i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_START, workday.getStartDate());
             i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_END, workday.getEndDate());
             i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_EVENT_IDS, workday.getEventIds());
             startActivity(i);
         }
-	}
+    }
 }

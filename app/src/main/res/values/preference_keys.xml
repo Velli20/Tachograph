@@ -48,22 +48,23 @@
         <item >1</item>
     </string-array>
 
-    <string name="preference_key_count_daily_and_weekly_rest_automatically">preference_key_count_daily_and_weekly_rest_automatically</string>
-    <string name="preference_key_count_activity_progress">preference_key_count_activity_progress</string>
-    <string name="preference_key_show_big_activity_cards">preference_key_show_big_activity_cards</string>
-    <string name="preference_key_show_notifications">preference_key_show_notifications</string>
+    <string name="preference_key_count_daily_and_weekly_rest_automatically" translatable="false">preference_key_count_daily_and_weekly_rest_automatically</string>
+    <string name="preference_key_count_activity_progress" translatable="false">preference_key_count_activity_progress</string>
+    <string name="preference_key_show_big_activity_cards" translatable="false">preference_key_show_big_activity_cards</string>
+    <string name="preference_key_show_notifications" translatable="false">preference_key_show_notifications</string>
 
-    <string name="preference_key_remove_all_logs">prefence_key_remove_all_logs</string>
-    <string name="preference_key_backup">preference_key_backup</string>
-    <string name="preference_key_restore">preference_key_restore</string>
-    <string name="preference_key_export">preference_key_export</string>
-    <string name="preference_key_log_order_day_week_month">pref_key_log_order_day_week_month</string>
-    <string name="preference_key_log_order_asc_desc">pref_key_log_order_asc_desc</string>
-    <string name="preference_key_use_gps">prefence_key_use_gps</string>
-    <string name="preference_key_threshold_value">prefence_key_threshold_value</string>
-    <string name="preference_key_threshold_time">prefence_key_threshold_time</string>
-    <string name="preference_key_map_type">prefence_key_map_type</string>
-    <string name="preference_key_remove_under_1_min_logs">preference_key_remove_under_1_min_logs</string>
-    <string name="preference_key_gps_min_accuracy">preference_key_gps_min_accuracy</string>
-    <string name="preference_key_view_source_code">preference_key_view_source_code</string>
+    <string name="preference_key_remove_all_logs" translatable="false">prefence_key_remove_all_logs</string>
+    <string name="preference_key_backup" translatable="false">preference_key_backup</string>
+    <string name="preference_key_restore" translatable="false">preference_key_restore</string>
+    <string name="preference_key_export" translatable="false">preference_key_export</string>
+    <string name="preference_key_log_order_day_week_month" translatable="false">pref_key_log_order_day_week_month</string>
+    <string name="preference_key_log_order_asc_desc" translatable="false">pref_key_log_order_asc_desc</string>
+    <string name="preference_key_use_gps" translatable="false">prefence_key_use_gps</string>
+    <string name="preference_key_threshold_value" translatable="false">prefence_key_threshold_value</string>
+    <string name="preference_key_threshold_time" translatable="false">prefence_key_threshold_time</string>
+    <string name="preference_key_map_type" translatable="false">prefence_key_map_type</string>
+    <string name="preference_key_remove_under_1_min_logs" translatable="false">preference_key_remove_under_1_min_logs</string>
+    <string name="preference_key_gps_min_accuracy" translatable="false">preference_key_gps_min_accuracy</string>
+    <string name="preference_key_view_source_code" translatable="false">preference_key_view_source_code</string>
+    <string name="preference_key_use_detected_activity" translatable="false">preference_key_use_detected_activity</string>
 </resources>

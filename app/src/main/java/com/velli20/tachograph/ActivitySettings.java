@@ -36,40 +36,37 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class ActivitySettings extends AppCompatActivity {
-	  
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_settings);
-		
-		final Toolbar bar = (Toolbar)findViewById(R.id.settings_toolbar);
-		final View shadow = findViewById(R.id.toolbar_shadow);
-		
-		shadow.setVisibility(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? View.VISIBLE : View.INVISIBLE);
-		
-		setSupportActionBar(bar);
 
-		ActionBar ab = getSupportActionBar();
-		if(ab != null) {
-			getSupportActionBar().setDisplayShowHomeEnabled(true);
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-			getSupportActionBar().setTitle(getResources().getString(R.string.menu_settings));
-		}
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
 
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem menuItem) {
-		switch(menuItem.getItemId()){
-		case android.R.id.home:
-        	finish();
-			return true;
-		}
-		return super.onOptionsItemSelected(menuItem);
-	}
+        final Toolbar bar = (Toolbar) findViewById(R.id.settings_toolbar);
+        final View shadow = findViewById(R.id.toolbar_shadow);
 
-	
-	
-	
+        shadow.setVisibility(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? View.VISIBLE : View.INVISIBLE);
+
+        setSupportActionBar(bar);
+
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(getResources().getString(R.string.menu_settings));
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
 
 }

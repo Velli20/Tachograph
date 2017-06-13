@@ -30,15 +30,15 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF" >
+    android:background="@color/white">
 
     <ExpandableListView
         android:id="@+id/log_fragment_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:groupIndicator="@null">
-    </ExpandableListView>
+        android:groupIndicator="@null"
+        android:background="@null" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_new_event_fab"

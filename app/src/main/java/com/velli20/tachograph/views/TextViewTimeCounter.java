@@ -32,6 +32,8 @@ import android.os.Handler;
 import android.util.AttributeSet;
 
 public class TextViewTimeCounter extends RobotoLightTextView {
+    private boolean mCountDown;
+
     private long mStartTime = 0;
     private String mTitle;
     private Handler mHandler;
@@ -47,18 +49,37 @@ public class TextViewTimeCounter extends RobotoLightTextView {
 	public TextViewTimeCounter(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
-	
-	public void startTimer(long start){
+
+	public void countDown(long dateEnd) {
+        mCountDown = true;
+        if(mHandler != null && isTimerRunning()){
+            mHandler.removeCallbacks(r);
+            stopTimer();
+        }
+
+        mStartTime = dateEnd;
+
+        mHandler = new Handler();
+        mHandler.postDelayed(r, 1000);
+
+        long now = System.currentTimeMillis();
+
+        setTimerText(now, Math.max(now, dateEnd));
+    }
+
+
+	public void countUp(long dateStart){
+        mCountDown = false;
 		if(mHandler != null && isTimerRunning()){
 			mHandler.removeCallbacks(r);
 			stopTimer();
 		}
 		
-		mStartTime = start;
+		mStartTime = dateStart;
 
 		mHandler = new Handler();
 		mHandler.postDelayed(r, 1000);
-		setTimerText(start, System.currentTimeMillis());
+		setTimerText(dateStart, System.currentTimeMillis());
 	}
 	
 	public void stopTimer(){
@@ -81,7 +102,12 @@ public class TextViewTimeCounter extends RobotoLightTextView {
 	Runnable r = new Runnable() {
 	    @Override
 	    public void run(){
-			setTimerText(mStartTime, System.currentTimeMillis());
+            long now = System.currentTimeMillis();
+            if(mCountDown) {
+                setTimerText(now, Math.max(now, mStartTime));
+            } else {
+                setTimerText(mStartTime, now);
+            }
 			if(mHandler != null){
 				mHandler.postDelayed(r, 1000);
 			}
@@ -90,18 +116,25 @@ public class TextViewTimeCounter extends RobotoLightTextView {
 	
 
 	
-	public void setTimerText(long start, long end){
+	private void setTimerText(long start, long end){
 		long secs = (end - start);
 		long second = (secs / 1000) % 60;
 		long minute = (secs / (1000 * 60)) % 60;
 		long hour = (secs / (1000 * 60 * 60)) % 24;
 		long days = (secs / (1000 * 60 * 60 )) / 24;
-		String time = String.format(Locale.getDefault(), "%02d:%02d:%02d", hour, minute, second);
-		if(days > 0){
-			setText((mTitle != null) ? String.format(Locale.getDefault(), "%s %d d %s", mTitle, days, time) : (days + "d " + time));
-		} else {
-			setText((mTitle != null) ? String.format(Locale.getDefault(), "%s %s", mTitle, time) : time);
-		}
+        String time;
+
+        if(days > 0 || hour > 0) {
+            /* Concat seconds */
+            time = String.format(Locale.getDefault(), "%d h %d min", hour, minute);
+        } else if(minute == 0 && hour == 0 && days == 0){
+            time = String.format(Locale.getDefault(), "%d s", second);
+        } else {
+            time = String.format(Locale.getDefault(), "%d min %d s", minute, second);
+        }
+
+		setText((mTitle != null) ? String.format(Locale.getDefault(), mTitle, time) : time);
+
 	}
 
 }

@@ -65,6 +65,7 @@
     <string name="action_ok">Ok</string>
     <string name="action_cancel">Peruuta</string>
     <string name="action_today">Tänään</string>
+    <string name="action_enable_gps">Kytke GPS päälle</string>
 
     <string name="dialog_title_remove_all_logs">Poista kaikki lokitiedot</string>
     <string name="dialog_title_map_layer">Kartan taso</string>
@@ -81,6 +82,7 @@
     <string name="title_navigation_drawer_log">Loki</string>
     <string name="title_navigation_drawer_log_summary">Yhteenvedot</string>
 
+    <string name="title_gps_logger_status">GPS tallennin</string>
     <string name="title_add_new_log_event">Lisää</string>
     <string name="title_edit_log_event">Muokkaa</string>
     <string name="title_today">Tänään</string>
@@ -91,6 +93,18 @@
     <string name="title_duration">Matkan kesto</string>
     <string name="title_started_at">Alkoi: </string>
     <string name="title_ended_at">Päättyi: </string>
+
+    <string name="title_gps_logger_logging_in_progress" formatted="false">Kirjaus käynnissä. GPS-nopeus: %d km/h</string>
+    <string name="title_gps_logger_vehicle_stopped" formatted="false">Ajoneuvo pysähtynyt. GPS-nopeus: %d km/h</string>
+    <string name="title_gps_logger_gps_provider_turned_disabled">GPS pois päältä. Kytke GPS päälle laitteen asetuksista</string>
+    <string name="title_gps_logger_acquiring_gps_fix">Odotetaan GPS-signaalia</string>
+    <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">Heikko GPS-signaali. Tarkkuus: ± %d m</string>
+    <string name="title_detected_activity_driving">Havaittu aktiviteetti: Ajo</string>
+    <string name="title_detected_activity_walking">Havaittu aktiviteetti: Kävely</string>
+    <string name="title_detected_activity_still">Havaittu aktiviteetti: Paikallaan</string>
+    <string name="title_detected_activity_unknown">Havaittu aktiviteetti: Tuntematon</string>
+    <string name="title_detected_activity_not_enabled">Havaittu aktiviteetti: Ei saatavilla</string>
+    <string name="title_switching_to_other_work_in" formatted="false">Tila vaihdetaan muuhun työhön %s kuluttua</string>
 
     <string name="title_recording_event">Kirjaaminen käynnissä</string>
     <string name="title_info">Tiedot</string>
@@ -108,6 +122,13 @@
     <string name="title_event_daily_rest">Vuorokausilepo</string>
     <string name="title_event_weekly_rest">Viikkolepo</string>
     <string name="title_event_break">Tauko</string>
+
+    <string name="title_event_driving_format" formatted="false">Ajoaika %s</string>
+    <string name="title_event_poa_format" formatted="false">Varallaoloaika %s</string>
+    <string name="title_event_other_work_format" formatted="false">Muu työ %s</string>
+    <string name="title_event_daily_rest_format" formatted="false">Vuorokausilepo %s</string>
+    <string name="title_event_weekly_rest_format" formatted="false">Viikkolepo %s</string>
+    <string name="title_event_break_format" formatted="false">Tauko %s</string>
 
     <string name="exception_title_extended_drive_time">Jatkettuja päiviä jäljellä</string>
     <string name="exception_subtitle_extended_drive_time">Vuorokautinen ajoaika saa olla enintään 9 tuntia. Sitä voidaan viikon aikana kahdesti pidentää enintään 10 tuntiin.</string>
@@ -226,6 +247,7 @@
     <string name="preference_title_remove_less_1_min_entries">Poista alle 1 min kirjaukset</string>
     <string name="preference_title_gps_min_accuracy">Vähimmäistarkkuus</string>
     <string name="preference_title_view_source_code">Tarkastele sovelluksen lähdekoodia</string>
+    <string name="preference_title_use_detected_activity">Käytä havaittua aktiviteettia</string>
 
     <string name="preference_summary_export">Tallenna loki ulkoiseen muistiin ja avaa haluamassasi taulukko-ohjelmassa</string>
     <string name="preference_summary_use_gps">Vaihda automaattisesti ajoajasta muuhun työhön kun ajoneuvon nopeus laskee alle kynnysnopeuden</string>
@@ -233,6 +255,9 @@
     <string name="preference_summary_threshold_time">Aseta aika, jonka kuluttua ajoaika vaihdetaan muuhun työhön kun ajoneuvon GPS-nopeus putoaa alle kynnysnopeuden</string>
     <string name="preference_summary_remove_less_1_min_entries">Poista automaattisesti kirjaukset, joiden kesto on alle 1 minuuttia</string>
     <string name="preference_summary_gps_min_accuracy">GPS-vastaanottimesta tulevaa dataa ei oteta huomioon, jos sijaintisi tarkkuus on pienempi kuin valittu sijaintitarkkuus </string>
+    <string name="preference_summary_use_detected_activity">Paranna GPS-paikannuksen luotettavuutta lukemalla kiihtyvyysmittarin antureista tulevia tietoja sen määrittämiseksi, että laite on todella liikkuvassa ajoneuvossa vai käyttäjä kävelee tämän laitteen kanssa taskussa.
+    \n\nJos tämä asetus on päällä, niin sovellus saattaa olettaa että ajoneuvo on pysähtynyt, vaikka GPS-nopeus on yli kynnysarvon</string>
+
 
     <string name="preference_entry_sort_log_by_day">Päivän mukaan</string>
     <string name="preference_entry_sort_log_by_week">Viikon mukaan</string>

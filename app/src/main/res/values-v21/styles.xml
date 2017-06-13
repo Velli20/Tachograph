@@ -65,6 +65,7 @@
     
     <style name="RippleButtonBackground" >
         <item name="android:background">@drawable/overflow_ripple_background</item>
+        <item name="android:colorBackground">@null</item>
     </style>
 
 </resources>

@@ -86,11 +86,18 @@
     <com.velli20.tachograph.preferences.CustomPreferenceCategory android:title="@string/preference_category_gps_settings">
 
         <com.velli20.tachograph.preferences.CustomCheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/preference_key_use_gps"
             android:summary="@string/preference_summary_use_gps"
             android:title="@string/preference_title_use_gps" />
 
+        <!-- Under development
+        <com.velli20.tachograph.preferences.CustomCheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/preference_key_use_detected_activity"
+            android:summary="@string/preference_summary_use_detected_activity"
+            android:title="@string/preference_title_use_detected_activity" />
+        -->
         <com.velli20.tachograph.preferences.CustomCounterPreference
             android:defaultValue="14"
             android:key="@string/preference_key_threshold_value"

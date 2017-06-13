@@ -74,7 +74,7 @@ public class ActivityAddNewEvent extends AppCompatActivity implements OnClickLis
     public static final int DISPLAY_MODE_CREATE_NEW = 0;
     public static final int DISPLAY_MODE_EDIT_OR_DELETE = 1;
     public static final String INTENT_EXTRA_DISPLAY_MODE = "display mode";
-    public static final String INTENT_EXTRA_EVENT_ROW_ID = "event row id";
+    public static final String INTENT_EXTRA_EVENT_ROW_ID = "event row mId";
 	public static final String INTENT_EXTRA_START_TIME= "event start time";
     public static final String INTENT_EXTRA_END_TIME= "event end time";
     public static final String INTENT_EXTRA_EVENT_TYPE = "event type";
@@ -400,7 +400,7 @@ public class ActivityAddNewEvent extends AppCompatActivity implements OnClickLis
 		public EventSpinnerAdapter(Context context){
 			mInflater = LayoutInflater.from(context);
 			mColors = context.getResources().getIntArray(R.array.event_colors);
-			mEvents = context.getResources().getStringArray(R.array.event_explanations);
+			mEvents = context.getResources().getStringArray(R.array.events);
 		}
 		
 		@Override

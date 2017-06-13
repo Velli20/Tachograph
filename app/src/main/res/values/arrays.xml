@@ -29,6 +29,7 @@
 
 
     <string-array name="items_to_show_in_summary">
+        <item >@string/title_gps_logger_status</item>
         <item >@string/work_limit_daily_driving_time</item>
         <item >@string/work_limit_daily_rest</item>
         <item >@string/work_limit_fortnightly_driving_time</item>
@@ -37,13 +38,22 @@
         <item >@string/work_limit_wtd_weekly_working</item>
     </string-array>
 
-    <string-array name="event_explanations">
+    <string-array name="events">
         <item >@string/title_event_driving</item>
         <item >@string/title_event_daily_rest</item>
         <item >@string/title_event_weekly_rest</item>
         <item >@string/title_event_break</item>
         <item >@string/title_event_other_work</item>
         <item >@string/title_event_poa</item>
+    </string-array>
+
+    <string-array name="events_format">
+        <item >@string/title_event_driving_format</item>
+        <item >@string/title_event_daily_rest_format</item>
+        <item >@string/title_event_weekly_rest_format</item>
+        <item >@string/title_event_break_format</item>
+        <item >@string/title_event_other_work_format</item>
+        <item >@string/title_event_poa_format</item>
     </string-array>
 
     <string-array name="navigation_drawer_titles">

@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, DataBaseHandler.OnGetEventTaskCompleted {
     private static Regulations sRegulationsInstance;
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final String TAG = "Regulations";
 
     private WeekHolder mCurrentWeek;

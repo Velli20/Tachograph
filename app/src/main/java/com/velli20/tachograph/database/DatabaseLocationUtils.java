@@ -108,7 +108,7 @@ public class DatabaseLocationUtils {
         return earthRadius * c;
     }
 
-    /* Checks if there is logged locations with given Event id. */
+    /* Checks if there is logged locations with given Event mId. */
     public static boolean checkForLoggedRoute(SQLiteDatabase database, Event event){
         if(event == null || database == null || !database.isOpen()) {
             return false;

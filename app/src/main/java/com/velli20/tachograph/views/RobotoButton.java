@@ -31,14 +31,12 @@ import com.velli20.tachograph.R;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.widget.Button;
 
 
-public class RobotoButton extends Button {
-	private String[] mTypefacePaths = {"font/Roboto-Bold.ttf", "font/Roboto-Light.ttf", 
-    		"font/Roboto-Medium.ttf", "font/Roboto-Regular.ttf", "font/Roboto-Thin.ttf"};
-	
+public class RobotoButton extends AppCompatButton {
+
 	public RobotoButton(Context context) {
 		super(context);
 		init(context, null);
@@ -61,8 +59,7 @@ public class RobotoButton extends Button {
 			return;
 		}
 		if (attrs != null) {
-			TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
-					R.styleable.RobotoText, 0, 0);
+			TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RobotoText, 0, 0);
 			try {
 				typeface = a.getInt(com.velli20.tachograph.R.styleable.RobotoText_style, 3);
 			} finally {
@@ -70,8 +67,7 @@ public class RobotoButton extends Button {
 			}
 		}
 
-		Typeface roboto = Typeface.createFromAsset(context.getAssets(),
-				mTypefacePaths[typeface]);
+		Typeface roboto = RobotoLightTextView.getTypeface(getResources(), typeface);
 		setTypeface(roboto);
 	}
 

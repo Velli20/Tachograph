@@ -42,13 +42,13 @@ public class EventNotificationHandler {
 
     /* Show currently ongoing recording event on status bar */
     public static void showRecordingEventNotification(Context context, int currentEventType) {
-        if(context == null) {
+        if (context == null) {
             return;
         }
         final Resources res = context.getResources();
 
         final int[] colors = res.getIntArray(R.array.event_colors);
-        final String[] events = res.getStringArray(R.array.event_explanations);
+        final String[] events = res.getStringArray(R.array.events);
 
         final TypedArray icons = res.obtainTypedArray(R.array.event_icons);
 
@@ -58,12 +58,12 @@ public class EventNotificationHandler {
 
         /* Intent for the notification button to stop recording current event */
         final Intent cancel = new Intent(context, StartEventService.class);
-        cancel.setAction(Long.toString(System.currentTimeMillis()+1));
+        cancel.setAction(Long.toString(System.currentTimeMillis() + 1));
         cancel.putExtra(StartEventService.INTENT_EXTRA_EVENT_TO_START, currentEventType);
 
         /* Intent to switch current event to start new event */
         final Intent nextEvent = new Intent(context, StartEventService.class);
-        nextEvent.setAction(Long.toString(System.currentTimeMillis()+2));
+        nextEvent.setAction(Long.toString(System.currentTimeMillis() + 2));
 
         final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(icons.getResourceId(currentEventType, R.drawable.ic_truck_white))
@@ -78,21 +78,20 @@ public class EventNotificationHandler {
                 PendingIntent.getService(context, -1, cancel, PendingIntent.FLAG_ONE_SHOT));
 
 
-            switch (currentEventType) {
-                case Event.EVENT_TYPE_NORMAL_BREAK:
-                case Event.EVENT_TYPE_DAILY_REST:
-                case Event.EVENT_TYPE_WEEKLY_REST:
-                case Event.EVENT_TYPE_OTHER_WORK:
-                case Event.EVENT_TYPE_POA:
-                    nextEvent.putExtra(StartEventService.INTENT_EXTRA_EVENT_TO_START, Event.EVENT_TYPE_DRIVING);
-                    notificationBuilder.addAction(R.drawable.ic_action_driving, res.getString(R.string.notification_button_start_drive_time), PendingIntent.getService(context, -1, nextEvent, android.app.PendingIntent.FLAG_ONE_SHOT));
-                    break;
-                case Event.EVENT_TYPE_DRIVING:
-                    nextEvent.putExtra(StartEventService.INTENT_EXTRA_EVENT_TO_START, Event.EVENT_TYPE_NORMAL_BREAK);
-                    notificationBuilder.addAction(R.drawable.ic_action_rest, res.getString(R.string.notification_button_start_break), PendingIntent.getService(context, -1, nextEvent, android.app.PendingIntent.FLAG_ONE_SHOT));
-                    break;
-            }
-
+        switch (currentEventType) {
+            case Event.EVENT_TYPE_NORMAL_BREAK:
+            case Event.EVENT_TYPE_DAILY_REST:
+            case Event.EVENT_TYPE_WEEKLY_REST:
+            case Event.EVENT_TYPE_OTHER_WORK:
+            case Event.EVENT_TYPE_POA:
+                nextEvent.putExtra(StartEventService.INTENT_EXTRA_EVENT_TO_START, Event.EVENT_TYPE_DRIVING);
+                notificationBuilder.addAction(R.drawable.ic_action_driving, res.getString(R.string.notification_button_start_drive_time), PendingIntent.getService(context, -1, nextEvent, android.app.PendingIntent.FLAG_ONE_SHOT));
+                break;
+            case Event.EVENT_TYPE_DRIVING:
+                nextEvent.putExtra(StartEventService.INTENT_EXTRA_EVENT_TO_START, Event.EVENT_TYPE_NORMAL_BREAK);
+                notificationBuilder.addAction(R.drawable.ic_action_rest_light, res.getString(R.string.notification_button_start_break), PendingIntent.getService(context, -1, nextEvent, android.app.PendingIntent.FLAG_ONE_SHOT));
+                break;
+        }
 
 
         final Notification notification = notificationBuilder.build();
@@ -105,7 +104,7 @@ public class EventNotificationHandler {
         icons.recycle();
     }
 
-    public static void hideNotification(Context c){
+    public static void hideNotification(Context c) {
         NotificationManager notificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NOTIFICATION_ID_EVENT_END_START);
     }

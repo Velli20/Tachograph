@@ -29,6 +29,7 @@ package com.velli20.tachograph.database;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.velli20.tachograph.DateUtils;
 import com.velli20.tachograph.Event;
@@ -38,6 +39,9 @@ import java.util.Date;
 
 
 public class AddEventTask extends AsyncTask<Void, Integer, Integer> {
+    private static final String TAG = "AddEventTask ";
+    private static final boolean DEBUG = false;
+
     private boolean mUpdate;
 
     private Event mEvent;
@@ -90,23 +94,20 @@ public class AddEventTask extends AsyncTask<Void, Integer, Integer> {
             } else {
                 result = (int) mDb.insert(DataBaseHandlerConstants.TABLE_EVENTS, null, values);
             }
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            if(DEBUG) {
+                Log.e(TAG, TAG + e.getMessage());
+            }
+        } finally {
+            mDb.setTransactionSuccessful();
+        }
 
-        mDb.setTransactionSuccessful();
         mDb.endTransaction();
 
 
         return result;
     }
 
-    public static String escapeSQLiteString(String toEscape) {
-        if(toEscape == null) {
-            return null;
-        } else if (toEscape.contains("'")) {
-            return toEscape.replaceAll("'", "''");
-        }
-        return toEscape;
-    }
 
     @Override
     protected void onPostExecute(Integer result) {

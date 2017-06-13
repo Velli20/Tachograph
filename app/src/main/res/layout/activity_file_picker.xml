@@ -71,8 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="@dimen/left_keyline"
-        android:layout_marginStart="@dimen/left_keyline"
+        android:layout_marginLeft="@dimen/left_key_line"
+        android:layout_marginStart="@dimen/left_key_line"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:minHeight="48dp">

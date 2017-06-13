@@ -53,7 +53,7 @@ import android.widget.Spinner;
 
 public class ActivityMain extends AppCompatActivity implements OnItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener, DataBaseHandler.OnDatabaseEditedListener {
     private static final String BUNDLE_KEY_SELECTED_NAV_ITEM = "selected nav item";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private Toolbar mToolbar;
     private int mSelectedNavItem = -1;
@@ -114,6 +114,11 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
         super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
         DataBaseHandler.getInstance().registerOnDatabaseEditedListener(this);
+
+        Spinner navigationSpinner = (Spinner) findViewById(R.id.navigation_spinner);
+        if(navigationSpinner != null) {
+            navigationSpinner.setOnItemSelectedListener(null);
+        }
     }
 
     /* Starts GpsBackgroundService if required. If not required and service is running, then shut service down
@@ -246,7 +251,7 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        /* User has toggled app notification on/off. In order to show notification we
+        /* User has toggled app notification on/off. In order to mShow notification we
          * have to start background service
          */
         startOrStopBackgroundServiceIfRequired();

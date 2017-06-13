@@ -30,12 +30,17 @@ package com.velli20.tachograph.database;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.velli20.tachograph.location.CustomLocation;
+
 
 import static com.velli20.tachograph.database.DataBaseHandlerConstants.TABLE_LOCATIONS;
 
 public class AddLocationTask extends AsyncTask<Void, Void, Integer> {
+    private static final String TAG = "AddLocationTask ";
+    private static final boolean DEBUG = false;
+
     private CustomLocation mLocation;
     private SQLiteDatabase mDb;
     private OnDatabaseActionCompletedListener mListener;
@@ -62,13 +67,23 @@ public class AddLocationTask extends AsyncTask<Void, Void, Integer> {
         values.put(DataBaseHandlerConstants.KEY_LOCATION_SPEED, mLocation.getSpeed());
         values.put(DataBaseHandlerConstants.KEY_LOCATION_EVENT_ID, mLocation.getEventId());
 
-        mDb.beginTransaction();
+        int result = -1;
 
-        int result = (int) mDb.insert(TABLE_LOCATIONS, null, values);
+        if(mDb.isOpen()) {
+            mDb.beginTransaction();
 
+            try {
+                result = (int) mDb.insert(TABLE_LOCATIONS, null, values);
+            } catch(IllegalStateException e) {
+                if(DEBUG) {
+                    Log.e(TAG, TAG + e.getMessage());
+                }
+            } finally {
+                mDb.setTransactionSuccessful();
+            }
 
-        mDb.setTransactionSuccessful();
-        mDb.endTransaction();
+            mDb.endTransaction();
+        }
 
         return result;
     }

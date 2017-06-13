@@ -46,9 +46,6 @@ public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 	
 	private String mQuery;
 
-	private int mMapLineStrokeWidth;
-	private int mMapLineColor;
-	
 	public interface OnGetLoggedRouteListener {
 		void onGetLoggedRoute(LoggedRoute info);
 	}
@@ -63,13 +60,7 @@ public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 				.orderByKey(DataBaseHandlerConstants.KEY_LOCATION_TIME, true)
 				.buildQuery();
 	}
-	
 
-	
-	public void setMapParams(int lineStrokeWidth, int lineColor) {
-		mMapLineStrokeWidth = lineStrokeWidth;
-		mMapLineColor = lineColor;
-	}
 	
 	public void setOnGetLocationInfoListener(OnGetLoggedRouteListener l) {
 		mListener = l;
@@ -83,7 +74,7 @@ public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 
         mDb.beginTransaction();
 
-		final PolylineOptions mapPolyline = getNewLine();
+		final PolylineOptions mapPolyline = new PolylineOptions();
 		final Line speedGraphLine = new Line();
 		final LoggedRoute route = new LoggedRoute();
 	    final Cursor cursor = mDb.rawQuery(mQuery, null);
@@ -130,8 +121,9 @@ public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 	    
 	    final int duration = DateUtils.convertDatesToMinutes(startTime, endTime);
 		final float averageSpeed = (totalDistance == 0 || duration == 0) ? 0: ((float)(totalDistance / (duration * 60)) * 3.6f);
-		
-		
+
+		mapPolyline.visible(true);
+
 		route.setDistance((float)totalDistance / 1000);
 		route.setAverageSpeed(averageSpeed);
 		route.setDuration(duration);
@@ -155,13 +147,6 @@ public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 		mDb = null;
 	}
 	
-	private PolylineOptions getNewLine(){
-		PolylineOptions opt = new PolylineOptions();
-		opt.width(mMapLineStrokeWidth);
-		opt.color(mMapLineColor);
-		opt.visible(true);
-		
-		return opt;
-	}
+
 
 }

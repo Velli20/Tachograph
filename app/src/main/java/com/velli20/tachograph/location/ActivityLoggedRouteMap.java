@@ -58,7 +58,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class ActivityLoggedRouteMap extends AppCompatActivity implements OnMapReadyCallback, OnGetLocationsListener, OnMapClickListener {
-	public static final String EXTRAS_LOCATION_EVENT_ID= "event id";
+	public static final String EXTRAS_LOCATION_EVENT_ID= "event mId";
 	public static final String INTENT_EXTRA_START_DAY = "start day";
 	public static final String INTENT_EXTRA_END_DAY = "end day";
 	public static final String EXTRAS_TITLE = "title";

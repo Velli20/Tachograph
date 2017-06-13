@@ -65,7 +65,6 @@ public class GetLocationsTask extends AsyncTask<Void, Void, ArrayList<CustomLoca
 			return null;
 		}
 
-		mDb.beginTransaction();
 		final ArrayList<CustomLocation> list = new ArrayList<>();
 	    final Cursor cursor = mDb.rawQuery(mQuery, null);
 	    
@@ -85,9 +84,6 @@ public class GetLocationsTask extends AsyncTask<Void, Void, ArrayList<CustomLoca
 	    if(cursor != null){
 	    	cursor.close();
 	    }
-
-		mDb.setTransactionSuccessful();
-		mDb.endTransaction();
 	    
 		return list;
 	}

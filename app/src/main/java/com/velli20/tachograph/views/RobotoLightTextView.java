@@ -33,11 +33,11 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.LruCache;
-import android.widget.TextView;
 
-public class RobotoLightTextView extends TextView {
+public class RobotoLightTextView extends AppCompatTextView {
     private static LruCache<String, Typeface> sTypefaceCache = new LruCache<>(7);
     
     private static String[] mTypefacePaths = {"font/Roboto-Bold.ttf", "font/Roboto-Light.ttf", "font/Roboto-LightItalic.ttf", 

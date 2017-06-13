@@ -28,11 +28,11 @@
 <resources>
     <integer-array name="event_icons">
         <item >@drawable/ic_action_driving</item>
-        <item >@drawable/ic_action_rest</item>
-        <item >@drawable/ic_action_rest</item>
-        <item >@drawable/ic_action_rest</item>
-        <item >@drawable/ic_action_other</item>
-        <item >@drawable/ic_action_poa</item>
+        <item >@drawable/ic_action_rest_light</item>
+        <item >@drawable/ic_action_rest_light</item>
+        <item >@drawable/ic_action_rest_light</item>
+        <item >@drawable/ic_action_other_work_light</item>
+        <item >@drawable/ic_action_poa_light</item>
     </integer-array>
     
 </resources>

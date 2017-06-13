@@ -68,91 +68,91 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
     public static final int PICK_BACKUP_FILE_REQUEST_CODE = 47;
     public static final int BACKUP_REQUEST_CODE = 49;
 
-	public static final String TAG = "SettingsFragment ";
+    public static final String TAG = "SettingsFragment ";
 
     private SharedPreferences mPrefs;
 
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		addPreferencesFromResource(R.xml.preferences);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
 
-		final Resources res = getActivity().getResources();
+        final Resources res = getActivity().getResources();
 
-		final Preference mRemoveLogsPref = findPreference(res.getString(R.string.preference_key_remove_all_logs));
-		final Preference mBackupPref = findPreference(res.getString(R.string.preference_key_backup));
-		final Preference mRestorePref = findPreference(res.getString(R.string.preference_key_restore));
-		final Preference mExportPref = findPreference(res.getString(R.string.preference_key_export));
-		final Preference locationPref = findPreference(res.getString(R.string.preference_key_use_gps));
+        final Preference mRemoveLogsPref = findPreference(res.getString(R.string.preference_key_remove_all_logs));
+        final Preference mBackupPref = findPreference(res.getString(R.string.preference_key_backup));
+        final Preference mRestorePref = findPreference(res.getString(R.string.preference_key_restore));
+        final Preference mExportPref = findPreference(res.getString(R.string.preference_key_export));
+        final Preference locationPref = findPreference(res.getString(R.string.preference_key_use_gps));
         final Preference viewSourceCode = findPreference(getString(R.string.preference_key_view_source_code));
 
-		mRemoveLogsPref.setOnPreferenceClickListener(this);
-		mBackupPref.setOnPreferenceClickListener(this);
-		mRestorePref.setOnPreferenceClickListener(this);
-		mExportPref.setOnPreferenceClickListener(this);
+        mRemoveLogsPref.setOnPreferenceClickListener(this);
+        mBackupPref.setOnPreferenceClickListener(this);
+        mRestorePref.setOnPreferenceClickListener(this);
+        mExportPref.setOnPreferenceClickListener(this);
         viewSourceCode.setOnPreferenceClickListener(this);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-			locationPref.setOnPreferenceChangeListener(this);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            locationPref.setOnPreferenceChangeListener(this);
             int permission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
 
-            if(permission != PackageManager.PERMISSION_GRANTED && mPrefs.getBoolean(getString(R.string.preference_key_use_gps), false)) {
+            if (permission != PackageManager.PERMISSION_GRANTED && mPrefs.getBoolean(getString(R.string.preference_key_use_gps), false)) {
                 mPrefs.edit().putBoolean(getString(R.string.preference_key_use_gps), false).apply();
-                ((CustomCheckBoxPreference)findPreference(getString(R.string.preference_key_use_gps))).setChecked(false);
+                ((CustomCheckBoxPreference) findPreference(getString(R.string.preference_key_use_gps))).setChecked(false);
             }
 
-		}
+        }
 
 
-	}
+    }
 
 
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
         String key = preference.getKey();
 
-        if(key.equals(getString(R.string.preference_key_remove_all_logs))) {
+        if (key.equals(getString(R.string.preference_key_remove_all_logs))) {
             onRemoveAllLogs();
-        } else if(key.equals(getString(R.string.preference_key_backup))) {
+        } else if (key.equals(getString(R.string.preference_key_backup))) {
             Intent backup = new Intent(getActivity(), ActivityFilePicker.class);
             backup.putExtra(ActivityFilePicker.INTENT_EXTRA_FILE_EXTENSION, ".db");
             backup.putExtra(ActivityFilePicker.INTENT_EXTRA_MODE, ActivityFilePicker.MODE_CREATE_FILE);
             backup.putExtra(ActivityFilePicker.INTENT_EXTRA_FILENAME, getString(R.string.app_name) + "_" + DateUtils.getFileDateName());
 
             startActivityForResult(backup, BACKUP_REQUEST_CODE);
-        } else if(key.equals(getString(R.string.preference_key_restore))) {
+        } else if (key.equals(getString(R.string.preference_key_restore))) {
             Intent restore = new Intent(getActivity(), ActivityFilePicker.class);
             restore.putExtra(ActivityFilePicker.INTENT_EXTRA_FILE_EXTENSION, ".db");
             restore.putExtra(ActivityFilePicker.INTENT_EXTRA_MODE, ActivityFilePicker.MODE_PICK_FILE);
 
             startActivityForResult(restore, PICK_BACKUP_FILE_REQUEST_CODE);
-        } else if(key.equals(getString(R.string.preference_key_export))) {
+        } else if (key.equals(getString(R.string.preference_key_export))) {
             Intent i = new Intent(getActivity(), ActivityFilePicker.class);
             i.putExtra(ActivityFilePicker.INTENT_EXTRA_FILE_EXTENSION, ".xls");
             i.putExtra(ActivityFilePicker.INTENT_EXTRA_MODE, ActivityFilePicker.MODE_CREATE_FILE);
             i.putExtra(ActivityFilePicker.INTENT_EXTRA_FILENAME, getString(R.string.app_name) + "_" + DateUtils.getFileDateName());
 
             startActivityForResult(i, EXPORT_REQUEST_CODE);
-        } else if(key.equals(getString(R.string.preference_key_view_source_code))) {
+        } else if (key.equals(getString(R.string.preference_key_view_source_code))) {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse("https://github.com/Velli20/Tachograph"));
             startActivity(i);
         }
 
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object o) {
-		final String key = preference.getKey();
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object o) {
+        final String key = preference.getKey();
 
 
-		if(key.equals(getString(R.string.preference_key_use_gps))) {
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (key.equals(getString(R.string.preference_key_use_gps))) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
                 int permission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
 
                 if (permission != PackageManager.PERMISSION_GRANTED) {
@@ -161,61 +161,61 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
                     return false;
                 }
             }
-		}
-		return true;
-	}
+        }
+        return true;
+    }
 
 
-	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		switch (requestCode) {
-			case PERMISSION_REQUEST_FINE_LOCATION:
-				boolean permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_FINE_LOCATION:
+                boolean permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                 mPrefs.edit().putBoolean(getString(R.string.preference_key_use_gps), permissionGranted).apply();
-                ((CustomCheckBoxPreference)findPreference(getString(R.string.preference_key_use_gps))).setChecked(permissionGranted);
+                ((CustomCheckBoxPreference) findPreference(getString(R.string.preference_key_use_gps))).setChecked(permissionGranted);
 
-				break;
-			default:
-				super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		}
-	}
-	
-	@SuppressLint("NewApi")
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         String uri = null;
-        if(data != null) {
+        if (data != null) {
             uri = data.getStringExtra(ActivityFilePicker.INTENT_EXTRA_FILEPATH);
         }
-		if(requestCode == EXPORT_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-			if(uri != null){
-				File file = new File(uri);
-				
-				ExportEvents exportevents = new ExportEvents();
-				exportevents.setFile(file);
-			    exportevents.write(getActivity().getApplicationContext());
-				exportevents.setOnFileSavedListener(new OnFileSavedListener() {
-					@Override
-					public void onFileSaved(File file) {
-						if(file.exists()){
-							createFileSavedNotification(getActivity(), file);
-						}
-					}
-				});
-			}
-		} else if(requestCode == PICK_BACKUP_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if(uri != null) {
+        if (requestCode == EXPORT_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (uri != null) {
+                File file = new File(uri);
+
+                ExportEvents exportevents = new ExportEvents();
+                exportevents.setFile(file);
+                exportevents.write(getActivity().getApplicationContext());
+                exportevents.setOnFileSavedListener(new OnFileSavedListener() {
+                    @Override
+                    public void onFileSaved(File file) {
+                        if (file.exists()) {
+                            createFileSavedNotification(getActivity(), file);
+                        }
+                    }
+                });
+            }
+        } else if (requestCode == PICK_BACKUP_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (uri != null) {
                 restore(new File(uri));
             }
-        } else if(requestCode == BACKUP_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if(uri != null) {
+        } else if (requestCode == BACKUP_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (uri != null) {
                 backup(new File(uri));
             }
         }
-	}
+    }
 
 
     public void onRemoveAllLogs() {
@@ -238,64 +238,64 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
 
     }
 
-	
-	public void backup(File file){
-	    DataBaseHandler db = DataBaseHandler.getInstance();
 
-		try {
-	        File sd = Environment.getExternalStorageDirectory();
+    public void backup(File file) {
+        DataBaseHandler db = DataBaseHandler.getInstance();
 
-	        if (sd.canWrite()) {
+        try {
+            File sd = Environment.getExternalStorageDirectory();
 
-	            final File currentDB = getActivity().getDatabasePath(db.getDatabaseName());
+            if (sd.canWrite()) {
+
+                final File currentDB = getActivity().getDatabasePath(db.getDatabaseName());
 
 
-	            if (currentDB.exists()) {
-	                FileChannel src = new FileInputStream(currentDB).getChannel();
-	                FileChannel dst = new FileOutputStream(file).getChannel();
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(file).getChannel();
                     dst.transferFrom(src, 0, src.size());
                     src.close();
                     dst.close();
                     Toast.makeText(getActivity(), getActivity().getText(R.string.notification_log_backup_complete), Toast.LENGTH_SHORT).show();
-	            }
-	        }
-	    } catch (Exception ignored) { }
-	}
-	
-
-	public void restore(File fileToRestore){
-		
-		final DataBaseHandler db = DataBaseHandler.getInstance();
-		try {
-			final File sd = Environment.getExternalStorageDirectory();
-
-		    if (sd.canWrite()) {
-				final File currentDB = getActivity().getDatabasePath(db.getDatabaseName());
-
-		        if (currentDB.exists()) {
-		            FileChannel src = new FileInputStream(fileToRestore).getChannel();
-		            FileChannel dst = new FileOutputStream(currentDB).getChannel();
-		            dst.transferFrom(src, 0, src.size());
-		            src.close();
-		            dst.close();
-		            Toast.makeText(getActivity(), getString(R.string.notification_log_restored), Toast.LENGTH_SHORT).show();
-		            DataBaseHandler.getInstance().notifyCallbacks(0, -1);
-		        }
-		    }
-		} catch (Exception ignored) { }
-	}
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
 
 
+    public void restore(File fileToRestore) {
 
-	
-	public static void createFileSavedNotification(Context c, File file){
-        if(file == null || c == null || !file.exists()) {
+        final DataBaseHandler db = DataBaseHandler.getInstance();
+        try {
+            final File sd = Environment.getExternalStorageDirectory();
+
+            if (sd.canWrite()) {
+                final File currentDB = getActivity().getDatabasePath(db.getDatabaseName());
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(fileToRestore).getChannel();
+                    FileChannel dst = new FileOutputStream(currentDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                    Toast.makeText(getActivity(), getString(R.string.notification_log_restored), Toast.LENGTH_SHORT).show();
+                    DataBaseHandler.getInstance().notifyCallbacks(0, -1);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+
+    public static void createFileSavedNotification(Context c, File file) {
+        if (file == null || c == null || !file.exists()) {
             return;
         }
-		Intent intent = new Intent();
-		int notificationId = 120;
+        Intent intent = new Intent();
+        int notificationId = 120;
 
-		intent.setAction(Intent.ACTION_VIEW);
+        intent.setAction(Intent.ACTION_VIEW);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -305,18 +305,18 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.ms-excel");
         }
 
-		
-		PendingIntent resultPendingIntent = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		
-		NotificationCompat.Builder notification = new NotificationCompat.Builder(c)
-				.setContentTitle(c.getText(R.string.notification_file_saved))
-				.setSmallIcon(R.drawable.ic_action_share)
-				.setColor(c.getResources().getColor(R.color.color_primary))
-				.setTicker(c.getText(R.string.notification_file_saved))
-				.setContentIntent(resultPendingIntent);
 
-		((NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE)).notify(notificationId, notification.build());
-	}
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(c)
+                .setContentTitle(c.getText(R.string.notification_file_saved))
+                .setSmallIcon(R.drawable.ic_action_share)
+                .setColor(c.getResources().getColor(R.color.color_primary))
+                .setTicker(c.getText(R.string.notification_file_saved))
+                .setContentIntent(resultPendingIntent);
+
+        ((NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE)).notify(notificationId, notification.build());
+    }
 
 
 }

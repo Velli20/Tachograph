@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:src="@drawable/ic_dots_horizontal_grey"
+            android:src="@drawable/ic_action_dots_horizontal_grey"
             android:layout_gravity="center_vertical|right"/>
 
         <com.velli20.tachograph.views.RobotoLightTextView

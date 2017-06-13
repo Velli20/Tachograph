@@ -66,7 +66,7 @@ public class ListAdapterFragmentLog extends BaseExpandableListAdapter {
 		mInflater = LayoutInflater.from(context);
 		mItemsList = list;
 		mColors = res.getIntArray(R.array.event_colors);
-		mExplanations = res.getStringArray(R.array.event_explanations);
+		mExplanations = res.getStringArray(R.array.events);
 		mStart = res.getString(R.string.title_started_at);
 		mEnd = res.getString(R.string.title_ended_at);
 		mRec = res.getString(R.string.title_recording_event).toLowerCase();

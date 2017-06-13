@@ -35,18 +35,20 @@
     <dimen name="card_padding">8dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="toolbar_content_inset_route_info">56dp</dimen>
-    <dimen name="toolbar_title_conatiner_height">240dp</dimen>
+    <dimen name="toolbar_title_container_height">240dp</dimen>
     <dimen name="toolbar_title_fab_margin">90dp</dimen>
     <dimen name="list_header_map_height">240dp</dimen>
     
     <dimen name="list_item_work_limit_min_required_width">248dp</dimen>
-    
     <dimen name="title_text_size">16sp</dimen>
 
+    <dimen name="list_item_log_summary_week_elevation_top">2dp</dimen>
+    <dimen name="list_item_log_summary_week_elevation_bottom">5dp</dimen>
+    <dimen name="list_item_log_summary_week_divider_height">3dp</dimen> <!-- 8 dp minus elevation_top -->
 
-    <dimen name="left_keyline">16dp</dimen>
-    <dimen name="left_keyline_with_content">72dp</dimen>
-    <dimen name="right_keyline">16dp</dimen>
+    <dimen name="left_key_line">16dp</dimen>
+    <dimen name="left_key_line_with_content">72dp</dimen>
+    <dimen name="right_key_line">16dp</dimen>
 
     <dimen name="date_picker_day_number_size">16sp</dimen>
     <dimen name="date_picker_day_number_select_circle_radius">16dp</dimen>
@@ -57,5 +59,4 @@
 
     <dimen name="date_picker_view_animator_height">270dp</dimen>
 
-    <integer name="preference_fragment_scrollbarStyle">0x02000000</integer> <!-- outsideOverlay -->
 </resources>
