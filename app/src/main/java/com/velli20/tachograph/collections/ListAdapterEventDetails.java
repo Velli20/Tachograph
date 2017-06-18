@@ -40,6 +40,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.velli20.materialunixgraph.LineGraph;
 import com.velli20.tachograph.App;
 import com.velli20.tachograph.DateUtils;
 import com.velli20.tachograph.Event;
@@ -51,7 +52,6 @@ import com.velli20.tachograph.views.RobotoLightTextView;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import graph.velli.com.librarytimebasedgraph.LineGraph;
 
 
 public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

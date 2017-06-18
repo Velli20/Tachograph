@@ -67,7 +67,7 @@ android {
         compile('com.afollestad.material-dialogs:core:0.9.3.0@aar') {
             transitive = true
         }
-        compile 'com.github.Velli20:LibraryTimeBasedGraph:v1.4.4'
+        compile 'com.github.Velli20:MaterialUnixGraphLibrary:v1.5'
     }
 
     buildTypes {

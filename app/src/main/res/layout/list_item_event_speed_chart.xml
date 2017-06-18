@@ -27,6 +27,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:graph="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -57,12 +58,22 @@
         android:maxLines="1"
         android:text="@string/title_speed"/>
 
-    <graph.velli.com.librarytimebasedgraph.LineGraph
+    <com.velli20.materialunixgraph.LineGraph
         android:id="@+id/list_item_event_speed_chart"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="16dp"
-        android:layout_below="@+id/list_item_event_speed_chart_title"/>
+        android:layout_below="@+id/list_item_event_speed_chart_title"
+        graph:graphFrameColor="#e0e0e0"
+        graph:verticalAxisLabelColor="#9e9e9e"
+        graph:horizontalAxisLabelColor="#9e9e9e"
+        graph:graphFrameStrokeWidth="1dp"
+        graph:verticalAxisLabelTextSize="12sp"
+        graph:horizontalAxisLabelTextSize="14sp"
+        graph:maxVerticalAxisValue="140"
+        graph:minVerticalAxisValue="0"
+        graph:maxVerticalAxisCount="4"
+        graph:verticalAxisValueLabel=" km/h" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_speed_chart_average_speed"

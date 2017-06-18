@@ -27,8 +27,8 @@
 package com.velli20.tachograph.location;
 
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.velli20.materialunixgraph.Line;
 
-import graph.velli.com.librarytimebasedgraph.Line;
 
 public class LoggedRoute {
 	private PolylineOptions mMapPolyLine;

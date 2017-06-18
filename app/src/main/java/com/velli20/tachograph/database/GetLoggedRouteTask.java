@@ -34,11 +34,11 @@ import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.velli20.materialunixgraph.Line;
+import com.velli20.materialunixgraph.LinePoint;
 import com.velli20.tachograph.DateUtils;
 import com.velli20.tachograph.location.LoggedRoute;
 
-import graph.velli.com.librarytimebasedgraph.Line;
-import graph.velli.com.librarytimebasedgraph.LinePoint;
 
 public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
 	private SQLiteDatabase mDb;

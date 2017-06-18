@@ -45,7 +45,7 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
     private static final boolean DEBUG = false;
 
     private SQLiteDatabase mDb;
-    private boolean mCalculateDrivenDistance= false;
+    private boolean mCalculateDrivenDistance = false;
     private boolean mCalculateAllEvents = false;
     private boolean mIncludeRecordingEvents = true;
     private boolean mIncludeEventIds = false;
@@ -97,9 +97,9 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
                 .fromTable(DataBaseHandlerConstants.TABLE_EVENTS)
                 .selectAllColumns()
                 .orderByKey(DataBaseHandlerConstants.KEY_EVENT_START_DATE, true);
-        if(mCalculateAllEvents) {
+        if (mCalculateAllEvents) {
             return builder.buildQuery();
-        } else if(mRowIdsWeek != null) {
+        } else if (mRowIdsWeek != null) {
             return builder.whereEventsWithRowIds(mRowIdsWeek).buildQuery();
         } else {
             long timeNow = System.currentTimeMillis();
@@ -116,7 +116,7 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
      */
     @Override
     protected ArrayList<WeekHolder> doInBackground(Void... params) {
-        if(mDb == null || !mDb.isOpen()) {
+        if (mDb == null || !mDb.isOpen()) {
             return null;
         }
 
@@ -133,45 +133,45 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
         String query = getDatabaseQuery();
         Cursor eventCursor = mDb.rawQuery(query, null);
 
-        if(eventCursor == null || !eventCursor.moveToFirst()) {
+        if (eventCursor == null || !eventCursor.moveToFirst()) {
             return null;
         }
 
         do {
             event = DatabaseEventUtils.getEvent(eventCursor);
-            if(event == null) {
+            if (event == null) {
                 continue;
             }
 
-            if(mCalculateDrivenDistance && DatabaseLocationUtils.checkForLoggedRoute(mDb, event)) {
+            if (mCalculateDrivenDistance && DatabaseLocationUtils.checkForLoggedRoute(mDb, event)) {
                 event.setDrivenDistance(DatabaseLocationUtils.getLoggedRouteDistance(mDb, event.getRowId()) / 1000);
             }
 
-            if(isRequiredToStartNewDay(currentDay, event)) {
+            if (isRequiredToStartNewDay(currentDay, event)) {
                 /* End current day */
-                if(currentDay != null && previousEvent != null && currentWeek != null) {
+                if (currentDay != null && previousEvent != null && currentWeek != null) {
                     currentDay.setEndDate(previousEvent.getEndDateInMillis());
-                    if(mIncludeEventIds && eventIdsDay != null) {
+                    if (mIncludeEventIds && eventIdsDay != null) {
                         currentDay.setEventIds(eventIdsDay);
                     }
                     endWorkingDay(currentWeek, currentDay);
                 }
                 currentDay = startNewDay(event);
-                if(mIncludeEventIds) {
+                if (mIncludeEventIds) {
                     eventIdsDay = new ArrayList<>();
                 }
             }
-            if(isRequiredToStartNewWeek(currentWeek, event)) {
+            if (isRequiredToStartNewWeek(currentWeek, event)) {
                 /* End current week */
-                if(currentWeek != null && previousEvent != null ) {
+                if (currentWeek != null && previousEvent != null) {
                     currentWeek.setEndDate(previousEvent.getEndDateInMillis());
-                    if(mIncludeEventIds && eventIdsWeek != null) {
+                    if (mIncludeEventIds && eventIdsWeek != null) {
                         currentWeek.setEventIds(eventIdsWeek);
                     }
                     weeks.add(currentWeek);
                 }
                 currentWeek = startNewWeek(event);
-                if(mIncludeEventIds) {
+                if (mIncludeEventIds) {
                     eventIdsWeek = new ArrayList<>();
                 }
             }
@@ -200,7 +200,7 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
                     currentDay.setDailyWorkingTime(currentDay.getDailyWorkingTime() + eventDurationInMinutes);
                     currentDay.addNewBreakTime(getBreakTime(event));
 
-                    if(checkIfLatestBreakTimeIsValid(currentDay)) {
+                    if (checkIfLatestBreakTimeIsValid(currentDay)) {
                         /* Break time fulfilled. Reset continuous driving time */
                         currentDay.setContinuousDrivingTimeAfterBreak(0);
                     }
@@ -212,22 +212,22 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
                     currentWeek.setWeeklyRest(eventDurationInMinutes);
                     break;
             }
-            if(mIncludeEventIds && eventIdsWeek != null && eventIdsDay != null) {
+            if (mIncludeEventIds && eventIdsWeek != null && eventIdsDay != null) {
                 eventIdsWeek.add(event.getRowId());
                 eventIdsDay.add(event.getRowId());
             }
             previousEvent = event;
 
-            if(eventCursor.isLast() && currentWeek != null) {
+            if (eventCursor.isLast() && currentWeek != null) {
 
                 currentDay.setEndDate(previousEvent.getEndDateInMillis());
-                if(mIncludeEventIds && eventIdsDay != null) {
+                if (mIncludeEventIds && eventIdsDay != null) {
                     currentDay.setEventIds(eventIdsDay);
                 }
                 endWorkingDay(currentWeek, currentDay);
 
                 currentWeek.setEndDate(previousEvent.getEndDateInMillis());
-                if(mIncludeEventIds && eventIdsWeek != null) {
+                if (mIncludeEventIds && eventIdsWeek != null) {
                     currentWeek.setEventIds(eventIdsWeek);
                 }
                 weeks.add(currentWeek);
@@ -239,8 +239,8 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
     }
 
     @Override
-    protected void onPostExecute(ArrayList<WeekHolder> list){
-        if(mListener != null){
+    protected void onPostExecute(ArrayList<WeekHolder> list) {
+        if (mListener != null) {
             mListener.onWorkingTimeCalculationsReady(list);
         }
     }
@@ -260,7 +260,7 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
     }
 
     private BreakTime getBreakTime(Event event) {
-        if(event == null) {
+        if (event == null) {
             return null;
         }
 
@@ -274,12 +274,12 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
 
     /* Checks if it is required to start a new week. */
     private static boolean isRequiredToStartNewWeek(WeekHolder currentWeek, Event nextEvent) {
-        if(currentWeek == null) {
+        if (currentWeek == null) {
             return true;
-        } else if((nextEvent.getStartDateInMillis() - currentWeek.getStartDate()) >= Constants.SEVEN_DAYS_PERIOD_IN_MILLIS) {
+        } else if ((nextEvent.getStartDateInMillis() - currentWeek.getStartDate()) >= Constants.SEVEN_DAYS_PERIOD_IN_MILLIS) {
             /* It's over 7 days since we started counting current week */
             return true;
-        } else if(checkIfWeeklyRestIsFulfilled(currentWeek)) {
+        } else if (checkIfWeeklyRestIsFulfilled(currentWeek)) {
             /* Weekly rest time length is at least 24 hours */
             return true;
         }
@@ -287,25 +287,25 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
     }
 
     private static boolean isRequiredToStartNewDay(WorkDayHolder currentDay, Event nextEvent) {
-        if(currentDay == null) {
+        if (currentDay == null) {
             return true;
-        } else if((nextEvent.getStartDateInMillis() - currentDay.getStartDate()) >= Constants.ONE_DAY_PERIOD_IN_MILLIS) {
+        } else if ((nextEvent.getStartDateInMillis() - currentDay.getStartDate()) >= Constants.ONE_DAY_PERIOD_IN_MILLIS) {
             return true;
-        } else if(checkIfDailyRestIsFulfilled(currentDay)) {
+        } else if (checkIfDailyRestIsFulfilled(currentDay)) {
             return true;
         }
         return false;
     }
 
     private static boolean checkIfWeeklyRestIsFulfilled(WeekHolder currentWeek) {
-        if(currentWeek == null) {
+        if (currentWeek == null) {
             return false;
         }
         return currentWeek.getWeeklyRest() >= Constants.LIMIT_WEEKLY_REST_REDUCED_MIN;
     }
 
     private static boolean checkIfDailyRestIsFulfilled(WorkDayHolder currentDay) {
-        if(currentDay == null) {
+        if (currentDay == null) {
             return false;
         }
         return currentDay.getDailyRest() >= Constants.LIMIT_DAILY_REST_REDUCED_MIN;
@@ -315,18 +315,18 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
      * should be taken after 4 ½ hours at the latest.
      */
     private static boolean checkIfLatestBreakTimeIsValid(WorkDayHolder currentDay) {
-        if(currentDay == null) {
+        if (currentDay == null) {
             return false;
         }
         BreakTime latestBreak = currentDay.getLastBreak();
         BreakTime previousBreak = currentDay.getPreviousBreak();
 
-        if(latestBreak == null) {
+        if (latestBreak == null) {
             return false;
-        } else if(latestBreak.getDurationInMinutes() >= Constants.LIMIT_BREAK) {
+        } else if (latestBreak.getDurationInMinutes() >= Constants.LIMIT_BREAK) {
             return true;
-        } else if(previousBreak != null
-                && ((previousBreak.getDurationInMinutes() + latestBreak.getDurationInMinutes()) >= Constants.LIMIT_BREAK)){
+        } else if (previousBreak != null
+                && ((previousBreak.getDurationInMinutes() + latestBreak.getDurationInMinutes()) >= Constants.LIMIT_BREAK)) {
             /* Check that both breaks are within 4,5 hours time frame */
             int timeFrame = DateUtils.getTimeDifferenceInMinutes(latestBreak.getStartTime(), previousBreak.getStartTime(), -1);
             return timeFrame < 450;
@@ -339,7 +339,7 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
     }
 
     private static void endWorkingDay(WeekHolder currentWeek, WorkDayHolder dayToEnd) {
-        if(currentWeek == null) {
+        if (currentWeek == null) {
             return;
         }
 
@@ -350,15 +350,14 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
         currentWeek.setWeeklyPoaTime(currentWeek.getWeeklyPoaTime() + dayToEnd.getDailyPoaTime());
         currentWeek.setWtdWeeklyWorkingTime(currentWeek.getWtdWeeklyWorkingTime() + dayToEnd.getWtdDailyWorkingTime());
 
-        if(dayToEnd.getDailyRest() < Constants.LIMIT_DAILY_REST_MIN) {
-            currentWeek.setReducedDailyRest(currentWeek.getReducedDailyRests()+1);
+        if (dayToEnd.getDailyRest() < Constants.LIMIT_DAILY_REST_MIN) {
+            currentWeek.setReducedDailyRest(currentWeek.getReducedDailyRests() + 1);
         }
-        if(dayToEnd.getDailyDrivingTime() > Constants.LIMIT_DAILY_DRIVE_MIN) {
-            currentWeek.setExtendedDrivingDaysUsed(currentWeek.getExtendedDrivingDaysUsed()+1);
+        if (dayToEnd.getDailyDrivingTime() > Constants.LIMIT_DAILY_DRIVE_MIN) {
+            currentWeek.setExtendedDrivingDaysUsed(currentWeek.getExtendedDrivingDaysUsed() + 1);
         }
         currentWeek.addWorkDay(dayToEnd);
     }
-
 
 
 }

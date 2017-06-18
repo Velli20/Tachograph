@@ -27,6 +27,7 @@
 package com.velli20.tachograph.views;
 
 import com.velli20.tachograph.R;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -39,78 +40,78 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class ExceptionTile extends View {
-	private TextPaint mExceptionTextPaint;
-	private Paint mTilePaint;
+    private TextPaint mExceptionTextPaint;
+    private Paint mTilePaint;
 
-	
-	private final float mScale;
-	private final float mStrokeWidth;
 
-	private String mExceptionNumber = "3";
+    private final float mScale;
+    private final float mStrokeWidth;
 
-	public ExceptionTile(Context context) {
-		this(context, null, 0);
-	}
-	
-	public ExceptionTile(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
-	
-	public ExceptionTile(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		
-		final Resources res = context.getResources();
-		
-		mScale = res.getDisplayMetrics().density;
-		mStrokeWidth = convertFromPxToDip(1);
-	
-		mExceptionTextPaint = new TextPaint();
-		mExceptionTextPaint.setColor(res.getColor(R.color.black));
-		mExceptionTextPaint.setTextSize(convertFromPxToDip(12));
-		mExceptionTextPaint.setAntiAlias(true);
-		mExceptionTextPaint.setTextAlign(Align.CENTER);
-		
-		mTilePaint = new Paint();
-		mTilePaint.setStyle(Style.STROKE);
-		mTilePaint.setStrokeWidth(mStrokeWidth);
-		mTilePaint.setColor(res.getColor(R.color.black));
-		mTilePaint.setAntiAlias(true);
-		
-		if(!isInEditMode()){
+    private String mExceptionNumber = "3";
 
-			Typeface font = RobotoLightTextView.getTypeface(res, 1);
-			if(font != null){
-				mExceptionTextPaint.setTypeface(font);
-			}
-		}
-		
-		setWillNotDraw(false);
-		
-		
-	}
-	
-	public void setException(String exception){
-		mExceptionNumber = exception;
-		invalidate();
-	}
-	
-	private float convertFromPxToDip(float value){
-		return mScale * value;
-	}
-	
+    public ExceptionTile(Context context) {
+        this(context, null, 0);
+    }
 
-	public int getTileHeight(){
-		return (int)convertFromPxToDip(8);
-	}
-	
-	@Override
-	public void onDraw(Canvas canvas){
-		final int xPos = (getWidth() / 2);
-		final int yPos = (int) ((getHeight() / 2) - ((mExceptionTextPaint.descent() + mExceptionTextPaint.ascent()) / 2)) ; 
-		 
-		canvas.drawCircle(xPos, (getHeight() / 2), convertFromPxToDip(8), mTilePaint);
-		canvas.drawText(mExceptionNumber,  xPos, yPos , mExceptionTextPaint);
-	}
+    public ExceptionTile(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ExceptionTile(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        final Resources res = context.getResources();
+
+        mScale = res.getDisplayMetrics().density;
+        mStrokeWidth = convertFromPxToDip(1);
+
+        mExceptionTextPaint = new TextPaint();
+        mExceptionTextPaint.setColor(res.getColor(R.color.black));
+        mExceptionTextPaint.setTextSize(convertFromPxToDip(12));
+        mExceptionTextPaint.setAntiAlias(true);
+        mExceptionTextPaint.setTextAlign(Align.CENTER);
+
+        mTilePaint = new Paint();
+        mTilePaint.setStyle(Style.STROKE);
+        mTilePaint.setStrokeWidth(mStrokeWidth);
+        mTilePaint.setColor(res.getColor(R.color.black));
+        mTilePaint.setAntiAlias(true);
+
+        if (!isInEditMode()) {
+
+            Typeface font = RobotoLightTextView.getTypeface(res, 1);
+            if (font != null) {
+                mExceptionTextPaint.setTypeface(font);
+            }
+        }
+
+        setWillNotDraw(false);
+
+
+    }
+
+    public void setException(String exception) {
+        mExceptionNumber = exception;
+        invalidate();
+    }
+
+    private float convertFromPxToDip(float value) {
+        return mScale * value;
+    }
+
+
+    public int getTileHeight() {
+        return (int) convertFromPxToDip(8);
+    }
+
+    @Override
+    public void onDraw(Canvas canvas) {
+        final int xPos = (getWidth() / 2);
+        final int yPos = (int) ((getHeight() / 2) - ((mExceptionTextPaint.descent() + mExceptionTextPaint.ascent()) / 2));
+
+        canvas.drawCircle(xPos, (getHeight() / 2), convertFromPxToDip(8), mTilePaint);
+        canvas.drawText(mExceptionNumber, xPos, yPos, mExceptionTextPaint);
+    }
 
 
 }
