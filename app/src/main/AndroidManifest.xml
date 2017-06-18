@@ -27,8 +27,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.velli20.tachograph"
-    android:versionCode="12"
-    android:versionName="2.0.1" >
+    android:versionCode="14"
+    android:versionName="2.0.2" >
 
 
     <permission
