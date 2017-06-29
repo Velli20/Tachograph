@@ -27,7 +27,6 @@
 package com.velli20.tachograph.database;
 
 
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -41,112 +40,110 @@ import com.velli20.tachograph.location.LoggedRoute;
 
 
 public class GetLoggedRouteTask extends AsyncTask<Void, Void, LoggedRoute> {
-	private SQLiteDatabase mDb;
-	private OnGetLoggedRouteListener mListener;
-	
-	private String mQuery;
+    private SQLiteDatabase mDb;
+    private OnGetLoggedRouteListener mListener;
 
-	public interface OnGetLoggedRouteListener {
-		void onGetLoggedRoute(LoggedRoute info);
-	}
-	
-	public GetLoggedRouteTask(SQLiteDatabase db, int eventId) {
-		mDb = db;
+    private String mQuery;
 
-		mQuery = new DatabaseLocationQueryBuilder()
-				.fromTable(DataBaseHandlerConstants.TABLE_LOCATIONS)
+    public GetLoggedRouteTask(SQLiteDatabase db, int eventId) {
+        mDb = db;
+
+        mQuery = new DatabaseLocationQueryBuilder()
+                .fromTable(DataBaseHandlerConstants.TABLE_LOCATIONS)
                 .selectAllColumns()
-				.whereLocationEventIdIs(eventId)
-				.orderByKey(DataBaseHandlerConstants.KEY_LOCATION_TIME, true)
-				.buildQuery();
-	}
+                .whereLocationEventIdIs(eventId)
+                .orderByKey(DataBaseHandlerConstants.KEY_LOCATION_TIME, true)
+                .buildQuery();
+    }
 
-	
-	public void setOnGetLocationInfoListener(OnGetLoggedRouteListener l) {
-		mListener = l;
-	}
-	
-	@Override
-	protected LoggedRoute doInBackground(Void... params) {
-        if(mDb == null || !mDb.isOpen() || mQuery == null){
+    public void setOnGetLocationInfoListener(OnGetLoggedRouteListener l) {
+        mListener = l;
+    }
+
+    @Override
+    protected LoggedRoute doInBackground(Void... params) {
+        if (mDb == null || !mDb.isOpen() || mQuery == null) {
             return null;
         }
 
         mDb.beginTransaction();
 
-		final PolylineOptions mapPolyline = new PolylineOptions();
-		final Line speedGraphLine = new Line();
-		final LoggedRoute route = new LoggedRoute();
-	    final Cursor cursor = mDb.rawQuery(mQuery, null);
-	    
-	    double totalDistance = 0;
-	    double lastLatitude = -1;
-	    double lastLongitude = -1;
-	    
-	    long startTime = -1;
-	    long endTime = -1;
-	    if (cursor != null && !cursor.isClosed() && cursor.moveToFirst()){
-	    	do {
-	    		
-	    		double latitude = cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LATITUDE));
-	    		double longitude = cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LONGITUDE));
-	    		
-	    		float speed = (float) cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_SPEED));
-	    		long time = cursor.getLong(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_TIME));
+        final PolylineOptions mapPolyline = new PolylineOptions();
+        final Line speedGraphLine = new Line();
+        final LoggedRoute route = new LoggedRoute();
+        final Cursor cursor = mDb.rawQuery(mQuery, null);
 
-	            if(lastLatitude != -1 && lastLongitude != -1) {
-	            	totalDistance += DatabaseLocationUtils.calculateDistance(latitude, longitude, lastLatitude, lastLongitude);
-	            }
-	            
-	            lastLatitude = latitude;
-	            lastLongitude = longitude;
-	            
-	            if(cursor.isFirst()) {
-	            	startTime = time;
-	            	route.setStartLocation(latitude, longitude);
-	            } else if(cursor.isLast()) {
-	            	endTime = time;
-	            	route.setEndLocation(latitude, longitude);
-	            }
-				
-				speedGraphLine.addPoint(new LinePoint(time, speed));
-	    		mapPolyline.add(new LatLng(latitude, longitude));
-	    	} while(cursor.moveToNext());
-	    } else {
+        double totalDistance = 0;
+        double lastLatitude = -1;
+        double lastLongitude = -1;
+
+        long startTime = -1;
+        long endTime = -1;
+        if (cursor != null && !cursor.isClosed() && cursor.moveToFirst()) {
+            do {
+
+                double latitude = cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LATITUDE));
+                double longitude = cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LONGITUDE));
+
+                float speed = (float) cursor.getDouble(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_SPEED));
+                long time = cursor.getLong(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_TIME));
+
+                if (lastLatitude != -1 && lastLongitude != -1) {
+                    totalDistance += DatabaseLocationUtils.calculateDistance(latitude, longitude, lastLatitude, lastLongitude);
+                }
+
+                lastLatitude = latitude;
+                lastLongitude = longitude;
+
+                if (cursor.isFirst()) {
+                    startTime = time;
+                    route.setStartLocation(latitude, longitude);
+                } else if (cursor.isLast()) {
+                    endTime = time;
+                    route.setEndLocation(latitude, longitude);
+                }
+
+                speedGraphLine.addPoint(new LinePoint(time, speed));
+                mapPolyline.add(new LatLng(latitude, longitude));
+            } while (cursor.moveToNext());
+        } else {
             mDb.endTransaction();
-	    	return null;
-	    }
+            return null;
+        }
 
         cursor.close();
-	    
-	    final int duration = DateUtils.convertDatesToMinutes(startTime, endTime);
-		final float averageSpeed = (totalDistance == 0 || duration == 0) ? 0: ((float)(totalDistance / (duration * 60)) * 3.6f);
 
-		mapPolyline.visible(true);
+        final int duration = DateUtils.convertDatesToMinutes(startTime, endTime);
+        final float averageSpeed = (totalDistance == 0 || duration == 0) ? 0 : ((float) (totalDistance / (duration * 60)) * 3.6f);
 
-		route.setDistance((float)totalDistance / 1000);
-		route.setAverageSpeed(averageSpeed);
-		route.setDuration(duration);
-		route.setSpeedGraphLine(speedGraphLine);
-		route.setMapPolyline(mapPolyline);
+        mapPolyline.visible(true);
+
+        route.setDistance((float) totalDistance / 1000);
+        route.setAverageSpeed(averageSpeed);
+        route.setDuration(duration);
+        route.setSpeedGraphLine(speedGraphLine);
+        route.setMapPolyline(mapPolyline);
 
 
         mDb.setTransactionSuccessful();
         mDb.endTransaction();
 
-		return route;
-	}
-	
-	@Override
-	protected void onPostExecute(LoggedRoute result){
-		if(mListener != null) {
-			mListener.onGetLoggedRoute(result);
-		}
-		
-		mListener = null;
-		mDb = null;
-	}
-	
+        return route;
+    }
+
+    @Override
+    protected void onPostExecute(LoggedRoute result) {
+        if (mListener != null) {
+            mListener.onGetLoggedRoute(result);
+        }
+
+        mListener = null;
+        mDb = null;
+    }
+
+    public interface OnGetLoggedRouteListener {
+        void onGetLoggedRoute(LoggedRoute info);
+    }
 
 
 }

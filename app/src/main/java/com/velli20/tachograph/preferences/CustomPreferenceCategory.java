@@ -26,16 +26,6 @@
 
 package com.velli20.tachograph.preferences;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
-import static android.text.TextUtils.isEmpty;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
-
-
-import com.velli20.tachograph.R;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.preference.PreferenceCategory;
@@ -45,43 +35,51 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.velli20.tachograph.R;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static android.text.TextUtils.isEmpty;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class CustomPreferenceCategory extends PreferenceCategory {
 
-	public CustomPreferenceCategory(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
-	}
-	
-	public CustomPreferenceCategory(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-	}
-	
-	public CustomPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-		// TODO Auto-generated constructor stub
-	}
-	
-	@TargetApi(LOLLIPOP)
-	public CustomPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-		// TODO Auto-generated constructor stub
-	}
+    public CustomPreferenceCategory(Context context) {
+        super(context);
+        // TODO Auto-generated constructor stub
+    }
 
-	@Override
-	protected View onCreateView(ViewGroup parent) {
-		super.onCreateView(parent);
-		LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-		return layoutInflater.inflate(R.layout.view_preference_category, parent, false);
-	}
-	
-	@Override
-	protected void onBindView(View view) {
-		super.onBindView(view);
-		CharSequence title = getTitle();
-		TextView titleView = (TextView) view.findViewById(R.id.title);
-		titleView.setText(title);
-		titleView.setVisibility(!isEmpty(title) ? VISIBLE : GONE);
-	}
-	
+    public CustomPreferenceCategory(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+    }
+
+    public CustomPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        // TODO Auto-generated constructor stub
+    }
+
+    @TargetApi(LOLLIPOP)
+    public CustomPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected View onCreateView(ViewGroup parent) {
+        super.onCreateView(parent);
+        LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        return layoutInflater.inflate(R.layout.view_preference_category, parent, false);
+    }
+
+    @Override
+    protected void onBindView(View view) {
+        super.onBindView(view);
+        CharSequence title = getTitle();
+        TextView titleView = (TextView) view.findViewById(R.id.title);
+        titleView.setText(title);
+        titleView.setVisibility(!isEmpty(title) ? VISIBLE : GONE);
+    }
+
 }

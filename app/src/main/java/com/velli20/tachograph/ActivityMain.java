@@ -27,20 +27,21 @@
 package com.velli20.tachograph;
 
 
-import com.velli20.tachograph.collections.ListAdapterNavigationSpinner;
-import com.velli20.tachograph.database.DataBaseHandler;
-
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -51,6 +52,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
+import com.velli20.tachograph.collections.ListAdapterNavigationSpinner;
+import com.velli20.tachograph.database.DataBaseHandler;
+
 public class ActivityMain extends AppCompatActivity implements OnItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener, DataBaseHandler.OnDatabaseEditedListener {
     private static final String BUNDLE_KEY_SELECTED_NAV_ITEM = "selected nav item";
     private static final boolean DEBUG = false;
@@ -59,6 +63,24 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
     private int mSelectedNavItem = -1;
     private Event mCurrentEvent; /* Currently recording Event */
 
+    public static boolean isLocationPermissionGrated(Activity c) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int permission = ContextCompat.checkSelfPermission(c, android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+            return permission == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
+    }
+
+    public static void requestLocationPermission(Activity c) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int permission = ContextCompat.checkSelfPermission(c, android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                c.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FragmentSettings.PERMISSION_REQUEST_FINE_LOCATION);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +117,7 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
         }
 
         getRecordingEvent();
-
+        requestLocationPermission(this);
     }
 
     public Toolbar getToolbar() {
@@ -110,13 +132,19 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        GpsRouteLoggerStatus.INSTANCE.setGpsPermissionGranted(isLocationPermissionGrated(this));
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
         DataBaseHandler.getInstance().registerOnDatabaseEditedListener(this);
 
         Spinner navigationSpinner = (Spinner) findViewById(R.id.navigation_spinner);
-        if(navigationSpinner != null) {
+        if (navigationSpinner != null) {
             navigationSpinner.setOnItemSelectedListener(null);
         }
     }
@@ -179,14 +207,30 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
             case R.id.menu_send_feedback:
                 ShareCompat.IntentBuilder.from(this)
                         .setType("message/rfc822")
-                        .addEmailTo("velli.su@gmail.com")
+                        .addEmailTo("ve23571113@gmail.com")
                         .setSubject("Tachograph feedback")
                         .setChooserTitle("Send email...")
                         .startChooser();
 
-                return true;        }
+                return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case FragmentSettings.PERMISSION_REQUEST_FINE_LOCATION:
+                boolean permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                Intent i = new Intent(getApplicationContext(), GpsBackgroundService.class);
+                i.putExtra(GpsBackgroundService.INTENT_KEY_LOCATION_PERMISSION_GRANTED, permissionGranted);
+                startService(i);
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
 
@@ -221,7 +265,8 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) { }
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 
 
     /* Save state of the Fragments if activity is being recreated (i.g on screen rotation ) */

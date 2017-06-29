@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -30,35 +29,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="48dp">
-    
-    <ImageButton 
+
+    <ImageButton
         android:id="@+id/list_items_to_show_drag"
         style="@style/RippleButtonBackground"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:padding="24dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_action_drag"
-        android:contentDescription="@null"/>
+        android:contentDescription="@null"
+        android:padding="24dp"
+        android:src="@drawable/ic_action_drag" />
 
     <com.velli20.tachograph.views.RobotoSwitchCompat
         android:id="@+id/list_items_to_show_switch"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:textSize="16sp"/>
-    
-    <View 
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        custom:style="regular" />
+
+    <View
         style="@style/Divider"
         android:layout_gravity="bottom"
         android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"/>
-    
+        android:layout_marginStart="72dp" />
+
 </FrameLayout>

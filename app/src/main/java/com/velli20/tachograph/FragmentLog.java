@@ -26,24 +26,6 @@
 
 package com.velli20.tachograph;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.velli20.tachograph.ExportEvents.OnFileSavedListener;
-import com.velli20.tachograph.collections.ListAdapterFragmentLog;
-import com.velli20.tachograph.collections.ListItemLogGroup;
-import com.velli20.tachograph.collections.ListAdapterFragmentLog.OnEventSelectedListener;
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.database.DataBaseHandlerConstants;
-import com.velli20.tachograph.database.DataBaseHandler.OnDatabaseEditedListener;
-import com.velli20.tachograph.database.DataBaseHandler.OnGetSortedLogListener;
-import com.velli20.tachograph.database.DatabaseEventQueryBuilder;
-import com.velli20.tachograph.filepicker.ActivityFilePicker;
-import com.velli20.tachograph.views.ListCircle;
-import com.velli20.tachograph.views.RobotoLightTextView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -65,6 +47,24 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.velli20.tachograph.ExportEvents.OnFileSavedListener;
+import com.velli20.tachograph.collections.ListAdapterFragmentLog;
+import com.velli20.tachograph.collections.ListAdapterFragmentLog.OnEventSelectedListener;
+import com.velli20.tachograph.collections.ListItemLogGroup;
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.DataBaseHandler.OnDatabaseEditedListener;
+import com.velli20.tachograph.database.DataBaseHandler.OnGetSortedLogListener;
+import com.velli20.tachograph.database.DataBaseHandlerConstants;
+import com.velli20.tachograph.database.DatabaseEventQueryBuilder;
+import com.velli20.tachograph.filepicker.ActivityFilePicker;
+import com.velli20.tachograph.views.ListCircle;
+import com.velli20.tachograph.views.RobotoLightTextView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentLog extends Fragment implements OnChildClickListener, OnDatabaseEditedListener, OnClickListener, OnEventSelectedListener, OnGetSortedLogListener, OnItemLongClickListener, OnFileSavedListener, OnSharedPreferenceChangeListener {
     public static final String tag = "LogFragment ";
@@ -388,6 +388,39 @@ public class FragmentLog extends Fragment implements OnChildClickListener, OnDat
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mLogListView != null) {
+            View v = mLogListView.getChildAt(0);
+
+            outState.putParcelable(BUNDLE_KEY_LIST_STATE, mLogListView.onSaveInstanceState());
+            outState.putInt(BUNDLE_KEY_LIST_FIRST_VISIBLE_POS, mLogListView.getFirstVisiblePosition());
+            outState.putInt(BUNDLE_KEY_LIST_FIRST_VISIBLE_POS_TOP, (v == null) ? 0 : (v.getTop()));
+
+            if (mActionMode != null && !mListAdapter.getSelectedItems().isEmpty()) {
+                outState.putBoolean(BUNDLE_KEY_IS_LIST_ITEMS_SELECTED, true);
+            }
+        }
+    }
+
+    @Override
+    public void onFileSaved(File file) {
+        if (file.exists()) {
+            FragmentSettings.createFileSavedNotification(getActivity(), file);
+        }
+
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        mSortBy = Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.preference_key_log_order_day_week_month), "2"));
+        mSortAscending = sharedPreferences.getBoolean(getResources().getString(R.string.preference_key_log_order_asc_desc), false);
+
+        getEventsByCategory();
+    }
+
     private class ContextualToolbarCallback implements ActionMode.Callback {
 
         @Override
@@ -440,42 +473,6 @@ public class FragmentLog extends Fragment implements OnChildClickListener, OnDat
         }
 
 
-    }
-
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (mLogListView != null) {
-            View v = mLogListView.getChildAt(0);
-
-            outState.putParcelable(BUNDLE_KEY_LIST_STATE, mLogListView.onSaveInstanceState());
-            outState.putInt(BUNDLE_KEY_LIST_FIRST_VISIBLE_POS, mLogListView.getFirstVisiblePosition());
-            outState.putInt(BUNDLE_KEY_LIST_FIRST_VISIBLE_POS_TOP, (v == null) ? 0 : (v.getTop()));
-
-            if (mActionMode != null && !mListAdapter.getSelectedItems().isEmpty()) {
-                outState.putBoolean(BUNDLE_KEY_IS_LIST_ITEMS_SELECTED, true);
-            }
-        }
-    }
-
-
-    @Override
-    public void onFileSaved(File file) {
-        if (file.exists()) {
-            FragmentSettings.createFileSavedNotification(getActivity(), file);
-        }
-
-    }
-
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        mSortBy = Integer.parseInt(sharedPreferences.getString(getResources().getString(R.string.preference_key_log_order_day_week_month), "2"));
-        mSortAscending = sharedPreferences.getBoolean(getResources().getString(R.string.preference_key_log_order_asc_desc), false);
-
-        getEventsByCategory();
     }
 
 

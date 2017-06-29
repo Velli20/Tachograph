@@ -89,8 +89,16 @@ public class Event {
         return rowId;
     }
 
+    public void setRowId(int id) {
+        rowId = id;
+    }
+
     public int getEventType() {
         return mEventType;
+    }
+
+    public void setEventType(int type) {
+        mEventType = type;
     }
 
     public long getStartDateInMillis() {
@@ -109,21 +117,40 @@ public class Event {
         return mMileageStart;
     }
 
+    public void setMileageStart(int mileage) {
+        mMileageStart = mileage;
+    }
+
     public int getMileageEnd() {
         return mMileageEnd;
     }
 
+    public void setMileageEnd(int mileage) {
+        mMileageEnd = mileage;
+    }
 
     public String getNote() {
         return mNote;
+    }
+
+    public void setNote(String note) {
+        mNote = note;
     }
 
     public String getStartLocation() {
         return mStartLocation;
     }
 
+    public void setStartLocation(String location) {
+        mStartLocation = location;
+    }
+
     public double getDrivenDistance() {
         return mDistance;
+    }
+
+    public void setDrivenDistance(double dist) {
+        mDistance = dist;
     }
 
     public boolean isSplitBreak() {
@@ -134,14 +161,13 @@ public class Event {
         return mEndLocation;
     }
 
+    public void setEndLocation(String location) {
+        mEndLocation = location;
+    }
+
     public boolean hasLoggedRoute() {
         return mHasLoggedRoute;
     }
-
-    public void setEventType(int type) {
-        mEventType = type;
-    }
-
 
     public void setStartDate(long millis) {
         mStartDateInMillis = millis;
@@ -161,40 +187,11 @@ public class Event {
         mEndMinutes = minutes;
     }
 
-    public void setMileageStart(int mileage) {
-        mMileageStart = mileage;
-    }
-
-    public void setMileageEnd(int mileage) {
-        mMileageEnd = mileage;
-    }
-
-    public void setRowId(int id) {
-        rowId = id;
-    }
-
-
     public void setRecording(boolean recording) {
         mRecordingEvent = recording ? EVENT_LOGGING_IN_PROGRESS : EVENT_LOGGING_STOPPED;
     }
 
-    public void setNote(String note) {
-        mNote = note;
-    }
-
-    public void setStartLocation(String location) {
-        mStartLocation = location;
-    }
-
-    public void setEndLocation(String location) {
-        mEndLocation = location;
-    }
-
     public void setHasLoggedRoute(boolean hasRoute) {
         mHasLoggedRoute = hasRoute;
-    }
-
-    public void setDrivenDistance(double dist) {
-        mDistance = dist;
     }
 }

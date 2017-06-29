@@ -53,7 +53,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 
-
 public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int CARD_EVENT_DETAILS = 0;
     public static final int CARD_EVENT_LOGGED_ROUTE = 1;
@@ -80,8 +79,29 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
+    private static String formatValueMileage(int value) {
+        DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
+        symbols.setGroupingSeparator(' ');
+
+        DecimalFormat formatter = new DecimalFormat("###,###.##", symbols);
+        return formatter.format(value);
+    }
+
+    private static void setMapPolyLine(GoogleMap map, PolylineOptions line) {
+        if (map != null) {
+            map.addPolyline(line);
+
+            final LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(line.getPoints().get(0));
+            builder.include(line.getPoints().get(line.getPoints().size() - 1));
+            LatLngBounds bounds = builder.build();
+
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 5));
+        }
+    }
+
     public void setEvent(Event event) {
-        if(mEvent == null) {
+        if (mEvent == null) {
             mEvent = event;
             notifyItemInserted(0);
         } else {
@@ -92,16 +112,16 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void setLoggedRoute(LoggedRoute route) {
-        if(mRoute == null && route != null) {
+        if (mRoute == null && route != null) {
             mRoute = route;
-            if(mEndLocation != null) {
+            if (mEndLocation != null) {
                 loadEndAddressOverInternet(mEndLocation);
             }
-            if(mStartLocation != null) {
+            if (mStartLocation != null) {
                 loadStartAddressOverInternet(mStartLocation);
             }
             notifyItemRangeInserted(1, 2);
-        } else if(mRoute != null && route == null){
+        } else if (mRoute != null && route == null) {
             mRoute = route;
             notifyItemRangeRemoved(1, 2);
         } else {
@@ -132,24 +152,24 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
 
-        if(viewType == CARD_EVENT_DETAILS) {
-            setEventDetailsData((ViewHolderEventDetails)holder);
-        } else if(viewType == CARD_EVENT_LOGGED_ROUTE) {
-            setMapData((ViewHolderMap)holder);
-        } else if(viewType == CARD_EVENT_SPEED_CHART) {
-            setChartData((ViewHolderSpeedChart)holder);
+        if (viewType == CARD_EVENT_DETAILS) {
+            setEventDetailsData((ViewHolderEventDetails) holder);
+        } else if (viewType == CARD_EVENT_LOGGED_ROUTE) {
+            setMapData((ViewHolderMap) holder);
+        } else if (viewType == CARD_EVENT_SPEED_CHART) {
+            setChartData((ViewHolderSpeedChart) holder);
         }
     }
 
     private void setEventDetailsData(ViewHolderEventDetails holder) {
-        if(holder == null || mEvent == null) {
+        if (holder == null || mEvent == null) {
             return;
         }
         holder.mDate.setText(DateUtils.createDateTimeString(mEvent.getStartDateInMillis(), mEvent.getEndDateInMillis()));
         holder.mDuration.setText(DateUtils.convertDatesInHours(mEvent.getStartDateInMillis(), mEvent.getEndDateInMillis()));
 
-        if((mEvent.getStartLocation() != null && !mEvent.getStartLocation().isEmpty()) || mEvent.hasLoggedRoute()){
-            if(mEvent.getStartLocation() == null) {
+        if ((mEvent.getStartLocation() != null && !mEvent.getStartLocation().isEmpty()) || mEvent.hasLoggedRoute()) {
+            if (mEvent.getStartLocation() == null) {
                 loadStartAddressOverInternet(holder.mStartLocation);
             } else {
                 holder.mStartLocation.setText(mEvent.getStartLocation());
@@ -159,8 +179,8 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
             holder.mStartLocation.setVisibility(View.GONE);
         }
 
-        if((mEvent.getEndLocation() != null && !mEvent.getEndLocation().isEmpty()) || (mEvent.hasLoggedRoute() && !mEvent.isRecordingEvent())){
-            if(mEvent.getEndLocation() == null) {
+        if ((mEvent.getEndLocation() != null && !mEvent.getEndLocation().isEmpty()) || (mEvent.hasLoggedRoute() && !mEvent.isRecordingEvent())) {
+            if (mEvent.getEndLocation() == null) {
                 loadEndAddressOverInternet(holder.mEndLocation);
             } else {
                 holder.mEndLocation.setText(mEvent.getEndLocation());
@@ -170,14 +190,14 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
             holder.mEndLocation.setVisibility(View.GONE);
         }
 
-        if(mEvent.getNote() != null && !mEvent.getNote().isEmpty()){
+        if (mEvent.getNote() != null && !mEvent.getNote().isEmpty()) {
             holder.mNote.setText(mEvent.getNote());
             holder.mNote.setVisibility(View.VISIBLE);
         } else {
             holder.mNote.setVisibility(View.GONE);
         }
 
-        if(mEvent.getMileageStart() == 0 || mEvent.getMileageEnd() == 0 || mEvent.getEventType() != Event.EVENT_TYPE_DRIVING) {
+        if (mEvent.getMileageStart() == 0 || mEvent.getMileageEnd() == 0 || mEvent.getEventType() != Event.EVENT_TYPE_DRIVING) {
             holder.mMileage.setVisibility(View.GONE);
         } else {
             holder.mMileage.setVisibility(View.VISIBLE);
@@ -186,11 +206,11 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void loadStartAddressOverInternet(RobotoLightTextView startLocation) {
-        if(startLocation != null) {
+        if (startLocation != null) {
             startLocation.setText(R.string.title_loading_address);
         }
 
-        if(mRoute != null) {
+        if (mRoute != null) {
             new GetAddressForLocationTask(App.get(), null, mRoute.getStartLatitude(), mRoute.getStartLongitude())
                     .setTextViewToSet(startLocation, mRes.getString(R.string.title_address_not_available))
                     .execute();
@@ -200,10 +220,10 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void loadEndAddressOverInternet(RobotoLightTextView endLocation) {
-        if(endLocation != null) {
+        if (endLocation != null) {
             endLocation.setText(R.string.title_loading_address);
         }
-        if(mRoute != null) {
+        if (mRoute != null) {
             new GetAddressForLocationTask(App.get(), null, mRoute.getEndLatitude(), mRoute.getEndLongitude())
                     .setTextViewToSet(endLocation, mRes.getString(R.string.title_address_not_available))
                     .execute();
@@ -212,19 +232,11 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    private static String formatValueMileage(int value){
-        DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
-        symbols.setGroupingSeparator(' ');
-
-        DecimalFormat formatter = new DecimalFormat("###,###.##", symbols);
-        return formatter.format(value);
-    }
-
     private void setMapData(final ViewHolderMap holder) {
-        if(holder == null) {
+        if (holder == null) {
             return;
         }
-        if(!holder.mMapReady && holder.mMapView != null) {
+        if (!holder.mMapReady && holder.mMapView != null) {
             holder.mMapView.setClickable(false);
             holder.mMapView.onCreate(null);
             holder.mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -235,7 +247,7 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
                     googleMap.getUiSettings().setMapToolbarEnabled(false);
                     googleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-                    if(mRoute != null && mRoute.getMapPolyline() != null) {
+                    if (mRoute != null && mRoute.getMapPolyline() != null) {
                         PolylineOptions line = mRoute.getMapPolyline();
                         line.color(mColorBlue);
                         line.width((int) mDensity * 2);
@@ -246,24 +258,11 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    private static void setMapPolyLine(GoogleMap map, PolylineOptions line) {
-        if(map != null) {
-            map.addPolyline(line);
-
-            final LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(line.getPoints().get(0));
-            builder.include(line.getPoints().get(line.getPoints().size() - 1));
-            LatLngBounds bounds = builder.build();
-
-            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 5));
-        }
-    }
-
     private void setChartData(ViewHolderSpeedChart holder) {
-        if(holder == null) {
+        if (holder == null) {
             return;
         }
-        if(mRoute != null && mRoute.getSpeedGraphLine() != null) {
+        if (mRoute != null && mRoute.getSpeedGraphLine() != null) {
             mRoute.getSpeedGraphLine().setFillLine(true);
             mRoute.getSpeedGraphLine().setFillAlpha(60);
             mRoute.getSpeedGraphLine().setLineStrokeWidth(2.5f);
@@ -279,10 +278,10 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         int count = 0;
-        if(mEvent != null) {
+        if (mEvent != null) {
             count += 1;
         }
-        if(mRoute != null) {
+        if (mRoute != null) {
             count += 2;
         }
         return count;
@@ -344,7 +343,7 @@ public class ListAdapterEventDetails extends RecyclerView.Adapter<RecyclerView.V
 
         @Override
         public void onClick(View view) {
-            if(mListener != null) {
+            if (mListener != null) {
                 mListener.onClick(view);
             }
         }

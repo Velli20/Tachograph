@@ -26,8 +26,6 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -37,53 +35,55 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.LruCache;
 
+import com.velli20.tachograph.R;
+
 public class RobotoLightTextView extends AppCompatTextView {
     private static LruCache<String, Typeface> sTypefaceCache = new LruCache<>(7);
-    
-    private static String[] mTypefacePaths = {"font/Roboto-Bold.ttf", "font/Roboto-Light.ttf", "font/Roboto-LightItalic.ttf", 
-    		"font/Roboto-Medium.ttf", "font/Roboto-Regular.ttf", "font/Roboto-Thin.ttf", "font/Roboto-Italic.ttf", "AndroidClockMono-Thin.ttf"};
-    
-	public RobotoLightTextView(Context context) {
-		this(context, null, 0);
-	}
-	
-	public RobotoLightTextView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
-	
-	public RobotoLightTextView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		int typeface = 3;
-		
-		if(isInEditMode()){
-			return;
-		}
-		if(attrs != null){
-			TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RobotoText, 0, 0);
-			
-			try{
-				typeface = a.getInt(R.styleable.RobotoText_style, 4);
-			} finally {
-				a.recycle();
-			}
-		}
-				
 
-		setTypeface(getTypeface(getResources(), typeface));
-		setPaintFlags(getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-		
-	}
-	
+    private static String[] mTypefacePaths = {"font/Roboto-Bold.ttf", "font/Roboto-Light.ttf", "font/Roboto-LightItalic.ttf",
+            "font/Roboto-Medium.ttf", "font/Roboto-Regular.ttf", "font/Roboto-Thin.ttf", "font/Roboto-Italic.ttf", "AndroidClockMono-Thin.ttf"};
 
-	public static Typeface getTypeface(Resources res, int typeface){
-		Typeface roboto = sTypefaceCache.get(mTypefacePaths[typeface]);
-		
-		if(roboto == null){
-			roboto = Typeface.createFromAsset(res.getAssets(), mTypefacePaths[typeface]);
-			sTypefaceCache.put(mTypefacePaths[typeface], roboto);
-		}
-		
-		return roboto;
-	}
+    public RobotoLightTextView(Context context) {
+        this(context, null, 0);
+    }
+
+    public RobotoLightTextView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public RobotoLightTextView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        int typeface = 3;
+
+        if (isInEditMode()) {
+            return;
+        }
+        if (attrs != null) {
+            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RobotoText, 0, 0);
+
+            try {
+                typeface = a.getInt(R.styleable.RobotoText_style, 4);
+            } finally {
+                a.recycle();
+            }
+        }
+
+
+        setTypeface(getTypeface(getResources(), typeface));
+        setPaintFlags(getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+
+    }
+
+
+    public static Typeface getTypeface(Resources res, int typeface) {
+        Typeface roboto = sTypefaceCache.get(mTypefacePaths[typeface]);
+
+        if (roboto == null) {
+            roboto = Typeface.createFromAsset(res.getAssets(), mTypefacePaths[typeface]);
+            sTypefaceCache.put(mTypefacePaths[typeface], roboto);
+        }
+
+        return roboto;
+    }
 
 }

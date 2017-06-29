@@ -26,17 +26,6 @@
 
 package com.velli20.tachograph;
 
-import java.util.ArrayList;
-
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.database.DataBaseHandler.OnDatabaseEditedListener;
-import com.velli20.tachograph.database.DataBaseHandler.OnTaskCompleted;
-import com.velli20.tachograph.database.GetLogSummaryTask;
-import com.velli20.tachograph.restingtimes.WeekHolder;
-import com.velli20.tachograph.restingtimes.WorkDayHolder;
-import com.velli20.tachograph.views.StepperCircle;
-import com.velli20.tachograph.views.RobotoLightTextView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -53,6 +42,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.DataBaseHandler.OnDatabaseEditedListener;
+import com.velli20.tachograph.database.DataBaseHandler.OnTaskCompleted;
+import com.velli20.tachograph.database.GetLogSummaryTask;
+import com.velli20.tachograph.restingtimes.WeekHolder;
+import com.velli20.tachograph.restingtimes.WorkDayHolder;
+import com.velli20.tachograph.views.RobotoLightTextView;
+import com.velli20.tachograph.views.StepperCircle;
+
+import java.util.ArrayList;
 
 public class ActivityLogSummaryDay extends AppCompatActivity implements OnDatabaseEditedListener {
     public static final String INTENT_EXTRA_START = "start";
@@ -156,6 +156,10 @@ public class ActivityLogSummaryDay extends AppCompatActivity implements OnDataba
         }
     }
 
+    @Override
+    public void onDatabaseEdited(int action, int rowId) {
+        getEvents(mRowIds);
+    }
 
     private class ListAdapterActivityLogSummaryDay extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int VIEW_TYPE_HEADER = 0;
@@ -163,10 +167,9 @@ public class ActivityLogSummaryDay extends AppCompatActivity implements OnDataba
 
         private final LayoutInflater mInflater;
         private final ArrayList<Event> mListItems;
-        private WorkDayHolder mWorkDay;
         private final String[] mExplanations;
-
         private final int[] mColors;
+        private WorkDayHolder mWorkDay;
 
         private ListAdapterActivityLogSummaryDay(Context c, ArrayList<Event> items) {
             mInflater = LayoutInflater.from(c);
@@ -295,11 +298,6 @@ public class ActivityLogSummaryDay extends AppCompatActivity implements OnDataba
 
             }
         }
-    }
-
-    @Override
-    public void onDatabaseEdited(int action, int rowId) {
-        getEvents(mRowIds);
     }
 
 }

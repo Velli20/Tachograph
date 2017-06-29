@@ -26,11 +26,6 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-import com.velli20.tachograph.DateUtils;
-import com.velli20.tachograph.restingtimes.OnRegulationsChangedListener;
-import com.velli20.tachograph.restingtimes.Regulations;
-
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -40,11 +35,16 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.velli20.tachograph.DateUtils;
+import com.velli20.tachograph.R;
+import com.velli20.tachograph.restingtimes.OnRegulationsChangedListener;
+import com.velli20.tachograph.restingtimes.Regulations;
 
 import java.lang.ref.WeakReference;
 

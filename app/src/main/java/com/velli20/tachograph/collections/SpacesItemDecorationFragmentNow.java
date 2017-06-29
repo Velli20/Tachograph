@@ -41,17 +41,17 @@ public class SpacesItemDecorationFragmentNow extends RecyclerView.ItemDecoration
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        outRect.bottom = Math.max(space - mAppCompatElevation, 0 );
-        outRect.left = Math.max(space - mAppCompatElevation, 0 );
-        
+        outRect.bottom = Math.max(space - mAppCompatElevation, 0);
+        outRect.left = Math.max(space - mAppCompatElevation, 0);
+
         int position = parent.getChildAdapterPosition(view);
         // Add top margin only for the first item to avoid double space between items
-        if(position == 0){
-            outRect.top = Math.max(space - mAppCompatElevation, 0 );
+        if (position == 0) {
+            outRect.top = Math.max(space - mAppCompatElevation, 0);
         }
-        
 
-        outRect.right = Math.max(space - mAppCompatElevation, 0 );
+
+        outRect.right = Math.max(space - mAppCompatElevation, 0);
 
     }
 

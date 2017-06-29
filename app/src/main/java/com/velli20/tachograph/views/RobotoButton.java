@@ -26,50 +26,50 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
+import com.velli20.tachograph.R;
+
 
 public class RobotoButton extends AppCompatButton {
 
-	public RobotoButton(Context context) {
-		super(context);
-		init(context, null);
-	}
-	
-	public RobotoButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context, attrs);
-	}
-	
-	public RobotoButton(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		init(context, attrs);
-	}
-	
-	private void init(Context context, AttributeSet attrs) {
-		int typeface = 3;
+    public RobotoButton(Context context) {
+        super(context);
+        init(context, null);
+    }
 
-		if (isInEditMode()) {
-			return;
-		}
-		if (attrs != null) {
-			TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RobotoText, 0, 0);
-			try {
-				typeface = a.getInt(com.velli20.tachograph.R.styleable.RobotoText_style, 3);
-			} finally {
-				a.recycle();
-			}
-		}
+    public RobotoButton(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context, attrs);
+    }
 
-		Typeface roboto = RobotoLightTextView.getTypeface(getResources(), typeface);
-		setTypeface(roboto);
-	}
+    public RobotoButton(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(context, attrs);
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        int typeface = 3;
+
+        if (isInEditMode()) {
+            return;
+        }
+        if (attrs != null) {
+            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RobotoText, 0, 0);
+            try {
+                typeface = a.getInt(com.velli20.tachograph.R.styleable.RobotoText_style, 3);
+            } finally {
+                a.recycle();
+            }
+        }
+
+        Typeface roboto = RobotoLightTextView.getTypeface(getResources(), typeface);
+        setTypeface(roboto);
+    }
 
 }
 

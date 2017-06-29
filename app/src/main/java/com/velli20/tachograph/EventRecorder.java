@@ -37,22 +37,27 @@ import com.velli20.tachograph.database.DataBaseHandler;
 
 import java.lang.ref.WeakReference;
 
-public enum  EventRecorder {
+public enum EventRecorder {
     INSTANCE;
 
+    private final Handler mScheduledEventHandler = new Handler();
     private boolean mEventRecordingScheduled = false;
     private int mScheduledEventType;
     private Event mScheduledEventIdToMatch;
     private long mScheduledDate;
     private long mScheduledEventStartDate;
-
-    private static EventRecorder sEventRecorderInstance;
-    private final Handler mScheduledEventHandler = new Handler();
     private WeakReference<OnEventScheduledListener> mListener;
+    private final Runnable mScheduledEventRunnable = new Runnable() {
 
-    public interface OnEventScheduledListener {
-        void onEventScheduled(boolean isEventScheduled, int scheduledEventType, long scheduledDate);
-    }
+        @Override
+        public void run() {
+            if (mEventRecordingScheduled) {
+                startRecordingEventExplicitlyWithCurrentEventId(mScheduledEventType, mScheduledEventStartDate, mScheduledEventIdToMatch);
+                cancelScheduledEvent();
+                notifyCallback();
+            }
+        }
+    };
 
     /* Start recording new Event. This will end any ongoing recording events */
     public void startRecordingEvent(int eventType, long startTime) {
@@ -69,11 +74,11 @@ public enum  EventRecorder {
 
             @Override
             public void onGetEvent(Event ev) {
-                if(ev != null) {
+                if (ev != null) {
                     /* Stop this event */
-                    endRecordingEvent(ev, System.currentTimeMillis()-1);
+                    endRecordingEvent(ev, System.currentTimeMillis() - 1);
                 }
-                if((ev != null && ev.getEventType() != eventToRecord.getEventType()) || ev == null) {
+                if ((ev != null && ev.getEventType() != eventToRecord.getEventType()) || ev == null) {
                     /* Add recording event to the database */
                     DataBaseHandler.getInstance().addNewEvent(eventToRecord);
                 }
@@ -98,14 +103,14 @@ public enum  EventRecorder {
 
             @Override
             public void onGetEvent(Event ev) {
-                if((ev == null && eventToMatch != null) || (ev != null && eventToMatch != null && ev.getRowId() != eventToMatch.getRowId())) {
+                if ((ev == null && eventToMatch != null) || (ev != null && eventToMatch != null && ev.getRowId() != eventToMatch.getRowId())) {
                     return;
                 }
-                if(ev != null) {
+                if (ev != null) {
                     /* Stop this event */
-                    endRecordingEvent(ev, startTime-1);
+                    endRecordingEvent(ev, startTime - 1);
                 }
-                if((ev != null && ev.getEventType() != eventToRecord.getEventType()) || ev == null) {
+                if ((ev != null && ev.getEventType() != eventToRecord.getEventType()) || ev == null) {
                     /* Add recording event to the database */
                     DataBaseHandler.getInstance().addNewEvent(eventToRecord);
                 }
@@ -115,7 +120,7 @@ public enum  EventRecorder {
 
     /* End recording event */
     public void endRecordingEvent(Event ev, long endTime) {
-        if(ev == null) {
+        if (ev == null) {
             return;
         }
         final Resources res = App.get().getResources();
@@ -127,7 +132,7 @@ public enum  EventRecorder {
         ev.setEndTime(DateUtils.getCurrentHour(endTime), DateUtils.getCurrentMinute(endTime));
 
         /* Avoid adding events to database with 0 min duration */
-        if(ev.getEndDateInMillis() - ev.getStartDateInMillis() < (60*1000) && deleteOneMinEvents) {
+        if (ev.getEndDateInMillis() - ev.getStartDateInMillis() < (60 * 1000) && deleteOneMinEvents) {
             DataBaseHandler.getInstance().deleteEvent(ev.getRowId());
 
         } else {
@@ -152,7 +157,7 @@ public enum  EventRecorder {
         mScheduledEventStartDate = eventStartTime;
         mScheduledEventIdToMatch = currentEvent;
 
-        if(delay < 0) {
+        if (delay < 0) {
             startRecordingEventExplicitlyWithCurrentEventId(mScheduledEventType, mScheduledEventStartDate, mScheduledEventIdToMatch);
             return;
         }
@@ -163,54 +168,52 @@ public enum  EventRecorder {
     public void cancelScheduledEvent() {
         mEventRecordingScheduled = false;
         mScheduledEventIdToMatch = null;
-        if(mScheduledEventHandler != null) {
+        if (mScheduledEventHandler != null) {
             mScheduledEventHandler.removeCallbacks(mScheduledEventRunnable);
         }
         notifyCallback();
     }
 
-    public boolean isEventScheduled() { return mEventRecordingScheduled; }
+    public boolean isEventScheduled() {
+        return mEventRecordingScheduled;
+    }
 
-    public int getScheduledEventType() { return mScheduledEventType; }
+    public int getScheduledEventType() {
+        return mScheduledEventType;
+    }
 
-    public long getScheduledDate() { return mScheduledDate; }
-
-    private final Runnable mScheduledEventRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            if(mEventRecordingScheduled) {
-                startRecordingEventExplicitlyWithCurrentEventId(mScheduledEventType, mScheduledEventStartDate, mScheduledEventIdToMatch);
-                cancelScheduledEvent();
-                notifyCallback();
-            }
-        }
-    };
+    public long getScheduledDate() {
+        return mScheduledDate;
+    }
 
     public void registerOnEventScheduledListener(OnEventScheduledListener l) {
-        mListener =  new WeakReference<>(l);
+        mListener = new WeakReference<>(l);
     }
 
     public void unregisterOnEventScheduledListener(OnEventScheduledListener l) {
-        if(l == null && mListener != null && mListener.get().equals(l)) {
+        if (l == null && mListener != null && mListener.get().equals(l)) {
             mListener.clear();
             mListener = null;
         }
     }
 
-
     private void notifyCallback() {
-        if(mListener == null || mListener.get() == null) {
+        if (mListener == null || mListener.get() == null) {
             return;
         }
         /* Use UI thread to notify callback */
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                if(mListener.get() != null) {
+                if (mListener.get() != null) {
                     mListener.get().onEventScheduled(mEventRecordingScheduled, mScheduledEventType, mScheduledDate);
                 }
             }
         });
+    }
+
+
+    public interface OnEventScheduledListener {
+        void onEventScheduled(boolean isEventScheduled, int scheduledEventType, long scheduledDate);
     }
 }

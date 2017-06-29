@@ -26,19 +26,6 @@
 
 package com.velli20.tachograph;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
-import com.velli20.tachograph.ExportEvents.OnFileSavedListener;
-import com.velli20.tachograph.database.DataBaseHandlerConstants;
-import com.velli20.tachograph.filepicker.ActivityFilePicker;
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.preferences.CustomCheckBoxPreference;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -61,9 +48,22 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
+import com.velli20.tachograph.ExportEvents.OnFileSavedListener;
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.DataBaseHandlerConstants;
+import com.velli20.tachograph.filepicker.ActivityFilePicker;
+import com.velli20.tachograph.preferences.CustomCheckBoxPreference;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+
 
 public class FragmentSettings extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
-    private static final int PERMISSION_REQUEST_FINE_LOCATION = 0;
+    public static final int PERMISSION_REQUEST_FINE_LOCATION = 0;
     public static final int EXPORT_REQUEST_CODE = 43;
     public static final int PICK_BACKUP_FILE_REQUEST_CODE = 47;
     public static final int BACKUP_REQUEST_CODE = 49;
@@ -72,6 +72,38 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
 
     private SharedPreferences mPrefs;
 
+    public static void createFileSavedNotification(Context c, File file) {
+        if (file == null || c == null || !file.exists()) {
+            return;
+        }
+        Intent intent = new Intent();
+        int notificationId = 120;
+
+        intent.setAction(Intent.ACTION_VIEW);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && c != null && file != null) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            Uri contentUri = FileProvider.getUriForFile(c, "com.velli20.tachograph.fileProvider", file);
+            if (contentUri != null) {
+                intent.setDataAndType(contentUri, "application/vnd.ms-excel");
+            }
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.ms-excel");
+        }
+
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(c)
+                .setContentTitle(c.getText(R.string.notification_file_saved))
+                .setSmallIcon(R.drawable.ic_action_share)
+                .setColor(c.getResources().getColor(R.color.color_primary))
+                .setTicker(c.getText(R.string.notification_file_saved))
+                .setContentIntent(resultPendingIntent);
+
+        ((NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE)).notify(notificationId, notification.build());
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -105,10 +137,7 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
             }
 
         }
-
-
     }
-
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -165,7 +194,6 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
         return true;
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -201,7 +229,7 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
                     @Override
                     public void onFileSaved(File file) {
                         if (file.exists()) {
-                            createFileSavedNotification(getActivity(), file);
+                            createFileSavedNotification(getActivity().getApplicationContext(), file);
                         }
                     }
                 });
@@ -216,7 +244,6 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
             }
         }
     }
-
 
     public void onRemoveAllLogs() {
         new MaterialDialog.Builder(getActivity())
@@ -237,7 +264,6 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
                 .show();
 
     }
-
 
     public void backup(File file) {
         DataBaseHandler db = DataBaseHandler.getInstance();
@@ -263,7 +289,6 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
         }
     }
 
-
     public void restore(File fileToRestore) {
 
         final DataBaseHandler db = DataBaseHandler.getInstance();
@@ -285,37 +310,6 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
             }
         } catch (Exception ignored) {
         }
-    }
-
-
-    public static void createFileSavedNotification(Context c, File file) {
-        if (file == null || c == null || !file.exists()) {
-            return;
-        }
-        Intent intent = new Intent();
-        int notificationId = 120;
-
-        intent.setAction(Intent.ACTION_VIEW);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(c, "com.velli.tachograph.fileProvider", file);
-            intent.setDataAndType(contentUri, "application/vnd.ms-excel");
-        } else {
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.ms-excel");
-        }
-
-
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(c)
-                .setContentTitle(c.getText(R.string.notification_file_saved))
-                .setSmallIcon(R.drawable.ic_action_share)
-                .setColor(c.getResources().getColor(R.color.color_primary))
-                .setTicker(c.getText(R.string.notification_file_saved))
-                .setContentIntent(resultPendingIntent);
-
-        ((NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE)).notify(notificationId, notification.build());
     }
 
 

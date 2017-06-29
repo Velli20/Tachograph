@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,12 +27,12 @@
 <resources>
 
     <string name="app_name">Tachograph</string>
-    
+
     <string name="menu_settings">Settings</string>
     <string name="menu_send_feedback">Send feedback</string>
     <string name="menu_discard">Delete event</string>
     <string name="menu_save_changes">Save changes</string>
-    
+
     <string name="menu_filter">Filter</string>
     <string name="menu_filter_category_drive">Driving</string>
     <string name="menu_filter_category_rest">Break/rest</string>
@@ -66,6 +65,8 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_today">Today</string>
     <string name="action_enable_gps">Enable GPS</string>
+    <string name="action_grant_location_permission">Grant location permission</string>
+    <string name="action_enable_gps_monitor">Enable GPS monitor</string>
 
     <string name="dialog_title_remove_all_logs">Delete all data</string>
     <string name="dialog_title_map_layer">Map layer</string>
@@ -98,6 +99,8 @@
     <string name="title_gps_logger_vehicle_stopped" formatted="false">Vehicle is stopped. GPS speed: %d km/h</string>
     <string name="title_gps_logger_gps_provider_turned_disabled">GPS provider disabled. Turn GPS on in device settings</string>
     <string name="title_gps_logger_acquiring_gps_fix">Waiting for GPS signal</string>
+    <string name="title_gps_logger_no_gps_permission">Location permission denied</string>
+    <string name="title_gps_logger_gps_speed_monitor_not_enabled">GPS speed monitor not enabled</string>
     <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">GPS signal not accurate enough. Accuracy: ± %d m</string>
     <string name="title_detected_activity_driving">Detected activity: Driving</string>
     <string name="title_detected_activity_walking">Detected activity: Walking</string>
@@ -185,13 +188,13 @@
     <string name="log_summary_wtd_weekly_work_time">WTD weekly work time:</string>
     <string name="log_summary_total_driven_distance">Total driven distance:</string>
     <string name="log_summary_driven_distance">Driven distance:</string>
-    
+
     <string name="log_summary_daily_rest_time">Daily rest:</string>
     <string name="log_summary_daily_driving_time">Daily driving time:</string>
     <string name="log_summary_daily_working_time">Daily working time:</string>
     <string name="log_summary_daily_wtd_working_time">WTD daily working time:</string>
     <string name="log_summary_no_items_to_display">No log summaries available.</string>
-    
+
     <string name="work_limit_daily_rest">Daily rest</string>
     <string name="work_limit_weekly_rest">Weekly rest</string>
     <string name="work_limit_weekly_driving_time">Weekly driving time</string>
@@ -208,24 +211,24 @@
     <string name="work_limit_continuous_driving_time_remaining">Continuous driving time remaining</string>
     <string name="work_limit_daily_driving_time_remaining">Daily driving time remaining</string>
     <string name="work_limit_break_time_remaining">Break time remaining</string>
-    
+
     <string name="work_limit_wtd_daily_rest_remaining">WTD daily rest remaining</string>
     <string name="work_limit_wtd_weekly_rest_remaining">WTD weekly rest remaining</string>
     <string name="work_limit_wtd_weekly_working_remaining">WTD weekly working time remaining</string>
-    
+
     <string-array name="months">
-        <item >January</item>
-        <item >February</item>
-        <item >March</item>
-        <item >April</item>
-        <item >May</item>
-        <item >June</item>
-        <item >July</item>
-        <item >August</item>
-        <item >September</item>
-        <item >October</item>
-        <item >November</item>
-        <item >December</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 
 
@@ -233,7 +236,7 @@
     <string name="preference_category_log">Log</string>
     <string name="preference_category_gps_settings">GPS settings</string>
     <string name="preference_category_about">About</string>
-    
+
     <string name="preference_title_show_notifications">Show notifications</string>
     <string name="preference_title_count_activity_progress">Count activity progress</string>
     <string name="preference_title_remove_all_logs">Clear log</string>

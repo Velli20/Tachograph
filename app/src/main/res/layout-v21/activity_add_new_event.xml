@@ -31,7 +31,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/activity_add_new_event_status_bar_reveal_background"

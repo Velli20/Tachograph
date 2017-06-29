@@ -35,7 +35,9 @@ import java.util.List;
 
 public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProviderCompat
         implements View.OnHoverListener {
-    /** Virtual node identifier value for invalid nodes. */
+    /**
+     * Virtual node identifier value for invalid nodes.
+     */
     public static final int INVALID_ID = Integer.MIN_VALUE;
 
     private final Rect mTempScreenRect = new Rect();
@@ -44,7 +46,24 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
     private final int[] mTempGlobalRect = new int[2];
 
     private final AccessibilityManager mManager;
+    private final AccessibilityDelegateCompat mDelegate = new AccessibilityDelegateCompat() {
+        @Override
+        public void onInitializeAccessibilityEvent(View view, AccessibilityEvent event) {
+            super.onInitializeAccessibilityEvent(view, event);
+            event.setClassName(view.getClass().getName());
+        }
 
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat info) {
+            super.onInitializeAccessibilityNodeInfo(view, info);
+            info.setClassName(view.getClass().getName());
+        }
+
+        @Override
+        public AccessibilityNodeProviderCompat getAccessibilityNodeProvider(View host) {
+            return TouchExplorationHelper.this;
+        }
+    };
     private View mParentView;
     private int mFocusedItemId = INVALID_ID;
     private T mCurrentItem = null;
@@ -61,22 +80,10 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
 
     /**
      * @return The current accessibility focused item, or {@code null} if no
-     *         item is focused.
+     * item is focused.
      */
     public T getFocusedItem() {
         return getItemForId(mFocusedItemId);
-    }
-
-    /**
-     * Clears the current accessibility focused item.
-     */
-    public void clearFocusedItem() {
-        final int itemId = mFocusedItemId;
-        if (itemId == INVALID_ID) {
-            return;
-        }
-
-        performAction(itemId, AccessibilityNodeInfoCompat.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
     }
 
     /**
@@ -91,6 +98,18 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
         }
 
         performAction(itemId, AccessibilityNodeInfoCompat.ACTION_ACCESSIBILITY_FOCUS, null);
+    }
+
+    /**
+     * Clears the current accessibility focused item.
+     */
+    public void clearFocusedItem() {
+        final int itemId = mFocusedItemId;
+        if (itemId == INVALID_ID) {
+            return;
+        }
+
+        performAction(itemId, AccessibilityNodeInfoCompat.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
     }
 
     /**
@@ -122,7 +141,7 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
      * Populates an event of the specified type with information about an item
      * and attempts to send it up through the view hierarchy.
      *
-     * @param item The item for which to send an event.
+     * @param item      The item for which to send an event.
      * @param eventType The type of event to send.
      * @return {@code true} if the event was sent successfully.
      */
@@ -357,25 +376,6 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
         return mDelegate;
     }
 
-    private final AccessibilityDelegateCompat mDelegate = new AccessibilityDelegateCompat() {
-        @Override
-        public void onInitializeAccessibilityEvent(View view, AccessibilityEvent event) {
-            super.onInitializeAccessibilityEvent(view, event);
-            event.setClassName(view.getClass().getName());
-        }
-
-        @Override
-        public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat info) {
-            super.onInitializeAccessibilityNodeInfo(view, info);
-            info.setClassName(view.getClass().getName());
-        }
-
-        @Override
-        public AccessibilityNodeProviderCompat getAccessibilityNodeProvider(View host) {
-            return TouchExplorationHelper.this;
-        }
-    };
-
     /**
      * Performs an accessibility action on the specified item. See
      * {@link AccessibilityNodeInfoCompat#performAction(int, Bundle)}.
@@ -388,8 +388,8 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
      * method.
      * </p>
      *
-     * @param item The item on which to perform the action.
-     * @param action The accessibility action to perform.
+     * @param item      The item on which to perform the action.
+     * @param action    The accessibility action to perform.
      * @param arguments Arguments for the action, or optionally {@code null}.
      * @return {@code true} if the action was performed successfully.
      */
@@ -407,7 +407,7 @@ public abstract class TouchExplorationHelper<T> extends AccessibilityNodeProvide
      * </ul>
      * </p>
      *
-     * @param item The item for which to populate the event.
+     * @param item  The item for which to populate the event.
      * @param event The event to populate.
      */
     protected abstract void populateEventForItem(T item, AccessibilityEvent event);

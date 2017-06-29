@@ -32,27 +32,26 @@ import java.util.ArrayList;
 public enum GoogleDetectedActivityStatus {
     INSTANCE;
     private boolean mIsDetectedActivityEnabled;
-
-    public interface OnGoogleDetectedActivityStatusChangedListener {
-        void onGoogleDetectedActivityStatusChanged(int newStatus);
-    }
-
     private int mDetectedActivityStatus = GoogleDetectedActivityListener.DETECTED_ACTIVITY_UNKNOWN;
     private ArrayList<WeakReference<OnGoogleDetectedActivityStatusChangedListener>> mCallbacks = new ArrayList<>();
+
+    public int getDetectedActivityStatus() {
+        return mDetectedActivityStatus;
+    }
 
     public void setDetectedActivityStatus(int status) {
         mDetectedActivityStatus = status;
         notifyCallbacks();
     }
 
+    public boolean isDetectedActivityEnabled() {
+        return mIsDetectedActivityEnabled;
+    }
+
     public void setDetectedActivityEnabled(boolean enabled) {
         mIsDetectedActivityEnabled = enabled;
         notifyCallbacks();
     }
-
-    public int getDetectedActivityStatus() { return mDetectedActivityStatus; }
-
-    public boolean isDetectedActivityEnabled() { return mIsDetectedActivityEnabled; }
 
     public boolean isActivityDriving() {
         return mIsDetectedActivityEnabled && mDetectedActivityStatus == GoogleDetectedActivityListener.DETECTED_ACTIVITY_DRIVING;
@@ -64,17 +63,17 @@ public enum GoogleDetectedActivityStatus {
     }
 
     public void registerOnGoogleDetectedActivityStatusChangedListener(OnGoogleDetectedActivityStatusChangedListener l) {
-        if(l == null) {
+        if (l == null) {
             return;
         }
         mCallbacks.add(new WeakReference<>(l));
     }
 
     public void unregisterOnGoogleDetectedActivityStatusChangedListener(OnGoogleDetectedActivityStatusChangedListener l) {
-        if(l == null) {
+        if (l == null) {
             return;
         }
-        for(WeakReference<OnGoogleDetectedActivityStatusChangedListener> callback : mCallbacks) {
+        for (WeakReference<OnGoogleDetectedActivityStatusChangedListener> callback : mCallbacks) {
             if (callback != null && callback.get() != null && callback.get().equals(l)) {
                 callback.clear();
                 mCallbacks.remove(callback);
@@ -84,10 +83,14 @@ public enum GoogleDetectedActivityStatus {
     }
 
     private void notifyCallbacks() {
-        for(WeakReference<OnGoogleDetectedActivityStatusChangedListener> callback : mCallbacks) {
-            if(callback != null && callback.get() != null) {
+        for (WeakReference<OnGoogleDetectedActivityStatusChangedListener> callback : mCallbacks) {
+            if (callback != null && callback.get() != null) {
                 callback.get().onGoogleDetectedActivityStatusChanged(mDetectedActivityStatus);
             }
         }
+    }
+
+    public interface OnGoogleDetectedActivityStatusChangedListener {
+        void onGoogleDetectedActivityStatusChanged(int newStatus);
     }
 }

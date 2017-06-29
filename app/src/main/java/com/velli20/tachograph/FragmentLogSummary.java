@@ -26,15 +26,6 @@
 
 package com.velli20.tachograph;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import com.velli20.tachograph.collections.SpacesItemDecorationEventDetails;
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.database.GetLogSummaryTask;
-import com.velli20.tachograph.restingtimes.WeekHolder;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -55,49 +46,58 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.velli20.tachograph.collections.SpacesItemDecorationEventDetails;
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.GetLogSummaryTask;
+import com.velli20.tachograph.restingtimes.WeekHolder;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class FragmentLogSummary extends Fragment implements OnGroupClickListener {
-	public static final boolean DEBUG = false;
-	public static final String TAG = "FragmentLogSummary ";
-	private RecyclerView mList;
+    public static final boolean DEBUG = false;
+    public static final String TAG = "FragmentLogSummary ";
+    private RecyclerView mList;
     private LinearLayout mNoItemsView;
 
     private WeekOverviewAdapter mListAdapter;
-	private ArrayList<WeekHolder> mWorkingTimes;
-	private String mWeek = "";
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		final Resources res = getResources();
+    private ArrayList<WeekHolder> mWorkingTimes;
+    private String mWeek = "";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Resources res = getResources();
         mWeek = res.getString(R.string.title_week);
-	}
-	
-	@Override
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View v = inflater.inflate(R.layout.fragment_log_summary_layout, container, false);
+        final View v = inflater.inflate(R.layout.fragment_log_summary_layout, container, false);
 
         mList = (RecyclerView) v.findViewById(R.id.working_days_fragment_expandableListView);
-		mList.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.list_item_log_summary_week_divider_height)));
+        mList.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.list_item_log_summary_week_divider_height)));
 
-        mNoItemsView = (LinearLayout)v.findViewById(R.id.working_days_fragment_no_items);
+        mNoItemsView = (LinearLayout) v.findViewById(R.id.working_days_fragment_no_items);
 
-		return v;
-	}
+        return v;
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		DataBaseHandler.getInstance().getWorkingTimes(new GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener() {
-			@Override
-			public void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks) {
-				mWorkingTimes = workingWeeks;
-				initializeList();
-			}
-		}, true, true, true, true);
-	}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        DataBaseHandler.getInstance().getWorkingTimes(new GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener() {
+            @Override
+            public void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks) {
+                mWorkingTimes = workingWeeks;
+                initializeList();
+            }
+        }, true, true, true, true);
+    }
 
     private void initializeList() {
-        if(mWorkingTimes != null && !mWorkingTimes.isEmpty()){
+        if (mWorkingTimes != null && !mWorkingTimes.isEmpty()) {
             mListAdapter = new WeekOverviewAdapter(getActivity(), mWorkingTimes);
             mListAdapter.setOnGroupClickListener(FragmentLogSummary.this);
 
@@ -110,14 +110,14 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
             mNoItemsView.setVisibility(View.VISIBLE);
         }
     }
-	
-	@Override
-	public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-		if(DEBUG) {
-			Log.i(TAG, TAG + "onGroupClick(groupPosition " + groupPosition + ")");
-		}
-		ArrayList<Integer> eventIds = mWorkingTimes.get(groupPosition).getEventIds();
-        if(eventIds != null) {
+
+    @Override
+    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+        if (DEBUG) {
+            Log.i(TAG, TAG + "onGroupClick(groupPosition " + groupPosition + ")");
+        }
+        ArrayList<Integer> eventIds = mWorkingTimes.get(groupPosition).getEventIds();
+        if (eventIds != null) {
             Intent i = new Intent(getActivity(), ActivityLogSummaryWeek.class);
 
             i.putExtra(ActivityLogSummaryWeek.INTENT_START_DATE, mWorkingTimes.get(groupPosition).getStartDate());
@@ -125,112 +125,109 @@ public class FragmentLogSummary extends Fragment implements OnGroupClickListener
 
             getActivity().startActivity(i);
         }
-		return false;
-	}
+        return false;
+    }
 
 
-	
-	private class WeekOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-		private final LayoutInflater mInflater;
-		private ArrayList<WeekHolder> mItems;
-		private int mItemCount = 0;
-		private WeakReference<OnGroupClickListener> mGroupClickListener;
+    private class WeekOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private final LayoutInflater mInflater;
+        private ArrayList<WeekHolder> mItems;
+        private int mItemCount = 0;
+        private WeakReference<OnGroupClickListener> mGroupClickListener;
         private Drawable mElevationTop;
 
-        private WeekOverviewAdapter(Context c, ArrayList<WeekHolder> list){
-			mInflater = LayoutInflater.from(c);
-			mItems = list;
-			mItemCount = mItems.size();
+        private WeekOverviewAdapter(Context c, ArrayList<WeekHolder> list) {
+            mInflater = LayoutInflater.from(c);
+            mItems = list;
+            mItemCount = mItems.size();
             mElevationTop = c.getResources().getDrawable(R.drawable.dropdown_shadow_up);
-		}
+        }
 
         private void setOnGroupClickListener(OnGroupClickListener l) {
-			mGroupClickListener = new WeakReference<>(l);
-		}
+            mGroupClickListener = new WeakReference<>(l);
+        }
 
-		@Override
-		public int getItemCount() {
-			return mItemCount;
-		}
-		
-		@Override
-		public void onBindViewHolder(ViewHolder holder, int position) {
-			holder.itemView.setOnClickListener(new ClickListener(position));
+        @Override
+        public int getItemCount() {
+            return mItemCount;
+        }
 
-			setWeekData(((ViewHolderWeek)holder), position);
-		}
-		
-		private void setWeekData(ViewHolderWeek groupHolder, int position) {
-			WeekHolder weekHolder = mItems.get(position);
-			if(weekHolder == null || groupHolder == null) {
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.itemView.setOnClickListener(new ClickListener(position));
+
+            setWeekData(((ViewHolderWeek) holder), position);
+        }
+
+        private void setWeekData(ViewHolderWeek groupHolder, int position) {
+            WeekHolder weekHolder = mItems.get(position);
+            if (weekHolder == null || groupHolder == null) {
                 return;
             }
-			groupHolder.mTitle.setText(mWeek + " " + DateUtils.getWeekOfYear(weekHolder.getStartDate()));
-			groupHolder.mWeeklyDate.setText(DateUtils.dateSummary(weekHolder.getStartDate(), weekHolder.getEndDate()));
-			groupHolder.mWeeklyDriveTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyDrivingTime()));
-			groupHolder.mWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyWorkingTime()));
-			groupHolder.mWeeklyRestTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyRest()));
-			groupHolder.mWtdWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWtdWeeklyWorkingTime()));
+            groupHolder.mTitle.setText(mWeek + " " + DateUtils.getWeekOfYear(weekHolder.getStartDate()));
+            groupHolder.mWeeklyDate.setText(DateUtils.dateSummary(weekHolder.getStartDate(), weekHolder.getEndDate()));
+            groupHolder.mWeeklyDriveTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyDrivingTime()));
+            groupHolder.mWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyWorkingTime()));
+            groupHolder.mWeeklyRestTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWeeklyRest()));
+            groupHolder.mWtdWeeklyWorkTime.setText(DateUtils.convertMinutesToTimeString(weekHolder.getWtdWeeklyWorkingTime()));
             groupHolder.mDrivenDistance.setText(String.format(Locale.getDefault(), "%.2f", weekHolder.getWeeklyDrivenDistance()) + " km");
-            if(position == 0) {
+            if (position == 0) {
                 groupHolder.mShadowTop.setBackgroundColor(Color.WHITE);
             } else {
                 groupHolder.mShadowTop.setBackgroundDrawable(mElevationTop);
             }
-		}
-		
-	
-		
-		@Override
-		public ViewHolder onCreateViewHolder(ViewGroup root, int viewType) {
-			return new ViewHolderWeek(mInflater.inflate(R.layout.list_item_log_summary_week, root, false));
-			
-		}
-		
-		private class ViewHolderWeek extends RecyclerView.ViewHolder {
-			private TextView mTitle;
-			private TextView mWeeklyDate;
-			private TextView mWeeklyDriveTime;
-			private TextView mWeeklyWorkTime;
-			private TextView mWeeklyRestTime;
-			private TextView mWtdWeeklyWorkTime;
-			private TextView mDrivenDistance;
-			private View mShadowTop;
+        }
+
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup root, int viewType) {
+            return new ViewHolderWeek(mInflater.inflate(R.layout.list_item_log_summary_week, root, false));
+
+        }
+
+        private class ViewHolderWeek extends RecyclerView.ViewHolder {
+            private TextView mTitle;
+            private TextView mWeeklyDate;
+            private TextView mWeeklyDriveTime;
+            private TextView mWeeklyWorkTime;
+            private TextView mWeeklyRestTime;
+            private TextView mWtdWeeklyWorkTime;
+            private TextView mDrivenDistance;
+            private View mShadowTop;
             private View mBackground;
 
-			private ViewHolderWeek(View itemView) {
-				super(itemView);
-				mTitle = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_title_week_of_year);
-				mWeeklyDate = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_date);
-				mWeeklyDriveTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_driving_time);
-				mWeeklyWorkTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_working_time);
-				mWeeklyRestTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_rest_time);
-				mWtdWeeklyWorkTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_wtd_weekly_working_time);
+            private ViewHolderWeek(View itemView) {
+                super(itemView);
+                mTitle = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_title_week_of_year);
+                mWeeklyDate = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_date);
+                mWeeklyDriveTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_driving_time);
+                mWeeklyWorkTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_working_time);
+                mWeeklyRestTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_weekly_rest_time);
+                mWtdWeeklyWorkTime = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_wtd_weekly_working_time);
                 mDrivenDistance = (TextView) itemView.findViewById(R.id.list_item_log_summary_week_driven_distance);
                 mShadowTop = itemView.findViewById(R.id.list_item_log_summary_week_shadow_top);
                 mBackground = itemView.findViewById(R.id.list_item_log_summary_week_background);
 
-			}
-		}
+            }
+        }
 
 
+        private class ClickListener implements OnClickListener {
+            private int mGroupPosition;
 
-		private class ClickListener implements OnClickListener {
-			private int mGroupPosition;
+            private ClickListener(int groupPosition) {
+                mGroupPosition = groupPosition;
+            }
 
-			private ClickListener(int groupPosition){
-				mGroupPosition = groupPosition;
-			}
-			
-			@Override
-			public void onClick(View v) {
-				if(mGroupClickListener != null && mGroupClickListener.get() != null) {
-					mGroupClickListener.get().onGroupClick(null, v, mGroupPosition, -1);
-				} 
-				
-			}
-		}
-		
-	}
+            @Override
+            public void onClick(View v) {
+                if (mGroupClickListener != null && mGroupClickListener.get() != null) {
+                    mGroupClickListener.get().onGroupClick(null, v, mGroupPosition, -1);
+                }
+
+            }
+        }
+
+    }
 
 }

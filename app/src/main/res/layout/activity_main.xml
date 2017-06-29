@@ -28,7 +28,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -40,13 +40,13 @@
         app:contentInsetLeft="16dp"
         app:contentInsetStart="16dp"
         app:theme="@style/ToolbarStyle"
-        tools:ignore="UnusedAttribute" >
+        tools:ignore="UnusedAttribute">
 
         <Spinner
             android:id="@+id/navigation_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|left|start"/>
+            android:gravity="center_vertical|left|start" />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
@@ -54,13 +54,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/toolbar_height" />
-    
-    <View 
+
+    <View
         android:id="@+id/toolbar_shadow"
-        android:layout_height="3dp"
         android:layout_width="match_parent"
-        android:background="@drawable/dropdown_shadow"
+        android:layout_height="3dp"
         android:layout_gravity="top"
-        android:layout_marginTop="@dimen/toolbar_height"/>
+        android:layout_marginTop="@dimen/toolbar_height"
+        android:background="@drawable/dropdown_shadow" />
 
 </FrameLayout>

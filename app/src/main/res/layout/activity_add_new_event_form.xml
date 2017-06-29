@@ -52,11 +52,11 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_time"
         style="@style/Subtitle.ActivityAddNewEvent"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_below="@+id/activity_add_new_event_spinner_divider"
         android:drawableLeft="@drawable/ic_time"
-        android:text="@string/add_event_title_time" />
+        android:text="@string/add_event_title_time"
+        custom:style="medium" />
 
     <View
         android:id="@+id/activity_add_new_event_title_time_divider"
@@ -66,12 +66,12 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_start_time"
         style="@style/Title.ActivityAddNewEvent"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_add_new_event_title_time_divider"
         android:layout_toLeftOf="@+id/activity_add_new_event_button_start_time"
-        android:text="@string/add_event_event_start_time" />
+        android:text="@string/add_event_event_start_time"
+        custom:style="regular" />
 
     <Button
         android:id="@+id/activity_add_new_event_button_start_time"
@@ -85,12 +85,12 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_end_time"
         style="@style/Title.ActivityAddNewEvent"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_add_new_event_button_start_time"
         android:layout_toLeftOf="@+id/activity_add_new_event_button_end_time"
-        android:text="@string/add_event_event_end_time" />
+        android:text="@string/add_event_event_end_time"
+        custom:style="regular" />
 
     <Button
         android:id="@+id/activity_add_new_event_button_end_time"
@@ -104,11 +104,11 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_date"
         style="@style/Subtitle.ActivityAddNewEvent"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_below="@+id/activity_add_new_event_title_end_time"
         android:drawableLeft="@drawable/ic_event"
-        android:text="@string/add_event_title_date" />
+        android:text="@string/add_event_title_date"
+        custom:style="medium" />
 
     <View
         android:id="@+id/activity_add_new_event_title_date_divider"
@@ -119,12 +119,12 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_start_date"
         style="@style/Title.ActivityAddNewEvent"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_add_new_event_title_date_divider"
         android:layout_toLeftOf="@+id/activity_add_new_event_button_start_date"
-        android:text="@string/add_event_event_start_date" />
+        android:text="@string/add_event_event_start_date"
+        custom:style="regular" />
 
     <Button
         android:id="@+id/activity_add_new_event_button_start_date"
@@ -139,12 +139,12 @@
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/activity_add_new_event_title_end_date"
         style="@style/Title.ActivityAddNewEvent"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_add_new_event_title_start_date"
         android:layout_toLeftOf="@+id/activity_add_new_event_button_end_date"
-        android:text="@string/add_event_event_end_date" />
+        android:text="@string/add_event_event_end_date"
+        custom:style="regular" />
 
     <Button
         android:id="@+id/activity_add_new_event_button_end_date"
@@ -165,10 +165,10 @@
         <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/activity_add_new_event_title_mileage"
             style="@style/Subtitle.ActivityAddNewEvent"
-            custom:style="medium"
             android:layout_width="wrap_content"
             android:drawableLeft="@drawable/ic_mileage"
-            android:text="@string/add_event_title_mileage" />
+            android:text="@string/add_event_title_mileage"
+            custom:style="medium" />
 
         <View
             android:id="@+id/activity_add_new_event_title_mileage_divider"
@@ -181,11 +181,11 @@
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/activity_add_new_event_title_mileage_start"
                 style="@style/Title.ActivityAddNewEvent"
-                custom:style="regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/activity_add_new_event_button_mileage_start"
-                android:text="@string/add_event_event_mileage_at_start" />
+                android:text="@string/add_event_event_mileage_at_start"
+                custom:style="regular" />
 
             <Button
                 android:id="@+id/activity_add_new_event_button_mileage_start"
@@ -203,11 +203,11 @@
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/activity_add_new_event_title_mileage_end"
                 style="@style/Title.ActivityAddNewEvent"
-                custom:style="regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/activity_add_new_event_button_mileage_end"
-                android:text="@string/add_event_event_mileage_at_end" />
+                android:text="@string/add_event_event_mileage_at_end"
+                custom:style="regular" />
 
             <Button
                 android:id="@+id/activity_add_new_event_button_mileage_end"

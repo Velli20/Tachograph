@@ -29,50 +29,49 @@ package com.velli20.tachograph;
 import android.app.IntentService;
 import android.content.Intent;
 
-public class StartEventService extends IntentService  {
-	public static final String INTENT_EXTRA_EVENT = "event widget";
-	public static final String INTENT_EXTRA_CURRENT_EVENT = "current event";
-	public static final String INTENT_EXTRA_EVENT_TO_START = "event to start";
-	public static final String TAG = "StartEventService ";
+public class StartEventService extends IntentService {
+    public static final String INTENT_EXTRA_EVENT = "event widget";
+    public static final String INTENT_EXTRA_CURRENT_EVENT = "current event";
+    public static final String INTENT_EXTRA_EVENT_TO_START = "event to start";
+    public static final String TAG = "StartEventService ";
 
-	
-	public StartEventService() {
-		super(StartEventService.class.getName());
-	}
 
-	
-	
-	
+    public StartEventService() {
+        super(StartEventService.class.getName());
+    }
 
-	@Override
-	protected void onHandleIntent(Intent i) {
-		
-		if(i != null){
-			int event = i.getIntExtra(INTENT_EXTRA_EVENT, -1);
-			int eventToStart = i.getIntExtra(INTENT_EXTRA_EVENT_TO_START, -1);
-			int currentEvent = i.getIntExtra(INTENT_EXTRA_CURRENT_EVENT, -1);
-			
-			if(eventToStart != -1){
-				EventRecorder.INSTANCE.startRecordingEvent(eventToStart, System.currentTimeMillis());
-			} else {
-				if(event == 0){
-					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
-				} else if(event == 1){
-					final Intent choose = new Intent(this, ActivityRestTypeChooser.class);
-					choose.putExtra(ActivityRestTypeChooser.INTENT_EXTRA_CURRENT_EVENT_TYPE, currentEvent);
-					choose.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					
-					startActivity(choose);
-					stopSelf();
-				} if(event == 2){
-					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_OTHER_WORK, System.currentTimeMillis());
-				} if(event == 3){
-					EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_POA, System.currentTimeMillis());
 
-				}
-			}
-		}
-		
-	}
+    @Override
+    protected void onHandleIntent(Intent i) {
+
+        if (i != null) {
+            int event = i.getIntExtra(INTENT_EXTRA_EVENT, -1);
+            int eventToStart = i.getIntExtra(INTENT_EXTRA_EVENT_TO_START, -1);
+            int currentEvent = i.getIntExtra(INTENT_EXTRA_CURRENT_EVENT, -1);
+
+            if (eventToStart != -1) {
+                EventRecorder.INSTANCE.startRecordingEvent(eventToStart, System.currentTimeMillis());
+            } else {
+                if (event == 0) {
+                    EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
+                } else if (event == 1) {
+                    final Intent choose = new Intent(this, ActivityRestTypeChooser.class);
+                    choose.putExtra(ActivityRestTypeChooser.INTENT_EXTRA_CURRENT_EVENT_TYPE, currentEvent);
+                    choose.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(choose);
+                    stopSelf();
+                }
+                if (event == 2) {
+                    EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_OTHER_WORK, System.currentTimeMillis());
+                }
+                if (event == 3) {
+                    EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_POA, System.currentTimeMillis());
+
+                }
+            }
+        }
+
+    }
 
 }

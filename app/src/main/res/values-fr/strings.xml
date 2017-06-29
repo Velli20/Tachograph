@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -64,6 +63,8 @@
     <string name="action_cancel">Annuler</string>
     <string name="action_today">Aujourd\'hui</string>
     <string name="action_enable_gps">Enable GPS</string>
+    <string name="action_grant_location_permission">Grant location permission</string>
+    <string name="action_enable_gps_monitor">Enable GPS monitor</string>
 
     <string name="dialog_title_remove_all_logs">Effacer toutes les données</string>
     <string name="dialog_title_map_layer">Couche de carte</string>
@@ -97,6 +98,8 @@
     <string name="title_gps_logger_vehicle_stopped" formatted="false">Vehicle is stopped. GPS speed: %d km/h</string>
     <string name="title_gps_logger_gps_provider_turned_disabled">GPS provider disabled. Turn GPS on in device settings</string>
     <string name="title_gps_logger_acquiring_gps_fix">Waiting for GPS signal</string>
+    <string name="title_gps_logger_no_gps_permission">Location permission denied</string>
+    <string name="title_gps_logger_gps_speed_monitor_not_enabled">GPS speed monitor not enabled</string>
     <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">GPS signal not accurate enough. Accuracy: ± %d m</string>
     <string name="title_detected_activity_driving">Detected activity: Driving</string>
     <string name="title_detected_activity_walking">Detected activity: Walking</string>

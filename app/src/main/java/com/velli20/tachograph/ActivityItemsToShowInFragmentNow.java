@@ -26,8 +26,6 @@
 
 package com.velli20.tachograph;
 
-import com.velli20.tachograph.views.RobotoSwitchCompat;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -38,8 +36,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +49,8 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 
+import com.velli20.tachograph.views.RobotoSwitchCompat;
+
 public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implements OnSharedPreferenceChangeListener {
     private static final boolean DEBUG = true;
     private static final String TAG = "ActivityItemsToShowInFragmentNow ";
@@ -59,6 +59,40 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
     private ItemTouchHelper mItemTouchHelper;
     private int[] mPositions;
     private boolean[] mShow;
+    private final ItemTouchHelper.SimpleCallback mSimpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+        }
+
+        @Override
+        public boolean onMove(RecyclerView arg0, ViewHolder viewHolder, ViewHolder target) {
+            final int fromPos = mPositions[viewHolder.getAdapterPosition()];
+            final int toPos = mPositions[target.getAdapterPosition()];
+
+            final boolean showFromPos = mShow[viewHolder.getAdapterPosition()];
+            final boolean showToPos = mShow[target.getAdapterPosition()];
+
+
+            mPositions[viewHolder.getAdapterPosition()] = toPos;
+            mPositions[target.getAdapterPosition()] = fromPos;
+
+            mShow[viewHolder.getAdapterPosition()] = showToPos;
+            mShow[target.getAdapterPosition()] = showFromPos;
+
+            CardsToShowInFragmentNow.setItemPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE), fromPos, target.getAdapterPosition());
+            CardsToShowInFragmentNow.setItemPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE), toPos, viewHolder.getAdapterPosition());
+
+            mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
+            return true;
+        }
+
+        public boolean isLongPressDragEnabled() {
+            return false;
+        }
+    };
     private boolean mNotifyDataSetChanged = false;
 
     @Override
@@ -126,40 +160,16 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
         return super.onOptionsItemSelected(item);
     }
 
-    private final ItemTouchHelper.SimpleCallback mSimpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-
+        mPositions = CardsToShowInFragmentNow.getItemsToShowPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE));
+        mShow = CardsToShowInFragmentNow.getItemsToShow(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE));
+        if (mNotifyDataSetChanged && mList != null && mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
         }
-
-        @Override
-        public boolean onMove(RecyclerView arg0, ViewHolder viewHolder, ViewHolder target) {
-            final int fromPos = mPositions[viewHolder.getAdapterPosition()];
-            final int toPos = mPositions[target.getAdapterPosition()];
-
-            final boolean showFromPos = mShow[viewHolder.getAdapterPosition()];
-            final boolean showToPos = mShow[target.getAdapterPosition()];
-
-
-            mPositions[viewHolder.getAdapterPosition()] = toPos;
-            mPositions[target.getAdapterPosition()] = fromPos;
-
-            mShow[viewHolder.getAdapterPosition()] = showToPos;
-            mShow[target.getAdapterPosition()] = showFromPos;
-
-            CardsToShowInFragmentNow.setItemPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE), fromPos, target.getAdapterPosition());
-            CardsToShowInFragmentNow.setItemPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE), toPos, viewHolder.getAdapterPosition());
-
-            mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-
-            return true;
-        }
-
-        public boolean isLongPressDragEnabled() {
-            return false;
-        }
-    };
+        mNotifyDataSetChanged = false;
+    }
 
     private class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final LayoutInflater mInflater;
@@ -176,7 +186,7 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
 
         @Override
         public int getItemCount() {
-            if(mItems == null) {
+            if (mItems == null) {
                 return 0;
             }
             return mItems.length;
@@ -184,7 +194,7 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            if(position >= mItems.length || position >= mPositions.length || mPositions[position] >= mItems.length) {
+            if (position >= mItems.length || position >= mPositions.length || mPositions[position] >= mItems.length) {
                 return;
             }
             ((ViewHolderSwitch) holder).mSwitch.setText(mItems[mPositions[position]]);
@@ -224,7 +234,6 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
 
     }
 
-
     private class ViewHolderSwitch extends RecyclerView.ViewHolder {
         final RobotoSwitchCompat mSwitch;
         final ImageButton mDrag;
@@ -235,17 +244,5 @@ public class ActivityItemsToShowInFragmentNow extends AppCompatActivity implemen
             mDrag = (ImageButton) itemView.findViewById(R.id.list_items_to_show_drag);
         }
 
-    }
-
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-        mPositions = CardsToShowInFragmentNow.getItemsToShowPosition(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE));
-        mShow = CardsToShowInFragmentNow.getItemsToShow(getSharedPreferences(CardsToShowInFragmentNow.KEY, Context.MODE_PRIVATE));
-        if (mNotifyDataSetChanged && mList != null && mAdapter != null) {
-            mAdapter.notifyDataSetChanged();
-        }
-        mNotifyDataSetChanged = false;
     }
 }

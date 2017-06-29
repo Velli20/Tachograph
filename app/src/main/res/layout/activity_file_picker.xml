@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,52 +27,52 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/activity_file_picker_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/color_primary"
         android:layout_alignParentTop="true"
+        android:background="@color/color_primary"
         android:elevation="2dp"
         android:gravity="center_vertical"
-        app:theme="@style/ToolbarStyleActivityFilePicker"
         app:contentInsetLeft="16dp"
-        app:contentInsetStart="16dp">
+        app:contentInsetStart="16dp"
+        app:theme="@style/ToolbarStyleActivityFilePicker">
 
         <Spinner
             android:id="@+id/activity_file_picker_navigation_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|left|start"/>
+            android:gravity="center_vertical|left|start" />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/activity_file_picker_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/activity_file_picker_toolbar"
-        android:layout_above="@+id/activity_file_picker_edittext_container"/>
+        android:layout_above="@+id/activity_file_picker_edittext_container"
+        android:layout_below="@+id/activity_file_picker_toolbar" />
 
     <View
         android:id="@+id/activity_file_picker_toolbar_shadow"
-        android:layout_height="3dp"
         android:layout_width="match_parent"
-        android:background="@drawable/dropdown_shadow"
+        android:layout_height="3dp"
         android:layout_gravity="top"
-        android:layout_marginTop="@dimen/toolbar_height"/>
+        android:layout_marginTop="@dimen/toolbar_height"
+        android:background="@drawable/dropdown_shadow" />
 
 
     <RelativeLayout
         android:id="@+id/activity_file_picker_edittext_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="@dimen/left_key_line"
-        android:layout_marginStart="@dimen/left_key_line"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="@dimen/left_key_line"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="@dimen/left_key_line"
         android:background="@color/white"
         android:minHeight="48dp">
 
@@ -82,37 +81,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_filepicker_excel"/>
+            android:layout_marginRight="32dp"
+            android:src="@drawable/ic_filepicker_excel" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/activity_file_picker_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/activity_file_picker_file_ext_icon"
+            android:layout_toLeftOf="@+id/activity_file_picker_save"
             android:layout_toRightOf="@+id/activity_file_picker_file_ext_icon"
             android:layout_toStartOf="@+id/activity_file_picker_save"
-            android:layout_toLeftOf="@+id/activity_file_picker_save"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:drawablePadding="32dp"
             android:hint="@string/file_picker_title_filename"
             android:textColor="@color/time_picker_text_dark"
             android:textColorHint="@color/time_picker_text_dark_disabled"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/activity_file_picker_save"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="@string/file_picker_menu_save" />
     </RelativeLayout>
 
@@ -120,5 +119,5 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_above="@+id/activity_file_picker_edittext_container"
-        android:background="@drawable/dropdown_shadow_up"/>
+        android:background="@drawable/dropdown_shadow_up" />
 </RelativeLayout>

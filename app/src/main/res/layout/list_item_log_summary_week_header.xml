@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,8 +27,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
+    android:layout_height="wrap_content">
 
 
     <com.velli20.tachograph.views.RobotoLightTextView
@@ -38,8 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/log_summary_weekly_driving_time"
         android:layout_marginTop="16dp"
+        android:text="@string/log_summary_weekly_driving_time"
         custom:style="regular" />
 
 
@@ -129,8 +127,8 @@
 
     <View
         android:id="@+id/list_item_log_summary_week_divider"
-        android:layout_below="@+id/list_item_log_summary_week_driven_distance"
-        style="@style/Divider" />
+        style="@style/Divider"
+        android:layout_below="@+id/list_item_log_summary_week_driven_distance" />
 
-    
+
 </RelativeLayout>

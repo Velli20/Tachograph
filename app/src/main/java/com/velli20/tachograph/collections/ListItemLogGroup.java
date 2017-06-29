@@ -26,33 +26,33 @@
 
 package com.velli20.tachograph.collections;
 
-import java.util.ArrayList;
-
 import com.velli20.tachograph.Event;
 
+import java.util.ArrayList;
+
 public class ListItemLogGroup {
-	private String mTitle;
-	private String mSummary;
-	private ArrayList<Event> mChildList;
-	
-	public void setTitle(String title, String summary){
-		mTitle = title;
-		mSummary = summary;
-	}
-	
-	public String getTitle(){
-		return mTitle;
-	}
-	
-	public String getSummary(){
-		return mSummary;
-	}
-	
-	public void setChildList(ArrayList<Event> childList){
-		mChildList = new ArrayList<>(childList);
-	}
-	
-	public ArrayList<Event> getChildList(){
-		return mChildList;
-	}
+    private String mTitle;
+    private String mSummary;
+    private ArrayList<Event> mChildList;
+
+    public void setTitle(String title, String summary) {
+        mTitle = title;
+        mSummary = summary;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public String getSummary() {
+        return mSummary;
+    }
+
+    public ArrayList<Event> getChildList() {
+        return mChildList;
+    }
+
+    public void setChildList(ArrayList<Event> childList) {
+        mChildList = new ArrayList<>(childList);
+    }
 }

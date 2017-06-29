@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -34,24 +33,24 @@
     <color name="color_primary_activity_settings">#90a4ae</color>
     <color name="color_primary_dark_activity_settings">#78909c</color>
     <color name="color_accent_activity_settings">#03a9f4</color>
-    
+
     <color name="text_color_primary_light">#FFFFFF</color>
     <color name="text_color_secondary_light">#FFFFFF</color>
-    
+
     <color name="gray">#8A000000</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#e51c23</color>
 
     <color name="list_item_selected">#1F03a9f4</color>
-    
+
     <color name="event_driving">#03a9f4</color>
     <color name="event_daily_rest">#4caf50</color>
     <color name="event_weekly_rest">#009688</color>
     <color name="event_break">#607d8b</color>
     <color name="event_other_work">#ff8a05</color>
     <color name="event_poa">#af6ad2</color>
-    
+
     <color name="time_picker_text_dark">#DD000000</color>
     <color name="time_picker_text_secondary_dark">#8A000000</color>
     <color name="time_picker_text_dark_disabled">#61000000</color>
@@ -64,7 +63,7 @@
     <color name="date_picker_date_picker_today_number_color">#33b5e5</color>
     <color name="date_picker_date_picker_month_title_color">#ffffff</color>
     <color name="date_picker_date_picker_month_title_background_color">#f2f2f2</color>
-    
+
     <array name="event_colors">
         <item>@color/event_driving</item>
         <item>@color/event_daily_rest</item>

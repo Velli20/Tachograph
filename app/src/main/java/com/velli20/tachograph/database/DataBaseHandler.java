@@ -26,7 +26,10 @@
 
 package com.velli20.tachograph.database;
 
-import java.util.ArrayList;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.velli20.tachograph.App;
 import com.velli20.tachograph.Event;
@@ -34,13 +37,10 @@ import com.velli20.tachograph.collections.ListItemLogGroup;
 import com.velli20.tachograph.database.GetLoggedRouteTask.OnGetLoggedRouteListener;
 import com.velli20.tachograph.location.CustomLocation;
 
+import java.util.ArrayList;
+
 import static com.velli20.tachograph.database.DataBaseHandlerConstants.CREATE_EVENTS_TABLE;
 import static com.velli20.tachograph.database.DataBaseHandlerConstants.CREATE_LOCATION_TABLE;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActionCompletedListener {
     public static final String TAG = "DataBaseHandler ";
@@ -55,28 +55,8 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
     private ArrayList<OnDatabaseEditedListener> mEditCallbacks = new ArrayList<>();
 
 
-    public interface OnTaskCompleted {
-        void onTaskCompleted(ArrayList<Event> list);
-    }
-
-    public interface OnGetEventTaskCompleted {
-        void onGetEvent(Event ev);
-    }
-
-    public interface OnGetLocationsListener {
-        void onGetLocations(ArrayList<CustomLocation> locations);
-    }
-
-    public interface OnGetLatestLocationListener {
-        void onGetLatestLocation(CustomLocation location);
-    }
-
-    public interface OnGetSortedLogListener {
-        void onTaskCompleted(ArrayList<ListItemLogGroup> list);
-    }
-
-    public interface OnDatabaseEditedListener {
-        void onDatabaseEdited(int action, int rowId);
+    private DataBaseHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public static DataBaseHandler getInstance() {
@@ -87,10 +67,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
     private static synchronized DataBaseHandler getSync() {
         if (sInstance == null) sInstance = new DataBaseHandler(App.get());
         return sInstance;
-    }
-
-    private DataBaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public String getDatabaseName() {
@@ -137,7 +113,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         }
     }
 
-
     public void registerOnDatabaseEditedListener(OnDatabaseEditedListener l) {
         if (!mEditCallbacks.contains(l)) {
             mEditCallbacks.add(l);
@@ -181,7 +156,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         }
         new AddLocationTask(mDb, location).execute();
     }
-
 
     public void getEvent(int rowId, OnGetEventTaskCompleted l, boolean includeLocationInfo) {
         if (!isDatabaseOpen()) {
@@ -241,7 +215,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
             Log.i(TAG, "getAllEvents() SQL query: " + query);
         }
     }
-
 
     public void getEventsByRowIds(OnTaskCompleted listener, int rowIds[], boolean withDrivenDistance) {
         if (!isDatabaseOpen()) {
@@ -326,7 +299,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         new DeleteLocationTask(mDb, eventId).setOnDatabaseActionCompletedListener(this).execute();
     }
 
-
     public void getSortedLog(String query, String months[], String titleWeek, int sortBy,
                              boolean includeDrivenDistance, OnGetSortedLogListener l) {
         if (!isDatabaseOpen()) {
@@ -343,7 +315,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
             Log.i(TAG, "getSortedLog() SQL query: " + query);
         }
     }
-
 
     public void getEventsByTime(long startDate, long endDate, OnTaskCompleted listener, boolean withLocationInfo) {
 
@@ -367,7 +338,6 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         }
 
     }
-
 
     public void getAllLocationByTimeFrame(long start, long end, OnGetLocationsListener l) {
         if (!isDatabaseOpen()) {
@@ -421,6 +391,33 @@ public class DataBaseHandler extends SQLiteOpenHelper implements OnDatabaseActio
         GetLoggedRouteTask task = new GetLoggedRouteTask(mDb, eventId);
         task.setOnGetLocationInfoListener(l);
         task.execute();
+    }
+
+
+    public interface OnTaskCompleted {
+        void onTaskCompleted(ArrayList<Event> list);
+    }
+
+
+    public interface OnGetEventTaskCompleted {
+        void onGetEvent(Event ev);
+    }
+
+
+    public interface OnGetLocationsListener {
+        void onGetLocations(ArrayList<CustomLocation> locations);
+    }
+
+    public interface OnGetLatestLocationListener {
+        void onGetLatestLocation(CustomLocation location);
+    }
+
+    public interface OnGetSortedLogListener {
+        void onTaskCompleted(ArrayList<ListItemLogGroup> list);
+    }
+
+    public interface OnDatabaseEditedListener {
+        void onDatabaseEdited(int action, int rowId);
     }
 
 

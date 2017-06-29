@@ -26,10 +26,11 @@
 
 package com.velli20.tachograph.views;
 
-import java.util.Locale;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+
+import java.util.Locale;
 
 public class TextViewTimeCounter extends RobotoLightTextView {
     private boolean mCountDown;
@@ -37,22 +38,36 @@ public class TextViewTimeCounter extends RobotoLightTextView {
     private long mStartTime = 0;
     private String mTitle;
     private Handler mHandler;
-    
-	public TextViewTimeCounter(Context context) {
-		super(context, null, 0);
-	}
-	
-	public TextViewTimeCounter(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
-	
-	public TextViewTimeCounter(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            long now = System.currentTimeMillis();
+            if (mCountDown) {
+                setTimerText(now, Math.max(now, mStartTime));
+            } else {
+                setTimerText(mStartTime, now);
+            }
+            if (mHandler != null) {
+                mHandler.postDelayed(r, 1000);
+            }
+        }
+    };
 
-	public void countDown(long dateEnd) {
+    public TextViewTimeCounter(Context context) {
+        super(context, null, 0);
+    }
+
+    public TextViewTimeCounter(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public TextViewTimeCounter(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
+
+    public void countDown(long dateEnd) {
         mCountDown = true;
-        if(mHandler != null && isTimerRunning()){
+        if (mHandler != null && isTimerRunning()) {
             mHandler.removeCallbacks(r);
             stopTimer();
         }
@@ -67,74 +82,55 @@ public class TextViewTimeCounter extends RobotoLightTextView {
         setTimerText(now, Math.max(now, dateEnd));
     }
 
-
-	public void countUp(long dateStart){
+    public void countUp(long dateStart) {
         mCountDown = false;
-		if(mHandler != null && isTimerRunning()){
-			mHandler.removeCallbacks(r);
-			stopTimer();
-		}
-		
-		mStartTime = dateStart;
+        if (mHandler != null && isTimerRunning()) {
+            mHandler.removeCallbacks(r);
+            stopTimer();
+        }
 
-		mHandler = new Handler();
-		mHandler.postDelayed(r, 1000);
-		setTimerText(dateStart, System.currentTimeMillis());
-	}
-	
-	public void stopTimer(){
-		if(mHandler != null){
-			mHandler = null;
-			mStartTime = 0;
-		}
-	}
+        mStartTime = dateStart;
 
-	public void setTitle(String title) {
-		mTitle = title;
-		setTimerText(mStartTime == 0? System.currentTimeMillis() : mStartTime, System.currentTimeMillis());
-	}
+        mHandler = new Handler();
+        mHandler.postDelayed(r, 1000);
+        setTimerText(dateStart, System.currentTimeMillis());
+    }
 
-	public boolean isTimerRunning(){
-		return mHandler != null;
-	}
-	
-	
-	Runnable r = new Runnable() {
-	    @Override
-	    public void run(){
-            long now = System.currentTimeMillis();
-            if(mCountDown) {
-                setTimerText(now, Math.max(now, mStartTime));
-            } else {
-                setTimerText(mStartTime, now);
-            }
-			if(mHandler != null){
-				mHandler.postDelayed(r, 1000);
-			}
-	    }
-	};
-	
+    public void stopTimer() {
+        if (mHandler != null) {
+            mHandler = null;
+            mStartTime = 0;
+        }
+    }
 
-	
-	private void setTimerText(long start, long end){
-		long secs = (end - start);
-		long second = (secs / 1000) % 60;
-		long minute = (secs / (1000 * 60)) % 60;
-		long hour = (secs / (1000 * 60 * 60)) % 24;
-		long days = (secs / (1000 * 60 * 60 )) / 24;
+    public void setTitle(String title) {
+        mTitle = title;
+        setTimerText(mStartTime == 0 ? System.currentTimeMillis() : mStartTime, System.currentTimeMillis());
+    }
+
+    public boolean isTimerRunning() {
+        return mHandler != null;
+    }
+
+    private void setTimerText(long start, long end) {
+        long secs = (end - start);
+        long second = (secs / 1000) % 60;
+        long minute = (secs / (1000 * 60)) % 60;
+        long hour = (secs / (1000 * 60 * 60)) % 24;
+        long days = (secs / (1000 * 60 * 60)) / 24;
         String time;
 
-        if(days > 0 || hour > 0) {
+        if (days > 0 || hour > 0) {
             /* Concat seconds */
             time = String.format(Locale.getDefault(), "%d h %d min", hour, minute);
-        } else if(minute == 0 && hour == 0 && days == 0){
+        } else if (minute == 0 && hour == 0 && days == 0) {
             time = String.format(Locale.getDefault(), "%d s", second);
         } else {
             time = String.format(Locale.getDefault(), "%d min %d s", minute, second);
         }
 
-		setText((mTitle != null) ? String.format(Locale.getDefault(), mTitle, time) : time);
+        setText((mTitle != null) ? String.format(Locale.getDefault(), mTitle, time) : time);
 
-	}
+    }
 
 }

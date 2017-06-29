@@ -27,7 +27,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/list_item_log_summary_week_shadow_top"
@@ -40,9 +40,9 @@
         android:id="@+id/list_item_log_summary_week_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/list_item_log_summary_week_shadow_top"
         android:layout_above="@+id/list_item_log_summary_week_shadow_bottom"
-        android:background="#FFFFFF"/>
+        android:layout_below="@+id/list_item_log_summary_week_shadow_top"
+        android:background="#FFFFFF" />
 
 
     <LinearLayout
@@ -50,9 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_log_summary_week_shadow_top"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <com.velli20.tachograph.views.RobotoLightTextView
@@ -81,8 +81,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_log_summary_week_title_container"
-        android:text="@string/log_summary_weekly_driving_time"
         android:layout_marginTop="16dp"
+        android:text="@string/log_summary_weekly_driving_time"
         custom:style="regular" />
 
 
@@ -94,8 +94,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/list_item_log_summary_week_title_container"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp" />
 
 
     <com.velli20.tachograph.views.RobotoLightTextView
@@ -116,8 +116,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/list_item_log_summary_week_weekly_driving_time_title"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_week_weekly_rest_time_title"
@@ -137,8 +137,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/list_item_log_summary_week_weekly_working_time_title"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp" />
 
 
     <com.velli20.tachograph.views.RobotoLightTextView
@@ -159,8 +159,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/list_item_log_summary_week_weekly_rest_time_title"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_week_driven_distance_title"
@@ -182,8 +182,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/list_item_log_summary_week_wtd_weekly_working_time_title"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"  />
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp" />
 
     <View
         android:id="@+id/list_item_log_summary_week_shadow_bottom"

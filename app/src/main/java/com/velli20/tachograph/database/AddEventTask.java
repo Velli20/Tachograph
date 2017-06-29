@@ -37,7 +37,6 @@ import com.velli20.tachograph.Event;
 import java.util.Date;
 
 
-
 public class AddEventTask extends AsyncTask<Void, Integer, Integer> {
     private static final String TAG = "AddEventTask ";
     private static final boolean DEBUG = false;
@@ -95,7 +94,7 @@ public class AddEventTask extends AsyncTask<Void, Integer, Integer> {
                 result = (int) mDb.insert(DataBaseHandlerConstants.TABLE_EVENTS, null, values);
             }
         } catch (Exception e) {
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.e(TAG, TAG + e.getMessage());
             }
         } finally {
@@ -111,10 +110,10 @@ public class AddEventTask extends AsyncTask<Void, Integer, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
-        if(mListener != null) {
-            if(result == -1) {
+        if (mListener != null) {
+            if (result == -1) {
                 mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_ERROR, result);
-            } else if(mUpdate) {
+            } else if (mUpdate) {
                 mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_EDIT, result);
             } else {
                 mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_INSERT, result);

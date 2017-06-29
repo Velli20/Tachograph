@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -27,12 +26,12 @@
 
 <resources>
     <integer-array name="event_icons">
-        <item >@drawable/ic_action_driving</item>
-        <item >@drawable/ic_action_rest_light</item>
-        <item >@drawable/ic_action_rest_light</item>
-        <item >@drawable/ic_action_rest_light</item>
-        <item >@drawable/ic_action_other_work_light</item>
-        <item >@drawable/ic_action_poa_light</item>
+        <item>@drawable/ic_action_driving</item>
+        <item>@drawable/ic_action_rest_light</item>
+        <item>@drawable/ic_action_rest_light</item>
+        <item>@drawable/ic_action_rest_light</item>
+        <item>@drawable/ic_action_other_work_light</item>
+        <item>@drawable/ic_action_poa_light</item>
     </integer-array>
-    
+
 </resources>

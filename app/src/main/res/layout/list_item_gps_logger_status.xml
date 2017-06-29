@@ -53,11 +53,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_gps_logger_status"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:text="@string/title_gps_logger_status"
                 custom:style="regular" />
 
             <com.velli20.tachograph.views.RobotoLightTextView
@@ -68,11 +68,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/list_item_gps_logger_status_title"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:singleLine="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:singleLine="false"
                 custom:style="regular" />
 
             <com.velli20.tachograph.views.RobotoLightTextView
@@ -83,11 +83,12 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/list_item_gps_logger_status_speed"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:singleLine="false"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                android:singleLine="false"
+                android:visibility="gone"
                 custom:style="regular" />
 
         </RelativeLayout>

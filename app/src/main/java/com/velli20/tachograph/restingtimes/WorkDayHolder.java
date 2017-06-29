@@ -29,124 +29,140 @@ package com.velli20.tachograph.restingtimes;
 import java.util.ArrayList;
 
 public class WorkDayHolder {
-	private long start = -1;
-	private long end = -1;
-
+    private long start = -1;
+    private long end = -1;
 
 
     private int mTotalDrivingTime = 0;
     private int mDailyRestingTime = 0;
-	private int mContinuousDrivingTimeAfterBreak = 0;
+    private int mContinuousDrivingTimeAfterBreak = 0;
     private int mPeriodOfAvailability = 0;
     private int mTotalWorkingTime = 0;
     private int mOtherWorkingTime = 0;
 
-	private int wtdDailyWorkingTime = 0;
-	private double mDrivenDistance = 0;
+    private int wtdDailyWorkingTime = 0;
+    private double mDrivenDistance = 0;
 
-	
-	
-	private ArrayList<BreakTime> mBreaks = new ArrayList<>();
-	private ArrayList<Integer> mEventIds;
-	
-	public WorkDayHolder(){
-	
-	}
-	
-	public void setStartDate(long startDate){
-		start = startDate;
-	}
-	
-	public void setEndDate(long endDate){ end = endDate; }
-	
-	public void setDailyDrivingTime(int minutes){
-		this.mTotalDrivingTime = minutes;
-	}
 
-    public void setContinuousDrivingTimeAfterBreak(int minutes){ mContinuousDrivingTimeAfterBreak = minutes; }
-	
-	public void setDailyRestingTime(int minutes){
-		this.mDailyRestingTime = minutes;
-	}
-	
-	public void setDailyWorkingTime(int minutes){ this.mTotalWorkingTime = minutes; }
+    private ArrayList<BreakTime> mBreaks = new ArrayList<>();
+    private ArrayList<Integer> mEventIds;
 
-    public void setDailyDrivenDistance(double distance) {
-        mDrivenDistance = distance;
+    public WorkDayHolder() {
+
+    }
+
+    public void setDailyRestingTime(int minutes) {
+        this.mDailyRestingTime = minutes;
+    }
+
+    public void setWtdWorkingTime(int time) {
+        wtdDailyWorkingTime = time;
+    }
+
+    public long getStartDate() {
+        return start;
+    }
+
+    public void setStartDate(long startDate) {
+        start = startDate;
+    }
+
+    public long getEndDate() {
+        return end;
+    }
+
+    public void setEndDate(long endDate) {
+        end = endDate;
+    }
+
+    public int getDailyDrivingTime() {
+        return mTotalDrivingTime;
+    }
+
+    public void setDailyDrivingTime(int minutes) {
+        this.mTotalDrivingTime = minutes;
+    }
+
+    public int getContinuousDrivingTimeAfterBreak() {
+        return mContinuousDrivingTimeAfterBreak;
+    }
+
+    public void setContinuousDrivingTimeAfterBreak(int minutes) {
+        mContinuousDrivingTimeAfterBreak = minutes;
+    }
+
+    public int getDailyRest() {
+        return mDailyRestingTime;
+    }
+
+    public int getDailyWorkingTime() {
+        return mTotalWorkingTime;
+    }
+
+    public void setDailyWorkingTime(int minutes) {
+        this.mTotalWorkingTime = minutes;
+    }
+
+    public int getOtherWorkingTime() {
+        return mOtherWorkingTime;
+    }
+
+    public void setOtherWorkingTime(int minutes) {
+        mOtherWorkingTime = minutes;
+    }
+
+    public int getWtdDailyWorkingTime() {
+        return wtdDailyWorkingTime;
+    }
+
+    public int getDailyPoaTime() {
+        return mPeriodOfAvailability;
     }
 
     public void setDailyPoaTime(int minutes) {
         mPeriodOfAvailability = minutes;
     }
 
-	public void setOtherWorkingTime(int minutes) { mOtherWorkingTime = minutes; }
-
-	public void setWtdWorkingTime(int time){
-		wtdDailyWorkingTime = time;
-	}
-
-	public void setEventIds(ArrayList<Integer> eventIds) { mEventIds = eventIds; }
-
-    public long getStartDate(){
-        return start;
+    public double getDailyDrivenDistance() {
+        return mDrivenDistance;
     }
 
-    public long getEndDate(){
-        return end;
+    public void setDailyDrivenDistance(double distance) {
+        mDrivenDistance = distance;
     }
 
-	public int getDailyDrivingTime(){
-		return mTotalDrivingTime;
-	}
-
-    public int getContinuousDrivingTimeAfterBreak(){
-        return mContinuousDrivingTimeAfterBreak;
+    public ArrayList<Integer> getEventIds() {
+        return mEventIds;
     }
 
-	public int getDailyRest(){
-		return mDailyRestingTime;
-	}
-	
-	public int getDailyWorkingTime(){ return mTotalWorkingTime; }
+    public void setEventIds(ArrayList<Integer> eventIds) {
+        mEventIds = eventIds;
+    }
 
-    public int getOtherWorkingTime() { return mOtherWorkingTime; }
-
-	public int getWtdDailyWorkingTime(){
-		return wtdDailyWorkingTime;
-	}
-
-    public int getDailyPoaTime() { return mPeriodOfAvailability; }
-
-	public double getDailyDrivenDistance() {
-		return mDrivenDistance;
-	}
-
-	public ArrayList<Integer> getEventIds() { return mEventIds; }
-
-    public void addNewBreakTime(BreakTime breaktime){
-        if(breaktime != null){
+    public void addNewBreakTime(BreakTime breaktime) {
+        if (breaktime != null) {
             mBreaks.add(breaktime);
         }
     }
 
 
-    public BreakTime getLastBreak(){
-		if(!mBreaks.isEmpty()){
-			return mBreaks.get(mBreaks.size()-1);
-		}
-		return null;
-	}
+    public BreakTime getLastBreak() {
+        if (!mBreaks.isEmpty()) {
+            return mBreaks.get(mBreaks.size() - 1);
+        }
+        return null;
+    }
 
-	public BreakTime getPreviousBreak() {
-		if(mBreaks.size() >= 2){
-			mBreaks.get(mBreaks.size() -2);
-		}
-		return null;
-	}
-	
-	public ArrayList<BreakTime> getBreakTimes(){
-		return mBreaks;
-	}
-	
-	
+    public BreakTime getPreviousBreak() {
+        if (mBreaks.size() >= 2) {
+            mBreaks.get(mBreaks.size() - 2);
+        }
+        return null;
+    }
+
+    public ArrayList<BreakTime> getBreakTimes() {
+        return mBreaks;
+    }
+
+
 }

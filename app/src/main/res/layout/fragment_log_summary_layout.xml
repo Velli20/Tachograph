@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -36,26 +35,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
-    
+
     <LinearLayout
         android:id="@+id/working_days_fragment_no_items"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:visibility="gone" >
-        
+        android:visibility="gone">
+
         <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/working_days_fragment_no_items_text"
-            custom:style="regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ic_no_log_summaries"
+            android:drawablePadding="16dp"
             android:gravity="center_horizontal"
             android:text="@string/log_summary_no_items_to_display"
+            android:textColor="@color/gray"
             android:textSize="24sp"
-            android:drawablePadding="16dp"
-            android:drawableBottom="@drawable/ic_no_log_summaries"
-            android:textColor="@color/gray" />
+            custom:style="regular" />
 
     </LinearLayout>
 

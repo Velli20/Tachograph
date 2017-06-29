@@ -26,15 +26,6 @@
 
 package com.velli20.tachograph.collections;
 
-import java.util.ArrayList;
-
-import com.velli20.tachograph.App;
-import com.velli20.tachograph.R;
-import com.velli20.tachograph.Event;
-import com.velli20.tachograph.CardsToShowInFragmentNow;
-import com.velli20.tachograph.views.ListItemActivityChooser;
-import com.velli20.tachograph.views.ListItemRegulation;
-
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
@@ -44,18 +35,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.velli20.tachograph.App;
+import com.velli20.tachograph.CardsToShowInFragmentNow;
+import com.velli20.tachograph.Event;
+import com.velli20.tachograph.R;
+import com.velli20.tachograph.views.ListItemActivityChooser;
+import com.velli20.tachograph.views.ListItemGpsLogger;
+import com.velli20.tachograph.views.ListItemRegulation;
+
+import java.util.ArrayList;
+
 
 public class ListAdapterFragmentNow extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final String Tag = "ListAdapterFragmentNow ";
     public static final int VIEW_TYPE_REGULATION = 1;
     public static final int VIEW_TYPE_ACTIVITY_CHOOSER = 2;
     public static final int VIEW_TYPE_GPS_STATUS = 3;
     public static final int VIEW_TYPE_ERROR = -1;
-
+    private static final String Tag = "ListAdapterFragmentNow ";
     private final LayoutInflater mInflater;
     private float mCardElevation = 0;
 
     private ArrayList<ListItemRegulationToShow> mItemsToShow;
+    private ListItemGpsLogger.OnPermissionRequestButtonClickedListener mPermissionRequestListener;
 
     private boolean mShowTimesCountDown = false;
     private boolean mShowBigActivityCards = true;
@@ -63,11 +64,13 @@ public class ListAdapterFragmentNow extends RecyclerView.Adapter<RecyclerView.Vi
     private Event mCurrentEvent;
     private View.OnClickListener mClickListener;
 
-    public ListAdapterFragmentNow(Context c, ArrayList<ListItemRegulationToShow> items, boolean showBigActivityCards) {
+    public ListAdapterFragmentNow(Context c, ArrayList<ListItemRegulationToShow> items,
+                                  boolean showBigActivityCards, ListItemGpsLogger.OnPermissionRequestButtonClickedListener l) {
         mInflater = LayoutInflater.from(c);
         mCardElevation = (c.getResources().getDimension(R.dimen.card_elevation));
         mItemsToShow = items;
         mShowBigActivityCards = showBigActivityCards;
+        mPermissionRequestListener = l;
         setHasStableIds(true);
     }
 
@@ -142,6 +145,8 @@ public class ListAdapterFragmentNow extends RecyclerView.Adapter<RecyclerView.Vi
                     CardsToShowInFragmentNow.restoreDefaults(App.get().getApplicationContext());
                 }
             });
+        } else if (viewType == VIEW_TYPE_GPS_STATUS) {
+            ((ListItemGpsLogger) (((ViewHolderGpsStatus) holder).itemView)).setOnPermissionRequestButtonClickedListener(mPermissionRequestListener);
         }
 
     }

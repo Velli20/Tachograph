@@ -27,8 +27,6 @@
 package com.velli20.tachograph.views;
 
 
-import com.velli20.tachograph.R;
-
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.annotation.SuppressLint;
@@ -38,13 +36,15 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.Paint.Align;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.velli20.tachograph.R;
 
 
 public class ListCircle extends View {
@@ -63,10 +63,6 @@ public class ListCircle extends View {
     private Drawable mDrawableNormal;
     private OnCircleSelectedListener mListener;
 
-
-    public interface OnCircleSelectedListener {
-        void onCircleSelected(ListCircle v, boolean selected);
-    }
 
     public ListCircle(Context context) {
         this(context, null, 0);
@@ -159,12 +155,6 @@ public class ListCircle extends View {
 
     }
 
-    public void setSelected(final boolean selected) {
-        mBackgroundPaint.setColor(mIsSelected ? mSelectedColor : mBackgroundColor);
-        mIsSelected = selected;
-        invalidate();
-    }
-
     public void setDrawable(Drawable d) {
         mDrawableNormal = d;
         invalidate();
@@ -178,6 +168,12 @@ public class ListCircle extends View {
 
     public boolean isSelected() {
         return mIsSelected;
+    }
+
+    public void setSelected(final boolean selected) {
+        mBackgroundPaint.setColor(mIsSelected ? mSelectedColor : mBackgroundColor);
+        mIsSelected = selected;
+        invalidate();
     }
 
     public boolean isSelectable() {
@@ -269,6 +265,10 @@ public class ListCircle extends View {
         } else if (!mText.isEmpty()) {
             canvas.drawText(mText, textX, textY, mLetterPaint);
         }
+    }
+
+    public interface OnCircleSelectedListener {
+        void onCircleSelected(ListCircle v, boolean selected);
     }
 
 }

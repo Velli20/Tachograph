@@ -62,18 +62,18 @@ public class DatabaseEventQueryBuilder {
     public DatabaseEventQueryBuilder whereEventsInTimeFrame(long startDate, long endDate, boolean includeRecordingEvents) {
         openWhereClause();
 
-        mWhereClause.append("(" + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS  + " >= " + String.valueOf(startDate)
-                + " AND " + DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS  + " <= "+ String.valueOf(endDate) + ") ");
+        mWhereClause.append("(" + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " >= " + String.valueOf(startDate)
+                + " AND " + DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS + " <= " + String.valueOf(endDate) + ") ");
 
         mWhereClause.append("OR ( " + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " <= " + String.valueOf(startDate)
                 + " AND " + DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS + " >= " + String.valueOf(startDate) + ") ");
 
         mWhereClause.append("OR ( " + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " >= " + String.valueOf(startDate)
-                + " AND " + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " <= "+ String.valueOf(endDate)
-                + " AND " + DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS + " >= "+ String.valueOf(endDate) + ")");
+                + " AND " + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " <= " + String.valueOf(endDate)
+                + " AND " + DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS + " >= " + String.valueOf(endDate) + ")");
 
-        if(includeRecordingEvents) {
-            if(endDate > System.currentTimeMillis()) {
+        if (includeRecordingEvents) {
+            if (endDate > System.currentTimeMillis()) {
                 mWhereClause.append("OR ( " + DataBaseHandlerConstants.KEY_EVENT_RECORDING + " = " + String.valueOf(1)
                         + " AND " + DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS + " >= " + String.valueOf(startDate) + ")");
             }
@@ -87,13 +87,12 @@ public class DatabaseEventQueryBuilder {
         }
 
 
-
         return this;
     }
 
     /* Get Events by event type */
     public DatabaseEventQueryBuilder whereEventTypeIs(int eventType) {
-        if(mEventsToInclude == null) {
+        if (mEventsToInclude == null) {
             mEventsToInclude = new ArrayList<>();
         }
         mEventsToInclude.add(eventType);
@@ -128,8 +127,8 @@ public class DatabaseEventQueryBuilder {
 
         int length = rowIds.length;
 
-        for(int i = 0; i < length; i++){
-            if(i != 0){
+        for (int i = 0; i < length; i++) {
+            if (i != 0) {
                 mWhereClause.append(" OR ");
             }
             mWhereClause.append(DataBaseHandlerConstants.KEY_ID + " = " + String.valueOf(rowIds[i]));
@@ -141,17 +140,17 @@ public class DatabaseEventQueryBuilder {
 
     /* Select events with given row ids */
     public DatabaseEventQueryBuilder whereEventsWithRowIds(ArrayList<Integer> rowIds) {
-        if(rowIds == null) {
+        if (rowIds == null) {
             return this;
         }
         openWhereClause();
 
         boolean first = true;
-        for(Integer rowId : rowIds) {
-            if(rowId == null) {
+        for (Integer rowId : rowIds) {
+            if (rowId == null) {
                 continue;
             }
-            if(!first) {
+            if (!first) {
                 mWhereClause.append(" OR ");
             }
             mWhereClause.append(DataBaseHandlerConstants.KEY_ID + " = " + String.valueOf(rowId));
@@ -171,7 +170,7 @@ public class DatabaseEventQueryBuilder {
     }
 
     private void openWhereClause() {
-        if(mWhereClause == null) {
+        if (mWhereClause == null) {
             mWhereClause = new StringBuilder();
             mWhereClause.append("( ");
         } else {
@@ -182,7 +181,7 @@ public class DatabaseEventQueryBuilder {
     }
 
     private void closeWhereClause() {
-        if(!mWhereClauseIsOpen) {
+        if (!mWhereClauseIsOpen) {
             return;
         } else {
             mWhereClause.append(")");
@@ -193,36 +192,36 @@ public class DatabaseEventQueryBuilder {
     public String buildQuery() {
         String query = "SELECT " + mColumns + " FROM " + mTable;
 
-        if((mWhereClause != null && mWhereClause.length() > 0) || mEventsToInclude != null) {
+        if ((mWhereClause != null && mWhereClause.length() > 0) || mEventsToInclude != null) {
             query += " WHERE(";
-            if(mWhereClause != null) {
+            if (mWhereClause != null) {
                 query += mWhereClause.toString();
             }
-            if(mEventsToInclude != null) {
-                if(mWhereClause != null) {
+            if (mEventsToInclude != null) {
+                if (mWhereClause != null) {
                     query += " AND (";
                 } else {
                     query += "";
                 }
 
                 boolean firstInList = true;
-                for(Integer eventType : mEventsToInclude) {
-                    if(!firstInList) {
+                for (Integer eventType : mEventsToInclude) {
+                    if (!firstInList) {
                         query += " OR ";
                     } else {
                         firstInList = false;
                     }
-                    query += DataBaseHandlerConstants.KEY_EVENT_TYPE + String.format(" = %d" ,eventType.intValue());
+                    query += DataBaseHandlerConstants.KEY_EVENT_TYPE + String.format(" = %d", eventType.intValue());
 
                 }
-                if(mWhereClause != null) {
+                if (mWhereClause != null) {
                     query += ")";
                 }
             }
             query += ") ";
         }
 
-        if(mOrderBy != null) {
+        if (mOrderBy != null) {
             query += " ORDER BY ";
             query += mOrderBy;
             query += (mOrderAscending ? " ASC " : " DESC ");

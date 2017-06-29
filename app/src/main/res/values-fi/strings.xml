@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,12 +27,12 @@
 <resources>
 
     <string name="app_name">Ajopäiväkirja</string>
-    
+
     <string name="menu_settings">Asetukset</string>
     <string name="menu_send_feedback">Lähetä palautetta</string>
     <string name="menu_discard">Poista tapahtuma</string>
     <string name="menu_save_changes">Tallenna muutokset</string>
-    
+
     <string name="menu_filter">Suodata</string>
     <string name="menu_filter_category_drive">Ajoajat</string>
     <string name="menu_filter_category_rest">Tauot ja lepoajat</string>
@@ -59,13 +58,15 @@
     <string name="menu_show_items">Kohteiden hallinta</string>
     <string name="menu_restore">Palauta</string>
     <string name="menu_open_map">Avaa kartta</string>
-    
+
     <string name="default_filename">Ajopaivakirja</string>
 
     <string name="action_ok">Ok</string>
     <string name="action_cancel">Peruuta</string>
     <string name="action_today">Tänään</string>
     <string name="action_enable_gps">Kytke GPS päälle</string>
+    <string name="action_grant_location_permission">Myönnä sijainnin käyttölupa</string>
+    <string name="action_enable_gps_monitor">Ota gps-monitori käyttöön</string>
 
     <string name="dialog_title_remove_all_logs">Poista kaikki lokitiedot</string>
     <string name="dialog_title_map_layer">Kartan taso</string>
@@ -98,6 +99,8 @@
     <string name="title_gps_logger_vehicle_stopped" formatted="false">Ajoneuvo pysähtynyt. GPS-nopeus: %d km/h</string>
     <string name="title_gps_logger_gps_provider_turned_disabled">GPS pois päältä. Kytke GPS päälle laitteen asetuksista</string>
     <string name="title_gps_logger_acquiring_gps_fix">Odotetaan GPS-signaalia</string>
+    <string name="title_gps_logger_no_gps_permission">Sijainnin käyttölupa evätty</string>
+    <string name="title_gps_logger_gps_speed_monitor_not_enabled">GPS-monitori ei käytössä</string>
     <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">Heikko GPS-signaali. Tarkkuus: ± %d m</string>
     <string name="title_detected_activity_driving">Havaittu aktiviteetti: Ajo</string>
     <string name="title_detected_activity_walking">Havaittu aktiviteetti: Kävely</string>
@@ -136,7 +139,7 @@
     <string name="exception_subtitle_reduced_daily_rest">Vuorokausilevon saa kahden viikottaisen lepoajan välillä lyhentää enintään kolme kertaa vähintään 9 tunnin mittaiseksi. </string>
     <string name="exception_title_reduced_weekly_rest">Lyhennettyjä viikkolepoja jäljellä</string>
     <string name="exception_subtitle_reduced_weekly_rest">Viikkolepo voidaan lyhentää vähintään 24 tuntiin kerran peräkkäisen kahden viikon aikana.</string>
-    
+
     <string name="add_event_event_mileage_at_start">Ajon alussa:</string>
     <string name="add_event_event_mileage_at_end">Ajon lopussa:</string>
     <string name="add_event_event_start_time">Aloitusaika:</string>
@@ -182,14 +185,14 @@
     <string name="log_summary_wtd_weekly_work_time">WTD viikoittainen työskentelyaika:</string>
     <string name="log_summary_total_driven_distance">Ajettu matka:</string>
     <string name="log_summary_driven_distance">Ajettu matka:</string>
-    
+
     <string name="log_summary_daily_rest_time">Vuorokausilepo:</string>
     <string name="log_summary_daily_driving_time">Vuorokautinen ajoaika:</string>
     <string name="log_summary_daily_working_time">Työskentelyaika:</string>
     <string name="log_summary_daily_wtd_working_time">WTD työskentelyaika:</string>
     <string name="log_summary_no_items_to_display">Ei näytettäviä yhteenvetoja</string>
 
-   
+
     <string name="work_limit_daily_rest">Vuorokausilepo</string>
     <string name="work_limit_weekly_rest">Viikkolepo</string>
     <string name="work_limit_weekly_driving_time">Viikottainen ajoaika</string>
@@ -199,7 +202,7 @@
     <string name="work_limit_break_time">Tauko</string>
     <string name="work_limit_wtd_weekly_working">WTD viikoittainen työskentelyaika</string>
 
-    
+
     <string name="work_limit_daily_rest_remaining">Vuorokausilepoa jäljellä</string>
     <string name="work_limit_weekly_rest_remaining">Viikkolepoa jäljellä</string>
     <string name="work_limit_weekly_driving_time_remaining">Viikottaista ajoaikaa jäljellä</string>
@@ -207,32 +210,32 @@
     <string name="work_limit_continuous_driving_time_remaining">Yhtämittaista ajoaikaa jäljellä</string>
     <string name="work_limit_daily_driving_time_remaining">Vuorokautista ajoaikaa jäljellä</string>
     <string name="work_limit_break_time_remaining">Taukoa jäljellä</string>
-    
+
     <string name="work_limit_wtd_daily_rest_remaining">WTD vuorokausilepoa jäljellä</string>
     <string name="work_limit_wtd_weekly_rest_remaining">WTD viikkolepoa jäljellä</string>
     <string name="work_limit_wtd_weekly_working_remaining">WTD viikoittaista työskentelyaikaa jäljellä</string>
 
     <string-array name="months">
-        <item >Tammikuu</item>
-        <item >Helmikuu</item>
-        <item >Maaliskuu</item>
-        <item >Huhtikuu</item>
-        <item >Toukokuu</item>
-        <item >Kesäkuu</item>
-        <item >Heinäkuu</item>
-        <item >Elokuu</item>
-        <item >Syyskuu</item>
-        <item >Lokakuu</item>
-        <item >Marraskuu</item>
-        <item >Joulukuu</item>
+        <item>Tammikuu</item>
+        <item>Helmikuu</item>
+        <item>Maaliskuu</item>
+        <item>Huhtikuu</item>
+        <item>Toukokuu</item>
+        <item>Kesäkuu</item>
+        <item>Heinäkuu</item>
+        <item>Elokuu</item>
+        <item>Syyskuu</item>
+        <item>Lokakuu</item>
+        <item>Marraskuu</item>
+        <item>Joulukuu</item>
     </string-array>
 
-    
+
     <string name="preference_category_general">Yleiset asetukset</string>
     <string name="preference_category_log">Loki</string>
     <string name="preference_category_gps_settings">GPS-asetukset</string>
     <string name="preference_category_about">Tietoja</string>
-    
+
     <string name="preference_title_show_notifications">Näytä ilmoitukset</string>
     <string name="preference_title_count_activity_progress">Aktiviteetin eteneminen</string>
     <string name="preference_title_remove_all_logs">Poista kaikki lokitiedot</string>

@@ -26,8 +26,6 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -35,6 +33,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.velli20.tachograph.R;
 
 public class TooltipView extends LinearLayout {
     private ImageView mArrowUp;
@@ -57,10 +57,6 @@ public class TooltipView extends LinearLayout {
         this.setOrientation(VERTICAL);
     }
 
-    public enum ArrowType {
-        ArrowUp, ArrowDown
-    }
-
     protected void onFinishInflate() {
         super.onFinishInflate();
         mArrowUp = (ImageView) this.findViewById(R.id.tooltip_arrow_top);
@@ -75,7 +71,6 @@ public class TooltipView extends LinearLayout {
 
         setArrowType(ArrowType.ArrowDown);
     }
-
 
     public void setArrowType(ArrowType al) {
         switch (al) {
@@ -118,13 +113,16 @@ public class TooltipView extends LinearLayout {
         setParams();
     }
 
-
     public void setTitle(String title) {
         mTitle.setText(title);
     }
 
     public void setSubtitle(String subtitle) {
         mSubtitle.setText(subtitle);
+    }
+
+    public enum ArrowType {
+        ArrowUp, ArrowDown
     }
 
 }

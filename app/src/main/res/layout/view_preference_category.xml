@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,14 +27,14 @@
 <com.velli20.tachograph.views.RobotoLightTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:robototext="http://schemas.android.com/apk/res-auto"
     android:id="@+id/title"
-    robototext:style="medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:gravity="center_vertical"
     android:textColor="@color/color_primary"
-    android:textSize="14sp" />
+    android:textSize="14sp"
+    robototext:style="medium" />
 

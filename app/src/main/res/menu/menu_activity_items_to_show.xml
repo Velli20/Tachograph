@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,11 +24,13 @@
   ~  */
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:appcompat="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_item_restore"
-        appcompat:showAsAction="ifRoom"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_restore"
+        android:icon="@drawable/ic_action_restore_light"
         android:orderInCategory="0"
         android:title="@string/menu_restore"
-        android:icon="@drawable/ic_action_restore_light"/>
+        appcompat:showAsAction="ifRoom" />
 
 </menu>

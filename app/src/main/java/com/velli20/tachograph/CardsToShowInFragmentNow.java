@@ -26,18 +26,17 @@
 
 package com.velli20.tachograph;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.velli20.tachograph.collections.ListAdapterFragmentNow;
 import com.velli20.tachograph.collections.ListItemRegulationToShow;
 import com.velli20.tachograph.views.ListItemRegulation;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CardsToShowInFragmentNow {
     public static final String KEY = "preference_key_show_items";
@@ -193,7 +192,6 @@ public class CardsToShowInFragmentNow {
         int plusIndex = 0;  // Position delta for cards that are fixed on top of the list
         int id = 3;         // Stable mId for RecyclerView
 
-        boolean gpsMonitorEnabled = PreferenceManager.getDefaultSharedPreferences(c).getBoolean(c.getResources().getString(R.string.preference_key_use_gps), false);
         boolean showGpsMonitor = false;
 
         ArrayList<ListItemRegulationToShow> list = new ArrayList<>();
@@ -222,10 +220,10 @@ public class CardsToShowInFragmentNow {
             int position = getItemPosition(prefs, i);
             boolean show = getShowItem(prefs, i);
             if (i == 0) {
-                list.add(new ListItemRegulationToShow((plusIndex + position), ListAdapterFragmentNow.VIEW_TYPE_GPS_STATUS, showGpsMonitor && show && gpsMonitorEnabled, id));
+                list.add(new ListItemRegulationToShow((plusIndex + position), ListAdapterFragmentNow.VIEW_TYPE_GPS_STATUS, showGpsMonitor && show, id));
 
             } else {
-                list.add(new ListItemRegulationToShow((plusIndex + position), ListAdapterFragmentNow.VIEW_TYPE_REGULATION, i-1, show, id));
+                list.add(new ListItemRegulationToShow((plusIndex + position), ListAdapterFragmentNow.VIEW_TYPE_REGULATION, i - 1, show, id));
             }
             id++;
         }

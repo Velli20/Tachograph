@@ -37,8 +37,7 @@ public class DeleteLocationTask extends AsyncTask<Void, Void, Integer> {
     private OnDatabaseActionCompletedListener mListener;
 
 
-
-    public DeleteLocationTask(SQLiteDatabase db, int eventId){
+    public DeleteLocationTask(SQLiteDatabase db, int eventId) {
         mDb = db;
         mEventId = eventId;
     }
@@ -63,12 +62,11 @@ public class DeleteLocationTask extends AsyncTask<Void, Void, Integer> {
         mDb.execSQL(query);
 
 
-
         return mEventId;
     }
 
     @Override
-    protected void onPostExecute(Integer result){
+    protected void onPostExecute(Integer result) {
         if (mListener != null) {
             mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_DELETE, result);
         }

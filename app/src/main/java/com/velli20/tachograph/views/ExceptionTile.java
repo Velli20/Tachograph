@@ -26,27 +26,24 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.velli20.tachograph.R;
+
 public class ExceptionTile extends View {
-    private TextPaint mExceptionTextPaint;
-    private Paint mTilePaint;
-
-
     private final float mScale;
     private final float mStrokeWidth;
-
+    private TextPaint mExceptionTextPaint;
+    private Paint mTilePaint;
     private String mExceptionNumber = "3";
 
     public ExceptionTile(Context context) {

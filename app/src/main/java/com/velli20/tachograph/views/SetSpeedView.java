@@ -27,15 +27,15 @@
 package com.velli20.tachograph.views;
 
 
-import com.velli20.tachograph.DateUtils;
-import com.velli20.tachograph.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+
+import com.velli20.tachograph.DateUtils;
+import com.velli20.tachograph.R;
 
 public class SetSpeedView extends RelativeLayout implements OnSeekBarChangeListener {
     public static final String UNIT_KM = " km/h";
@@ -119,6 +119,10 @@ public class SetSpeedView extends RelativeLayout implements OnSeekBarChangeListe
         mUnit = unit;
     }
 
+    public int getValue() {
+        return mSeekBar.getProgress();
+    }
+
     public void setValue(int value) {
         mCurrentValue = value;
         if (value < mMinValue) {
@@ -129,10 +133,6 @@ public class SetSpeedView extends RelativeLayout implements OnSeekBarChangeListe
         if (mSeekBar != null) {
             mSeekBar.setProgress(mCurrentValue);
         }
-    }
-
-    public int getValue() {
-        return mSeekBar.getProgress();
     }
 
 }

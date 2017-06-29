@@ -34,7 +34,6 @@ import android.util.Log;
 
 import com.velli20.tachograph.location.CustomLocation;
 
-
 import static com.velli20.tachograph.database.DataBaseHandlerConstants.TABLE_LOCATIONS;
 
 public class AddLocationTask extends AsyncTask<Void, Void, Integer> {
@@ -69,13 +68,13 @@ public class AddLocationTask extends AsyncTask<Void, Void, Integer> {
 
         int result = -1;
 
-        if(mDb.isOpen()) {
+        if (mDb.isOpen()) {
             mDb.beginTransaction();
 
             try {
                 result = (int) mDb.insert(TABLE_LOCATIONS, null, values);
-            } catch(IllegalStateException e) {
-                if(DEBUG) {
+            } catch (IllegalStateException e) {
+                if (DEBUG) {
                     Log.e(TAG, TAG + e.getMessage());
                 }
             } finally {
@@ -90,8 +89,8 @@ public class AddLocationTask extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
-        if(mListener != null) {
-            if(result == -1) {
+        if (mListener != null) {
+            if (result == -1) {
                 mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_ERROR, result);
             } else {
                 mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_INSERT, result);

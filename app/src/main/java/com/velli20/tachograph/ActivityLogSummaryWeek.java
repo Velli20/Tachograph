@@ -26,18 +26,6 @@
 
 package com.velli20.tachograph;
 
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.database.GetLogSummaryTask;
-import com.velli20.tachograph.restingtimes.WeekHolder;
-import com.velli20.tachograph.restingtimes.WorkDayHolder;
-import com.velli20.tachograph.views.StepperCircle;
-import com.velli20.tachograph.views.RobotoLightTextView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -55,6 +43,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.GetLogSummaryTask;
+import com.velli20.tachograph.restingtimes.WeekHolder;
+import com.velli20.tachograph.restingtimes.WorkDayHolder;
+import com.velli20.tachograph.views.RobotoLightTextView;
+import com.velli20.tachograph.views.StepperCircle;
+
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ActivityLogSummaryWeek extends AppCompatActivity implements AdapterView.OnItemClickListener {
     public static final boolean DEBUG = false;
@@ -140,16 +140,27 @@ public class ActivityLogSummaryWeek extends AppCompatActivity implements Adapter
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        WorkDayHolder workday = mWeek.getWorkDays().get(position - 1);
+        if (workday != null) {
+            Intent i = new Intent(this, ActivityLogSummaryDay.class);
+            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_START, workday.getStartDate());
+            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_END, workday.getEndDate());
+            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_EVENT_IDS, workday.getEventIds());
+            startActivity(i);
+        }
+    }
+
     private class WeekAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int VIEW_TYPE_CHART = 0;
         private static final int VIEW_TYPE_NORMAL = 1;
 
         private final LayoutInflater mInflater;
-        private AdapterView.OnItemClickListener mListener;
-        private WeekHolder mItems;
-
         private final String mDailyRest;
         private final String[] SHORT_WEEK_DAYS = new DateFormatSymbols().getShortWeekdays();
+        private AdapterView.OnItemClickListener mListener;
+        private WeekHolder mItems;
 
         private WeekAdapter(Context context, WeekHolder week) {
             mInflater = LayoutInflater.from(context);
@@ -307,17 +318,5 @@ public class ActivityLogSummaryWeek extends AppCompatActivity implements Adapter
             }
         }
 
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-        WorkDayHolder workday = mWeek.getWorkDays().get(position - 1);
-        if (workday != null) {
-            Intent i = new Intent(this, ActivityLogSummaryDay.class);
-            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_START, workday.getStartDate());
-            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_END, workday.getEndDate());
-            i.putExtra(ActivityLogSummaryDay.INTENT_EXTRA_EVENT_IDS, workday.getEventIds());
-            startActivity(i);
-        }
     }
 }

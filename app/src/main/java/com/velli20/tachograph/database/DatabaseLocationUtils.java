@@ -33,7 +33,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 
-
 import com.velli20.tachograph.Event;
 
 import java.util.List;
@@ -41,34 +40,33 @@ import java.util.Locale;
 
 public class DatabaseLocationUtils {
 
-	
-	
-	/* Get name of the address with given coordinates */
-	public static String getAdressForLocation(Context context, double latitude, double longitude) {
-		if(context == null){
-			return null;
-		}
 
-		try {
+    /* Get name of the address with given coordinates */
+    public static String getAdressForLocation(Context context, double latitude, double longitude) {
+        if (context == null) {
+            return null;
+        }
 
-			final Geocoder geo = new Geocoder(context, Locale.getDefault());
-			final List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
+        try {
 
-			if (addresses == null || addresses.isEmpty()) {
-				return null;
-			} else {
-				return addresses.get(0).getAddressLine(1);
-			}
+            final Geocoder geo = new Geocoder(context, Locale.getDefault());
+            final List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
 
-		}
-		catch (Exception ignored) {}
+            if (addresses == null || addresses.isEmpty()) {
+                return null;
+            } else {
+                return addresses.get(0).getAddressLine(1);
+            }
 
-		return null;
-	}
+        } catch (Exception ignored) {
+        }
+
+        return null;
+    }
 
     /* Returns result in meters */
     public static double calculateRouteDistance(Cursor routeCursor) {
-        if(routeCursor == null || routeCursor.isClosed() || !routeCursor.moveToFirst()) {
+        if (routeCursor == null || routeCursor.isClosed() || !routeCursor.moveToFirst()) {
             return 0;
         }
         double distance = 0.0;
@@ -82,7 +80,7 @@ public class DatabaseLocationUtils {
             latitude = routeCursor.getDouble(routeCursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LATITUDE));
             longitude = routeCursor.getDouble(routeCursor.getColumnIndex(DataBaseHandlerConstants.KEY_LOCATION_LONGITUDE));
 
-            if(previousLatitude != -1 && previousLongitude != -1 && latitude != -1 && longitude != -1){
+            if (previousLatitude != -1 && previousLongitude != -1 && latitude != -1 && longitude != -1) {
                 /* Calculate distance between two points */
                 distance += calculateDistance(previousLatitude, previousLongitude, latitude, longitude);
             }
@@ -98,19 +96,19 @@ public class DatabaseLocationUtils {
 
     public static double calculateDistance(double lat1, double lng1, double lat2, double lng2) {
         double earthRadius = 6371000; //meters
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return earthRadius * c;
     }
 
     /* Checks if there is logged locations with given Event mId. */
-    public static boolean checkForLoggedRoute(SQLiteDatabase database, Event event){
-        if(event == null || database == null || !database.isOpen()) {
+    public static boolean checkForLoggedRoute(SQLiteDatabase database, Event event) {
+        if (event == null || database == null || !database.isOpen()) {
             return false;
         }
         String query = new DatabaseLocationQueryBuilder()
@@ -124,7 +122,7 @@ public class DatabaseLocationUtils {
 
         boolean result = false;
 
-        if(locCursor != null) {
+        if (locCursor != null) {
             result = locCursor.moveToFirst() && locCursor.getInt(0) > 1;
             locCursor.close();
         }
@@ -134,7 +132,7 @@ public class DatabaseLocationUtils {
 
     /* Returns result in meters */
     public static double getLoggedRouteDistance(SQLiteDatabase database, int eventId) {
-        if(database == null || !database.isOpen()) {
+        if (database == null || !database.isOpen()) {
             return 0;
         }
 
@@ -150,14 +148,12 @@ public class DatabaseLocationUtils {
 
         double distance = DatabaseLocationUtils.calculateRouteDistance(routeCursor);
 
-        if(routeCursor != null) {
+        if (routeCursor != null) {
             routeCursor.close();
         }
 
         return distance;
     }
-	
-	
-	
+
 
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -26,8 +25,8 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:isScrollContainer="true">
@@ -43,13 +42,12 @@
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"
         app:theme="@style/ToolbarStyle"
-        tools:ignore="UnusedAttribute" >
-    </android.support.v7.widget.Toolbar>
+        tools:ignore="UnusedAttribute"></android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_add_new_event_tool_bar" >
+        android:layout_below="@+id/activity_add_new_event_tool_bar">
 
         <include layout="@layout/activity_add_new_event_form" />
     </ScrollView>

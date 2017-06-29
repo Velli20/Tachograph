@@ -41,7 +41,7 @@ import java.lang.ref.WeakReference;
 
 
 public class ListItemActivityChooser extends CardView implements View.OnClickListener, EventRecorder.OnEventScheduledListener {
-	private TextViewTimeCounter mCounter;
+    private TextViewTimeCounter mCounter;
     private TextViewTimeCounter mNextEvent;
 
     private RobotoButton mToggleDriving;
@@ -51,22 +51,22 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
 
     private WeakReference<OnClickListener> mListener;
 
-	public ListItemActivityChooser(Context context) {
-		super(context);
-	}
-	
-	public ListItemActivityChooser(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
-	
-	public ListItemActivityChooser(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-	}
+    public ListItemActivityChooser(Context context) {
+        super(context);
+    }
+
+    public ListItemActivityChooser(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ListItemActivityChooser(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if(!isInEditMode()) {
+        if (!isInEditMode()) {
             EventRecorder.INSTANCE.registerOnEventScheduledListener(this);
         }
     }
@@ -74,14 +74,14 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if(!isInEditMode()) {
+        if (!isInEditMode()) {
             EventRecorder.INSTANCE.unregisterOnEventScheduledListener(this);
         }
     }
 
-	@Override
-	public void onFinishInflate() {
-		super.onFinishInflate();
+    @Override
+    public void onFinishInflate() {
+        super.onFinishInflate();
 
         mCounter = (TextViewTimeCounter) findViewById(R.id.list_item_activity_event_chooser_counter);
         mNextEvent = (TextViewTimeCounter) findViewById(R.id.list_item_activity_event_chooser_next_event);
@@ -98,12 +98,12 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
         mTogglePoa.setOnClickListener(this);
 
         displayNextEvent();
-	}
+    }
 
 
     @Override
     public void onClick(View v) {
-        if(mListener != null && mListener.get() != null) {
+        if (mListener != null && mListener.get() != null) {
             mListener.get().onClick(v);
         }
     }
@@ -114,7 +114,7 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
     }
 
     public void setEvent(Event ev) {
-        if(ev != null) {
+        if (ev != null) {
             setToggle(ev.getEventType());
             mCounter.setVisibility(View.VISIBLE);
 
@@ -137,10 +137,10 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
 
         drivingEvent = resources.getDrawable(toggle == Event.EVENT_TYPE_DRIVING ? R.drawable.ic_event_driving_on : R.drawable.ic_event_driving_off);
         otherWorkEvent = resources.getDrawable(toggle == Event.EVENT_TYPE_OTHER_WORK ? R.drawable.ic_event_other_work_on : R.drawable.ic_event_other_work_off);
-        poaEvent= resources.getDrawable(toggle == Event.EVENT_TYPE_POA ? R.drawable.ic_event_poa_on : R.drawable.ic_event_poa_off);
+        poaEvent = resources.getDrawable(toggle == Event.EVENT_TYPE_POA ? R.drawable.ic_event_poa_on : R.drawable.ic_event_poa_off);
 
 
-        if(toggle == Event.EVENT_TYPE_DAILY_REST
+        if (toggle == Event.EVENT_TYPE_DAILY_REST
                 || toggle == Event.EVENT_TYPE_NORMAL_BREAK
                 || toggle == Event.EVENT_TYPE_WEEKLY_REST) {
             restingEvent = resources.getDrawable(R.drawable.ic_event_rest_on);
@@ -148,7 +148,6 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
         } else {
             restingEvent = resources.getDrawable(R.drawable.ic_event_rest_off);
         }
-
 
 
         setDrawableBounds(drivingEvent);
@@ -163,7 +162,7 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
     }
 
     private void setDrawableBounds(Drawable d) {
-        if(d != null) {
+        if (d != null) {
             d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
         }
     }
@@ -171,7 +170,7 @@ public class ListItemActivityChooser extends CardView implements View.OnClickLis
     private void displayNextEvent() {
         EventRecorder recorder = EventRecorder.INSTANCE;
 
-        if(recorder.isEventScheduled() && recorder.getScheduledEventType() == Event.EVENT_TYPE_OTHER_WORK) {
+        if (recorder.isEventScheduled() && recorder.getScheduledEventType() == Event.EVENT_TYPE_OTHER_WORK) {
             mNextEvent.setVisibility(View.VISIBLE);
             mNextEvent.setTitle(getResources().getString(R.string.title_switching_to_other_work_in));
             mNextEvent.countDown(recorder.getScheduledDate());

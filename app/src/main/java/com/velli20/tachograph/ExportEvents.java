@@ -26,16 +26,16 @@
 
 package com.velli20.tachograph;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
+import android.content.Context;
+import android.util.Log;
 
 import com.velli20.tachograph.database.DataBaseHandler;
 import com.velli20.tachograph.database.DataBaseHandler.OnTaskCompleted;
 
-import android.content.Context;
-import android.util.Log;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import jxl.CellView;
 import jxl.Workbook;
@@ -58,15 +58,9 @@ public class ExportEvents implements OnTaskCompleted {
     private OnFileSavedListener listener;
     private Context mContext;
 
-    public interface OnFileSavedListener {
-        void onFileSaved(File file);
-    }
-
-
     public void setFile(File file) {
         this.file = file;
     }
-
 
     public void write(Context context) {
         mContext = context;
@@ -116,7 +110,6 @@ public class ExportEvents implements OnTaskCompleted {
         addCaption(sheet, 9, 0, mContext.getString(R.string.export_events_driven_distance));
 
     }
-
 
     private void writeEvents(ArrayList<Event> list) throws IOException, WriteException {
         if (DEBUG) {
@@ -182,6 +175,10 @@ public class ExportEvents implements OnTaskCompleted {
         Label label;
         label = new Label(column, row, s, times);
         sheet.addCell(label);
+    }
+
+    public interface OnFileSavedListener {
+        void onFileSaved(File file);
     }
 
 

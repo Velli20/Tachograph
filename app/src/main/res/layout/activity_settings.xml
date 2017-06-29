@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -29,7 +28,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/settings_toolbar"
@@ -42,8 +41,7 @@
         app:contentInsetLeft="16dp"
         app:contentInsetStart="16dp"
         app:theme="@style/ToolbarStyle"
-        tools:ignore="UnusedAttribute" >
-    </android.support.v7.widget.Toolbar>
+        tools:ignore="UnusedAttribute"></android.support.v7.widget.Toolbar>
 
     <fragment
         android:id="@+id/navigation_drawer"
@@ -51,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/settings_toolbar" />
-    
+
     <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"

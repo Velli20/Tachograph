@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -30,7 +29,7 @@
     <declare-styleable name="TimePickerDialog">
         <attr name="bpTextColor" format="reference" />
     </declare-styleable>
-    
+
     <declare-styleable name="RobotoText">
         <attr name="style" format="enum">
             <enum name="bold" value="0" />
@@ -43,22 +42,22 @@
             <enum name="custom" value="7" />
         </attr>
     </declare-styleable>
-    
+
     <declare-styleable name="FloatingMenu">
-        <attr name="menu_button" format="boolean"/>
+        <attr name="menu_button" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="StepperCircle">
-        <attr name="circleColor" format="color"/>
+        <attr name="circleColor" format="color" />
     </declare-styleable>
 
-    
+
     <declare-styleable name="ListCircle">
-        <attr name="background_color" format="string"/>
-        <attr name="background_color_selected" format="string"/>
-        <attr name="drawable_normal" format="reference"/>
-        <attr name="letter" format="string"/>
-        <attr name="letter_size" format="dimension"/>
+        <attr name="background_color" format="string" />
+        <attr name="background_color_selected" format="string" />
+        <attr name="drawable_normal" format="reference" />
+        <attr name="letter" format="string" />
+        <attr name="letter_size" format="dimension" />
     </declare-styleable>
-    
+
 </resources>

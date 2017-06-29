@@ -40,30 +40,6 @@ public class ActivityRestTypeChooser extends Activity {
     public static final String INTENT_EXTRA_CURRENT_EVENT_TYPE = "current event type";
     public static final String TAG = "ActivityRestTypeChooser ";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getIntent() != null) {
-            int type = getIntent().getIntExtra(INTENT_EXTRA_CURRENT_EVENT_TYPE, -1);
-
-            showChooseRestTypeDialog(this, type, new MaterialDialog.ListCallback() {
-
-                @Override
-                public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                    if (which == 0) {
-                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
-                    } else if (which == 1) {
-                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
-                    } else if (which == 2) {
-                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
-                    }
-                    finish();
-                }
-            });
-
-        }
-    }
-
     public static void showChooseRestTypeDialog(final Context c, int currentEventType, final MaterialDialog.ListCallback callback) {
         new MaterialDialog.Builder(c)
                 .items(getRestTimeTypeArray(c.getResources(), currentEventType))
@@ -100,6 +76,30 @@ public class ActivityRestTypeChooser extends Activity {
             return 1;
         } else {
             return 2;
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getIntent() != null) {
+            int type = getIntent().getIntExtra(INTENT_EXTRA_CURRENT_EVENT_TYPE, -1);
+
+            showChooseRestTypeDialog(this, type, new MaterialDialog.ListCallback() {
+
+                @Override
+                public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                    if (which == 0) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_WEEKLY_REST, System.currentTimeMillis());
+                    } else if (which == 1) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_DAILY_REST, System.currentTimeMillis());
+                    } else if (which == 2) {
+                        EventRecorder.INSTANCE.startRecordingEvent(Event.EVENT_TYPE_NORMAL_BREAK, System.currentTimeMillis());
+                    }
+                    finish();
+                }
+            });
+
         }
     }
 

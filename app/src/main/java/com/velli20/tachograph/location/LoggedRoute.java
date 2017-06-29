@@ -31,85 +31,86 @@ import com.velli20.materialunixgraph.Line;
 
 
 public class LoggedRoute {
-	private PolylineOptions mMapPolyLine;
-	private Line mSpeedGraphLine;
-	
-	private int mDuration;
-	private float mAverageSpeed;
-	private float mDistance;
-	
-	private double mStartLatitude;
-	private double mStartLongitude;
+    private PolylineOptions mMapPolyLine;
+    private Line mSpeedGraphLine;
 
-	private double mEndLatitude;
-	private double mEndLongitude;
-	
-	public LoggedRoute(){ }
-	
-	public void setMapPolyline(PolylineOptions opt){
-		mMapPolyLine = opt;
-	}
-	
-	public void setSpeedGraphLine(Line line){
-		mSpeedGraphLine = line;
-	}
-	
-	public void setDuration(int duration){
-		mDuration = duration;
-	}
-	
-	public void setAverageSpeed(float averageSpeed){
-		mAverageSpeed = averageSpeed;
-	}
-	
-	public void setDistance(float distance){
-		mDistance = distance;
-	}
-	
-	public void setStartLocation(double latitude, double longitude){
-		mStartLatitude = latitude;
-		mStartLongitude = longitude;
-	}
-	
-	public void setEndLocation(double latitude, double longitude){
-		mEndLatitude = latitude;
-		mEndLongitude = longitude;
-	}
-	
-	public PolylineOptions getMapPolyline(){
-		return mMapPolyLine;
-	}
-	
-	public Line getSpeedGraphLine(){
-		return mSpeedGraphLine;
-	}
-	
-	public int getDuration(){
-		return mDuration;
-	}
-	
-	public float getAverageSpeed(){
-		return mAverageSpeed;
-	}
-	
-	public float getDistance(){
-		return mDistance;
-	}
-	
-	public double getStartLatitude(){
-		return mStartLatitude;
-	}
-	
-	public double getStartLongitude(){
-		return mStartLongitude;
-	}
-	
-	public double getEndLatitude(){
-		return mEndLatitude;
-	}
-	
-	public double getEndLongitude(){
-		return mEndLongitude;
-	}
-	
+    private int mDuration;
+    private float mAverageSpeed;
+    private float mDistance;
+
+    private double mStartLatitude;
+    private double mStartLongitude;
+
+    private double mEndLatitude;
+    private double mEndLongitude;
+
+    public LoggedRoute() {
+    }
+
+    public void setStartLocation(double latitude, double longitude) {
+        mStartLatitude = latitude;
+        mStartLongitude = longitude;
+    }
+
+    public void setEndLocation(double latitude, double longitude) {
+        mEndLatitude = latitude;
+        mEndLongitude = longitude;
+    }
+
+    public PolylineOptions getMapPolyline() {
+        return mMapPolyLine;
+    }
+
+    public void setMapPolyline(PolylineOptions opt) {
+        mMapPolyLine = opt;
+    }
+
+    public Line getSpeedGraphLine() {
+        return mSpeedGraphLine;
+    }
+
+    public void setSpeedGraphLine(Line line) {
+        mSpeedGraphLine = line;
+    }
+
+    public int getDuration() {
+        return mDuration;
+    }
+
+    public void setDuration(int duration) {
+        mDuration = duration;
+    }
+
+    public float getAverageSpeed() {
+        return mAverageSpeed;
+    }
+
+    public void setAverageSpeed(float averageSpeed) {
+        mAverageSpeed = averageSpeed;
+    }
+
+    public float getDistance() {
+        return mDistance;
+    }
+
+    public void setDistance(float distance) {
+        mDistance = distance;
+    }
+
+    public double getStartLatitude() {
+        return mStartLatitude;
+    }
+
+    public double getStartLongitude() {
+        return mStartLongitude;
+    }
+
+    public double getEndLatitude() {
+        return mEndLatitude;
+    }
+
+    public double getEndLongitude() {
+        return mEndLongitude;
+    }
+
 }

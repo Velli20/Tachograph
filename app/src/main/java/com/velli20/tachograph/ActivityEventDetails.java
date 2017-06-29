@@ -27,14 +27,6 @@
 package com.velli20.tachograph;
 
 
-import com.velli20.tachograph.collections.ListAdapterEventDetails;
-import com.velli20.tachograph.collections.SpacesItemDecorationEventDetails;
-import com.velli20.tachograph.database.DataBaseHandler;
-import com.velli20.tachograph.database.DataBaseHandler.OnGetEventTaskCompleted;
-import com.velli20.tachograph.database.GetLoggedRouteTask.OnGetLoggedRouteListener;
-import com.velli20.tachograph.location.ActivityLoggedRouteMap;
-import com.velli20.tachograph.location.LoggedRoute;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -48,6 +40,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.velli20.tachograph.collections.ListAdapterEventDetails;
+import com.velli20.tachograph.collections.SpacesItemDecorationEventDetails;
+import com.velli20.tachograph.database.DataBaseHandler;
+import com.velli20.tachograph.database.DataBaseHandler.OnGetEventTaskCompleted;
+import com.velli20.tachograph.database.GetLoggedRouteTask.OnGetLoggedRouteListener;
+import com.velli20.tachograph.location.ActivityLoggedRouteMap;
+import com.velli20.tachograph.location.LoggedRoute;
 
 import java.util.Locale;
 
@@ -71,7 +71,8 @@ public class ActivityEventDetails extends AppCompatActivity implements OnGetLogg
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_event_details_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.card_padding)));
+        recyclerView.addItemDecoration(new SpacesItemDecorationEventDetails(getResources().getDimensionPixelSize(R.dimen.list_item_event_details_divider_height)));
+
         recyclerView.setAdapter(mAdapter);
 
 
@@ -153,7 +154,7 @@ public class ActivityEventDetails extends AppCompatActivity implements OnGetLogg
 
         if (ev.hasLoggedRoute()) {
             DataBaseHandler.getInstance().getLoggedRoute(ev.getRowId(), this);
-        } else if(mAdapter != null) {
+        } else if (mAdapter != null) {
             mLoggedRoute = null;
             mAdapter.setLoggedRoute(null);
         }

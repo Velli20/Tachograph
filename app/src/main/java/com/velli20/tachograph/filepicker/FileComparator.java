@@ -43,9 +43,9 @@ public class FileComparator implements Comparator<File> {
 
     @Override
     public int compare(File lhs, File rhs) {
-        if(mCompareBy == COMPARE_BY_LAST_MODIFIED) {
+        if (mCompareBy == COMPARE_BY_LAST_MODIFIED) {
             return Long.valueOf(lhs.lastModified()).compareTo(rhs.lastModified());
-        } else if(mCompareBy == COMPARE_BY_NAME) {
+        } else if (mCompareBy == COMPARE_BY_NAME) {
             return String.valueOf(lhs.getName()).compareTo(rhs.getName());
         } else {
             return Long.valueOf(lhs.length()).compareTo(rhs.length());

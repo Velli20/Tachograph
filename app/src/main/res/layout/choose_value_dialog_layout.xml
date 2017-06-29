@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -29,8 +28,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    tools:ignore="UnusedAttribute"
-    android:windowMinWidthMajor="@android:dimen/dialog_min_width_major" >
+    android:windowMinWidthMajor="@android:dimen/dialog_min_width_major"
+    tools:ignore="UnusedAttribute">
 
     <TextView
         android:id="@+id/choose_value_dialog_current_value"
@@ -43,11 +42,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_toStartOf="@+id/choose_value_dialog_button_erase"
         android:layout_toLeftOf="@+id/choose_value_dialog_button_erase"
+        android:layout_toStartOf="@+id/choose_value_dialog_button_erase"
         android:fontFamily="sans-serif-light"
-        android:textSize="26sp"
         android:textColor="@color/black"
+        android:textSize="26sp"
         tools:ignore="UnusedAttribute" />
 
     <View
@@ -56,11 +55,7 @@
         android:layout_height="0.5dp"
         android:layout_below="@+id/choose_value_dialog_current_value"
         android:background="@color/black" />
-    
-    
-        
 
-    
 
     <ImageButton
         android:id="@+id/choose_value_dialog_button_erase"
@@ -71,10 +66,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-    
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+
         android:contentDescription="@null"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:src="@drawable/ic_backspace_normal_light" />
 
     <LinearLayout
@@ -83,11 +78,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/choose_value_dialog_separator"
         android:orientation="vertical">
-        
-        <include layout="@layout/choose_value_dialog_keypad"/>
+
+        <include layout="@layout/choose_value_dialog_keypad" />
     </LinearLayout>
 
-    
-    
 
 </com.velli20.tachograph.views.ChooseValueView>

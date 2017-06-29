@@ -27,38 +27,38 @@
 package com.velli20.tachograph.restingtimes;
 
 public class BreakTime {
-	private long mStart; // End time
-	private long mEnd; // Start time
-	
-	private int mLength; // In minutes
-	
-	public BreakTime(){
-		
-	}
-	
-	public void setStart(long start){
-		mStart = start;
-	}
-	
-	public void setEnd(long end){
-		mEnd = end;
-	}
-	
-	public void setDuration(int lenght){
-		mLength = lenght;
-	}
-	
-	public long getStartTime(){
-		return mStart;
-	}
-	
-	public long getEndTime(){
-		return mEnd;
-	}
-	
-	public int getDurationInMinutes(){
-		return mLength;
-	}
+    private long mStart; // End time
+    private long mEnd; // Start time
 
-	
+    private int mLength; // In minutes
+
+    public BreakTime() {
+
+    }
+
+    public void setStart(long start) {
+        mStart = start;
+    }
+
+    public void setEnd(long end) {
+        mEnd = end;
+    }
+
+    public void setDuration(int lenght) {
+        mLength = lenght;
+    }
+
+    public long getStartTime() {
+        return mStart;
+    }
+
+    public long getEndTime() {
+        return mEnd;
+    }
+
+    public int getDurationInMinutes() {
+        return mLength;
+    }
+
+
 }

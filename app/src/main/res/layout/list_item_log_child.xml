@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -26,13 +25,13 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/log_child_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="72dp"
-    android:background="?android:attr/activatedBackgroundIndicator">
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="72dp">
 
 
     <com.velli20.tachograph.views.ListCircle
@@ -41,78 +40,78 @@
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"
-        circle:background_color_selected="@color/gray"/>
+        circle:background_color_selected="@color/gray" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_child_title"
         style="@style/Title.ListItemLogChild"
-        custom:style="regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_log_child_icon"
+        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/list_item_log_child_icon"
         android:layout_toLeftOf="@+id/list_item_log_child_duration"
+        android:layout_toRightOf="@+id/list_item_log_child_icon"
         android:layout_toStartOf="@+id/list_item_log_child_duration"
-        android:layout_alignParentTop="true" />
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_child_start_time"
-        custom:style="regular"
         style="@style/ListSecondaryText.ListItemLogChild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_log_child_title"
-        android:layout_toRightOf="@+id/list_item_log_child_icon"
-        android:layout_toEndOf="@+id/list_item_log_child_icon"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/list_item_log_child_icon"
+        android:layout_toRightOf="@+id/list_item_log_child_icon"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_child_end_time"
-        custom:style="regular"
         style="@style/ListSecondaryText.ListItemLogChild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_log_child_start_time"
-        android:layout_toRightOf="@+id/list_item_log_child_icon"
-        android:layout_toEndOf="@+id/list_item_log_child_icon"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/list_item_log_child_icon"
+        android:layout_toRightOf="@+id/list_item_log_child_icon"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_child_distance"
-        custom:style="regular"
         style="@style/ListSecondaryText.ListItemLogChild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_log_child_end_time"
-        android:layout_toRightOf="@+id/list_item_log_child_icon"
-        android:layout_toEndOf="@+id/list_item_log_child_icon"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_toEndOf="@+id/list_item_log_child_icon"
+        android:layout_toRightOf="@+id/list_item_log_child_icon"
+        custom:style="regular" />
 
-    
+
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_child_duration"
         style="@style/Title.Time"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
-    
+        custom:style="medium" />
+
     <View
         style="@style/Divider"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="72dp"
-        android:layout_marginStart="72dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginStart="72dp" />
 
- 
+
 </RelativeLayout>

@@ -16,7 +16,6 @@
 
 package com.velli20.tachograph.googledatetimepicker;
 
-import com.velli20.tachograph.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -37,6 +36,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import com.velli20.tachograph.R;
 
 import java.security.InvalidParameterException;
 import java.util.Calendar;
@@ -50,17 +50,16 @@ import java.util.Locale;
  * within the specified month.
  */
 public class SimpleMonthView extends View {
-    private static final String TAG = "SimpleMonthView";
+    /**
+     * This sets the height of this week in pixels
+     */
+    public static final String VIEW_PARAMS_HEIGHT = "height";
 
     /**
      * These params can be passed into the view to control how it appears.
      * {@link #VIEW_PARAMS_WEEK} is the only required field, though the default
      * values are unlikely to fit most layouts correctly.
      */
-    /**
-     * This sets the height of this week in pixels
-     */
-    public static final String VIEW_PARAMS_HEIGHT = "height";
     /**
      * This specifies the position (or weeks since the epoch) of this week,
      * calculated using {@link Utils#getWeeksSinceEpochFromJulianDay}
@@ -95,9 +94,6 @@ public class SimpleMonthView extends View {
      * If this month should display week numbers. false if 0, true otherwise.
      */
     public static final String VIEW_PARAMS_SHOW_WK_NUM = "show_wk_num";
-
-    protected static int DEFAULT_HEIGHT = 32;
-    protected static int MIN_HEIGHT = 10;
     protected static final int DEFAULT_SELECTED_DAY = -1;
     protected static final int DEFAULT_WEEK_START = Calendar.SUNDAY;
     protected static final int DEFAULT_NUM_DAYS = 7;
@@ -105,9 +101,10 @@ public class SimpleMonthView extends View {
     protected static final int DEFAULT_FOCUS_MONTH = -1;
     protected static final int DEFAULT_NUM_ROWS = 6;
     protected static final int MAX_NUM_ROWS = 6;
-
+    private static final String TAG = "SimpleMonthView";
     private static final int SELECTED_CIRCLE_ALPHA = 60;
-
+    protected static int DEFAULT_HEIGHT = 32;
+    protected static int MIN_HEIGHT = 10;
     protected static int DAY_SEPARATOR_WIDTH = 1;
     protected static int MINI_DAY_NUMBER_TEXT_SIZE;
     protected static int MONTH_LABEL_TEXT_SIZE;
@@ -117,31 +114,25 @@ public class SimpleMonthView extends View {
 
     // used for scaling to the device density
     protected static float mScale = 0;
-
+    private final Formatter mFormatter;
+    private final StringBuilder mStringBuilder;
+    private final Calendar mCalendar;
+    private final Calendar mDayLabelCalendar;
+    private final MonthViewNodeProvider mNodeProvider;
     // affects the padding on the sides of this view
     protected int mPadding = 0;
-
-    private String mDayOfWeekTypeface;
-    private String mMonthTitleTypeface;
-
     protected Paint mMonthNumPaint;
     protected Paint mMonthTitlePaint;
     protected Paint mMonthTitleBGPaint;
     protected Paint mSelectedCirclePaint;
     protected Paint mMonthDayLabelPaint;
-
-    private final Formatter mFormatter;
-    private final StringBuilder mStringBuilder;
-
     // The Julian day of the first day displayed by this item
     protected int mFirstJulianDay = -1;
     // The month of the first day in this week
     protected int mFirstMonth = -1;
     // The month of the last day in this week
     protected int mLastMonth = -1;
-
     protected int mMonth;
-
     protected int mYear;
     // Quick reference to the width of this view, matches parent
     protected int mWidth;
@@ -163,22 +154,18 @@ public class SimpleMonthView extends View {
     protected int mSelectedLeft = -1;
     // The right edge of the selected day
     protected int mSelectedRight = -1;
-
-    private final Calendar mCalendar;
-    private final Calendar mDayLabelCalendar;
-    private final MonthViewNodeProvider mNodeProvider;
-
-    private int mNumRows = DEFAULT_NUM_ROWS;
-
-    // Optional listener for handling day click actions
-    private OnDayClickListener mOnDayClickListener;
-    // Whether to prevent setting the accessibility delegate
-    private boolean mLockAccessibilityDelegate;
-
     protected int mDayTextColor;
     protected int mTodayNumberColor;
     protected int mMonthTitleColor;
     protected int mMonthTitleBGColor;
+    private String mDayOfWeekTypeface;
+    private String mMonthTitleTypeface;
+    private int mNumRows = DEFAULT_NUM_ROWS;
+    // Optional listener for handling day click actions
+    private OnDayClickListener mOnDayClickListener;
+    // Whether to prevent setting the accessibility delegate
+    private boolean mLockAccessibilityDelegate;
+    private int mDayOfWeekStart = 0;
 
     public SimpleMonthView(Context context) {
         super(context);
@@ -304,9 +291,6 @@ public class SimpleMonthView extends View {
         drawMonthDayLabels(canvas);
         drawMonthNums(canvas);
     }
-
-    private int mDayOfWeekStart = 0;
-
 
     public void setMonthParams(HashMap<String, Integer> params) {
         if (!params.containsKey(VIEW_PARAMS_MONTH) && !params.containsKey(VIEW_PARAMS_YEAR)) {
@@ -464,7 +448,7 @@ public class SimpleMonthView extends View {
      *
      * @param x The x position of the touch event
      * @return A time object for the tapped day or null if the position wasn't
-     *         in a day
+     * in a day
      */
     public SimpleMonthAdapter.CalendarDay getDayFromLocation(float x, float y) {
         int dayStart = mPadding;
@@ -500,7 +484,7 @@ public class SimpleMonthView extends View {
 
     /**
      * @return The date that has accessibility focus, or {@code null} if no date
-     *         has focus
+     * has focus
      */
     public SimpleMonthAdapter.CalendarDay getAccessibilityFocus() {
         return mNodeProvider.getFocusedItem();
@@ -519,7 +503,7 @@ public class SimpleMonthView extends View {
      *
      * @param day The date which should receive focus
      * @return {@code false} if the date is not valid for this month view, or
-     *         {@code true} if the date received focus
+     * {@code true} if the date received focus
      */
     public boolean restoreAccessibilityFocus(SimpleMonthAdapter.CalendarDay day) {
         if ((day.year != mYear) || (day.month != mMonth) || (day.day > mNumCells)) {
@@ -528,6 +512,13 @@ public class SimpleMonthView extends View {
 
         mNodeProvider.setFocusedItem(day);
         return true;
+    }
+
+    /**
+     * Handles callbacks when the user clicks on a time object.
+     */
+    public interface OnDayClickListener {
+        public void onDayClick(SimpleMonthView view, SimpleMonthAdapter.CalendarDay day);
     }
 
     /**
@@ -662,12 +653,5 @@ public class SimpleMonthView extends View {
 
             return date;
         }
-    }
-
-    /**
-     * Handles callbacks when the user clicks on a time object.
-     */
-    public interface OnDayClickListener {
-        public void onDayClick(SimpleMonthView view, SimpleMonthAdapter.CalendarDay day);
     }
 }

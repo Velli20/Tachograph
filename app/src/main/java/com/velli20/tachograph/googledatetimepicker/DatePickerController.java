@@ -16,7 +16,6 @@
 package com.velli20.tachograph.googledatetimepicker;
 
 
-
 /**
  * Controller class to communicate among the various components of the date picker dialog.
  */

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -27,8 +26,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.velli20.tachograph"
-    android:versionCode="14"
-    android:versionName="2.0.2" >
+    android:versionCode="16"
+    android:versionName="2.0.4">
 
 
     <permission
@@ -39,30 +38,30 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <uses-permission android:name="com.velli.tachograph.permission.MAPS_RECEIVE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.velli.tachograph.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
+        android:name="com.velli20.tachograph.App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme"
-        android:hardwareAccelerated="true"
-        android:name="com.velli20.tachograph.App">
+        android:theme="@style/AppBaseTheme">
 
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.velli20.tachograph.fileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/app_file_paths" />
@@ -71,7 +70,7 @@
         <activity
             android:name="com.velli20.tachograph.ActivityMain"
             android:label="@string/app_name"
-            android:theme="@style/AppBaseTheme" >
+            android:theme="@style/AppBaseTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,68 +80,59 @@
 
         <activity
             android:name="com.velli20.tachograph.ActivityItemsToShowInFragmentNow"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppBaseThemeWhiteBackground"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name="com.velli20.tachograph.filepicker.ActivityFilePicker"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppBaseThemeWhiteBackground"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name="com.velli20.tachograph.ActivityLogSummaryDay"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppBaseThemeWhiteBackground"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name="com.velli20.tachograph.ActivityLogSummaryWeek"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppBaseThemeWhiteBackground"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity
             android:name="com.velli20.tachograph.ActivityAddNewEvent"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/ActivityAddNewEventTheme"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <activity
             android:name="com.velli20.tachograph.ActivityRestTypeChooser"
-            android:theme="@style/ActivityRestTypeChooser"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/ActivityRestTypeChooser"/>
 
         <activity
             android:name="com.velli20.tachograph.ActivitySettings"
-            android:theme="@style/ActivitySettings"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/ActivitySettings"/>
 
         <activity
             android:name="com.velli20.tachograph.location.ActivityLoggedRouteMap"
-            android:theme="@style/AppBaseTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppBaseTheme" />
 
         <activity
             android:name="com.velli20.tachograph.ActivityEventDetails"
-            android:theme="@style/AppBaseThemeWhiteBackground"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/ActivityEventDetailsTheme" />
 
-        <service
-            android:name="com.velli20.tachograph.StartEventService">
-        </service>
+        <service android:name="com.velli20.tachograph.StartEventService"/>
 
         <service
             android:name="com.velli20.tachograph.GpsBackgroundService"
-            android:enabled="true">
-        </service>
+            android:enabled="true"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -151,7 +141,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBCzpyNo-yLBPxbxzQvOdCqEp5jfaPGd6U" />
+            android:value="AIzaSyDvG4vOYJPsGrKAKmTnoIBzeGrlgNG5XkM" />
     </application>
 
 </manifest>

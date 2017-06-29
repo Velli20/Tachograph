@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -29,7 +28,6 @@
     xmlns:robototext="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_counter"
-    robototext:style="medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:alpha="1"
@@ -39,4 +37,5 @@
     android:gravity="center_vertical|right|end"
     android:textColor="@color/color_primary"
     android:textSize="16sp"
+    robototext:style="medium"
     tools:ignore="RtlHardcoded" />

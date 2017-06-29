@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,9 +24,11 @@
   ~  */
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:appcompat="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/map_layer"
-        appcompat:showAsAction="never"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/map_layer"
+        android:orderInCategory="0"
         android:title="@string/menu_map_layer"
-        android:orderInCategory="0"/>
+        appcompat:showAsAction="never" />
 </menu>

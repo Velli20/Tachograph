@@ -39,10 +39,9 @@ import java.util.ArrayList;
 
 
 public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, DataBaseHandler.OnGetEventTaskCompleted {
-    private static Regulations sRegulationsInstance;
     private static final boolean DEBUG = false;
     private static final String TAG = "Regulations";
-
+    private static Regulations sRegulationsInstance;
     private WeekHolder mCurrentWeek;
     private WeekHolder mPreviousWeek;
     private WorkDayHolder mCurrentDay;
@@ -50,13 +49,17 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
 
     private Handler mAutoUpdateHandler = new Handler();
     private ArrayList<WeakReference<OnRegulationsChangedListener>> mCallbacks = new ArrayList<>();
+    private Runnable mAutoUpdater = new Runnable() {
 
-    public static Regulations getInstance() {
-        if(sRegulationsInstance == null) {
-            sRegulationsInstance = new Regulations();
+        @Override
+        public void run() {
+            if (mAutoUpdateHandler != null) {
+                mAutoUpdateHandler.postDelayed(mAutoUpdater, 60000);
+                notifyCallBacks();
+            }
         }
-        return sRegulationsInstance;
-    }
+
+    };
 
     private Regulations() {
         update();
@@ -64,11 +67,18 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
         DataBaseHandler.getInstance().getRecordingEvent(this);
     }
 
+    public static Regulations getInstance() {
+        if (sRegulationsInstance == null) {
+            sRegulationsInstance = new Regulations();
+        }
+        return sRegulationsInstance;
+    }
+
     private void update() {
         DataBaseHandler.getInstance().getWorkingTimes(new GetLogSummaryTask.OnWorkingTimeCalculationsReadyListener() {
             @Override
             public void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks) {
-                if(workingWeeks != null) {
+                if (workingWeeks != null) {
 
                     int weeks = workingWeeks.size();
 
@@ -94,27 +104,15 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     /* Setup automatic updater that will notify callbacks every one minute.
      * Synchronization to match i.g with ongoing event
      */
-    private void syncAutoUpdater(long sync){
+    private void syncAutoUpdater(long sync) {
         mAutoUpdateHandler.postDelayed(mAutoUpdater, +(60000 - (sync)));
     }
 
     private void stopAutoUpdater() {
-        if(mAutoUpdateHandler != null) {
+        if (mAutoUpdateHandler != null) {
             mAutoUpdateHandler.removeCallbacks(mAutoUpdater);
         }
     }
-
-    private Runnable mAutoUpdater = new Runnable(){
-
-        @Override
-        public void run() {
-            if(mAutoUpdateHandler != null){
-                mAutoUpdateHandler.postDelayed(mAutoUpdater, 60000);
-                notifyCallBacks();
-            }
-        }
-
-    };
 
     /* Regulation (EC)561/2006 Maximum 56 hours weekly driving limit*/
     public int getWeeklyDrivingTimeLimit() {
@@ -122,7 +120,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getWeeklyDrivingTime() {
-        if(mCurrentWeek != null) {
+        if (mCurrentWeek != null) {
             return mCurrentWeek.getWeeklyDrivingTime() + getOngoingTime(Event.EVENT_TYPE_DRIVING);
         }
         return getOngoingTime(Event.EVENT_TYPE_DRIVING);
@@ -135,7 +133,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     /* Regulation (EC)561/2006 9 hours daily driving limit (can be
      * increased to 10 hours twice a week) */
     public int getDailyDrivingTimeLimit() {
-        if(getRemainingExtendedDrivingDaysLeft() > 0) {
+        if (getRemainingExtendedDrivingDaysLeft() > 0) {
             /* User has extended driving days left */
             return Constants.LIMIT_DAILY_DRIVE_EXTENDED_MIN;
         }
@@ -143,14 +141,14 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getDailyDrivingTime() {
-        if(mCurrentDay == null) {
+        if (mCurrentDay == null) {
             return getOngoingTime(Event.EVENT_TYPE_DRIVING);
         }
         return mCurrentDay.getDailyDrivingTime() + getOngoingTime(Event.EVENT_TYPE_DRIVING);
     }
 
     public int getRemainingExtendedDrivingDaysLeft() {
-        if(mCurrentWeek != null) {
+        if (mCurrentWeek != null) {
             return Math.max(2 - mCurrentWeek.getExtendedDrivingDaysUsed(), 0);
         }
         return 2;
@@ -166,9 +164,9 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getFortnightlyDrivingTime() {
-        if(mPreviousWeek != null && mCurrentWeek != null) {
+        if (mPreviousWeek != null && mCurrentWeek != null) {
             return mPreviousWeek.getWeeklyDrivingTime() + mCurrentWeek.getWeeklyDrivingTime() + getOngoingTime(Event.EVENT_TYPE_DRIVING);
-        } else if(mCurrentWeek != null) {
+        } else if (mCurrentWeek != null) {
             return mCurrentWeek.getWeeklyDrivingTime() + getOngoingTime(Event.EVENT_TYPE_DRIVING);
         }
         return getOngoingTime(Event.EVENT_TYPE_DRIVING);
@@ -182,7 +180,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     public int getContinuousDrivingTimeLimit() {
         int limit = Constants.LIMIT_CONTINUOUS_DRIVING;
 
-        if(mCurrentDay != null) {
+        if (mCurrentDay != null) {
             int dailyDrivingTimeAvailable = Math.max(getDailyDrivingTimeLimit() - mCurrentDay.getDailyDrivingTime(), 0);
 
             return (dailyDrivingTimeAvailable < limit ? dailyDrivingTimeAvailable : limit);
@@ -191,7 +189,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getContinuousDrivingTime() {
-        if(mCurrentDay != null) {
+        if (mCurrentDay != null) {
             return mCurrentDay.getContinuousDrivingTimeAfterBreak() + getOngoingTime(Event.EVENT_TYPE_DRIVING);
         }
         return getOngoingTime(Event.EVENT_TYPE_DRIVING);
@@ -204,7 +202,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     /* Regulation (EC)561/2006 11 hours regular daily rest which can be reduced to 9 hours
      * no more than three times a week */
     public int getDailyRestLimit() {
-        if(getRemainingReducedDailyRestsLeft() > 0) {
+        if (getRemainingReducedDailyRestsLeft() > 0) {
             /* User has reduced rests left */
             return Constants.LIMIT_DAILY_REST_REDUCED_MIN;
         }
@@ -212,14 +210,14 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getDailyRest() {
-        if(mCurrentDay != null) {
+        if (mCurrentDay != null) {
             return mCurrentDay.getDailyRest() + getOngoingTime(Event.EVENT_TYPE_DAILY_REST);
         }
         return getOngoingTime(Event.EVENT_TYPE_DAILY_REST);
     }
 
     public int getRemainingReducedDailyRestsLeft() {
-        if(mCurrentWeek != null) {
+        if (mCurrentWeek != null) {
             return Math.max(3 - mCurrentWeek.getReducedDailyRests(), 0);
         }
         return 3;
@@ -233,7 +231,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
      * is taken in any fortnight. There should be no more than six consecutive 24 hour periods between weekly rests.
      */
     public int getWeeklyRestLimit() {
-        if(getRemainingReducedWeeklyRestsLeft() > 0) {
+        if (getRemainingReducedWeeklyRestsLeft() > 0) {
             return Constants.LIMIT_WEEKLY_REST_REDUCED_MIN;
         }
         /* User already had reduced weekly rest in previous week. This weekly rest must be at least 45 hours */
@@ -241,14 +239,14 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getWeeklyRest() {
-        if(mCurrentWeek != null) {
+        if (mCurrentWeek != null) {
             return mCurrentWeek.getWeeklyRest() + getOngoingTime(Event.EVENT_TYPE_WEEKLY_REST);
         }
         return getOngoingTime(Event.EVENT_TYPE_WEEKLY_REST);
     }
 
     public int getRemainingReducedWeeklyRestsLeft() {
-        if(mPreviousWeek != null && mPreviousWeek.getWeeklyRest() < Constants.LIMIT_WEEKLY_REST_MIN) {
+        if (mPreviousWeek != null && mPreviousWeek.getWeeklyRest() < Constants.LIMIT_WEEKLY_REST_MIN) {
             return 0;
         }
         return 1;
@@ -264,9 +262,9 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     public int getBreakTimeLimit() {
         int fourAndHalfHoursInMillis = (1000 * 60 * 60 * 4) + (1000 * 60 * 30);
 
-        if(mCurrentDay != null) {
+        if (mCurrentDay != null) {
             BreakTime firstSplit = mCurrentDay.getPreviousBreak();
-            if(firstSplit != null
+            if (firstSplit != null
                     && (firstSplit.getDurationInMinutes() < Constants.LIMIT_BREAK)
                     && ((System.currentTimeMillis() - firstSplit.getStartTime()) < fourAndHalfHoursInMillis)) {
                 return Constants.LIMIT_BREAK_SPLIT_2;
@@ -276,7 +274,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getBreakTime() {
-        if(mCurrentDay != null && mCurrentDay.getPreviousBreak() != null) {
+        if (mCurrentDay != null && mCurrentDay.getPreviousBreak() != null) {
             return mCurrentDay.getPreviousBreak().getDurationInMinutes() + getOngoingTime(Event.EVENT_TYPE_NORMAL_BREAK);
         }
         return getOngoingTime(Event.EVENT_TYPE_NORMAL_BREAK);
@@ -292,7 +290,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     public int getWtdWeeklyWorkingTime() {
-        if(mCurrentWeek != null) {
+        if (mCurrentWeek != null) {
             return mCurrentWeek.getWtdWeeklyWorkingTime()
                     + getOngoingTime(Event.EVENT_TYPE_DRIVING)
                     + getOngoingTime(Event.EVENT_TYPE_OTHER_WORK)
@@ -311,7 +309,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
      * every minute when event is recording
      */
     private int getOngoingTime(int eventType) {
-        if(mCurrentEvent == null || (eventType != mCurrentEvent.getEventType())) {
+        if (mCurrentEvent == null || (eventType != mCurrentEvent.getEventType())) {
             return 0;
         } else {
             return DateUtils.getTimeDifferenceInMinutes(mCurrentEvent.getStartDateInMillis(), mCurrentEvent.getEndDateInMillis(), -1);
@@ -325,8 +323,8 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     public void unregisterOnRegulationsChangedListener(OnRegulationsChangedListener l) {
         int pos = 0;
 
-        for(WeakReference<OnRegulationsChangedListener> w : mCallbacks) {
-            if(w != null && w.get() != null && w.get().equals(l)) {
+        for (WeakReference<OnRegulationsChangedListener> w : mCallbacks) {
+            if (w != null && w.get() != null && w.get().equals(l)) {
                 mCallbacks.remove(pos);
                 break;
             }
@@ -335,8 +333,8 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     }
 
     private void notifyCallBacks() {
-        for(WeakReference<OnRegulationsChangedListener> l : mCallbacks) {
-            if(l.get() != null) {
+        for (WeakReference<OnRegulationsChangedListener> l : mCallbacks) {
+            if (l.get() != null) {
                 l.get().onRegulationsChanged();
             }
         }
@@ -352,7 +350,7 @@ public class Regulations implements DataBaseHandler.OnDatabaseEditedListener, Da
     public void onGetEvent(Event ev) {
         mCurrentEvent = ev;
         notifyCallBacks();
-        if(mCurrentEvent != null) {
+        if (mCurrentEvent != null) {
             syncAutoUpdater((System.currentTimeMillis() - ev.getStartDateInMillis()) % 60000);
         } else {
             stopAutoUpdater();

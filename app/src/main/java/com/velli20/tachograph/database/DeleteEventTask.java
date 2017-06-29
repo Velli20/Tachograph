@@ -33,7 +33,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 
-
 public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
     private static final String TAG = "DeleteEventTask ";
     private static final boolean DEBUG = false;
@@ -45,15 +44,29 @@ public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
     private OnDatabaseActionCompletedListener mListener;
 
     /* Delete multiple events on database */
-    public DeleteEventTask(SQLiteDatabase db, ArrayList<Integer> ids){
+    public DeleteEventTask(SQLiteDatabase db, ArrayList<Integer> ids) {
         mDb = db;
         mRowIds = ids;
     }
 
     /* Delete one event on database with given row mId */
-    public DeleteEventTask(SQLiteDatabase db, int rowId){
+    public DeleteEventTask(SQLiteDatabase db, int rowId) {
         mDb = db;
         mRowId = rowId;
+    }
+
+    private static void deleteEvent(SQLiteDatabase db, int rowId) throws Exception {
+        String queryEvent = "DELETE FROM "
+                + DataBaseHandlerConstants.TABLE_EVENTS + " WHERE("
+                + DataBaseHandlerConstants.KEY_ID + " = "
+                + String.valueOf(rowId) + ")";
+        String queryLocations = "DELETE FROM "
+                + DataBaseHandlerConstants.TABLE_LOCATIONS + " WHERE("
+                + DataBaseHandlerConstants.KEY_LOCATION_EVENT_ID + " = "
+                + String.valueOf(rowId) + ")";
+
+        db.execSQL(queryEvent);
+        db.execSQL(queryLocations);
     }
 
     public DeleteEventTask setOnDatabaseActionCompletedListener(OnDatabaseActionCompletedListener l) {
@@ -82,7 +95,7 @@ public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
                 deleteEvent(mDb, mRowId);
             }
         } catch (Exception e) {
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.e(TAG, TAG + e.getMessage());
             }
         } finally {
@@ -93,23 +106,9 @@ public class DeleteEventTask extends AsyncTask<Void, Void, Integer> {
         return rowsDeleted;
     }
 
-    private static void deleteEvent(SQLiteDatabase db, int rowId) throws Exception {
-        String queryEvent = "DELETE FROM "
-                + DataBaseHandlerConstants.TABLE_EVENTS + " WHERE("
-                + DataBaseHandlerConstants.KEY_ID + " = "
-                + String.valueOf(rowId) + ")";
-        String queryLocations = "DELETE FROM "
-                + DataBaseHandlerConstants.TABLE_LOCATIONS + " WHERE("
-                + DataBaseHandlerConstants.KEY_LOCATION_EVENT_ID + " = "
-                + String.valueOf(rowId) + ")";
-
-        db.execSQL(queryEvent);
-        db.execSQL(queryLocations);
-    }
-
     @Override
-    protected void onPostExecute(Integer rowsDeleted){
-        if(mListener != null) {
+    protected void onPostExecute(Integer rowsDeleted) {
+        if (mListener != null) {
             mListener.onDatabaseActionCompleted(DataBaseHandlerConstants.DATABASE_ACTION_DELETE_MULTIPLE, rowsDeleted);
         }
     }

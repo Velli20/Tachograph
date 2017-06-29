@@ -54,12 +54,95 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
 
     private OnWorkingTimeCalculationsReadyListener mListener;
 
-    public interface OnWorkingTimeCalculationsReadyListener {
-        void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks);
-    }
-
     public GetLogSummaryTask(SQLiteDatabase db) {
         mDb = db;
+    }
+
+    /* Checks if it is required to start a new week. */
+    private static boolean isRequiredToStartNewWeek(WeekHolder currentWeek, Event nextEvent) {
+        if (currentWeek == null) {
+            return true;
+        } else if ((nextEvent.getStartDateInMillis() - currentWeek.getStartDate()) >= Constants.SEVEN_DAYS_PERIOD_IN_MILLIS) {
+            /* It's over 7 days since we started counting current week */
+            return true;
+        } else if (checkIfWeeklyRestIsFulfilled(currentWeek)) {
+            /* Weekly rest time length is at least 24 hours */
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isRequiredToStartNewDay(WorkDayHolder currentDay, Event nextEvent) {
+        if (currentDay == null) {
+            return true;
+        } else if ((nextEvent.getStartDateInMillis() - currentDay.getStartDate()) >= Constants.ONE_DAY_PERIOD_IN_MILLIS) {
+            return true;
+        } else if (checkIfDailyRestIsFulfilled(currentDay)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean checkIfWeeklyRestIsFulfilled(WeekHolder currentWeek) {
+        if (currentWeek == null) {
+            return false;
+        }
+        return currentWeek.getWeeklyRest() >= Constants.LIMIT_WEEKLY_REST_REDUCED_MIN;
+    }
+
+    private static boolean checkIfDailyRestIsFulfilled(WorkDayHolder currentDay) {
+        if (currentDay == null) {
+            return false;
+        }
+        return currentDay.getDailyRest() >= Constants.LIMIT_DAILY_REST_REDUCED_MIN;
+    }
+
+    /* Check if previous break time is valid. Breaks of at least 45 minutes (separable into 15 minutes followed by 30 minutes)
+     * should be taken after 4 ½ hours at the latest.
+     */
+    private static boolean checkIfLatestBreakTimeIsValid(WorkDayHolder currentDay) {
+        if (currentDay == null) {
+            return false;
+        }
+        BreakTime latestBreak = currentDay.getLastBreak();
+        BreakTime previousBreak = currentDay.getPreviousBreak();
+
+        if (latestBreak == null) {
+            return false;
+        } else if (latestBreak.getDurationInMinutes() >= Constants.LIMIT_BREAK) {
+            return true;
+        } else if (previousBreak != null
+                && ((previousBreak.getDurationInMinutes() + latestBreak.getDurationInMinutes()) >= Constants.LIMIT_BREAK)) {
+            /* Check that both breaks are within 4,5 hours time frame */
+            int timeFrame = DateUtils.getTimeDifferenceInMinutes(latestBreak.getStartTime(), previousBreak.getStartTime(), -1);
+            return timeFrame < 450;
+        }
+        return false;
+    }
+
+    private static int getEventDuration(Event event) {
+        return DateUtils.getTimeDifferenceInMinutes(event.getStartDateInMillis(), event.getEndDateInMillis(), -1);
+    }
+
+    private static void endWorkingDay(WeekHolder currentWeek, WorkDayHolder dayToEnd) {
+        if (currentWeek == null) {
+            return;
+        }
+
+        currentWeek.setWeeklyDrivingTime(currentWeek.getWeeklyDrivingTime() + dayToEnd.getDailyDrivingTime());
+        currentWeek.setWeeklyWorkingTime(currentWeek.getWeeklyWorkingTime() + dayToEnd.getDailyWorkingTime());
+        currentWeek.setWeeklyOtherWorkingTime(currentWeek.getWeeklyOtherWorkingTime() + dayToEnd.getOtherWorkingTime());
+        currentWeek.setWeeklyDrivenDistance(currentWeek.getWeeklyDrivenDistance() + dayToEnd.getDailyDrivenDistance());
+        currentWeek.setWeeklyPoaTime(currentWeek.getWeeklyPoaTime() + dayToEnd.getDailyPoaTime());
+        currentWeek.setWtdWeeklyWorkingTime(currentWeek.getWtdWeeklyWorkingTime() + dayToEnd.getWtdDailyWorkingTime());
+
+        if (dayToEnd.getDailyRest() < Constants.LIMIT_DAILY_REST_MIN) {
+            currentWeek.setReducedDailyRest(currentWeek.getReducedDailyRests() + 1);
+        }
+        if (dayToEnd.getDailyDrivingTime() > Constants.LIMIT_DAILY_DRIVE_MIN) {
+            currentWeek.setExtendedDrivingDaysUsed(currentWeek.getExtendedDrivingDaysUsed() + 1);
+        }
+        currentWeek.addWorkDay(dayToEnd);
     }
 
     public GetLogSummaryTask includeAllEvents(boolean include) {
@@ -272,91 +355,8 @@ public class GetLogSummaryTask extends AsyncTask<Void, Void, ArrayList<WeekHolde
         return breakTime;
     }
 
-    /* Checks if it is required to start a new week. */
-    private static boolean isRequiredToStartNewWeek(WeekHolder currentWeek, Event nextEvent) {
-        if (currentWeek == null) {
-            return true;
-        } else if ((nextEvent.getStartDateInMillis() - currentWeek.getStartDate()) >= Constants.SEVEN_DAYS_PERIOD_IN_MILLIS) {
-            /* It's over 7 days since we started counting current week */
-            return true;
-        } else if (checkIfWeeklyRestIsFulfilled(currentWeek)) {
-            /* Weekly rest time length is at least 24 hours */
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isRequiredToStartNewDay(WorkDayHolder currentDay, Event nextEvent) {
-        if (currentDay == null) {
-            return true;
-        } else if ((nextEvent.getStartDateInMillis() - currentDay.getStartDate()) >= Constants.ONE_DAY_PERIOD_IN_MILLIS) {
-            return true;
-        } else if (checkIfDailyRestIsFulfilled(currentDay)) {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean checkIfWeeklyRestIsFulfilled(WeekHolder currentWeek) {
-        if (currentWeek == null) {
-            return false;
-        }
-        return currentWeek.getWeeklyRest() >= Constants.LIMIT_WEEKLY_REST_REDUCED_MIN;
-    }
-
-    private static boolean checkIfDailyRestIsFulfilled(WorkDayHolder currentDay) {
-        if (currentDay == null) {
-            return false;
-        }
-        return currentDay.getDailyRest() >= Constants.LIMIT_DAILY_REST_REDUCED_MIN;
-    }
-
-    /* Check if previous break time is valid. Breaks of at least 45 minutes (separable into 15 minutes followed by 30 minutes)
-     * should be taken after 4 ½ hours at the latest.
-     */
-    private static boolean checkIfLatestBreakTimeIsValid(WorkDayHolder currentDay) {
-        if (currentDay == null) {
-            return false;
-        }
-        BreakTime latestBreak = currentDay.getLastBreak();
-        BreakTime previousBreak = currentDay.getPreviousBreak();
-
-        if (latestBreak == null) {
-            return false;
-        } else if (latestBreak.getDurationInMinutes() >= Constants.LIMIT_BREAK) {
-            return true;
-        } else if (previousBreak != null
-                && ((previousBreak.getDurationInMinutes() + latestBreak.getDurationInMinutes()) >= Constants.LIMIT_BREAK)) {
-            /* Check that both breaks are within 4,5 hours time frame */
-            int timeFrame = DateUtils.getTimeDifferenceInMinutes(latestBreak.getStartTime(), previousBreak.getStartTime(), -1);
-            return timeFrame < 450;
-        }
-        return false;
-    }
-
-    private static int getEventDuration(Event event) {
-        return DateUtils.getTimeDifferenceInMinutes(event.getStartDateInMillis(), event.getEndDateInMillis(), -1);
-    }
-
-    private static void endWorkingDay(WeekHolder currentWeek, WorkDayHolder dayToEnd) {
-        if (currentWeek == null) {
-            return;
-        }
-
-        currentWeek.setWeeklyDrivingTime(currentWeek.getWeeklyDrivingTime() + dayToEnd.getDailyDrivingTime());
-        currentWeek.setWeeklyWorkingTime(currentWeek.getWeeklyWorkingTime() + dayToEnd.getDailyWorkingTime());
-        currentWeek.setWeeklyOtherWorkingTime(currentWeek.getWeeklyOtherWorkingTime() + dayToEnd.getOtherWorkingTime());
-        currentWeek.setWeeklyDrivenDistance(currentWeek.getWeeklyDrivenDistance() + dayToEnd.getDailyDrivenDistance());
-        currentWeek.setWeeklyPoaTime(currentWeek.getWeeklyPoaTime() + dayToEnd.getDailyPoaTime());
-        currentWeek.setWtdWeeklyWorkingTime(currentWeek.getWtdWeeklyWorkingTime() + dayToEnd.getWtdDailyWorkingTime());
-
-        if (dayToEnd.getDailyRest() < Constants.LIMIT_DAILY_REST_MIN) {
-            currentWeek.setReducedDailyRest(currentWeek.getReducedDailyRests() + 1);
-        }
-        if (dayToEnd.getDailyDrivingTime() > Constants.LIMIT_DAILY_DRIVE_MIN) {
-            currentWeek.setExtendedDrivingDaysUsed(currentWeek.getExtendedDrivingDaysUsed() + 1);
-        }
-        currentWeek.addWorkDay(dayToEnd);
+    public interface OnWorkingTimeCalculationsReadyListener {
+        void onWorkingTimeCalculationsReady(ArrayList<WeekHolder> workingWeeks);
     }
 
 

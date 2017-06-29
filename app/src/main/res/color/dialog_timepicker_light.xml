@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -26,10 +25,7 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-            android:state_enabled="false"
-            android:color="@color/time_picker_text_light_disabled"/>
+    <item android:color="@color/time_picker_text_light_disabled" android:state_enabled="false" />
 
-    <item
-            android:color="@color/time_picker_text_light"/>
+    <item android:color="@color/time_picker_text_light" />
 </selector>

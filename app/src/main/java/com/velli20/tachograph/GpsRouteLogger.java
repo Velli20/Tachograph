@@ -64,7 +64,21 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
     private int mCurrentSpeed = -1;
 
 
-    public GpsRouteLogger() { }
+    public GpsRouteLogger() {
+    }
+
+    private static float getSpeedFromLocations(Location start, Location end) {
+        final long millis = (end.getTime() - start.getTime());
+        long secs = millis <= 0 ? 0 : (millis / 1000);
+
+        final float dist = start.distanceTo(end);
+
+        if (dist <= 0 || secs <= 0) {
+            return 0;
+        } else {
+            return (dist / secs) * 3.6f;
+        }
+    }
 
     /* Set min accuracy of GPS signal. Signals with accuracy above
      * this limit will be ignored.
@@ -87,9 +101,8 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         mThresholdSpeed = speed;
     }
 
-
     public void setCurrentEvent(Event ev) {
-        if(ev == null || ev.getEventType() != Event.EVENT_TYPE_DRIVING) {
+        if (ev == null || ev.getEventType() != Event.EVENT_TYPE_DRIVING) {
             mEventRecorderInstance.cancelScheduledEvent();
         }
         mCurrentEvent = ev;
@@ -100,13 +113,12 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         monitorEvent(mCurrentSpeed);
     }
 
-
     @Override
     public void onLocationChanged(Location loc) {
-        if(!mGpsRouteLoggerStatusInstance.isGpsFixAcquired()) {
+        if (!mGpsRouteLoggerStatusInstance.isGpsFixAcquired()) {
             mGpsRouteLoggerStatusInstance.setGpsFixAcquired(true);
         }
-        if(!isGpsAccurateEnough(loc)){
+        if (!isGpsAccurateEnough(loc)) {
             return;
         }
 
@@ -124,7 +136,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
 
         monitorEvent(speed);
 
-        if(mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_DRIVING){
+        if (mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_DRIVING) {
             /* Save this location */
             location.setEventId(mCurrentEvent.getRowId());
             saveLocation(location);
@@ -137,9 +149,9 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         boolean detectedDriving = mDetectedActivityInstance.isActivityDriving();
         boolean detectedActivityOtherWork = mDetectedActivityInstance.isActivityOtherWork();
 
-        if((speed != -1 && speed > mThresholdSpeed && (!useDetectedActivity || detectedDriving)) && isVehicleStopped()) {
+        if ((speed != -1 && speed > mThresholdSpeed && (!useDetectedActivity || detectedDriving)) && isVehicleStopped()) {
             /* Check if there is scheduled event and cancel it */
-            if(mEventRecorderInstance.isEventScheduled()) {
+            if (mEventRecorderInstance.isEventScheduled()) {
                 mEventRecorderInstance.cancelScheduledEvent();
             }
 
@@ -150,9 +162,9 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
                 mEventRecorderInstance.startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
             }
 
-        } else if(((speed != -1 && speed <= mThresholdSpeed) || (useDetectedActivity && detectedActivityOtherWork)) && !isVehicleStopped()) {
+        } else if (((speed != -1 && speed <= mThresholdSpeed) || (useDetectedActivity && detectedActivityOtherWork)) && (!isVehicleStopped() || !mEventRecorderInstance.isEventScheduled())) {
             setVehicleStopped(true);
-            if((!mEventRecorderInstance.isEventScheduled() || mEventRecorderInstance.getScheduledEventType() != Event.EVENT_TYPE_OTHER_WORK)
+            if ((!mEventRecorderInstance.isEventScheduled() || mEventRecorderInstance.getScheduledEventType() != Event.EVENT_TYPE_OTHER_WORK)
                     && mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_DRIVING) {
                 /* Schedule to switch current Event to Other Work */
                 mEventRecorderInstance.scheduleEvent(Event.EVENT_TYPE_OTHER_WORK, mTimeAtStop, System.currentTimeMillis() + (mThresholdTime * 1000), mCurrentEvent);
@@ -162,7 +174,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
 
     @Override
     public void onStatusChanged(String s, int status, Bundle bundle) {
-        if(!LocationManager.GPS_PROVIDER.equals(s)) {
+        if (!LocationManager.GPS_PROVIDER.equals(s)) {
             return;
         }
         switch (status) {
@@ -180,20 +192,20 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
 
     @Override
     public void onProviderEnabled(String s) {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.d(TAG, "onProviderEnabled() " + s);
         }
-        if(s.equals(LocationManager.GPS_PROVIDER)) {
+        if (s.equals(LocationManager.GPS_PROVIDER)) {
             mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(true);
         }
     }
 
     @Override
     public void onProviderDisabled(String s) {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.d(TAG, "onProviderDisabled() " + s);
         }
-        if(s.equals(LocationManager.GPS_PROVIDER)) {
+        if (s.equals(LocationManager.GPS_PROVIDER)) {
             mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(false);
             mEventRecorderInstance.cancelScheduledEvent();
         }
@@ -206,32 +218,18 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         }
     }
 
-    private static float getSpeedFromLocations(Location start, Location end){
-        final long millis = (end.getTime() - start.getTime());
-        long secs = millis <= 0 ? 0 : (millis / 1000);
-
-        final float dist = start.distanceTo(end);
-
-        if(dist <= 0 || secs <= 0){
-            return 0;
-        } else {
-            return (dist / secs) * 3.6f;
-        }
-    }
-
-    private boolean isGpsAccurateEnough(Location location){
-        if(location != null && location.getAccuracy() <= mGpsMinAccuracy){
+    private boolean isGpsAccurateEnough(Location location) {
+        if (location != null && location.getAccuracy() <= mGpsMinAccuracy) {
             mGpsRouteLoggerStatusInstance.setGpsFixAccurateEnough(true);
-            mGpsRouteLoggerStatusInstance.setGpsFixAccuracy((int)location.getAccuracy());
+            mGpsRouteLoggerStatusInstance.setGpsFixAccuracy((int) location.getAccuracy());
             return true;
-        } else if(location != null){
+        } else if (location != null) {
             mGpsRouteLoggerStatusInstance.setGpsFixAccurateEnough(false);
-            mGpsRouteLoggerStatusInstance.setGpsFixAccuracy((int)location.getAccuracy());
+            mGpsRouteLoggerStatusInstance.setGpsFixAccuracy((int) location.getAccuracy());
             return false;
         }
         return false;
     }
-
 
 
     private boolean isVehicleStopped() {
@@ -239,17 +237,17 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
     }
 
     private void setVehicleStopped(boolean stopped) {
-        if(stopped) {
+        if (stopped) {
             mStopped = true;
             mTimeAtStop = System.currentTimeMillis();
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, TAG + "setVehicleStopped(true)");
             }
 
         } else {
             mStopped = false;
             mTimeAtStop = -1;
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, TAG + "setVehicleStopped(false)");
             }
         }
@@ -260,7 +258,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
     public void unregisterLocationListener(Context c) {
         mEventRecorderInstance.cancelScheduledEvent();
 
-        if(!mLocationManagerLocationUpdatesRequested) {
+        if (!mLocationManagerLocationUpdatesRequested) {
             return;
         }
         setVehicleStopped(true);
@@ -268,24 +266,26 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         boolean permissionGranted;
 
         LocationManager locationManager = (LocationManager) c.getSystemService(Context.LOCATION_SERVICE);
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             permissionGranted = ActivityCompat.checkSelfPermission(c, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(c, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         } else {
             permissionGranted = true;
         }
 
-        if(permissionGranted) {
+        if (permissionGranted) {
             locationManager.removeUpdates(this);
             mLocationManagerLocationUpdatesRequested = false;
             mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
             mGpsRouteLoggerStatusInstance.setGpsFixAcquired(false);
         }
-        mDetectedActivityInstance.unregisterOnGoogleDetectedActivityStatusChangedListener(this);
+        if (DEBUG) {
+            mDetectedActivityInstance.unregisterOnGoogleDetectedActivityStatusChangedListener(this);
+        }
     }
 
     public void registerLocationListener(Context c) {
-        if(mLocationManagerLocationUpdatesRequested) {
+        if (mLocationManagerLocationUpdatesRequested) {
             return;
         }
         LocationManager locationManager = (LocationManager) c.getSystemService(Context.LOCATION_SERVICE);
@@ -298,19 +298,26 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
         } else {
             permissionGranted = true;
         }
-        if(permissionGranted) {
-            if (locationManager.getAllProviders().indexOf(LocationManager.GPS_PROVIDER) >= 0) {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, this);
+        if (permissionGranted) {
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.getAllProviders().indexOf(LocationManager.GPS_PROVIDER) == 0) {
+                mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(false);
+                mLocationManagerLocationUpdatesRequested = false;
+            } else if (locationManager.getAllProviders().indexOf(LocationManager.GPS_PROVIDER) >= 0) {
                 mLocationManagerLocationUpdatesRequested = true;
 
-                mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
                 mGpsRouteLoggerStatusInstance.setGpsFixAcquired(false);
-            } else if(DEBUG) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, this);
+                mGpsRouteLoggerStatusInstance.setGpsProviderEnabled(true);
+            } else if (DEBUG) {
                 Log.d(TAG, TAG + "registerLocationListener() NO GPS PROVIDER");
             }
+        } else {
+            mLocationManagerLocationUpdatesRequested = false;
         }
         mGpsRouteLoggerStatusInstance.setGpsPermissionGranted(permissionGranted);
-        mDetectedActivityInstance.registerOnGoogleDetectedActivityStatusChangedListener(this);
+        if (DEBUG) {
+            mDetectedActivityInstance.registerOnGoogleDetectedActivityStatusChangedListener(this);
+        }
     }
 
 

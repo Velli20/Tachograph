@@ -26,8 +26,6 @@
 
 package com.velli20.tachograph.views;
 
-import com.velli20.tachograph.R;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
@@ -40,24 +38,22 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class StepperCircle extends View {
-    private static final boolean DEBUG = true;
-    private static final String TAG = "OverviewCircle ";
+import com.velli20.tachograph.R;
 
+public class StepperCircle extends View {
     public static final int START_CIRCLE_SIZE = 13;
     public static final int NORMAL_CIRCLE_SIZE = 10;
-
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_START = 1;
     public static final int TYPE_END = 2;
     public static final int TYPE_NO_BARS = 3;
-
-    private float scale;
-    private int mType = TYPE_NORMAL;
-
+    private static final boolean DEBUG = true;
+    private static final String TAG = "OverviewCircle ";
     private final Paint mPaint = new Paint();
     private final Paint mCirclePaintNormal = new Paint();
     private final Paint mCirclePaintStart = new Paint();
+    private float scale;
+    private int mType = TYPE_NORMAL;
 
 
     public StepperCircle(Context context) {

@@ -32,11 +32,12 @@ public class Utils {
 
 
     public static boolean isJellybeanOrLater() {
-      return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
     /**
      * Try to speak the specified text, for accessibility. Only available on JB or later.
+     *
      * @param text Text to announce.
      */
     @SuppressLint("NewApi")
@@ -72,14 +73,14 @@ public class Utils {
     /**
      * Returns the week since {@link Time#EPOCH_JULIAN_DAY} (Jan 1, 1970)
      * adjusted for first day of week.
-     *
+     * <p>
      * This takes a julian day and the week start day and calculates which
      * week since {@link Time#EPOCH_JULIAN_DAY} that day occurs in, starting
      * at 0. *Do not* use this to compute the ISO week number for the year.
      *
-     * @param julianDay The julian day to calculate the week number for
+     * @param julianDay      The julian day to calculate the week number for
      * @param firstDayOfWeek Which week day is the first day of the week,
-     *          see {@link Time#SUNDAY}
+     *                       see {@link Time#SUNDAY}
      * @return Weeks since the epoch
      */
     public static int getWeeksSinceEpochFromJulianDay(int julianDay, int firstDayOfWeek) {

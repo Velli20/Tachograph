@@ -90,7 +90,7 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_picker);
 
-        if(getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null) {
             mMode = getIntent().getExtras().getInt(INTENT_EXTRA_MODE, MODE_CREATE_FILE);
             mFileExtension = getIntent().getExtras().getString(INTENT_EXTRA_FILE_EXTENSION, "");
             mFilename = getIntent().getExtras().getString(INTENT_EXTRA_FILENAME, "");
@@ -121,8 +121,7 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
         });
 
 
-
-        if(mMode == MODE_CREATE_FILE) {
+        if (mMode == MODE_CREATE_FILE) {
             mFileExtIcon.setImageDrawable(getResources().getDrawable(FilePickerUtils.getDrawableResourceForFileExt(mFileExtension)));
             mEditText.addTextChangedListener(this);
         }
@@ -133,13 +132,13 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
         ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayShowHomeEnabled(false);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findViewById(R.id.activity_file_picker_toolbar_shadow).setVisibility(View.GONE);
         }
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             int result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-            if(result != PackageManager.PERMISSION_GRANTED) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         PERMISSION_REQUEST_WRITE_EXTERNAL_DIRECTORY);
 
@@ -178,7 +177,7 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
     public void addFragment(Fragment frag, boolean animate, String tag) {
         FragmentManager m = getSupportFragmentManager();
         FragmentTransaction t = m.beginTransaction();
-        if(animate) {
+        if (animate) {
             t.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         }
         mAdded = true;
@@ -186,7 +185,7 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_activity_file_picker, menu);
 
@@ -216,14 +215,14 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
 
     @Override
     public void onFileClicked(File file) {
-        if(file.isDirectory()) {
+        if (file.isDirectory()) {
             final String path = file.getPath();
             final FragmentFileList frag = getNewFileFragment(path);
 
             addFragment(frag, true, path);
             mAdapter.addPath(path);
-            mNavigationSpinner.setSelection(mAdapter.getCount() -1);
-        } else if(mMode == MODE_CREATE_FILE) {
+            mNavigationSpinner.setSelection(mAdapter.getCount() - 1);
+        } else if (mMode == MODE_CREATE_FILE) {
             String fileName = file.getName();
             int i = fileName.lastIndexOf('.');
             if (i > 1) {
@@ -231,7 +230,7 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
             } else {
                 mEditText.setText(fileName);
             }
-        } else if(mMode == MODE_PICK_FILE) {
+        } else if (mMode == MODE_PICK_FILE) {
             Intent data = new Intent();
             data.putExtra(INTENT_EXTRA_FILEPATH, file.getPath());
             setResult(Activity.RESULT_OK, data);
@@ -241,20 +240,21 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(position < getSupportFragmentManager().getBackStackEntryCount()) {
-            for(int i = position; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
+        if (position < getSupportFragmentManager().getBackStackEntryCount()) {
+            for (int i = position; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
                 getSupportFragmentManager().popBackStack();
             }
         }
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) { }
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 
     @Override
     public void onBackStackChanged() {
-        if(mAdapter != null && !mAdded) {
-            mAdapter.removePathStartingAt(getSupportFragmentManager().getBackStackEntryCount() +1);
+        if (mAdapter != null && !mAdded) {
+            mAdapter.removePathStartingAt(getSupportFragmentManager().getBackStackEntryCount() + 1);
 
         } else {
             mAdded = false;
@@ -262,16 +262,15 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
     }
 
 
-
     @Override
     public void onClick(View v) {
-        String path = mAdapter.getItem(mAdapter.getCount() -1) ;
+        String path = mAdapter.getItem(mAdapter.getCount() - 1);
         String fileName = mEditText.getText().toString();
         File file;
         int count = 0;
 
         do {
-            if(count == 0) {
+            if (count == 0) {
                 file = new File(path, fileName + mFileExtension);
                 count++;
             } else {
@@ -279,11 +278,12 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
                 count++;
             }
 
-        } while(file == null || file.exists());
+        } while (file == null || file.exists());
 
         try {
             file.createNewFile();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         Intent data = new Intent();
         data.putExtra(INTENT_EXTRA_FILEPATH, file.getPath());
@@ -292,10 +292,12 @@ public class ActivityFilePicker extends AppCompatActivity implements AdapterView
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
 
     @Override
     public void afterTextChanged(Editable s) {

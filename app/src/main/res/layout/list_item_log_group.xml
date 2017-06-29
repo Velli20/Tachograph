@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,27 +27,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="48dp" >
+    android:layout_height="48dp">
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/log_event_group_title"
-        custom:style="medium"
         style="@style/Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:gravity="left|center_vertical"/>
+        android:gravity="left|center_vertical"
+        custom:style="medium" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/log_event_group_hour_summary"
-        custom:style="medium"
         style="@style/Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:gravity="right|center_vertical"/>
+        android:gravity="right|center_vertical"
+        custom:style="medium" />
 
 </LinearLayout>

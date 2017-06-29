@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import com.velli20.tachograph.R;
 import com.velli20.tachograph.views.RobotoLightTextView;
 
-public class ViewHolderFile extends RecyclerView.ViewHolder  {
+public class ViewHolderFile extends RecyclerView.ViewHolder {
     protected ImageView mIcon;
     protected RobotoLightTextView mTitle;
     protected RobotoLightTextView mSubtitle;

@@ -46,15 +46,12 @@ import com.google.android.gms.location.DetectedActivity;
  * by periodically waking up the device and reading short bursts of sensor data
  */
 public class GoogleDetectedActivityListener implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private static final boolean DEBUG = false;
-    private static final String TAG = "DetectedActivity ";
-
     public static final int DETECTED_ACTIVITY_WALKING = 1;
     public static final int DETECTED_ACTIVITY_DRIVING = 2;
     public static final int DETECTED_ACTIVITY_STILL = 3;
     public static final int DETECTED_ACTIVITY_UNKNOWN = 4;
-
-
+    private static final boolean DEBUG = false;
+    private static final String TAG = "DetectedActivity ";
     private PendingIntent mActivityRecognizedPendIntent;
     private GoogleApiClient mGoogleApiClient;
 
@@ -145,7 +142,7 @@ public class GoogleDetectedActivityListener implements GoogleApiClient.Connectio
 
         // Get the type of activity
         int activityType = mostProbableActivity.getType();
-        if(!GoogleDetectedActivityStatus.INSTANCE.isDetectedActivityEnabled()) {
+        if (!GoogleDetectedActivityStatus.INSTANCE.isDetectedActivityEnabled()) {
             GoogleDetectedActivityStatus.INSTANCE.setDetectedActivityEnabled(true);
         }
 

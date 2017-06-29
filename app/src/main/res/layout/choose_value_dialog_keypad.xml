@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -28,14 +27,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    tools:ignore="UnusedAttribute" >
-    
+    android:layout_height="fill_parent"
+    tools:ignore="UnusedAttribute">
+
     <LinearLayout
         android:id="@+id/buttons_row0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="3" >
+        android:weightSum="3">
 
         <Button
             android:id="@+id/button1"
@@ -44,8 +43,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="UnusedAttribute,ButtonStyle" />
 
         <Button
@@ -55,8 +54,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="UnusedAttribute,ButtonStyle" />
 
         <Button
@@ -66,8 +65,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -77,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttons_row0"
-        android:weightSum="3" >
+        android:weightSum="3">
 
         <Button
             android:id="@+id/button4"
@@ -86,8 +85,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -97,8 +96,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -108,8 +107,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -119,7 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttons_row1"
-        android:weightSum="3" >
+        android:weightSum="3">
 
         <Button
             android:id="@+id/button7"
@@ -128,8 +127,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -139,8 +138,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -150,8 +149,8 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:fontFamily="sans-serif-light"
-            android:textSize="26sp"
             android:textColor="@color/black"
+            android:textSize="26sp"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
@@ -161,9 +160,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttons_row2"
-        android:weightSum="3" >
+        android:weightSum="3">
 
-        
 
         <Button
             android:id="@+id/choose_value_button_left"
@@ -171,10 +169,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="sans-serif-light"
             android:enabled="false"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/black"
-            android:textSize="26sp"/>
+            android:textSize="26sp" />
+
         <Button
             android:id="@+id/button10"
             android:layout_width="0dp"
@@ -184,16 +183,17 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/black"
             android:textSize="26sp" />
+
         <Button
             android:id="@+id/choose_value_button_right"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="sans-serif-light"
             android:enabled="false"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/black"
-            android:textSize="26sp"/>
+            android:textSize="26sp" />
 
     </LinearLayout>
 

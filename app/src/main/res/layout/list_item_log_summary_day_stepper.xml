@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -26,16 +25,15 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/log_child_container"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:background="?android:selectableItemBackground" >
+    android:background="?android:selectableItemBackground">
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_day_stepper_start_date"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -44,46 +42,46 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:alpha="0.87"
-        android:textSize="12sp" />
-    
+        android:textSize="12sp"
+        custom:style="medium" />
+
     <com.velli20.tachograph.views.StepperCircle
         android:id="@+id/list_item_log_summary_day_stepper"
         android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_log_summary_day_stepper_start_date"
-        android:layout_toEndOf="@+id/list_item_log_summary_day_stepper_start_date"
-        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        circle:circleColor="@color/event_driving"/>
-    
+        android:layout_toEndOf="@+id/list_item_log_summary_day_stepper_start_date"
+        android:layout_toRightOf="@+id/list_item_log_summary_day_stepper_start_date"
+        circle:circleColor="@color/event_driving" />
+
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_day_stepper_title"
-        custom:style="medium"
         style="@style/Title.ListItemDayStepper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_log_summary_day_stepper"
         android:layout_toEndOf="@+id/list_item_log_summary_day_stepper"
         android:layout_toLeftOf="@+id/list_item_log_summary_day_stepper_duration"
-        android:layout_toStartOf="@+id/list_item_log_summary_day_stepper_duration" />
-    
- 
+        android:layout_toRightOf="@+id/list_item_log_summary_day_stepper"
+        android:layout_toStartOf="@+id/list_item_log_summary_day_stepper_duration"
+        custom:style="medium" />
+
+
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_day_stepper_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
-        custom:style="medium"
+        android:layout_marginRight="16dp"
+        android:alpha="0.87"
         android:textColor="#000000"
         android:textSize="12sp"
-        android:alpha="0.87" />
+        custom:style="medium" />
 
 
- 
 </RelativeLayout>

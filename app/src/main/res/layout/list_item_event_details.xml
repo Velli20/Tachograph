@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -34,81 +33,82 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/list_item_event_details_shadow_bottom"
+        android:layout_alignParentTop="true"
         android:background="@color/white" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_title"
-        custom:style="medium"
         style="@style/Subtitle"
-        android:layout_height="48dp"
         android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/title_details" />
-
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/title_details"
+        custom:style="medium" />
 
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_date"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_title"
         android:drawableLeft="@drawable/ic_event"
-        android:drawableStart="@drawable/ic_event" />
+        android:drawableStart="@drawable/ic_event"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_duration"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_date"
         android:drawableLeft="@drawable/ic_time"
-        android:drawableStart="@drawable/ic_time" />
+        android:drawableStart="@drawable/ic_time"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_mileage"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_duration"
         android:drawableLeft="@drawable/ic_mileage"
-        android:drawableStart="@drawable/ic_mileage" />
+        android:drawableStart="@drawable/ic_mileage"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_note"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_mileage"
         android:drawableLeft="@drawable/ic_note"
-        android:drawableStart="@drawable/ic_note" />
+        android:drawableStart="@drawable/ic_note"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_start_location"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_note"
         android:drawableLeft="@drawable/ic_action_start_location"
-        android:drawableStart="@drawable/ic_action_start_location" />
+        android:drawableStart="@drawable/ic_action_start_location"
+        custom:style="regular" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_details_end_location"
         style="@style/ActivityEventDetailsText"
-        custom:style="regular"
         android:layout_width="match_parent"
         android:layout_below="@+id/list_item_event_details_start_location"
+        android:layout_marginBottom="16dp"
         android:drawableLeft="@drawable/ic_action_end_location"
-        android:drawableStart="@drawable/ic_action_end_location" />
+        android:drawableStart="@drawable/ic_action_end_location"
+        custom:style="regular" />
 
     <View
         android:id="@+id/list_item_event_details_shadow_bottom"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/list_item_event_details_end_location"
+        android:layout_height="@dimen/list_item_event_details_elevation_bottom"
+        android:layout_below="@+id/list_item_event_details_end_location"
         android:background="@drawable/dropdown_shadow" />
 </RelativeLayout>

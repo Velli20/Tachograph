@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -29,19 +28,19 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:orientation="horizontal" >
-    
+    android:orientation="horizontal">
+
     <com.velli20.tachograph.views.ListCircle
         android:id="@+id/add_new_event_spinner_item_circle"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"/>
-    
+        android:layout_centerVertical="true" />
+
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/add_new_event_spinner_item_title"
-        custom:style="regular"
+        style="@style/ListPrimaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -49,6 +48,6 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="56dp"
         android:layout_marginStart="56dp"
-        style="@style/ListPrimaryText"/>
+        custom:style="regular" />
 
 </RelativeLayout>

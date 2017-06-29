@@ -29,22 +29,22 @@ package com.velli20.tachograph.location;
 import android.location.Location;
 
 public class CustomLocation extends Location {
-	private int mEventId = -1;
-	
-	public CustomLocation(Location l) {
-		super(l);
-	}
-	
-	public CustomLocation(String provider) {
-		super(provider);
-	}
-	
-	public void setEventId(int rowId){
-		mEventId = rowId;
-	}
-	
-	public int getEventId(){
-		return mEventId;
-	}
+    private int mEventId = -1;
+
+    public CustomLocation(Location l) {
+        super(l);
+    }
+
+    public CustomLocation(String provider) {
+        super(provider);
+    }
+
+    public int getEventId() {
+        return mEventId;
+    }
+
+    public void setEventId(int rowId) {
+        mEventId = rowId;
+    }
 
 }

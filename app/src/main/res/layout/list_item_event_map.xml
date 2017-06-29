@@ -33,15 +33,15 @@
     <View
         android:id="@+id/list_item_event_map_shadow_top"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/list_item_event_details_elevation_top"
         android:layout_alignParentTop="true"
         android:background="@drawable/dropdown_shadow_up" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/list_item_event_map_shadow_top"
         android:layout_above="@+id/list_item_event_map_shadow_bottom"
+        android:layout_below="@+id/list_item_event_map_shadow_top"
         android:background="@color/white" />
 
 
@@ -50,32 +50,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_event_map_shadow_top"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp">
 
         <ImageButton
             android:id="@+id/list_item_event_map_overflow_button"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:src="@drawable/ic_action_dots_horizontal_grey"
-            android:layout_gravity="center_vertical|right"/>
+            android:src="@drawable/ic_action_dots_horizontal_grey" />
 
         <com.velli20.tachograph.views.RobotoLightTextView
             android:id="@+id/list_item_event_map_title"
             style="@style/Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="32dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:maxLines="1"
             android:text="@string/title_route"
-            custom:style="medium"
-            android:layout_gravity="center_vertical"/>
+            custom:style="medium" />
 
 
     </FrameLayout>
@@ -84,8 +84,8 @@
         android:id="@+id/list_item_event_map"
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_header_map_height"
-        android:layout_marginTop="16dp"
         android:layout_below="@+id/list_item_event_map_title_container"
+        android:layout_marginTop="16dp"
         android:focusable="false"
         map:liteMode="true"
         map:mapType="normal" />
@@ -94,7 +94,7 @@
     <View
         android:id="@+id/list_item_event_map_shadow_bottom"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/list_item_event_details_elevation_bottom"
         android:layout_below="@id/list_item_event_map"
         android:background="@drawable/dropdown_shadow" />
 </RelativeLayout>

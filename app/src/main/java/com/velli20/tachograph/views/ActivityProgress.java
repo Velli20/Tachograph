@@ -45,25 +45,19 @@ public class ActivityProgress extends View {
     private static final int PROGRESS_BAR_PADDING = 16;
     private static final int SUB_TITLE_PADDING = 16;
     private static final int PROGRESS_PIE_MAX_DIAMETER = 140;
-
+    private final Paint mBackGroundPaint = new Paint();
+    private final Paint mChartPaint = new Paint();
+    private final TextPaint mTitlePaint = new TextPaint();
+    private final TextPaint mSubTitlePaint = new TextPaint();
     private float mScale;
     private float mHeight;
     private float mWidth;
-
     private int mProgress;
     private int mProgressMax;
     private boolean mDisplayBigProgress = false;
-
     private String mTitle;
     private String mSubTitle;
-
-    private final Paint mBackGroundPaint = new Paint();
-    private final Paint mChartPaint = new Paint();
-
-    private final TextPaint mTitlePaint = new TextPaint();
-    private final TextPaint mSubTitlePaint = new TextPaint();
     private RectF mArcRect;
-
 
 
     public ActivityProgress(Context context) {
@@ -106,7 +100,7 @@ public class ActivityProgress extends View {
         mSubTitlePaint.setTextAlign(Paint.Align.CENTER);
         mSubTitlePaint.setAlpha(138); // ~54 %
 
-        if(isInEditMode()) {
+        if (isInEditMode()) {
             mProgress = 50;
             mProgressMax = 100;
             mTitle = "30 min";
@@ -120,19 +114,21 @@ public class ActivityProgress extends View {
         setWillNotDraw(false);
     }
 
-    float getDpValue(float value){
+    float getDpValue(float value) {
         return mScale * value;
     }
 
-    public int getProgress(){
+    public int getProgress() {
         return mProgress;
     }
-
-    public int getMax() { return mProgressMax; }
 
     public void setProgress(int progress) {
         mProgress = progress;
         invalidate();
+    }
+
+    public int getMax() {
+        return mProgressMax;
     }
 
     public void setMax(int max) {
@@ -140,9 +136,46 @@ public class ActivityProgress extends View {
         invalidate();
     }
 
+    public void setChartColor(int color) {
+        mChartPaint.setColor(color);
+        invalidate();
+    }
+
+    public void displayBigProgress(boolean big) {
+        if (big != mDisplayBigProgress) {
+            mDisplayBigProgress = big;
+
+            requestLayout();
+        }
+    }
+
+    Paint getChartPaint() {
+        return mChartPaint;
+    }
+
+    Paint getChartBackgroundPaint() {
+        return mBackGroundPaint;
+    }
+
+    TextPaint getTitlePaint() {
+        return mTitlePaint;
+    }
+
+    TextPaint getSubTitlePaint() {
+        return mSubTitlePaint;
+    }
+
+    String getTitle() {
+        return mTitle;
+    }
+
     public void setTitle(String title) {
         mTitle = title;
         invalidate();
+    }
+
+    String getSubTitle() {
+        return mSubTitle;
     }
 
     public void setSubTitle(String subTitle) {
@@ -150,32 +183,9 @@ public class ActivityProgress extends View {
         invalidate();
     }
 
-    public void setChartColor(int color){
-        mChartPaint.setColor(color);
-        invalidate();
+    float getTextPadding() {
+        return getDpValue(TEXT_PADDING);
     }
-
-    public void displayBigProgress(boolean big) {
-        if(big != mDisplayBigProgress) {
-            mDisplayBigProgress = big;
-
-            requestLayout();
-        }
-    }
-
-    Paint getChartPaint() { return mChartPaint; }
-
-    Paint getChartBackgroundPaint() { return mBackGroundPaint; }
-
-    TextPaint getTitlePaint() { return mTitlePaint; }
-
-    TextPaint getSubTitlePaint() { return mSubTitlePaint; }
-
-    String getTitle() { return mTitle; }
-
-    String getSubTitle() { return mSubTitle; }
-
-    float getTextPadding() { return getDpValue(TEXT_PADDING); }
 
 
     @Override
@@ -183,7 +193,7 @@ public class ActivityProgress extends View {
         getTitlePaint().setTextAlign(mDisplayBigProgress ? Paint.Align.CENTER : Paint.Align.LEFT);
         getSubTitlePaint().setTextAlign(mDisplayBigProgress ? Paint.Align.CENTER : Paint.Align.LEFT);
 
-        if(mDisplayBigProgress) {
+        if (mDisplayBigProgress) {
             drawProgressChart(canvas, mProgress, mProgressMax);
         } else {
             drawProgressBar(canvas, mProgress, mProgressMax);
@@ -205,7 +215,7 @@ public class ActivityProgress extends View {
         float progressStrokeWidth = progressPaint.getStrokeWidth();
         float capWidth = progressStrokeWidth / 2;
         float left = getPaddingLeft() + capWidth;
-        float right = (getWidth() - getPaddingRight())- capWidth;
+        float right = (getWidth() - getPaddingRight()) - capWidth;
 
 
         float cy = (getHeight() / 2);
@@ -218,11 +228,11 @@ public class ActivityProgress extends View {
         float textPadding = getTextPadding();
         float barPadding = getDpValue(PROGRESS_BAR_PADDING);
 
-        if(title != null) {
+        if (title != null) {
             titleHeight = titlePaint.getTextSize();
             titleWidth = titlePaint.measureText(title);
         }
-        if(subTitle != null) {
+        if (subTitle != null) {
             subTitleHeight = subTitlePaint.getTextSize();
             subTitleWidth = subTitlePaint.measureText(subTitle);
         }
@@ -238,11 +248,11 @@ public class ActivityProgress extends View {
         canvas.drawLine(left, cy, progressBarWidth, cy, progressPaint);
 
 
-        if(title != null) {
+        if (title != null) {
             float titleCx = getPaddingLeft() + ((titleMaxWidth - titleWidth) / 2);
             canvas.drawText(title, titleCx, titleCy, titlePaint);
         }
-        if(subTitle != null) {
+        if (subTitle != null) {
             float subTitleCx = getPaddingLeft() + ((titleMaxWidth - subTitleWidth) / 2);
             canvas.drawText(subTitle, subTitleCx, subTitleCy, subTitlePaint);
         }
@@ -262,9 +272,9 @@ public class ActivityProgress extends View {
         String title = getTitle();
         String subTitle = getSubTitle();
 
-        if(width > height){
+        if (width > height) {
             height = width;
-        } else if(height > width){
+        } else if (height > width) {
             width = height;
         }
 
@@ -281,7 +291,7 @@ public class ActivityProgress extends View {
         }
 
         // Draw progress
-        if(arc != 0) {
+        if (arc != 0) {
             canvas.drawArc(mArcRect, 270, arc, false, progressPaint);
         }
 
@@ -300,8 +310,8 @@ public class ActivityProgress extends View {
         int finalWidth;
         int finalHeight;
 
-        if(mDisplayBigProgress) {
-            int maxDiameter = (int)getDpValue(PROGRESS_PIE_MAX_DIAMETER);
+        if (mDisplayBigProgress) {
+            int maxDiameter = (int) getDpValue(PROGRESS_PIE_MAX_DIAMETER);
 
             if (widthSize > heightSize && widthSize < maxDiameter) {
                 finalWidth = widthSize;
@@ -314,7 +324,7 @@ public class ActivityProgress extends View {
                 finalHeight = maxDiameter;
             }
         } else {
-            int minHeight = (int)(mTitlePaint.getTextSize() + mSubTitlePaint.getTextSize() + (getTextPadding() * 2));
+            int minHeight = (int) (mTitlePaint.getTextSize() + mSubTitlePaint.getTextSize() + (getTextPadding() * 2));
             finalWidth = widthSize;
             finalHeight = Math.max(minHeight, heightSize);
         }
@@ -322,7 +332,7 @@ public class ActivityProgress extends View {
         setMeasuredDimension(finalWidth, finalHeight);
     }
 
-    private RectF getArcRect(){
+    private RectF getArcRect() {
 
         final RectF rect = new RectF();
         final float stroke = getDpValue(STROKE_WIDTH) / 2;
@@ -332,7 +342,7 @@ public class ActivityProgress extends View {
     }
 
     @Override
-    protected void onSizeChanged (int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = getWidth();
         mHeight = getHeight();

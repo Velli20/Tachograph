@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -34,20 +33,19 @@
     <View
         android:id="@+id/list_item_event_speed_chart_shadow_top"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/list_item_event_details_elevation_top"
         android:layout_alignParentTop="true"
         android:background="@drawable/dropdown_shadow_up" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/list_item_event_speed_chart_shadow_top"
         android:layout_above="@+id/list_item_event_speed_chart_shadow_bottom"
+        android:layout_below="@+id/list_item_event_speed_chart_shadow_top"
         android:background="@color/white" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_speed_chart_title"
-        custom:style="medium"
         style="@style/Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,44 +54,45 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:maxLines="1"
-        android:text="@string/title_speed"/>
+        android:text="@string/title_speed"
+        custom:style="medium" />
 
     <com.velli20.materialunixgraph.LineGraph
         android:id="@+id/list_item_event_speed_chart"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="16dp"
         android:layout_below="@+id/list_item_event_speed_chart_title"
+        android:layout_margin="16dp"
         graph:graphFrameColor="#e0e0e0"
-        graph:verticalAxisLabelColor="#9e9e9e"
-        graph:horizontalAxisLabelColor="#9e9e9e"
         graph:graphFrameStrokeWidth="1dp"
-        graph:verticalAxisLabelTextSize="12sp"
+        graph:horizontalAxisLabelColor="#9e9e9e"
         graph:horizontalAxisLabelTextSize="14sp"
+        graph:maxVerticalAxisCount="4"
         graph:maxVerticalAxisValue="140"
         graph:minVerticalAxisValue="0"
-        graph:maxVerticalAxisCount="4"
+        graph:verticalAxisLabelColor="#9e9e9e"
+        graph:verticalAxisLabelTextSize="12sp"
         graph:verticalAxisValueLabel=" km/h" />
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_event_speed_chart_average_speed"
         style="@style/ListPrimaryText"
-        custom:style="regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_event_speed_chart"
         android:layout_marginBottom="32dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_below="@+id/list_item_event_speed_chart"
-        android:drawablePadding="32dp"
         android:drawableLeft="@drawable/ic_average_speed"
+        android:drawablePadding="32dp"
         android:drawableStart="@drawable/ic_average_speed"
-        android:text="@string/title_average_speed" />
+        android:text="@string/title_average_speed"
+        custom:style="regular" />
 
     <View
         android:id="@+id/list_item_event_speed_chart_shadow_bottom"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/list_item_event_details_elevation_bottom"
         android:layout_below="@+id/list_item_event_speed_chart_average_speed"
         android:background="@drawable/dropdown_shadow" />
 </RelativeLayout>

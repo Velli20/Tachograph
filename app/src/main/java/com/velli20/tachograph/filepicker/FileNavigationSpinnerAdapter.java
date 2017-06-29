@@ -71,15 +71,15 @@ public class FileNavigationSpinnerAdapter extends BaseAdapter {
     }
 
     public void addPath(String path) {
-        if(!mPaths.contains(path)) {
+        if (!mPaths.contains(path)) {
             mPaths.add(path);
             notifyDataSetChanged();
         }
     }
 
     public void removePathStartingAt(int index) {
-        if(index < mPaths.size()) {
-            for(int i = index; i < mPaths.size(); i++) {
+        if (index < mPaths.size()) {
+            for (int i = index; i < mPaths.size(); i++) {
                 mPaths.remove(i);
             }
 
@@ -106,7 +106,7 @@ public class FileNavigationSpinnerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.nav_spinner_item, parent, false);
 
             holder = new ViewHolder();
@@ -118,7 +118,7 @@ public class FileNavigationSpinnerAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        if(mPaths.get(position).equals(Environment.getExternalStorageDirectory().getPath())) {
+        if (mPaths.get(position).equals(Environment.getExternalStorageDirectory().getPath())) {
             holder.mTitle.setText("External storage");
         } else {
             holder.mTitle.setText(new File(mPaths.get(position)).getName());
@@ -131,7 +131,7 @@ public class FileNavigationSpinnerAdapter extends BaseAdapter {
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         ViewHolderDropDown holder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.nav_spinner_item_dropdown, parent, false);
 
             holder = new ViewHolderDropDown();
@@ -143,7 +143,7 @@ public class FileNavigationSpinnerAdapter extends BaseAdapter {
             holder = (ViewHolderDropDown) convertView.getTag();
         }
 
-        if(mPaths.get(position).equals(Environment.getExternalStorageDirectory().getPath())) {
+        if (mPaths.get(position).equals(Environment.getExternalStorageDirectory().getPath())) {
             holder.mTitle.setText("External storage");
         } else {
             holder.mTitle.setText(new File(mPaths.get(position)).getName());

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,13 +24,15 @@
   ~  */
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_file_picker_add_folder"
-        appcompat:showAsAction="ifRoom"
+    <item
+        android:id="@+id/menu_file_picker_add_folder"
+        android:icon="@drawable/ic_filepicker_add_folder"
         android:orderInCategory="0"
         android:title="@string/file_picker_menu_add_folder"
-        android:icon="@drawable/ic_filepicker_add_folder"/>
+        appcompat:showAsAction="ifRoom" />
 
 
     <item

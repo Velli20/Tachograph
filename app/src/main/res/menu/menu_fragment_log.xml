@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,16 +24,51 @@
   ~  */
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:appcompat="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_filter" android:title="@string/menu_filter" android:orderInCategory="1" android:icon="@drawable/ic_filter_white" appcompat:showAsAction="ifRoom">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_filter"
+        android:icon="@drawable/ic_filter_white"
+        android:orderInCategory="1"
+        android:title="@string/menu_filter"
+        appcompat:showAsAction="ifRoom">
         <menu>
-            <item android:id="@+id/action_sort_by_category_drive" appcompat:showAsAction="never" android:orderInCategory="1" android:title="@string/menu_filter_category_drive" android:checked="true" android:checkable="true"/>
-            <item android:id="@+id/action_sort_by_category_rest" appcompat:showAsAction="never" android:orderInCategory="2" android:title="@string/menu_filter_category_rest" android:checked="true" android:checkable="true"/>
-            <item android:id="@+id/action_sort_by_category_other_work" appcompat:showAsAction="never" android:orderInCategory="3" android:title="@string/menu_filter_category_other_work" android:checked="true" android:checkable="true"/>
-            <item android:id="@+id/action_sort_by_category_poa" appcompat:showAsAction="never" android:orderInCategory="4" android:title="@string/menu_filter_category_poa" android:checked="true" android:checkable="true"/>
+            <item
+                android:id="@+id/action_sort_by_category_drive"
+                android:checkable="true"
+                android:checked="true"
+                android:orderInCategory="1"
+                android:title="@string/menu_filter_category_drive"
+                appcompat:showAsAction="never" />
+            <item
+                android:id="@+id/action_sort_by_category_rest"
+                android:checkable="true"
+                android:checked="true"
+                android:orderInCategory="2"
+                android:title="@string/menu_filter_category_rest"
+                appcompat:showAsAction="never" />
+            <item
+                android:id="@+id/action_sort_by_category_other_work"
+                android:checkable="true"
+                android:checked="true"
+                android:orderInCategory="3"
+                android:title="@string/menu_filter_category_other_work"
+                appcompat:showAsAction="never" />
+            <item
+                android:id="@+id/action_sort_by_category_poa"
+                android:checkable="true"
+                android:checked="true"
+                android:orderInCategory="4"
+                android:title="@string/menu_filter_category_poa"
+                appcompat:showAsAction="never" />
         </menu>
     </item>
-    <item android:id="@+id/menu_sort" android:title="@string/menu_sort" android:orderInCategory="0" android:icon="@drawable/ic_sort_white" appcompat:showAsAction="ifRoom"></item>
-    
+    <item
+        android:id="@+id/menu_sort"
+        android:icon="@drawable/ic_sort_white"
+        android:orderInCategory="0"
+        android:title="@string/menu_sort"
+        appcompat:showAsAction="ifRoom"></item>
+
 
 </menu>

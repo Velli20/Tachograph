@@ -27,7 +27,6 @@
 package com.velli20.tachograph.database;
 
 
-
 public class DatabaseLocationQueryBuilder {
     private StringBuilder mWhereClause;
 
@@ -99,7 +98,7 @@ public class DatabaseLocationQueryBuilder {
     }
 
     private void openWhereClause() {
-        if(mWhereClause == null) {
+        if (mWhereClause == null) {
             mWhereClause = new StringBuilder();
             mWhereClause.append("( ");
         } else {
@@ -110,7 +109,7 @@ public class DatabaseLocationQueryBuilder {
     }
 
     private void closeWhereClause() {
-        if(!mWhereClauseIsOpen) {
+        if (!mWhereClauseIsOpen) {
             return;
         } else {
             mWhereClause.append(")");
@@ -121,18 +120,18 @@ public class DatabaseLocationQueryBuilder {
     public String buildQuery() {
         String query = (mSelectDistinct ? "SELECT DISTINCT " : "SELECT ") + mColumns + " FROM " + mTable;
 
-        if(mWhereClause != null && mWhereClause.length() > 0) {
+        if (mWhereClause != null && mWhereClause.length() > 0) {
             query += " WHERE(";
             query += mWhereClause.toString();
             query += ") ";
         }
 
-        if(mOrderBy != null) {
+        if (mOrderBy != null) {
             query += " ORDER BY ";
             query += mOrderBy;
             query += (mOrderAscending ? " ASC " : " DESC ");
         }
-        if(mMaxResults > 0) {
+        if (mMaxResults > 0) {
             query += " LIMIT ";
             query += String.valueOf(mMaxResults);
         }

@@ -41,40 +41,63 @@ import com.velli20.tachograph.database.DataBaseHandler;
 
 
 public class GpsBackgroundService extends Service implements DataBaseHandler.OnDatabaseEditedListener, DataBaseHandler.OnGetEventTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener {
+    public static final String INTENT_KEY_LOCATION_PERMISSION_GRANTED = "location permission granted";
+
     private static final float[] ACCURACY_VALUES;
     private static final boolean DEBUG = false;
     private static final String TAG = "GpsBackgroundService ";
 
+    static {
+        ACCURACY_VALUES = new float[]{10.0f, 20.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 2000.0f, 5000.0f};
+    }
+
+    private final Handler mServiceShutdownHandler = new Handler();
+    private final Handler mStoppingRouteLoggingHandler = new Handler();
     private GoogleDetectedActivityListener mGoogleApiDetectedActivityListener;
     private GpsRouteLogger mGpsRouteLogger = new GpsRouteLogger();
-
     private int mThresholdTime;
     private int mThresholdSpeed;
-
     private float mGpsMinAccuracy = 20.0f;
-
     private boolean mUseGps = false;
     private boolean mShowNotifications = true;
     private boolean mNotificationShowing = false;
     private boolean mShuttingDownService = false;
+    private final Runnable mServiceShutdownRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            if (mShuttingDownService) {
+                /* End this service */
+                stopSelf();
+            } else {
+                if (DEBUG) {
+                    Log.i(TAG, TAG + " run() cancel service shutdown");
+                }
+            }
+        }
+    };
     private boolean mStoppingRouteLogging = false;
+    private final Runnable mRouteLoggingShutdownRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            if (mStoppingRouteLogging) {
+                stopLoggingRoute();
+            } else {
+                if (DEBUG) {
+                    Log.i(TAG, TAG + " run() cancel service shutdown");
+                }
+            }
+        }
+    };
     private boolean mUseDetectedActivity = true;
-
-    private final Handler mServiceShutdownHandler = new Handler();
-    private final Handler mStoppingRouteLoggingHandler = new Handler();
-
     private Event mRecordingEvent;
-
-    static {
-        ACCURACY_VALUES = new float[]{10.0f, 20.0f, 50.0f, 100.0f, 200.0f, 500.0f, 1000.0f, 2000.0f, 5000.0f};
-    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
 
     @Override
     public void onCreate() {
@@ -88,11 +111,10 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         DataBaseHandler.getInstance().registerOnDatabaseEditedListener(this);
         DataBaseHandler.getInstance().getRecordingEvent(this);
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " onCreate()");
         }
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -102,24 +124,24 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         if (intent != null && ActivityRecognitionResult.hasResult(intent) && mGoogleApiDetectedActivityListener != null && mUseDetectedActivity) {
             /* Handle this intent */
             mGoogleApiDetectedActivityListener.handleActivityRecognitionResult(intent);
+        } else if (intent != null && intent.getBooleanExtra(INTENT_KEY_LOCATION_PERMISSION_GRANTED, false)) {
+            initializeBackgroundService();
         }
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " onStartCommand()");
         }
         return Service.START_STICKY;
     }
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mGpsRouteLogger != null) {
+        if (mGpsRouteLogger != null) {
             mGpsRouteLogger.unregisterLocationListener(this);
             mGpsRouteLogger = null;
         }
-        if(mGoogleApiDetectedActivityListener != null) {
+        if (mGoogleApiDetectedActivityListener != null) {
             mGoogleApiDetectedActivityListener.stop();
             mGoogleApiDetectedActivityListener = null;
         }
@@ -130,7 +152,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
 
         EventNotificationHandler.hideNotification(this);
 
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " onDestroy()");
         }
     }
@@ -139,10 +161,13 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
      * or there are no event currently recording then stop this service
      */
     private boolean logRouteIfRequired(Event currentEvent) {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " logRouteIfRequired() event null: " + (currentEvent == null ? "YES" : "NO"));
         }
-        if(!mUseGps || currentEvent == null) {
+        if (!mUseGps && EventRecorder.INSTANCE.isEventScheduled()) {
+            EventRecorder.INSTANCE.cancelScheduledEvent();
+        }
+        if (!mUseGps || currentEvent == null) {
             return false;
         }
 
@@ -150,7 +175,7 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
             /* Enable GPS route logging. This class is also responsible to switch from
              * driving event to other work and vice versa based on GPS speed
              */
-            if(mGpsRouteLogger == null) {
+            if (mGpsRouteLogger == null) {
                 mGpsRouteLogger = new GpsRouteLogger();
             }
             mGpsRouteLogger.registerLocationListener(this);
@@ -164,14 +189,13 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         } else {
             return false;
         }
-
     }
 
     /* Check if need to turn on GPS */
     public boolean checkIfRequiredToTurnOnGps(Event currentEvent) {
-        if(currentEvent == null) {
+        if (currentEvent == null) {
             return false;
-        } else if(currentEvent.getEventType() == Event.EVENT_TYPE_DRIVING
+        } else if (currentEvent.getEventType() == Event.EVENT_TYPE_DRIVING
                 || currentEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK) {
             return true;
 
@@ -180,14 +204,14 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
     }
 
     private void stopLoggingRoute() {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " stopLoggingRoute()");
         }
-        if(mGpsRouteLogger != null) {
+        if (mGpsRouteLogger != null) {
             mGpsRouteLogger.unregisterLocationListener(this);
         }
 
-        if(mGoogleApiDetectedActivityListener != null) {
+        if (mGoogleApiDetectedActivityListener != null) {
             mGoogleApiDetectedActivityListener.stop();
             mGoogleApiDetectedActivityListener = null;
         }
@@ -195,8 +219,8 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
     }
 
     private boolean showNotificationIfRequired(Event currentEvent) {
-        if(!mShowNotifications || currentEvent == null) {
-            if(mNotificationShowing) {
+        if (!mShowNotifications || currentEvent == null) {
+            if (mNotificationShowing) {
             /* User turned notifications off. Hide currently showing notification */
                 EventNotificationHandler.hideNotification(this);
             }
@@ -209,8 +233,6 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         return true;
     }
 
-
-
     /* Load user settings */
     private void getPreferences() {
         final Resources res = getResources();
@@ -221,10 +243,10 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         mUseGps = prefs.getBoolean(res.getString(R.string.preference_key_use_gps), false);
         mShowNotifications = prefs.getBoolean(res.getString(R.string.preference_key_show_notifications), true);
         mGpsMinAccuracy = ACCURACY_VALUES[prefs.getInt(res.getString(R.string.preference_key_gps_min_accuracy), 4)];
-        mUseDetectedActivity =  prefs.getBoolean(res.getString(R.string.preference_key_use_detected_activity), true) && DEBUG;
+        mUseDetectedActivity = prefs.getBoolean(res.getString(R.string.preference_key_use_detected_activity), true) && DEBUG;
 
         /* Edit GPS route logger settings */
-        if(mGpsRouteLogger != null) {
+        if (mGpsRouteLogger != null) {
             mGpsRouteLogger.setGpsMinAccuracy(mGpsMinAccuracy);
             mGpsRouteLogger.setStoppedSpeedThreshold(mThresholdSpeed);
             mGpsRouteLogger.setStoppedTimeThreshold(mThresholdTime);
@@ -233,32 +255,29 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         initializeBackgroundService();
     }
 
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         getPreferences();
-        if(DEBUG) {
+        if (DEBUG) {
             Log.d(TAG, "onSharedPreferenceChanged()");
         }
     }
 
-
     @Override
     public void onGetEvent(Event ev) {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " onGetEvent()");
         }
         mRecordingEvent = ev;
-        if(mGpsRouteLogger != null) {
+        if (mGpsRouteLogger != null) {
             mGpsRouteLogger.setCurrentEvent(ev);
         }
         initializeBackgroundService();
     }
 
-
     @Override
     public void onDatabaseEdited(int action, int rowId) {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " onDatabaseEdited()");
         }
         /* Loads asynchronously current recording Event from app database */
@@ -269,84 +288,49 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
      * stop this service with a 5 second delay.
      */
     private void initializeBackgroundService() {
-        if(DEBUG) {
+        if (DEBUG) {
             Log.i(TAG, TAG + " initializeBackgroundService()");
         }
         /* Check if it is required to run this service */
         boolean showNotifications = showNotificationIfRequired(mRecordingEvent);
         boolean logRoute = logRouteIfRequired(mRecordingEvent);
 
-        if(mUseDetectedActivity && mGoogleApiDetectedActivityListener == null && logRoute)  {
+        if (mUseDetectedActivity && mGoogleApiDetectedActivityListener == null && logRoute) {
             mGoogleApiDetectedActivityListener = new GoogleDetectedActivityListener(GpsBackgroundService.this);
         }
-        if(mStoppingRouteLogging && logRoute) {
+        if (mStoppingRouteLogging && logRoute) {
             mStoppingRouteLogging = false;
             mStoppingRouteLoggingHandler.removeCallbacks(mRouteLoggingShutdownRunnable);
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, "initializeBackgroundService() continue route logging");
             }
-        } else if(!mStoppingRouteLogging && !logRoute) {
+        } else if (!mStoppingRouteLogging && !logRoute) {
             mStoppingRouteLogging = true;
             mStoppingRouteLoggingHandler.postDelayed(mRouteLoggingShutdownRunnable, 5000);
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, "initializeBackgroundService() stopping route logging in 5 seconds");
             }
         }
 
-        if(!showNotifications && !logRoute) {
+        if (!showNotifications && !logRoute) {
             /* Wait 5 seconds until we stop this service. If user starts
              * another event that requires this service then cancel this Runnable
              */
             mShuttingDownService = true;
             mServiceShutdownHandler.postDelayed(mServiceShutdownRunnable, 5000);
 
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, "initializeBackgroundService() shutting down service in 5 seconds");
             }
         } else {
             mShuttingDownService = false;
             mServiceShutdownHandler.removeCallbacksAndMessages(mServiceShutdownRunnable);
 
-            if(DEBUG) {
+            if (DEBUG) {
                 Log.d(TAG, "initializeBackgroundService() continue running service");
             }
         }
     }
-
-
-    private final Runnable mServiceShutdownRunnable = new Runnable(){
-
-        @Override
-        public void run(){
-            if(mShuttingDownService) {
-                /* End this service */
-                stopSelf();
-            } else {
-                if(DEBUG) {
-                    Log.i(TAG, TAG + " run() cancel service shutdown");
-                }
-            }
-        }
-    };
-
-    private final Runnable mRouteLoggingShutdownRunnable = new Runnable(){
-
-        @Override
-        public void run(){
-            if(mStoppingRouteLogging) {
-                stopLoggingRoute();
-            } else {
-                if(DEBUG) {
-                    Log.i(TAG, TAG + " run() cancel service shutdown");
-                }
-            }
-        }
-    };
-
-
-
-
-
 
 
 }

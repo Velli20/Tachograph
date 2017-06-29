@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -25,17 +24,20 @@
   ~  */
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:appcompat="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_item_edit" 
-        appcompat:showAsAction="ifRoom" 
-        android:orderInCategory="0"  
-        android:title="@string/title_edit_log_event" 
-        android:icon="@drawable/ic_action_edit"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_edit"
+        android:icon="@drawable/ic_action_edit"
+        android:orderInCategory="0"
+        android:title="@string/title_edit_log_event"
+        appcompat:showAsAction="ifRoom" />
 
-    <item android:id="@+id/menu_item_discard"
-        appcompat:showAsAction="ifRoom"
+    <item
+        android:id="@+id/menu_item_discard"
+        android:icon="@drawable/ic_action_delete_light"
         android:orderInCategory="1"
         android:title="@string/menu_discard"
-        android:icon="@drawable/ic_action_delete_light"/>
-    
+        appcompat:showAsAction="ifRoom" />
+
 </menu>

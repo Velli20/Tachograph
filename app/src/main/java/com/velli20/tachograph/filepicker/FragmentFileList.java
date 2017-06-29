@@ -64,11 +64,6 @@ public class FragmentFileList extends Fragment {
     private int mSortBy = FileComparator.COMPARE_BY_NAME;
     private Theme mTheme = Theme.LIGHT;
 
-
-    public interface OnFileClickedListener {
-        void onFileClicked(File file);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +71,7 @@ public class FragmentFileList extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_file_list, container, false);
 
 
-        if(getArguments() != null) {
+        if (getArguments() != null) {
             mPath = getArguments().getString(KEY_BUNDLE_PATH, Environment.getExternalStorageDirectory().toString());
             mSortBy = getArguments().getInt(KEY_BUNDLE_SORT_BY, FileComparator.COMPARE_BY_NAME);
             mFileExtension = getArguments().getString(KEY_BUNDLE_FILE_EXTENSION, null);
@@ -127,7 +122,7 @@ public class FragmentFileList extends Fragment {
     }
 
     private void updateDirectory(String path) {
-        if(mAdapter == null) {
+        if (mAdapter == null) {
             mAdapter = new FileAdapter(getActivity(), new File(mPath), Theme.LIGHT);
             mList.setAdapter(mAdapter);
         } else {
@@ -141,7 +136,7 @@ public class FragmentFileList extends Fragment {
         int count = 0;
 
         do {
-            if(count == 0) {
+            if (count == 0) {
                 file = new File(path);
                 count++;
             } else {
@@ -149,11 +144,11 @@ public class FragmentFileList extends Fragment {
                 count++;
             }
 
-        } while(file == null || file.exists());
+        } while (file == null || file.exists());
 
         file.mkdir();
         updateDirectory(mPath);
-        if(mListener != null) {
+        if (mListener != null) {
             mListener.onFileClicked(file);
         }
     }
@@ -173,14 +168,19 @@ public class FragmentFileList extends Fragment {
                 }).show();
     }
 
-    public String getPath() { return mPath; }
+    public String getPath() {
+        return mPath;
+    }
+
+    public interface OnFileClickedListener {
+        void onFileClicked(File file);
+    }
 
     public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final LayoutInflater mInflater;
-        private File[]  mDirectory;
         private final DateFormat formOut = new SimpleDateFormat("dd.MM.yyyy ' 'HH:mm:ss", Locale.getDefault());
         private final Resources mRes;
-
+        private File[] mDirectory;
         private Theme mTheme;
         private ColorStateList mTextColorDark;
         private ColorStateList mTextColorLight;
@@ -225,21 +225,21 @@ public class FragmentFileList extends Fragment {
                 extension = fileName.substring(i);
             }
 
-            ((ViewHolderFile)holder).mTitle.setText(file.getName());
-            ((ViewHolderFile)holder).mSubtitle.setText(formOut.format(file.lastModified()));
-            if(file.isDirectory()) {
-                ((ViewHolderFile)holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_folder));
-            } else if(fileName.endsWith(".xls")) {
-                ((ViewHolderFile)holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_excel));
-            } else if(fileName.endsWith(".jpg") || file.getName().endsWith(".png")) {
-                ((ViewHolderFile)holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_image));
-            } else if(fileName.endsWith(".pdf")) {
-                ((ViewHolderFile)holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_pdf));
+            ((ViewHolderFile) holder).mTitle.setText(file.getName());
+            ((ViewHolderFile) holder).mSubtitle.setText(formOut.format(file.lastModified()));
+            if (file.isDirectory()) {
+                ((ViewHolderFile) holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_folder));
+            } else if (fileName.endsWith(".xls")) {
+                ((ViewHolderFile) holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_excel));
+            } else if (fileName.endsWith(".jpg") || file.getName().endsWith(".png")) {
+                ((ViewHolderFile) holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_image));
+            } else if (fileName.endsWith(".pdf")) {
+                ((ViewHolderFile) holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_pdf));
             } else {
-                ((ViewHolderFile)holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_file));
+                ((ViewHolderFile) holder).mIcon.setImageDrawable(mRes.getDrawable(R.drawable.ic_filepicker_file));
             }
 
-            if(mFileExtension != null && !file.isDirectory() && !mFileExtension.equals(extension)) {
+            if (mFileExtension != null && !file.isDirectory() && !mFileExtension.equals(extension)) {
                 holder.itemView.setAlpha(0.30f);
                 holder.itemView.setEnabled(false);
             } else {
@@ -252,7 +252,7 @@ public class FragmentFileList extends Fragment {
 
         @Override
         public int getItemCount() {
-            if(mDirectory == null) {
+            if (mDirectory == null) {
                 return 0;
             }
             return mDirectory.length;
@@ -267,16 +267,13 @@ public class FragmentFileList extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if(mListener != null && v.isEnabled()) {
+                if (mListener != null && v.isEnabled()) {
                     mListener.onFileClicked(getFile(mPosition));
                 }
             }
         }
 
     }
-
-
-
 
 
 }

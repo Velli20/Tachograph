@@ -32,13 +32,12 @@ import com.velli20.tachograph.R;
 public class FilePickerUtils {
 
 
-
     public static int getDrawableResourceForFileExt(String fileExtension) {
-        if(fileExtension.endsWith(".xls") || fileExtension.endsWith(".xlsx")) {
+        if (fileExtension.endsWith(".xls") || fileExtension.endsWith(".xlsx")) {
             return R.drawable.ic_filepicker_excel;
-        } else if(fileExtension.endsWith(".jpg") || fileExtension.endsWith(".png")) {
+        } else if (fileExtension.endsWith(".jpg") || fileExtension.endsWith(".png")) {
             return R.drawable.ic_filepicker_image;
-        } else if(fileExtension.endsWith(".pdf")) {
+        } else if (fileExtension.endsWith(".pdf")) {
             return R.drawable.ic_filepicker_pdf;
         } else {
             return R.drawable.ic_filepicker_file;

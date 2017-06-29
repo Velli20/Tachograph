@@ -34,27 +34,26 @@ import com.velli20.tachograph.Event;
 public class DatabaseEventUtils {
 
 
-	
-	public static Event getEvent(Cursor cursor) {
-		if(cursor == null) {
-			return null;
-		}
-		Event event = new Event();
-		
-		event.setEventType(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_TYPE)));
-		event.setStartTime(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_HOUR)), cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_MINUTE)));
-		event.setEndTime(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_HOUR)), cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_MINUTE)));
-		event.setStartDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS))));
-		event.setEndDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS))));
-		event.setMileageStart(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_MILEAGE_START)));
-		event.setMileageEnd(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_MILEAGE_END)));
-		event.setRecording(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_RECORDING)) == Event.EVENT_LOGGING_IN_PROGRESS);
-		event.setNote(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_NOTE)));
-		event.setStartLocation(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_LOCATION)));
-		event.setEndLocation(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_LOCATION)));
-		event.setRowId(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_ID)));
+    public static Event getEvent(Cursor cursor) {
+        if (cursor == null) {
+            return null;
+        }
+        Event event = new Event();
 
-		return event;
-	}
+        event.setEventType(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_TYPE)));
+        event.setStartTime(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_HOUR)), cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_MINUTE)));
+        event.setEndTime(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_HOUR)), cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_MINUTE)));
+        event.setStartDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_DATE_IN_MILLIS))));
+        event.setEndDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_DATE_IN_MILLIS))));
+        event.setMileageStart(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_MILEAGE_START)));
+        event.setMileageEnd(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_MILEAGE_END)));
+        event.setRecording(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_RECORDING)) == Event.EVENT_LOGGING_IN_PROGRESS);
+        event.setNote(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_NOTE)));
+        event.setStartLocation(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_START_LOCATION)));
+        event.setEndLocation(cursor.getString(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_EVENT_END_LOCATION)));
+        event.setRowId(cursor.getInt(cursor.getColumnIndex(DataBaseHandlerConstants.KEY_ID)));
+
+        return event;
+    }
 
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -26,15 +25,14 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:selectableItemBackground" >
+    android:background="?android:selectableItemBackground">
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_week_stepper_weekday"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|start|center_vertical"
@@ -42,7 +40,8 @@
         android:layout_marginStart="16dp"
         android:alpha="0.87"
         android:maxLength="2"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        custom:style="medium" />
 
     <com.velli20.tachograph.views.StepperCircle
         android:id="@+id/list_item_log_summary_week_stepper_icon"
@@ -55,7 +54,6 @@
 
     <com.velli20.tachograph.views.RobotoLightTextView
         android:id="@+id/list_item_log_summary_week_stepper_title"
-        custom:style="medium"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_gravity="left|start|top"
@@ -68,7 +66,8 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        custom:style="medium" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,12 +78,12 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="88dp"
         android:layout_marginTop="48dp"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_driving_time_title"
@@ -97,19 +96,19 @@
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_driving_time"
-                custom:style="medium"
                 style="@style/Title.Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|end" />
+                android:gravity="right|end"
+                custom:style="medium" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_working_time_title"
@@ -122,19 +121,19 @@
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_working_time"
-                custom:style="medium"
                 style="@style/Title.Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|end" />
+                android:gravity="right|end"
+                custom:style="medium" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_rest_time_title"
@@ -147,19 +146,19 @@
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_rest_time"
-                custom:style="medium"
                 style="@style/Title.Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|end" />
+                android:gravity="right|end"
+                custom:style="medium" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_driven_distance_title"
@@ -172,12 +171,12 @@
 
             <com.velli20.tachograph.views.RobotoLightTextView
                 android:id="@+id/list_item_log_summary_week_stepper_daily_driven_distance"
-                custom:style="medium"
                 style="@style/Title.Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|end" />
+                android:gravity="right|end"
+                custom:style="medium" />
         </LinearLayout>
     </LinearLayout>
 

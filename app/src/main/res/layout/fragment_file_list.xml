@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -31,8 +30,8 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_file_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_file_list_recycler_view"
         android:layout_gravity="center" />
 </FrameLayout>

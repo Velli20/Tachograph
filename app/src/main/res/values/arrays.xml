@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * MIT License
   ~  *
@@ -29,60 +28,60 @@
 
 
     <string-array name="items_to_show_in_summary">
-        <item >@string/title_gps_logger_status</item>
-        <item >@string/work_limit_daily_driving_time</item>
-        <item >@string/work_limit_daily_rest</item>
-        <item >@string/work_limit_fortnightly_driving_time</item>
-        <item >@string/work_limit_weekly_rest</item>
-        <item >@string/work_limit_weekly_driving_time</item>
-        <item >@string/work_limit_wtd_weekly_working</item>
+        <item>@string/title_gps_logger_status</item>
+        <item>@string/work_limit_daily_driving_time</item>
+        <item>@string/work_limit_daily_rest</item>
+        <item>@string/work_limit_fortnightly_driving_time</item>
+        <item>@string/work_limit_weekly_rest</item>
+        <item>@string/work_limit_weekly_driving_time</item>
+        <item>@string/work_limit_wtd_weekly_working</item>
     </string-array>
 
     <string-array name="events">
-        <item >@string/title_event_driving</item>
-        <item >@string/title_event_daily_rest</item>
-        <item >@string/title_event_weekly_rest</item>
-        <item >@string/title_event_break</item>
-        <item >@string/title_event_other_work</item>
-        <item >@string/title_event_poa</item>
+        <item>@string/title_event_driving</item>
+        <item>@string/title_event_daily_rest</item>
+        <item>@string/title_event_weekly_rest</item>
+        <item>@string/title_event_break</item>
+        <item>@string/title_event_other_work</item>
+        <item>@string/title_event_poa</item>
     </string-array>
 
     <string-array name="events_format">
-        <item >@string/title_event_driving_format</item>
-        <item >@string/title_event_daily_rest_format</item>
-        <item >@string/title_event_weekly_rest_format</item>
-        <item >@string/title_event_break_format</item>
-        <item >@string/title_event_other_work_format</item>
-        <item >@string/title_event_poa_format</item>
+        <item>@string/title_event_driving_format</item>
+        <item>@string/title_event_daily_rest_format</item>
+        <item>@string/title_event_weekly_rest_format</item>
+        <item>@string/title_event_break_format</item>
+        <item>@string/title_event_other_work_format</item>
+        <item>@string/title_event_poa_format</item>
     </string-array>
 
     <string-array name="navigation_drawer_titles">
-        <item >@string/title_navigation_drawer_now</item>
-        <item >@string/title_navigation_drawer_log</item>
-        <item >@string/title_navigation_drawer_log_summary</item>
+        <item>@string/title_navigation_drawer_now</item>
+        <item>@string/title_navigation_drawer_log</item>
+        <item>@string/title_navigation_drawer_log_summary</item>
     </string-array>
 
     <string-array name="map_ground_layers">
-        <item >@string/menu_map_layer_satellite</item>
-        <item >@string/menu_map_layer_satellite_with_streets</item>
-        <item >@string/menu_map_layer_map</item>
-        <item >@string/menu_map_layer_earth</item>
+        <item>@string/menu_map_layer_satellite</item>
+        <item>@string/menu_map_layer_satellite_with_streets</item>
+        <item>@string/menu_map_layer_map</item>
+        <item>@string/menu_map_layer_earth</item>
     </string-array>
 
     <string-array name="preference_entries_sort_by_month_week_day">
-        <item >@string/preference_entry_sort_log_by_day</item>
-        <item >@string/preference_entry_sort_log_by_week</item>
-        <item >@string/preference_entry_sort_log_by_month</item>
+        <item>@string/preference_entry_sort_log_by_day</item>
+        <item>@string/preference_entry_sort_log_by_week</item>
+        <item>@string/preference_entry_sort_log_by_month</item>
     </string-array>
 
     <string-array name="preference_entries_sort_by_asc_desc">
-        <item >@string/preference_entry_sort_log_descending</item>
-        <item >@string/preference_entry_sort_log_ascending</item>
+        <item>@string/preference_entry_sort_log_descending</item>
+        <item>@string/preference_entry_sort_log_ascending</item>
     </string-array>
 
     <string-array name="preference_entries_count_activity_progress">
-        <item >@string/preference_entry_show_remaining_time</item>
-        <item >@string/preference_entry_show_elapsed_time</item>
+        <item>@string/preference_entry_show_remaining_time</item>
+        <item>@string/preference_entry_show_elapsed_time</item>
     </string-array>
 
 </resources>

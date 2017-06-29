@@ -53,21 +53,17 @@ public enum GpsRouteLoggerStatus {
 
     private WeakReference<OnGpsLoggerStatusChangedListener> mListener;
 
-    public interface OnGpsLoggerStatusChangedListener {
-        void onGpsLoggerStatusChanged();
-    }
-
     public void registerOnGpsLoggerStatusChangedListener(OnGpsLoggerStatusChangedListener l) {
-        if(mListener != null && mListener.get() != null) {
+        if (mListener != null && mListener.get() != null) {
             mListener.clear();
         }
-        if(l != null) {
+        if (l != null) {
             mListener = new WeakReference<>(l);
         }
     }
 
     public void unregisterOnGpsLoggerStatusChangedListener(OnGpsLoggerStatusChangedListener l) {
-        if(l != null && mListener != null && mListener.get() != null && mListener.get().equals(l)) {
+        if (l != null && mListener != null && mListener.get() != null && mListener.get().equals(l)) {
             mListener.clear();
             mListener = null;
         }
@@ -78,12 +74,22 @@ public enum GpsRouteLoggerStatus {
         return mSpeed;
     }
 
+    public void setSpeed(int speed) {
+        mSpeed = speed;
+        notifyCallback();
+    }
+
     public long getTimeAtVehicleStopped() {
         return mTimeAtVehicleStopped;
     }
 
     public boolean isGpsProviderEnabled() {
         return mGpsProviderEnabled;
+    }
+
+    public void setGpsProviderEnabled(boolean enabled) {
+        mGpsProviderEnabled = enabled;
+        notifyCallback();
     }
 
     public boolean isVehicleStopped() {
@@ -94,33 +100,27 @@ public enum GpsRouteLoggerStatus {
         return mGpsFixAcquired;
     }
 
-    public boolean isGpsFixAccurateEnough()  { return mGpsAccurateEnough; }
-
-    public int getGpsProviderAccuracy() { return mGpsFixAccuracy; }
-
-    public void setSpeed(int speed) {
-        mSpeed = speed;
-        notifyCallback();
-    }
-
-    public void setVehicleStopped(long timeAtVehicleStopped, boolean stopped) {
-        mTimeAtVehicleStopped = timeAtVehicleStopped;
-        mStopped = stopped;
-        notifyCallback();
-    }
-
-    public void setGpsProviderEnabled(boolean enabled) {
-        mGpsProviderEnabled = enabled;
-        notifyCallback();
-    }
-
     public void setGpsFixAcquired(boolean acquired) {
         mGpsFixAcquired = acquired;
         notifyCallback();
     }
 
+    public boolean isGpsFixAccurateEnough() {
+        return mGpsAccurateEnough;
+    }
+
     public void setGpsFixAccurateEnough(boolean accurateEnough) {
         mGpsAccurateEnough = accurateEnough;
+        notifyCallback();
+    }
+
+    public int getGpsProviderAccuracy() {
+        return mGpsFixAccuracy;
+    }
+
+    public void setVehicleStopped(long timeAtVehicleStopped, boolean stopped) {
+        mTimeAtVehicleStopped = timeAtVehicleStopped;
+        mStopped = stopped;
         notifyCallback();
     }
 
@@ -135,15 +135,17 @@ public enum GpsRouteLoggerStatus {
     }
 
     public int getStatus() {
-        if(!mGpsProviderEnabled) {
-            return GPS_LOGGER_STATUS_GPS_NOT_ENABLED;
-        } else if(!mGpsPermissionGranted) {
+        if (!mGpsPermissionGranted) {
             return GPS_LOGGER_STATUS_NO_PERMISSION;
-        } else if(!mGpsFixAcquired) {
+        } else if (!mGpsProviderEnabled) {
+            return GPS_LOGGER_STATUS_GPS_NOT_ENABLED;
+        } else if (!mGpsPermissionGranted) {
+            return GPS_LOGGER_STATUS_NO_PERMISSION;
+        } else if (!mGpsFixAcquired) {
             return GPS_LOGGER_STATUS_ACQUIRING_GPS_FIX;
-        } else if(!mGpsAccurateEnough) {
+        } else if (!mGpsAccurateEnough) {
             return GPS_LOGGER_STATUS_GPS_FIX_NOT_ACCURATE_ENOUGH;
-        } else if(mStopped) {
+        } else if (mStopped) {
             return GPS_LOGGER_STATUS_VEHICLE_STOPPED;
         }
 
@@ -151,8 +153,12 @@ public enum GpsRouteLoggerStatus {
     }
 
     private void notifyCallback() {
-        if(mListener != null && mListener.get() != null) {
+        if (mListener != null && mListener.get() != null) {
             mListener.get().onGpsLoggerStatusChanged();
         }
+    }
+
+    public interface OnGpsLoggerStatusChangedListener {
+        void onGpsLoggerStatusChanged();
     }
 }

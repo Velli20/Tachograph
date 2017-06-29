@@ -29,106 +29,133 @@ package com.velli20.tachograph.restingtimes;
 import java.util.ArrayList;
 
 public class WeekHolder {
-	private long weekStart;
-	private long weekEnd;
-	
-	private int mWeeklyDrivingTimeInMinutes = 0;
-	private int mWeeklyRestInMinutes = 0;
-	private int mWeeklyWorkingTimeInMinutes = 0;
+    private final ArrayList<WorkDayHolder> workdays = new ArrayList<>();
+    private long weekStart;
+    private long weekEnd;
+    private int mWeeklyDrivingTimeInMinutes = 0;
+    private int mWeeklyRestInMinutes = 0;
+    private int mWeeklyWorkingTimeInMinutes = 0;
     private int mWeeklyOtherWorkingTimeInMinutes = 0;
     private int mWeeklyPoaTime = 0;
-	private int mWtdWeeklyWorkingTime = 0;
-	private int mReducedDailyRests = 0;
-	private int mExtendedDrivingDaysUsed = 0;
+    private int mWtdWeeklyWorkingTime = 0;
+    private int mReducedDailyRests = 0;
+    private int mExtendedDrivingDaysUsed = 0;
+    private double mWeeklyDrivenDistance = 0;
+    private ArrayList<Integer> mEventIds;
 
-	private double mWeeklyDrivenDistance = 0;
+    public WeekHolder() {
+    }
 
-	private final ArrayList<WorkDayHolder> workdays = new ArrayList<>();
-	private ArrayList<Integer> mEventIds;
-	
-	public WeekHolder(){ }
-	
-	public void setStartDate(long start){ weekStart = start; }
-	
-	public void setEndDate(long end){ weekEnd = end; }
-	
-	public void setWeeklyDrivingTime(int minutes){ mWeeklyDrivingTimeInMinutes = minutes; }
+    public void setReducedDailyRest(int reducedDailyRests) {
+        mReducedDailyRests = reducedDailyRests;
+    }
 
-    public void setWeeklyOtherWorkingTime(int minutes) { mWeeklyOtherWorkingTimeInMinutes = minutes; }
+    public long getStartDate() {
+        return weekStart;
+    }
 
-	public void setWeeklyWorkingTime(int minutes){ mWeeklyWorkingTimeInMinutes = minutes; }
+    public void setStartDate(long start) {
+        weekStart = start;
+    }
 
-    public void setWeeklyPoaTime(int minutes) { mWeeklyPoaTime = minutes; }
+    public long getEndDate() {
+        return weekEnd;
+    }
 
-	public void setWeeklyRest(int minutes){
-		mWeeklyRestInMinutes = minutes;
-	}
+    public void setEndDate(long end) {
+        weekEnd = end;
+    }
 
-	public void setWtdWeeklyWorkingTime(int minutes){
-		mWtdWeeklyWorkingTime = minutes;
-	}
+    public int getWeeklyDrivingTime() {
+        return mWeeklyDrivingTimeInMinutes;
+    }
 
-	public void setWeeklyDrivenDistance(double distance) { mWeeklyDrivenDistance = distance; }
+    public void setWeeklyDrivingTime(int minutes) {
+        mWeeklyDrivingTimeInMinutes = minutes;
+    }
 
-    public void setReducedDailyRest(int reducedDailyRests){ mReducedDailyRests = reducedDailyRests; }
+    public int getWeeklyOtherWorkingTime() {
+        return mWeeklyOtherWorkingTimeInMinutes;
+    }
 
-    public void setExtendedDrivingDaysUsed(int extendedDaysUsed) { mExtendedDrivingDaysUsed = extendedDaysUsed; }
+    public void setWeeklyOtherWorkingTime(int minutes) {
+        mWeeklyOtherWorkingTimeInMinutes = minutes;
+    }
 
-    public void setEventIds(ArrayList<Integer> ids) { mEventIds = ids; }
+    public int getWeeklyWorkingTime() {
+        return mWeeklyWorkingTimeInMinutes;
+    }
 
-	public long getStartDate(){
-		return weekStart;
-	}
-	
-	public long getEndDate(){
-		return weekEnd;
-	}
-	
-	public int getWeeklyDrivingTime(){
-		return mWeeklyDrivingTimeInMinutes;
-	}
+    public void setWeeklyWorkingTime(int minutes) {
+        mWeeklyWorkingTimeInMinutes = minutes;
+    }
 
-    public int getWeeklyOtherWorkingTime() { return mWeeklyOtherWorkingTimeInMinutes; }
+    public int getWeeklyPoaTime() {
+        return mWeeklyPoaTime;
+    }
 
-	public int getWeeklyWorkingTime(){
-		return mWeeklyWorkingTimeInMinutes;
-	}
+    public void setWeeklyPoaTime(int minutes) {
+        mWeeklyPoaTime = minutes;
+    }
 
-    public int getWeeklyPoaTime() { return mWeeklyPoaTime; }
-	
-	public int getWeeklyRest(){
-		return mWeeklyRestInMinutes;
-	}
+    public int getWeeklyRest() {
+        return mWeeklyRestInMinutes;
+    }
 
-	public int getWtdWeeklyWorkingTime(){ return mWtdWeeklyWorkingTime; }
+    public void setWeeklyRest(int minutes) {
+        mWeeklyRestInMinutes = minutes;
+    }
 
-    public int getReducedDailyRests() {return mReducedDailyRests;}
+    public int getWtdWeeklyWorkingTime() {
+        return mWtdWeeklyWorkingTime;
+    }
 
-    public int getExtendedDrivingDaysUsed(){
+    public void setWtdWeeklyWorkingTime(int minutes) {
+        mWtdWeeklyWorkingTime = minutes;
+    }
+
+    public int getReducedDailyRests() {
+        return mReducedDailyRests;
+    }
+
+    public int getExtendedDrivingDaysUsed() {
         return mExtendedDrivingDaysUsed;
     }
 
-    public double getWeeklyDrivenDistance(){
+    public void setExtendedDrivingDaysUsed(int extendedDaysUsed) {
+        mExtendedDrivingDaysUsed = extendedDaysUsed;
+    }
+
+    public double getWeeklyDrivenDistance() {
         return mWeeklyDrivenDistance;
     }
 
-    public void addWorkDay(WorkDayHolder day){
-		if(day == null) {
-			return;
-		}
-		workdays.add(day);
-	}
-	
-	public ArrayList<WorkDayHolder> getWorkdaysList(){
-		return workdays;
-	}
+    public void setWeeklyDrivenDistance(double distance) {
+        mWeeklyDrivenDistance = distance;
+    }
 
-	public ArrayList<Integer> getEventIds() { return mEventIds; }
-	
-	public ArrayList<WorkDayHolder> getWorkDays(){
-		return workdays;
-	}
-	
-	
+    public void addWorkDay(WorkDayHolder day) {
+        if (day == null) {
+            return;
+        }
+        workdays.add(day);
+    }
+
+    public ArrayList<WorkDayHolder> getWorkdaysList() {
+        return workdays;
+    }
+
+    public ArrayList<Integer> getEventIds() {
+        return mEventIds;
+    }
+
+    public void setEventIds(ArrayList<Integer> ids) {
+        mEventIds = ids;
+    }
+
+    public ArrayList<WorkDayHolder> getWorkDays() {
+        return workdays;
+    }
+
 
 }

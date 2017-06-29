@@ -26,35 +26,31 @@
 
 package com.velli20.tachograph.location;
 
-import java.lang.ref.WeakReference;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-public class GetAddressForLocationTask extends AsyncTask<Void, Void, Address>{
-	private WeakReference<OnGetAddressListener> mListener;
-	private double mLatitude;
-	private double mLongitude;
-	private WeakReference<Context> mContext;
+import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.Locale;
+
+public class GetAddressForLocationTask extends AsyncTask<Void, Void, Address> {
+    private WeakReference<OnGetAddressListener> mListener;
+    private double mLatitude;
+    private double mLongitude;
+    private WeakReference<Context> mContext;
 
     private WeakReference<TextView> mTextToSet;
     private String mDefaultText;
-	
-	public interface OnGetAddressListener {
-		void onAddressReceived(String address);
-	}
-	
-	public GetAddressForLocationTask(Context context, OnGetAddressListener l, double latitude, double longitude){
-		mListener = new WeakReference<>(l);
-		mLatitude = latitude;
-		mLongitude = longitude;
-		mContext = new WeakReference<>(context);
-	}
+
+    public GetAddressForLocationTask(Context context, OnGetAddressListener l, double latitude, double longitude) {
+        mListener = new WeakReference<>(l);
+        mLatitude = latitude;
+        mLongitude = longitude;
+        mContext = new WeakReference<>(context);
+    }
 
     public GetAddressForLocationTask setOnGetAddressListener(OnGetAddressListener l) {
         mListener = new WeakReference<>(l);
@@ -67,46 +63,49 @@ public class GetAddressForLocationTask extends AsyncTask<Void, Void, Address>{
 
         return this;
     }
-	
-	@Override
-	protected Address doInBackground(Void... params) {
-		if(mContext.get() == null){
-			return null;
-		}
-		
-		try {
 
-	        Geocoder geo = new Geocoder(mContext.get(), Locale.getDefault());
-	        List<Address> addresses = geo.getFromLocation(mLatitude, mLongitude, 1);
-	        if (addresses.isEmpty()) {
-	        	return null;
-	        }
-	        else {
-	            if(addresses.size() > 0) {
-	            	return addresses.get(0);
-	            }
-	        }
-	    }
-	    catch (Exception e) {}
-		return null;
-	}
-	
-	@Override
-	protected void onPostExecute(Address address){
-		if(mListener.get() != null){
-			if(address == null){
-				mListener.get().onAddressReceived(null);
-			} else {
-				mListener.get().onAddressReceived(address.getAddressLine(1));
-			}
-		}
-        if(mTextToSet.get() != null) {
-            if(address == null || address.getAddressLine(1) == null || address.getAddressLine(1).isEmpty()) {
+    @Override
+    protected Address doInBackground(Void... params) {
+        if (mContext.get() == null) {
+            return null;
+        }
+
+        try {
+
+            Geocoder geo = new Geocoder(mContext.get(), Locale.getDefault());
+            List<Address> addresses = geo.getFromLocation(mLatitude, mLongitude, 1);
+            if (addresses.isEmpty()) {
+                return null;
+            } else {
+                if (addresses.size() > 0) {
+                    return addresses.get(0);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Address address) {
+        if (mListener.get() != null) {
+            if (address == null) {
+                mListener.get().onAddressReceived(null);
+            } else {
+                mListener.get().onAddressReceived(address.getAddressLine(1));
+            }
+        }
+        if (mTextToSet.get() != null) {
+            if (address == null || address.getAddressLine(1) == null || address.getAddressLine(1).isEmpty()) {
                 mTextToSet.get().setText(mDefaultText);
             } else {
                 mTextToSet.get().setText(address.getAddressLine(1));
             }
         }
-	}
-	
+    }
+
+    public interface OnGetAddressListener {
+        void onAddressReceived(String address);
+    }
+
 }
