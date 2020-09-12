@@ -256,7 +256,7 @@
     <string name="preference_summary_export">Exporteer en download log naar een .xls bestand.</string>
     <string name="preference_summary_use_gps">Schakel automatisch van Rijden naar Werken als de snelheid onder de minimale waarde komt.</string>
     <string name="preference_summary_threshold_value">De app gaat ervanuit dat het voertuig is gestopt als de GPS snelheid minder is dan deze waarde.</string>
-    <string name="preference_summary_threshold_time">De app schakelt naar Werken als voertuig langer dan opgegeven waarde stilstaat.</string>
+    <string name="preference_summary_threshold_time">De app schakelt naar Pauze als voertuig langer dan opgegeven waarde stilstaat.</string>
     <string name="preference_summary_remove_less_1_min_entries">Verwijder automatisch logs die korter zijn dan 1 minuut.</string>
     <string name="preference_summary_gps_min_accuracy">GPS gegevens worden niet gebruikt als deze minder zuiver is dan opgegeven waarde.</string>
     <string name="preference_summary_use_detected_activity">Verbeter GPS gegevens door ingebouwde sensoren te gebruiken om beweging te detecteren.
