@@ -137,11 +137,11 @@
     <string name="title_event_break_format" formatted="false">Pauze %s</string>
 
     <string name="exception_title_extended_drive_time">Verlengde rijtijd beschikbaar</string>
-    <string name="exception_subtitle_extended_drive_time">Daily driving period shall not exceed 9 hours, with an exemption of twice a week when it can be extended to 10 hours.</string>
+    <string name="exception_subtitle_extended_drive_time">Dagelijkse rijtijd mag niet langer zijn dan 9 uur. Twee maal per week mag deze verlengd worden naar 10 uur.</string>
     <string name="exception_title_reduced_daily_rest">Verkorte dagelijkse rust over</string>
-    <string name="exception_subtitle_reduced_daily_rest">Daily rest period shall be at least 11 hours, with an exception of going down to 9 hours maximum three times a week.</string>
+    <string name="exception_subtitle_reduced_daily_rest">Dagelijkse rust moet minimaal 11 uur per dag zijn. Drie maal per week mag dit verkort worden naar 9 uur.</string>
     <string name="exception_title_reduced_weekly_rest">Verkorte wekelijkse rust over</string>
-    <string name="exception_subtitle_reduced_weekly_rest">Weekly rest is 45 continuous hours, which can be reduced every second week to 24 hours.</string>
+    <string name="exception_subtitle_reduced_weekly_rest">Wekelijkse rust moeten 45 aaneengesloten uren zijn. Deze mag eens per 2 weken verkort worden naar 24 uur.</string>
 
     <string name="add_event_event_mileage_at_start">Bij start:</string>
     <string name="add_event_event_mileage_at_end">Bij einde:</string>
@@ -253,14 +253,14 @@
     <string name="preference_title_view_source_code">View source code for this app</string>
     <string name="preference_title_use_detected_activity">Gebruik gedetecteerde actie</string>
 
-    <string name="preference_summary_export">Export log as .xls file to preview in your preferred spread sheet application</string>
-    <string name="preference_summary_use_gps">Switch automatically driving time to other work when speed drops below threshold speed</string>
-    <string name="preference_summary_threshold_value">App will assume the vehicle has stopped when the GPS speed is below this value</string>
-    <string name="preference_summary_threshold_time">App will assume that other work has been started when vehicle has been stopped at least this long</string>
-    <string name="preference_summary_remove_less_1_min_entries">Remove automatically entries with duration less than 1 min</string>
-    <string name="preference_summary_gps_min_accuracy">Data coming from the GPS receiver will be ignored if your position is not at least this accurate</string>
-    <string name="preference_summary_use_detected_activity">Improve GPS monitor reliability by reading data coming from accelerometer sensors to determine that device is in moving vehicle or user is walking around with this device in the pocket.
-        \n\nWith this setting on App may assume that vehicle is stopped even though GPS speed is above threshold limit</string>
+    <string name="preference_summary_export">Exporteer en download log naar een .xls bestand.</string>
+    <string name="preference_summary_use_gps">Schakel automatisch van Rijden naar Werken als de snelheid onder de minimale waarde komt.</string>
+    <string name="preference_summary_threshold_value">De app gaat ervanuit dat het voertuig is gestopt als de GPS snelheid minder is dan deze waarde.</string>
+    <string name="preference_summary_threshold_time">De app schakelt naar Werken als voertuig langer dan opgegeven waarde stilstaat.</string>
+    <string name="preference_summary_remove_less_1_min_entries">Verwijder automatisch logs die korter zijn dan 1 minuut.</string>
+    <string name="preference_summary_gps_min_accuracy">GPS gegevens worden niet gebruikt als deze minder zuiver is dan opgegeven waarde.</string>
+    <string name="preference_summary_use_detected_activity">Verbeter GPS gegevens door ingebouwde sensoren te gebruiken om beweging te detecteren.
+        \n\nMet deze instelling gaat de app ervanuit dat voertuig is gestopt ondanks dat de snelheid boven de waarde ligt.</string>
 
     <string name="preference_entry_sort_log_by_day">Dag</string>
     <string name="preference_entry_sort_log_by_week">Week</string>

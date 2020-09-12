@@ -25,14 +25,14 @@
   -->
 
 <resources>
-    <string name="file_picker_menu_sort">Sort</string>
-    <string name="file_picker_menu_save">Save</string>
-    <string name="file_picker_menu_sort_by_name">By name</string>
-    <string name="file_picker_menu_sort_by_date">By date modified</string>
-    <string name="file_picker_menu_sort_by_size">By size</string>
-    <string name="file_picker_menu_add_folder">Add folder</string>
-    <string name="file_picker_title_external_storage">External storage</string>
-    <string name="file_picker_title_no_files">No items</string>
-    <string name="file_picker_title_filename">Filename</string>
-    <string name="file_picker_title_create_folder">Create folder</string>
+    <string name="file_picker_menu_sort">Sorteer</string>
+    <string name="file_picker_menu_save">Opslaan</string>
+    <string name="file_picker_menu_sort_by_name">Op naam</string>
+    <string name="file_picker_menu_sort_by_date">Op datum</string>
+    <string name="file_picker_menu_sort_by_size">Op groote</string>
+    <string name="file_picker_menu_add_folder">Op map</string>
+    <string name="file_picker_title_external_storage">Externe opslag</string>
+    <string name="file_picker_title_no_files">Geen items</string>
+    <string name="file_picker_title_filename">Bestandsnaam</string>
+    <string name="file_picker_title_create_folder">Maak map</string>
 </resources>
