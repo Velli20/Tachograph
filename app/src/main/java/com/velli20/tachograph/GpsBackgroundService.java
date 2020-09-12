@@ -196,7 +196,8 @@ public class GpsBackgroundService extends Service implements DataBaseHandler.OnD
         if (currentEvent == null) {
             return false;
         } else if (currentEvent.getEventType() == Event.EVENT_TYPE_DRIVING
-                || currentEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK) {
+                || currentEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK
+                || currentEvent.getEventType() == Event.EVENT_TYPE_NORMAL_BREAK) {
             return true;
 
         }

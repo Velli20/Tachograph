@@ -212,7 +212,7 @@ public class CardsToShowInFragmentNow {
                 plusIndex++;
             }
 
-            showGpsMonitor = (recordingEvent.getEventType() == Event.EVENT_TYPE_DRIVING || recordingEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK);
+            showGpsMonitor = (recordingEvent.getEventType() == Event.EVENT_TYPE_DRIVING || recordingEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK || recordingEvent.getEventType() == Event.EVENT_TYPE_NORMAL_BREAK);
         }
 
 

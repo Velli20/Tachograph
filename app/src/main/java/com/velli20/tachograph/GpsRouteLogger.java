@@ -167,7 +167,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
             if ((!mEventRecorderInstance.isEventScheduled() || mEventRecorderInstance.getScheduledEventType() != Event.EVENT_TYPE_OTHER_WORK)
                     && mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_DRIVING) {
                 /* Schedule to switch current Event to Other Work */
-                mEventRecorderInstance.scheduleEvent(Event.EVENT_TYPE_OTHER_WORK, mTimeAtStop, System.currentTimeMillis() + (mThresholdTime * 1000), mCurrentEvent);
+                mEventRecorderInstance.scheduleEvent(Event.EVENT_TYPE_NORMAL_BREAK, mTimeAtStop, System.currentTimeMillis() + (mThresholdTime * 1000), mCurrentEvent);
             }
         }
     }

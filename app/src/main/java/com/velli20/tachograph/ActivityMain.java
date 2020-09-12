@@ -162,7 +162,7 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
         int eventType = mCurrentEvent == null ? -1 : mCurrentEvent.getEventType();
 
         if ((!serviceRunning && showNotifications) || (!serviceRunning && useGps
-                && (eventType == Event.EVENT_TYPE_DRIVING || eventType == Event.EVENT_TYPE_OTHER_WORK))) {
+                && (eventType == Event.EVENT_TYPE_DRIVING || eventType == Event.EVENT_TYPE_OTHER_WORK || eventType == Event.EVENT_TYPE_NORMAL_BREAK))) {
             Intent i = new Intent(this, GpsBackgroundService.class);
             startService(i);
         }
