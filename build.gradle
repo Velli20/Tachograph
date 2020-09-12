@@ -29,14 +29,16 @@ buildscript {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }

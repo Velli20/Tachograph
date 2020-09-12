@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /*
+  ~  * MIT License
+  ~  *
+  ~  * Copyright (c) [2017] [velli20]
+  ~  *
+  ~  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~  * of this software and associated documentation files (the "Software"), to deal
+  ~  * in the Software without restriction, including without limitation the rights
+  ~  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~  * copies of the Software, and to permit persons to whom the Software is
+  ~  * furnished to do so, subject to the following conditions:
+  ~  *
+  ~  * The above copyright notice and this permission notice shall be included in all
+  ~  * copies or substantial portions of the Software.
+  ~  *
+  ~  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  * SOFTWARE.
+  ~  */
+  -->
+
+<resources>
+
+    <string name="app_name">Tachobuddy</string>
+
+    <string name="menu_settings">Instellingen</string>
+    <string name="menu_send_feedback">Stuur feedback</string>
+    <string name="menu_discard">Verwijder event</string>
+    <string name="menu_save_changes">Wijzigingen opslaan</string>
+
+    <string name="menu_filter">Filter</string>
+    <string name="menu_filter_category_drive">Rijdend</string>
+    <string name="menu_filter_category_rest">Pauze/rust</string>
+    <string name="menu_filter_category_other_work">Werkend</string>
+    <string name="menu_filter_category_poa">POA</string>
+
+    <string name="menu_start_weekly_rest">Start wekelijkse rust</string>
+    <string name="menu_stop_weekly_rest">Stop wekelijkse rust</string>
+    <string name="menu_start_daily_rest">Start dagelijkse rust</string>
+    <string name="menu_stop_daily_rest">Stop dagelijkse rust</string>
+    <string name="menu_start_break">Start pauze</string>
+    <string name="menu_stop_break">Stop pauze</string>
+
+    <string name="menu_map_layer">Map laag</string>
+    <string name="menu_map_layer_satellite">Sateliet</string>
+    <string name="menu_map_layer_satellite_with_streets">Sateliet met straten</string>
+    <string name="menu_map_layer_map">Map</string>
+    <string name="menu_map_layer_earth">Aarde</string>
+
+    <string name="menu_delete_route">Verwijder gelogde route</string>
+    <string name="menu_export_events">Exporteer acties</string>
+    <string name="menu_sort">Sorteer</string>
+    <string name="menu_show_items">Bekijk items</string>
+    <string name="menu_restore">Herstel</string>
+    <string name="menu_open_map">Open map</string>
+
+    <string name="default_filename">tachobuddy</string>
+
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Annuleer</string>
+    <string name="action_today">Vandaag</string>
+    <string name="action_enable_gps">GPS inschakelen</string>
+    <string name="action_grant_location_permission">Verleen locatietoestemming</string>
+    <string name="action_enable_gps_monitor">Schakel GPS monitor in</string>
+
+    <string name="dialog_title_remove_all_logs">Verwijder alle data</string>
+    <string name="dialog_title_map_layer">Map laaag</string>
+    <string name="dialog_title_delete_route">Wis route?</string>
+    <string name="dialog_title_filename">Bestandsname</string>
+    <string name="dialog_title_set_threshold_speed">Stel snelheid in</string>
+    <string name="dialog_title_set_threshold_time">Stel de drempeltijd in</string>
+    <string name="dialog_title_fix_following_errors">Herstel de volgende fouten:</string>
+    <string name="dialog_text_delete_route">De track en de bijbehorende markeringen worden van het apparaat verwijderd</string>
+    <string name="dialog_text_remove_all_logs">Weet je zeker dat je alle data wilt verwijderen?</string>
+    <string name="dialog_text_error_start_end_time">eind tijd is eerder dan start tijd!</string>
+
+    <string name="title_navigation_drawer_now">Status</string>
+    <string name="title_navigation_drawer_log">Log</string>
+    <string name="title_navigation_drawer_log_summary">Log overzicht</string>
+
+    <string name="title_gps_logger_status">GPS logger status</string>
+    <string name="title_add_new_log_event">Nieuw</string>
+    <string name="title_edit_log_event">Wijzig</string>
+    <string name="title_today">Vandaag</string>
+    <string name="title_week">Week</string>
+    <string name="title_now">Nu</string>
+    <string name="title_speed">Snelheid</string>
+    <string name="title_route">Gelogde route</string>
+    <string name="title_duration">Duur</string>
+    <string name="title_started_at">Gestart om: </string>
+    <string name="title_ended_at">Gestopt om: </string>
+
+    <string name="title_gps_logger_logging_in_progress" formatted="false">Loggen actief. GPS snelheid: %d km/h</string>
+    <string name="title_gps_logger_vehicle_stopped" formatted="false">Voertuig staat stil. GPS snelheid: %d km/h</string>
+    <string name="title_gps_logger_gps_provider_turned_disabled">GPS niet beschikbaar. Zet GPS aan in toestel instellingen.</string>
+    <string name="title_gps_logger_acquiring_gps_fix">Wachtend op GPS signaal</string>
+    <string name="title_gps_logger_no_gps_permission">Locatie gegevens geweigerd</string>
+    <string name="title_gps_logger_gps_speed_monitor_not_enabled">GPS snelheids monitor niet geactiveerd</string>
+    <string name="title_gps_logger_signal_not_accurate_enough" formatted="false">GPS signaal niet sterk genoeg. Sterkte: ± %d m</string>
+    <string name="title_detected_activity_driving">Gedetecteerde actie: Rijdend</string>
+    <string name="title_detected_activity_walking">Gedetecteerde actie: Lopend</string>
+    <string name="title_detected_activity_still">Gedetecteerde actie: Gestopt</string>
+    <string name="title_detected_activity_unknown">Gedetecteerde actie: Onbekend</string>
+    <string name="title_detected_activity_not_enabled">Gedetecteerde actie: Niet beschikbaar</string>
+    <string name="title_switching_to_other_work_in" formatted="false">Schakeld om naar Werkend in %s</string>
+
+
+    <string name="title_recording_event">Loggen actief</string>
+    <string name="title_info">Info</string>
+    <string name="title_details">Details</string>
+    <string name="title_average_speed">Gemiddelde snelheid</string>
+    <string name="title_address_not_available">Niet beschikbaar</string>
+    <string name="title_loading_address">Laad adres…</string>
+    <string name="title_items_to_show_in_summary">Beheer items</string>
+    <string name="title_log_no_events">Geen acties. Tap + voor nieuwe actie</string>
+
+    <string name="title_event_driving">Rijden</string>
+    <string name="title_event_poa">POA</string>
+    <string name="title_event_other_work">Werk</string>
+    <string name="title_event_rest">Rust</string>
+    <string name="title_event_daily_rest">Dagelijkse rust</string>
+    <string name="title_event_weekly_rest">Wekelijkse rust</string>
+    <string name="title_event_break">Pauze</string>
+
+    <!-- These strings are used in Now screen above Event chooser buttons to describe
+         current event and duration of the current event. %s is where the time string will be appended i.g Driving 1 hour 20 min -->
+    <string name="title_event_driving_format" formatted="false">Rijdend %s</string>
+    <string name="title_event_poa_format" formatted="false">POA %s</string>
+    <string name="title_event_other_work_format" formatted="false">Werkend %s</string>
+    <string name="title_event_daily_rest_format" formatted="false">Dagelijkse rust %s</string>
+    <string name="title_event_weekly_rest_format" formatted="false">Wekelijkse rust %s</string>
+    <string name="title_event_break_format" formatted="false">Pauze %s</string>
+
+    <string name="exception_title_extended_drive_time">Verlengde rijtijd beschikbaar</string>
+    <string name="exception_subtitle_extended_drive_time">Dagelijkse rijtijd mag niet langer zijn dan 9 uur. Twee maal per week mag deze verlengd worden naar 10 uur.</string>
+    <string name="exception_title_reduced_daily_rest">Verkorte dagelijkse rust over</string>
+    <string name="exception_subtitle_reduced_daily_rest">Dagelijkse rust moet minimaal 11 uur per dag zijn. Drie maal per week mag dit verkort worden naar 9 uur.</string>
+    <string name="exception_title_reduced_weekly_rest">Verkorte wekelijkse rust over</string>
+    <string name="exception_subtitle_reduced_weekly_rest">Wekelijkse rust moeten 45 aaneengesloten uren zijn. Deze mag eens per 2 weken verkort worden naar 24 uur.</string>
+
+    <string name="add_event_event_mileage_at_start">Bij start:</string>
+    <string name="add_event_event_mileage_at_end">Bij einde:</string>
+    <string name="add_event_event_start_time">Starttijd:</string>
+    <string name="add_event_event_end_time">Eindtijd:</string>
+    <string name="add_event_event_start_date">Startdatum:</string>
+    <string name="add_event_event_end_date">Einddatum:</string>
+    <string name="add_event_event_add_note">Notitie maken</string>
+    <string name="add_event_title_time">Tijd</string>
+    <string name="add_event_title_date">Datum</string>
+    <string name="add_event_title_mileage">Kilometers</string>
+    <string name="add_event_start_location">Start locatie</string>
+    <string name="add_event_end_location">Eind locatie</string>
+
+    <string name="export_events_start_time">Starttijd</string>
+    <string name="export_events_start_date">Startdatum</string>
+    <string name="export_events_end_time">Eindtijd</string>
+    <string name="export_events_end_date">Einddatum</string>
+    <string name="export_events_event_type">Soort actie</string>
+    <string name="export_events_mileage_at_start">KM bij start</string>
+    <string name="export_events_mileage_at_end">Km bij einde</string>
+    <string name="export_events_note">Notitie</string>
+    <string name="export_events_duration">Duur</string>
+    <string name="export_events_driven_distance">Gereden afstand</string>
+
+    <string name="notification_logging_in_progress">Loggen actief</string>
+    <string name="notification_button_start_break">Pauze</string>
+    <string name="notification_button_start_weekly_rest">Wekelijkse rust</string>
+    <string name="notification_button_start_drive_time">Rijdend</string>
+    <string name="notification_button_start_daily_rest">Pauze</string>
+    <string name="notification_button_cancel_logging">Stop</string>
+    <string name="notification_logging_started">Loggen gestart</string>
+    <string name="notification_logging_stopped">Loggen gestopt</string>
+
+    <string name="notification_file_saved">Bestand opgeslagen op intern geheugen</string>
+    <string name="notification_log_backup_complete">Backup gereed</string>
+    <string name="notification_log_restored">Hertel gereed</string>
+    <string name="notification_all_events_deleted">Alle bestanden zijn gewist</string>
+
+    <string name="log_summary_weekly_driving_time">Wekelijkse rijtijd:</string>
+    <string name="log_summary_weekly_working_time">Wekelijkse werktijd:</string>
+    <string name="log_summary_weekly_rest_time">Wekelijkse rust:</string>
+    <string name="log_summary_wtd_weekly_rest_time">WTD wekelijkse rust:</string>
+    <string name="log_summary_wtd_weekly_work_time">WTD wekelijks werkuren:</string>
+    <string name="log_summary_total_driven_distance">Totaal gereden afstand:</string>
+    <string name="log_summary_driven_distance">Gereden afstand:</string>
+
+    <string name="log_summary_daily_rest_time">Dagelijkse rust:</string>
+    <string name="log_summary_daily_driving_time">Dagelijkse rijtijd:</string>
+    <string name="log_summary_daily_working_time">Dagelijkse werktijd:</string>
+    <string name="log_summary_daily_wtd_working_time">WTD dagelijkse werkuren:</string>
+    <string name="log_summary_no_items_to_display">Geen log samenvatting beschikbaar.</string>
+
+    <string name="work_limit_daily_rest">Dagelijkse rust</string>
+    <string name="work_limit_weekly_rest">Wekelijkse rust</string>
+    <string name="work_limit_weekly_driving_time">Wekelijkse rijtijd</string>
+    <string name="work_limit_fortnightly_driving_time">5-daagse rijtijd</string>
+    <string name="work_limit_continuous_driving_time">Cintinue rijtijd</string>
+    <string name="work_limit_daily_driving_time">Dagelijkse rijtijd</string>
+    <string name="work_limit_break_time">Pauze</string>
+    <string name="work_limit_wtd_weekly_working">WTD wekelijkse werktijd</string>
+
+    <string name="work_limit_daily_rest_remaining">Dagelijkse rust over</string>
+    <string name="work_limit_weekly_rest_remaining">Wekelijkse rust over</string>
+    <string name="work_limit_weekly_driving_time_remaining">Wekelijkse rijtijd over</string>
+    <string name="work_limit_fortnightly_driving_time_remaining">5-daagse rijtijd over</string>
+    <string name="work_limit_continuous_driving_time_remaining">Continue rijtijd over</string>
+    <string name="work_limit_daily_driving_time_remaining">Dagelijkse rijtijd over</string>
+    <string name="work_limit_break_time_remaining">Pauzetijd over</string>
+
+    <string name="work_limit_wtd_daily_rest_remaining">WTD dagelijkse rust over</string>
+    <string name="work_limit_wtd_weekly_rest_remaining">WTD wekelijkse rust over</string>
+    <string name="work_limit_wtd_weekly_working_remaining">WTD wekelijkse werktijd over</string>
+
+    <string-array name="months">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maart</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Augustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+
+    <string name="preference_category_general">Algemene instellingen</string>
+    <string name="preference_category_log">Log</string>
+    <string name="preference_category_gps_settings">GPS instellingen</string>
+    <string name="preference_category_about">Over</string>
+
+    <string name="preference_title_show_notifications">Geef berichten weer</string>
+    <string name="preference_title_count_activity_progress">Actie tijdweergave</string>
+    <string name="preference_title_remove_all_logs">Verwijder log</string>
+    <string name="preference_title_backup_restore">Backup of herstel data</string>
+    <string name="preference_title_sort_by">Sorteer op</string>
+    <string name="preference_title_backup">Backup data</string>
+    <string name="preference_title_restore">Herstel data</string>
+    <string name="preference_title_export">Exporteer data</string>
+    <string name="preference_title_use_gps">Activeer GPS snelheids monitor</string>
+    <string name="preference_title_threshold_value">Gestopte snelheidsdrempel</string>
+    <string name="preference_title_threshold_time">Gestopte tijdsdrempel</string>
+    <string name="preference_title_remove_less_1_min_entries">Negeer &#60;1 min acties</string>
+    <string name="preference_title_gps_min_accuracy">GPS min zuiverheid</string>
+    <string name="preference_title_view_source_code">View source code for this app</string>
+    <string name="preference_title_use_detected_activity">Gebruik gedetecteerde actie</string>
+
+    <string name="preference_summary_export">Exporteer en download log naar een .xls bestand.</string>
+    <string name="preference_summary_use_gps">Schakel automatisch van Rijden naar Werken als de snelheid onder de minimale waarde komt.</string>
+    <string name="preference_summary_threshold_value">De app gaat ervanuit dat het voertuig is gestopt als de GPS snelheid minder is dan deze waarde.</string>
+    <string name="preference_summary_threshold_time">De app schakelt naar Werken als voertuig langer dan opgegeven waarde stilstaat.</string>
+    <string name="preference_summary_remove_less_1_min_entries">Verwijder automatisch logs die korter zijn dan 1 minuut.</string>
+    <string name="preference_summary_gps_min_accuracy">GPS gegevens worden niet gebruikt als deze minder zuiver is dan opgegeven waarde.</string>
+    <string name="preference_summary_use_detected_activity">Verbeter GPS gegevens door ingebouwde sensoren te gebruiken om beweging te detecteren.
+        \n\nMet deze instelling gaat de app ervanuit dat voertuig is gestopt ondanks dat de snelheid boven de waarde ligt.</string>
+
+    <string name="preference_entry_sort_log_by_day">Dag</string>
+    <string name="preference_entry_sort_log_by_week">Week</string>
+    <string name="preference_entry_sort_log_by_month">Maand</string>
+
+    <string name="preference_entry_sort_log_descending">Aflopend</string>
+    <string name="preference_entry_sort_log_ascending">Oplopend</string>
+
+    <string name="preference_entry_show_remaining_time">Toon resterende tijd</string>
+    <string name="preference_entry_show_elapsed_time">Toon verstreken tijd</string>
+
+
+</resources>
