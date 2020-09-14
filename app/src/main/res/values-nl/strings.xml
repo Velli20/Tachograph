@@ -71,13 +71,13 @@
     <string name="dialog_title_remove_all_logs">Verwijder alle data</string>
     <string name="dialog_title_map_layer">Map laaag</string>
     <string name="dialog_title_delete_route">Wis route?</string>
-    <string name="dialog_title_filename">Bestandsname</string>
+    <string name="dialog_title_filename">Bestandsnaaam</string>
     <string name="dialog_title_set_threshold_speed">Stel snelheid in</string>
     <string name="dialog_title_set_threshold_time">Stel de drempeltijd in</string>
     <string name="dialog_title_fix_following_errors">Herstel de volgende fouten:</string>
     <string name="dialog_text_delete_route">De track en de bijbehorende markeringen worden van het apparaat verwijderd</string>
     <string name="dialog_text_remove_all_logs">Weet je zeker dat je alle data wilt verwijderen?</string>
-    <string name="dialog_text_error_start_end_time">eind tijd is eerder dan start tijd!</string>
+    <string name="dialog_text_error_start_end_time">Eind tijd is eerder dan start tijd!</string>
 
     <string name="title_navigation_drawer_now">Status</string>
     <string name="title_navigation_drawer_log">Log</string>
@@ -199,7 +199,7 @@
     <string name="work_limit_weekly_rest">Wekelijkse rust</string>
     <string name="work_limit_weekly_driving_time">Wekelijkse rijtijd</string>
     <string name="work_limit_fortnightly_driving_time">5-daagse rijtijd</string>
-    <string name="work_limit_continuous_driving_time">Cintinue rijtijd</string>
+    <string name="work_limit_continuous_driving_time">Continue rijtijd</string>
     <string name="work_limit_daily_driving_time">Dagelijkse rijtijd</string>
     <string name="work_limit_break_time">Pauze</string>
     <string name="work_limit_wtd_weekly_working">WTD wekelijkse werktijd</string>
@@ -250,7 +250,7 @@
     <string name="preference_title_threshold_time">Gestopte tijdsdrempel</string>
     <string name="preference_title_remove_less_1_min_entries">Negeer &#60;1 min acties</string>
     <string name="preference_title_gps_min_accuracy">GPS min zuiverheid</string>
-    <string name="preference_title_view_source_code">View source code for this app</string>
+    <string name="preference_title_view_source_code">Over deze app</string>
     <string name="preference_title_use_detected_activity">Gebruik gedetecteerde actie</string>
 
     <string name="preference_summary_export">Exporteer en download log naar een .xls bestand.</string>

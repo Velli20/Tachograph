@@ -204,15 +204,7 @@ public class ActivityMain extends AppCompatActivity implements OnItemSelectedLis
                 final Intent settings = new Intent(this, ActivitySettings.class);
                 startActivity(settings);
                 return true;
-            case R.id.menu_send_feedback:
-                ShareCompat.IntentBuilder.from(this)
-                        .setType("message/rfc822")
-                        .addEmailTo("ve23571113@gmail.com")
-                        .setSubject("Tachograph feedback")
-                        .setChooserTitle("Send email...")
-                        .startChooser();
 
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

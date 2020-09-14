@@ -28,12 +28,6 @@
     xmlns:appcompat="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_send_feedback"
-        android:orderInCategory="0"
-        android:title="@string/menu_send_feedback"
-        appcompat:showAsAction="never"></item>
-
-    <item
         android:id="@+id/menu_settings"
         android:orderInCategory="1"
         android:title="@string/menu_settings"

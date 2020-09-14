@@ -167,7 +167,7 @@ public class FragmentSettings extends PreferenceFragment implements Preference.O
             startActivityForResult(i, EXPORT_REQUEST_CODE);
         } else if (key.equals(getString(R.string.preference_key_view_source_code))) {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://github.com/Velli20/Tachograph"));
+            i.setData(Uri.parse("https://google.com"));
             startActivity(i);
         }
 
