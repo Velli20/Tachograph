@@ -156,7 +156,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
             }
 
             setVehicleStopped(false);
-            if (mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK) {
+            if (mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_NORMAL_BREAK || mCurrentEvent.getEventType() == Event.EVENT_TYPE_OTHER_WORK) {
                 /* Switch to driving event if current Event is Other Work */
                 mEventRecorderInstance.endRecordingEvent(mCurrentEvent, System.currentTimeMillis());
                 mEventRecorderInstance.startRecordingEvent(Event.EVENT_TYPE_DRIVING, System.currentTimeMillis());
@@ -164,7 +164,7 @@ public class GpsRouteLogger implements LocationListener, GoogleDetectedActivityS
 
         } else if (((speed != -1 && speed <= mThresholdSpeed) || (useDetectedActivity && detectedActivityOtherWork)) && (!isVehicleStopped() || !mEventRecorderInstance.isEventScheduled())) {
             setVehicleStopped(true);
-            if ((!mEventRecorderInstance.isEventScheduled() || mEventRecorderInstance.getScheduledEventType() != Event.EVENT_TYPE_OTHER_WORK)
+            if ((!mEventRecorderInstance.isEventScheduled() || mEventRecorderInstance.getScheduledEventType() != Event.EVENT_TYPE_NORMAL_BREAK)
                     && mCurrentEvent != null && mCurrentEvent.getEventType() == Event.EVENT_TYPE_DRIVING) {
                 /* Schedule to switch current Event to Other Work */
                 mEventRecorderInstance.scheduleEvent(Event.EVENT_TYPE_NORMAL_BREAK, mTimeAtStop, System.currentTimeMillis() + (mThresholdTime * 1000), mCurrentEvent);
