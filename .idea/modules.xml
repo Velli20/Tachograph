@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Library Observable ScrollView/Library Observable ScrollView.iml" filepath="$PROJECT_DIR$/.idea/modules/Library Observable ScrollView/Library Observable ScrollView.iml" group="Tachograph/Library Observable ScrollView" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tachograph.iml" filepath="$PROJECT_DIR$/.idea/modules/Tachograph.iml" group="Tachograph" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Tachograph/app" />
+    </modules>
+  </component>
+</project>
